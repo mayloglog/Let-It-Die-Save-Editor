@@ -1,6 +1,6 @@
 ; Inno Setup Script for LET IT DIE - Deep Save Editor Pro
 #define MyAppName "Let It Die Save Editor"
-#define MyAppVersion "4.1.3"
+#define MyAppVersion "5.0.0"
 #define MyAppPublisher "g3usyk"
 
 #define MyAppURL "https://github.com/g3usyk/Let-It-Die-Save-Editor"
@@ -34,7 +34,7 @@ Name: "english"; MessagesFile: "compiler:Default.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Files]
-Source: "dist\LetItDieSaveEditor\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "dist\LetItDieSaveEditor.exe"; DestDir: "{app}"; Flags: ignoreversion
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\app_icon.ico"

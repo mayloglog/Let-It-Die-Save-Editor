@@ -28,14 +28,15 @@ def run():
     elapsed = time.time() - start_time
     print("-" * 70)
     print(f"Total Tests Run: {result.testsRun}")
-    print(f"Successes:      {result.testsRun - len(result.failures) - len(result.errors)}")
+    print(f"Successes:      {result.testsRun - len(result.failures) - len(result.errors) - len(result.skipped)}")
+    print(f"Skipped:        {len(result.skipped)}")
     print(f"Failures:       {len(result.failures)}")
     print(f"Errors:         {len(result.errors)}")
     print(f"Execution Time: {elapsed:.3f}s")
     print("=" * 70)
     
     if result.wasSuccessful():
-        print(">>> ALL TESTS PASSED! CODEBASE IS 100% HEALTHY! <<<")
+        print(">>> ALL EXECUTED TESTS PASSED. <<<")
         return 0
     else:
         print(">>> TEST SUITE FAILED! PLEASE REVIEW ERRORS ABOVE. <<<")

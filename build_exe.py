@@ -16,7 +16,7 @@ def build():
     app_name = "LetItDieSaveEditor_Lite" if is_lite else "LetItDieSaveEditor"
     print("=" * 60)
     print(f"Building LET IT DIE Save Editor - Standalone Executable: {app_name}")
-    print(f"Mode: {'LITE (CDN + Cache, ~30 MB)' if is_lite else 'FULL (Complete Offline, ~770 MB)'}")
+    print(f"Mode: {'LITE (essential icons)' if is_lite else 'FULL (bundled image catalog)'}")
     print("=" * 60)
 
     data_files = [
@@ -33,6 +33,7 @@ def build():
         ("tdm_dummy_defenders_template.json", "."),
         ("asset_manifest.json", "."),
         ("locales", "locales"),
+        ("ui_qt/styles.qss", "ui_qt"),
     ]
 
     if is_lite:
@@ -47,7 +48,7 @@ def build():
         # Full edition: bundle complete 9,228 images library
         data_files.append(("icons", "icons"))
 
-    is_onefile = "--onefile" in sys.argv or True
+    is_onefile = "--onedir" not in sys.argv
     build_mode = "--onefile" if is_onefile else "--onedir"
 
     cmd = [
@@ -58,6 +59,7 @@ def build():
         "--clean",
         "--noconfirm",
         "--uac-admin",
+        "--version-file", os.path.join(BASE_DIR, "tools", "windows_version_info.txt"),
     ]
 
 
@@ -71,6 +73,8 @@ def build():
 
     cmd.extend(["--collect-all", "core"])
     cmd.extend(["--collect-all", "ui"])
+    cmd.extend(["--collect-all", "ui_qt"])
+    # PyInstaller's Qt hooks collect the modules and plugins actually imported.
     cmd.extend(["--collect-all", "sv_ttk"])
 
     hidden_imports = [

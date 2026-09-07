@@ -1084,6 +1084,32 @@ class CompleteSaveEditorGUI(
             messagebox.showerror(t("error"), t("mb_import_json_error", err=e))
 
 
+def launch_qt_app():
+    from PySide6.QtWidgets import QApplication
+    from ui_qt.main_window import SaveEditorMainWindow
+    app = QApplication.instance()
+    if app is None:
+        app = QApplication(sys.argv)
+    save_path = next((arg for arg in sys.argv[1:] if not arg.startswith("-") and arg.lower().endswith(".sav")), None)
+    window = SaveEditorMainWindow(save_path=save_path)
+    window.show()
+    sys.exit(app.exec())
+
+
 if __name__ == "__main__":
-    app = CompleteSaveEditorGUI()
-    app.mainloop()
+    if "--self-test" in sys.argv:
+        from tools.packaged_smoke_test import run
+        index = sys.argv.index("--self-test")
+        sys.exit(run(sys.argv[index + 1]))
+    elif "--legacy-tk" in sys.argv:
+        app = CompleteSaveEditorGUI()
+        app.mainloop()
+    else:
+        try:
+            launch_qt_app()
+        except ModuleNotFoundError as e:
+            if not e.name or not e.name.startswith("PySide6"):
+                raise
+            print(f"PySide6 is not installed; starting the legacy interface: {e}")
+            app = CompleteSaveEditorGUI()
+            app.mainloop()

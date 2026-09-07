@@ -12,7 +12,7 @@ import urllib.request
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-CURRENT_VERSION = "4.2.0"
+CURRENT_VERSION = "5.0.0"
 REPO_OWNER = "g3usyk"
 REPO_NAME = "Let-It-Die-Save-Editor"
 RAW_VERSION_URL = f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/main/version.json"
@@ -318,13 +318,52 @@ def check_updates_background(root_window, silent=True):
             t = lambda k, **kw: k
             
         has_update, remote_info, err = check_for_updates()
-        if has_update and remote_info:
-            root_window.after(0, lambda: UpdateNotificationDialog(root_window, remote_info))
-        elif not silent:
-            if err:
-                root_window.after(0, lambda: messagebox.showwarning(t("updates"), t("updater_check_err", error=err)))
-            else:
-                loc = get_local_version_info().get("version", CURRENT_VERSION)
-                root_window.after(0, lambda: messagebox.showinfo(t("updates"), t("updater_up_to_date", version=loc)))
+        is_qt = hasattr(root_window, "_notify") or hasattr(root_window, "isWidgetType") or "PySide6" in str(type(root_window))
+
+        if is_qt:
+            def dispatch_qt(fn):
+                if hasattr(root_window, "after"):
+                    root_window.after(0, fn)
+                elif hasattr(root_window, "_qt_dispatcher"):
+                    root_window._qt_dispatcher.dispatch_signal.emit(fn)
+                else:
+                    fn()
+
+            if has_update and remote_info:
+                def show_qt_dialog():
+                    try:
+                        from ui_qt.dialogs.update_dialog import QtUpdateNotificationDialog
+                        dlg = QtUpdateNotificationDialog(root_window, remote_info)
+                        dlg.exec()
+                    except Exception as ex:
+                        print(f"Error opening Qt update dialog: {ex}")
+                dispatch_qt(show_qt_dialog)
+            elif not silent:
+                if err:
+                    def show_qt_err():
+                        if hasattr(root_window, "_notify"):
+                            root_window._notify("updates", "updater_check_err", kind="warning", error=err)
+                        else:
+                            from PySide6.QtWidgets import QMessageBox
+                            QMessageBox.warning(root_window, t("updates"), t("updater_check_err", error=err))
+                    dispatch_qt(show_qt_err)
+                else:
+                    loc = get_local_version_info().get("version", CURRENT_VERSION)
+                    def show_qt_ok():
+                        if hasattr(root_window, "_notify"):
+                            root_window._notify("updates", "updater_up_to_date", kind="info", version=loc)
+                        else:
+                            from PySide6.QtWidgets import QMessageBox
+                            QMessageBox.information(root_window, t("updates"), t("updater_up_to_date", version=loc))
+                    dispatch_qt(show_qt_ok)
+        else:
+            if has_update and remote_info:
+                root_window.after(0, lambda: UpdateNotificationDialog(root_window, remote_info))
+            elif not silent:
+                if err:
+                    root_window.after(0, lambda: messagebox.showwarning(t("updates"), t("updater_check_err", error=err)))
+                else:
+                    loc = get_local_version_info().get("version", CURRENT_VERSION)
+                    root_window.after(0, lambda: messagebox.showinfo(t("updates"), t("updater_up_to_date", version=loc)))
 
     threading.Thread(target=worker, daemon=True).start()

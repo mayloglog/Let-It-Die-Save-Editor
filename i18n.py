@@ -205,6 +205,10 @@ def get_item_name(item):
     """Universal name resolver with fallback cascade across languages."""
     if not item:
         return ""
+    if isinstance(item, str):
+        return item
+    if not isinstance(item, dict):
+        return str(item)
     lang = get_language()
     val = item.get(f"name_{lang}")
     if val:
@@ -229,6 +233,9 @@ def get_entity_display_title(item, with_en_subtitle=False):
     if not with_en_subtitle:
         return local_name or ""
 
+    if not isinstance(item, dict):
+        return local_name or ""
+
     lang = get_language()
     name_en = item.get("name_en") or item.get("name")
     if lang != "en" and name_en and local_name != name_en:
@@ -239,6 +246,10 @@ def get_item_desc(item):
     """Universal description resolver with fallback cascade across languages."""
     if not item:
         return ""
+    if isinstance(item, str):
+        return item
+    if not isinstance(item, dict):
+        return str(item)
     lang = get_language()
     desc = item.get(f"desc_{lang}")
     if not desc:
@@ -258,6 +269,10 @@ def get_set_name(set_obj):
     """Universal set name resolver with fallback cascade across languages."""
     if not set_obj:
         return ""
+    if isinstance(set_obj, str):
+        return set_obj
+    if not isinstance(set_obj, dict):
+        return str(set_obj)
     lang = get_language()
     val = set_obj.get(f"name_{lang}")
     if val:
