@@ -9,6 +9,7 @@ from tkinter import ttk
 import modifiers
 import i18n
 from i18n import t
+from ui.components import ScrollableFrame
 from ui.theme import ACCENT_GOLD, ACCENT_CYAN, FG_MUTED
 
 
@@ -16,13 +17,17 @@ class TowerTabMixin:
     """Provides methods for constructing and handling the Tower & Master Unlocks Tab."""
 
     def _build_tower_tab(self):
-        self.tab_tower.columnconfigure(0, weight=1, uniform="tab7")
-        self.tab_tower.columnconfigure(1, weight=1, uniform="tab7")
-        self.tab_tower.rowconfigure(0, weight=1)
-        self.tab_tower.rowconfigure(1, weight=1)
+        self.tower_scroll = scroll = ScrollableFrame(self.tab_tower)
+        scroll.pack(fill="both", expand=True)
+        container = scroll.content
+
+        container.columnconfigure(0, weight=1, uniform="tab7")
+        container.columnconfigure(1, weight=1, uniform="tab7")
+        container.rowconfigure(0, weight=1)
+        container.rowconfigure(1, weight=1)
         
         # Left Panel: Tower, Elevators & Stamps
-        box_left = ttk.LabelFrame(self.tab_tower, text=t("tw_left_title"), padding=12)
+        box_left = ttk.LabelFrame(container, text=t("tw_left_title"), padding=12)
         box_left.grid(row=0, column=0, sticky="nsew", padx=6, pady=6)
         
         # 1. Elevators & Map Discovery
@@ -48,7 +53,7 @@ class TowerTabMixin:
         btn_reset_shop.pack(fill="x", pady=2)
 
         # Right Panel: TDM & Encyclopedia Books
-        box_right = ttk.LabelFrame(self.tab_tower, text=t("tw_right_title"), padding=12)
+        box_right = ttk.LabelFrame(container, text=t("tw_right_title"), padding=12)
         box_right.grid(row=0, column=1, sticky="nsew", padx=6, pady=6)
         
         # 4. TDM Rank & Points
@@ -86,7 +91,7 @@ class TowerTabMixin:
         btn_media.pack(fill="x", pady=2)
 
         # Row 1 (Bottom Full-Width): Tower Exploration Records & Combat Stats
-        box_playlog = ttk.LabelFrame(self.tab_tower, text=t("tw_playlog_title"), padding=12)
+        box_playlog = ttk.LabelFrame(container, text=t("tw_playlog_title"), padding=12)
         box_playlog.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=6, pady=6)
         
         pl_grid = ttk.Frame(box_playlog)

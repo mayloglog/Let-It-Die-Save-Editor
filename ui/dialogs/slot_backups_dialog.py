@@ -26,8 +26,8 @@ class SlotBackupsDialog(tk.Toplevel):
         self.on_restored_cb = on_restored_cb
 
         self.title(t("slot_bak_dialog_title", slot=slot_num))
-        self.geometry("760x530")
-        self.minsize(680, 450)
+        self.geometry("860x540")
+        self.minsize(720, 440)
         self.configure(bg=BG_DARK)
         self.transient(parent)
         self.grab_set()
@@ -60,9 +60,9 @@ class SlotBackupsDialog(tk.Toplevel):
 
         self.lbl_subtitle = tk.Label(
             hdr,
-            text=t("slot_bak_subtitle"),
+            text=f"💡 {t('slot_bak_double_click_hint')}",
             font=("Segoe UI", 8),
-            fg=FG_MUTED,
+            fg=ACCENT_CYAN,
             bg=BG_PANEL
         )
         self.lbl_subtitle.pack(side="right", padx=4)
@@ -75,7 +75,7 @@ class SlotBackupsDialog(tk.Toplevel):
         tree_frame.pack(fill="both", expand=True)
 
         scroll = ttk.Scrollbar(tree_frame, orient="vertical")
-        cols = ("date", "size", "type")
+        cols = ("fighter", "floor", "coins", "date", "type")
         self.tree = ttk.Treeview(
             tree_frame,
             columns=cols,
@@ -86,18 +86,23 @@ class SlotBackupsDialog(tk.Toplevel):
         scroll.config(command=self.tree.yview)
 
         self.tree.heading("#0", text=t("slot_bak_col_file"), anchor="w")
+        self.tree.heading("fighter", text=t("slot_bak_col_fighter"), anchor="w")
+        self.tree.heading("floor", text=t("slot_bak_col_floor"), anchor="center")
+        self.tree.heading("coins", text=t("slot_bak_col_coins"), anchor="center")
         self.tree.heading("date", text=t("bak_col_date"), anchor="center")
-        self.tree.heading("size", text=t("bak_col_size"), anchor="center")
         self.tree.heading("type", text=t("slot_bak_col_type"), anchor="center")
 
-        self.tree.column("#0", width=300, anchor="w")
-        self.tree.column("date", width=160, anchor="center")
-        self.tree.column("size", width=85, anchor="center")
-        self.tree.column("type", width=130, anchor="center")
+        self.tree.column("#0", width=225, minwidth=170, anchor="w")
+        self.tree.column("fighter", width=165, minwidth=130, anchor="w")
+        self.tree.column("floor", width=80, minwidth=65, anchor="center")
+        self.tree.column("coins", width=105, minwidth=85, anchor="center")
+        self.tree.column("date", width=135, minwidth=110, anchor="center")
+        self.tree.column("type", width=105, minwidth=90, anchor="center")
 
         scroll.pack(side="right", fill="y")
         self.tree.pack(side="left", fill="both", expand=True)
         self.tree.bind("<<TreeviewSelect>>", self._on_tree_select)
+        self.tree.bind("<Double-Button-1>", lambda e: self._restore_to_active_action())
 
         # Selected Backup Preview Card
         self.preview_frame = tk.Frame(body, bg=BG_CARD, padx=10, pady=8, highlightbackground=ACCENT_CYAN, highlightthickness=1)
@@ -126,20 +131,20 @@ class SlotBackupsDialog(tk.Toplevel):
         btn_bar = tk.Frame(self, bg=BG_PANEL, padx=14, pady=10)
         btn_bar.pack(fill="x")
 
+        self.btn_restore_active = ttk.Button(
+            btn_bar,
+            text=t("slot_bak_use_session_btn"),
+            style="Accent.TButton",
+            command=self._restore_to_active_action
+        )
+        self.btn_restore_active.pack(side="left", padx=3)
+
         self.btn_restore = ttk.Button(
             btn_bar,
             text=t("slot_bak_restore_slot_btn"),
             command=self._restore_to_slot_action
         )
         self.btn_restore.pack(side="left", padx=3)
-
-        self.btn_restore_active = ttk.Button(
-            btn_bar,
-            text=t("slot_bak_restore_active_btn"),
-            style="Accent.TButton",
-            command=self._restore_to_active_action
-        )
-        self.btn_restore_active.pack(side="left", padx=3)
 
         self.btn_new_bak = ttk.Button(
             btn_bar,
@@ -168,7 +173,7 @@ class SlotBackupsDialog(tk.Toplevel):
         backups = slot_info.get("backups", [])
 
         if not backups:
-            self.tree.insert("", "end", text=f"  {t('slot_bak_empty')}", values=("-", "-", "-"))
+            self.tree.insert("", "end", text=f"  {t('slot_bak_empty')}", values=("-", "-", "-", "-", "-"))
             self.lbl_preview_details.config(text=t("slot_bak_empty"))
             self.btn_restore.config(state="disabled")
             self.btn_restore_active.config(state="disabled")
@@ -193,11 +198,25 @@ class SlotBackupsDialog(tk.Toplevel):
                 display_title = f"📦 {fn}"
                 type_lbl = t("slot_bak_type_auto")
 
-            sz_str = f"{b['size'] // 1024} KB"
+            meta = b.get("meta") or {}
+            if meta and not meta.get("error"):
+                f_name = meta.get("fighter_name", "Fighter")
+                f_lvl = meta.get("fighter_lvl", 1)
+                f_grade = meta.get("fighter_grade", 1)
+                fighter_str = f"🥋 {f_name} (★{f_grade} Lv.{f_lvl})"
+                flr = meta.get("max_floor", 1)
+                floor_str = f"🗼 P.{flr}"
+                kc = meta.get("kill_coins", 0)
+                coins_str = f"🪙 {kc:,}"
+            else:
+                fighter_str = "-"
+                floor_str = "-"
+                coins_str = "-"
+
             node_id = self.tree.insert(
                 "", "end",
                 text=display_title,
-                values=(b.get("date_str", "-"), sz_str, type_lbl)
+                values=(fighter_str, floor_str, coins_str, b.get("date_str", "-"), type_lbl)
             )
             self._node_to_filename[node_id] = fn
 

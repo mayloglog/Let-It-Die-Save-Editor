@@ -44,7 +44,8 @@ SHROOMS_BEASTS_DB_PATH = os.path.join(BASE_DIR, "all_shrooms_beasts_db.json")
 from ui.theme import (
     BG_DARK, BG_PANEL, BG_CARD, BG_CARD_LIGHT, BG_CARD_HOVER,
     FG_MAIN, FG_MUTED, ACCENT_GOLD, ACCENT_CYAN, ACCENT_BLUE,
-    ACCENT_GREEN, ACCENT_RED, ACCENT_PURPLE, ACCENT_PINK
+    ACCENT_GREEN, ACCENT_RED, ACCENT_PURPLE, ACCENT_PINK,
+    get_ui_font
 )
 from ui.dialogs import (
     SmartInventoryAnalyzerDialog,
@@ -83,10 +84,10 @@ class CompleteSaveEditorGUI(
 
     def __init__(self):
         super().__init__()
-        local_v = updater.get_local_version_info().get("version", "4.1.3")
+        local_v = updater.get_local_version_info().get("version", "4.2.0")
         self.title(f"LET IT DIE (Offline) - Deep Save Editor Pro v{local_v} (Master Cyberpunk Edition)")
         self.geometry("1240x820")
-        self.minsize(1040, 700)
+        self.minsize(960, 600)
         self.configure(bg=BG_DARK)
         
         self._apply_dark_theme()
@@ -132,10 +133,11 @@ class CompleteSaveEditorGUI(
             self.status_var.set(t("no_save_detected"))
 
     def _apply_dark_theme(self):
+        font_family = get_ui_font(size=9)[0]
         # 1. Option database defaults for Tk widgets, popups, and dropdown menus
         self.option_add("*background", BG_DARK)
         self.option_add("*foreground", FG_MAIN)
-        self.option_add("*font", ("Segoe UI", 9))
+        self.option_add("*font", (font_family, 9))
         self.option_add("*selectBackground", ACCENT_BLUE)
         self.option_add("*selectForeground", "#ffffff")
         
@@ -144,12 +146,12 @@ class CompleteSaveEditorGUI(
         self.option_add("*TCombobox*Listbox.foreground", "#ffffff")
         self.option_add("*TCombobox*Listbox.selectBackground", ACCENT_BLUE)
         self.option_add("*TCombobox*Listbox.selectForeground", "#ffffff")
-        self.option_add("*TCombobox*Listbox.font", ("Segoe UI", 9))
+        self.option_add("*TCombobox*Listbox.font", (font_family, 9))
         self.option_add("*ComboboxListbox*background", BG_CARD)
         self.option_add("*ComboboxListbox*foreground", "#ffffff")
         self.option_add("*ComboboxListbox*selectBackground", ACCENT_BLUE)
         self.option_add("*ComboboxListbox*selectForeground", "#ffffff")
-        self.option_add("*ComboboxListbox*font", ("Segoe UI", 9))
+        self.option_add("*ComboboxListbox*font", (font_family, 9))
         self.option_add("*Listbox.background", BG_CARD)
         self.option_add("*Listbox.foreground", "#ffffff")
         self.option_add("*Entry.background", BG_CARD)
@@ -170,7 +172,7 @@ class CompleteSaveEditorGUI(
             try: self.style.theme_use("clam")
             except Exception: pass
             
-        self.style.configure(".", background=BG_DARK, foreground=FG_MAIN, font=("Segoe UI", 9))
+        self.style.configure(".", background=BG_DARK, foreground=FG_MAIN, font=(font_family, 9))
         self.style.configure("TFrame", background=BG_DARK)
         self.style.configure("Card.TFrame", background=BG_CARD, relief="flat")
         self.style.configure("CardLight.TFrame", background=BG_CARD_LIGHT, relief="flat")
@@ -183,37 +185,37 @@ class CompleteSaveEditorGUI(
         self.style.configure("Muted.TLabel", background=BG_DARK, foreground=FG_MUTED)
         self.style.configure("CardMuted.TLabel", background=BG_CARD, foreground=FG_MUTED)
         
-        self.style.configure("Header.TLabel", font=("Segoe UI", 11, "bold"), foreground=ACCENT_GOLD, background=BG_DARK)
-        self.style.configure("Title.TLabel", font=("Segoe UI", 13, "bold"), foreground=FG_MAIN, background=BG_CARD)
-        self.style.configure("StatGold.TLabel", font=("Segoe UI", 10, "bold"), foreground=ACCENT_GOLD, background=BG_DARK)
+        self.style.configure("Header.TLabel", font=(font_family, 11, "bold"), foreground=ACCENT_GOLD, background=BG_DARK)
+        self.style.configure("Title.TLabel", font=(font_family, 13, "bold"), foreground=FG_MAIN, background=BG_CARD)
+        self.style.configure("StatGold.TLabel", font=(font_family, 10, "bold"), foreground=ACCENT_GOLD, background=BG_DARK)
         
         self.style.configure("TLabelframe", background=BG_DARK, foreground=ACCENT_GOLD, relief="groove")
-        self.style.configure("TLabelframe.Label", background=BG_DARK, foreground=ACCENT_GOLD, font=("Segoe UI", 9, "bold"))
+        self.style.configure("TLabelframe.Label", background=BG_DARK, foreground=ACCENT_GOLD, font=(font_family, 9, "bold"))
         self.style.configure("Card.TLabelframe", background=BG_CARD, foreground=ACCENT_GOLD, relief="groove")
-        self.style.configure("Card.TLabelframe.Label", background=BG_CARD, foreground=ACCENT_GOLD, font=("Segoe UI", 9, "bold"))
+        self.style.configure("Card.TLabelframe.Label", background=BG_CARD, foreground=ACCENT_GOLD, font=(font_family, 9, "bold"))
         
         # High-contrast Buttons
-        self.style.configure("TButton", background=BG_CARD, foreground="#ffffff", borderwidth=1, focuscolor="none", font=("Segoe UI", 9))
+        self.style.configure("TButton", background=BG_CARD, foreground="#ffffff", borderwidth=1, focuscolor="none", font=(font_family, 9))
         self.style.map("TButton", background=[("active", BG_CARD_LIGHT), ("pressed", BG_DARK)], foreground=[("active", "#ffffff"), ("pressed", FG_MUTED)])
         
-        self.style.configure("Accent.TButton", background=ACCENT_GOLD, foreground="#000000", font=("Segoe UI", 9, "bold"))
+        self.style.configure("Accent.TButton", background=ACCENT_GOLD, foreground="#000000", font=(font_family, 9, "bold"))
         self.style.map("Accent.TButton", background=[("active", "#f39c12"), ("pressed", "#d68910")], foreground=[("active", "#000000"), ("pressed", "#000000")])
         
-        self.style.configure("Danger.TButton", background=ACCENT_RED, foreground="#ffffff", font=("Segoe UI", 9, "bold"))
+        self.style.configure("Danger.TButton", background=ACCENT_RED, foreground="#ffffff", font=(font_family, 9, "bold"))
         self.style.map("Danger.TButton", background=[("active", "#c0392b"), ("pressed", "#962d22")], foreground=[("active", "#ffffff"), ("pressed", "#ffffff")])
         
-        self.style.configure("Success.TButton", background=ACCENT_GREEN, foreground="#000000", font=("Segoe UI", 9, "bold"))
+        self.style.configure("Success.TButton", background=ACCENT_GREEN, foreground="#000000", font=(font_family, 9, "bold"))
         self.style.map("Success.TButton", background=[("active", "#27ae60"), ("pressed", "#1e8449")], foreground=[("active", "#000000"), ("pressed", "#000000")])
         
         # Tabs / Notebook
         self.style.configure("TNotebook", background=BG_DARK, borderwidth=0)
-        self.style.configure("TNotebook.Tab", background=BG_PANEL, foreground=FG_MUTED, padding=(14, 8), font=("Segoe UI", 9, "bold"))
+        self.style.configure("TNotebook.Tab", background=BG_PANEL, foreground=FG_MUTED, padding=(8, 6), font=(font_family, 9, "bold"))
         self.style.map("TNotebook.Tab", background=[("selected", BG_CARD), ("active", "#252b3d")], foreground=[("selected", ACCENT_GOLD), ("active", FG_MAIN)])
         
         # Treeview
-        self.style.configure("Treeview", background=BG_PANEL, fieldbackground=BG_PANEL, foreground="#ffffff", rowheight=40, borderwidth=0, font=("Segoe UI", 9))
+        self.style.configure("Treeview", background=BG_PANEL, fieldbackground=BG_PANEL, foreground="#ffffff", rowheight=40, borderwidth=0, font=(font_family, 9))
         self.style.map("Treeview", background=[("selected", "#1a365d")], foreground=[("selected", "#00e5ff")])
-        self.style.configure("Treeview.Heading", background=BG_CARD, foreground=ACCENT_GOLD, font=("Segoe UI", 9, "bold"), borderwidth=1)
+        self.style.configure("Treeview.Heading", background=BG_CARD, foreground=ACCENT_GOLD, font=(font_family, 9, "bold"), borderwidth=1)
         
         # Modern High-Contrast Entries & Comboboxes
         self.style.configure("TEntry", fieldbackground=BG_CARD, background=BG_CARD, foreground="#ffffff", insertcolor="#ffffff")
@@ -529,40 +531,48 @@ class CompleteSaveEditorGUI(
             messagebox.showerror(title, msg)
 
     def _build_ui(self):
-        # 1. Top Cyberpunk Save File & Action Bar
-        top_frame = tk.Frame(self, bg=BG_PANEL, padx=14, pady=8)
+        # 1. Top Cyberpunk Save File & Action Bar (Two clean rows for responsiveness)
+        top_frame = tk.Frame(self, bg=BG_PANEL, padx=12, pady=6)
         top_frame.pack(fill="x", padx=10, pady=(6, 2))
         
-        self.lbl_file = tk.Label(top_frame, text=t("save_file"), font=("Segoe UI", 9, "bold"), fg=ACCENT_GOLD, bg=BG_PANEL)
-        self.lbl_file.pack(side="left", padx=(0, 8))
+        # Row 1: Save File Path & Save Actions
+        top_row1 = tk.Frame(top_frame, bg=BG_PANEL)
+        top_row1.pack(fill="x", pady=(0, 4))
+
+        self.lbl_file = tk.Label(top_row1, text=t("save_file"), font=("Segoe UI", 9, "bold"), fg=ACCENT_GOLD, bg=BG_PANEL)
+        self.lbl_file.pack(side="left", padx=(0, 6))
         
-        self.path_entry = ttk.Entry(top_frame)
-        self.path_entry.pack(side="left", fill="x", expand=True, padx=(0, 8))
+        self.path_entry = ttk.Entry(top_row1)
+        self.path_entry.pack(side="left", fill="x", expand=True, padx=(0, 6))
         if self.save_path:
             self.path_entry.insert(0, self.save_path)
             
-        self.browse_btn = ttk.Button(top_frame, text=t("browse"), command=self.browse_save)
+        self.browse_btn = ttk.Button(top_row1, text=t("browse"), command=self.browse_save)
         self.browse_btn.pack(side="left", padx=2)
         
-        self.reload_btn = ttk.Button(top_frame, text=t("reload"), command=lambda: self.load_save(self.path_entry.get()))
+        self.reload_btn = ttk.Button(top_row1, text=t("reload"), command=lambda: self.load_save(self.path_entry.get()))
         self.reload_btn.pack(side="left", padx=2)
         
-        self.backup_btn = ttk.Button(top_frame, text=t("backup"), command=self.create_manual_backup)
+        self.backup_btn = ttk.Button(top_row1, text=t("backup"), command=self.create_manual_backup)
         self.backup_btn.pack(side="left", padx=2)
+
+        self.save_btn = ttk.Button(top_row1, text=t("save_game"), style="Accent.TButton", command=self.save_current)
+        self.save_btn.pack(side="right", padx=(6, 0))
+
+        # Row 2: Quick Tools & Settings
+        top_row2 = tk.Frame(top_frame, bg=BG_PANEL)
+        top_row2.pack(fill="x")
         
-        self.btn_sets_hud = ttk.Button(top_frame, text=t("armor_sets"), style="Accent.TButton", command=self._open_armor_set_viewer)
-        self.btn_sets_hud.pack(side="left", padx=(6, 2))
+        self.btn_sets_hud = ttk.Button(top_row2, text=t("armor_sets"), style="Accent.TButton", command=self._open_armor_set_viewer)
+        self.btn_sets_hud.pack(side="left", padx=(0, 3))
         
-        self.btn_rnd_hud = ttk.Button(top_frame, text=t("rnd_analyzer"), command=self._open_smart_analyzer)
-        self.btn_rnd_hud.pack(side="left", padx=2)
+        self.btn_rnd_hud = ttk.Button(top_row2, text=t("rnd_analyzer"), command=self._open_smart_analyzer)
+        self.btn_rnd_hud.pack(side="left", padx=3)
         
-        self.btn_update_hud = ttk.Button(top_frame, text=t("updates"), command=self._check_app_updates)
-        self.btn_update_hud.pack(side="left", padx=2)
+        self.btn_update_hud = ttk.Button(top_row2, text=t("updates"), command=self._check_app_updates)
+        self.btn_update_hud.pack(side="left", padx=3)
         
         # Language Switcher (Español / English / 中文)
-        self.lbl_lang = tk.Label(top_frame, text=t("lang_label"), font=("Segoe UI", 9, "bold"), fg=ACCENT_GOLD, bg=BG_PANEL)
-        self.lbl_lang.pack(side="left", padx=(6, 2))
-        
         installed_langs = i18n.get_installed_languages()
         self._lang_display_map = {}
         self._lang_code_to_display = {}
@@ -573,15 +583,15 @@ class CompleteSaveEditorGUI(
         cur_lang = i18n.get_language()
         cur_lang_str = self._lang_code_to_display.get(cur_lang, "English")
         self.lang_var = tk.StringVar(value=cur_lang_str)
-        self.lang_cb = ttk.Combobox(top_frame, textvariable=self.lang_var, values=list(self._lang_display_map.keys()), state="readonly", width=9)
-        self.lang_cb.pack(side="left", padx=(0, 4))
+        self.lang_cb = ttk.Combobox(top_row2, textvariable=self.lang_var, values=list(self._lang_display_map.keys()), state="readonly", width=10)
+        self.lang_cb.pack(side="right")
         self.lang_cb.bind("<<ComboboxSelected>>", self._on_language_changed)
-        
-        self.save_btn = ttk.Button(top_frame, text=t("save_game"), style="Accent.TButton", command=self.save_current)
-        self.save_btn.pack(side="left", padx=(6, 0))
+
+        self.lbl_lang = tk.Label(top_row2, text=t("lang_label"), font=("Segoe UI", 9, "bold"), fg=ACCENT_GOLD, bg=BG_PANEL)
+        self.lbl_lang.pack(side="right", padx=(0, 6))
 
         # 2. Player Status Cyberpunk HUD Dashboard
-        self.dashboard_frame = tk.Frame(self, bg=BG_CARD, padx=14, pady=8, relief="flat", highlightbackground=BG_CARD_LIGHT, highlightthickness=1)
+        self.dashboard_frame = tk.Frame(self, bg=BG_CARD, padx=12, pady=6, relief="flat", highlightbackground=BG_CARD_LIGHT, highlightthickness=1)
         self.dashboard_frame.pack(fill="x", padx=10, pady=4)
         
         self.player_avatar_lbl = tk.Label(self.dashboard_frame, bg=BG_CARD, image=self.get_photo("all-rounder", (38, 38)) or "")
@@ -590,33 +600,33 @@ class CompleteSaveEditorGUI(
         info_subframe = tk.Frame(self.dashboard_frame, bg=BG_CARD)
         info_subframe.pack(side="left", fill="y")
         
-        self.player_name_lbl = tk.Label(info_subframe, text=t("hud_fighter_default"), font=("Segoe UI", 12, "bold"), fg="#ffffff", bg=BG_CARD)
+        self.player_name_lbl = tk.Label(info_subframe, text=t("hud_fighter_default"), font=("Segoe UI", 11, "bold"), fg="#ffffff", bg=BG_CARD)
         self.player_name_lbl.pack(anchor="w")
         
         self.player_meta_lbl = tk.Label(info_subframe, text=t("hud_meta_default"), font=("Segoe UI", 8), fg=FG_MUTED, bg=BG_CARD)
         self.player_meta_lbl.pack(anchor="w")
 
-        # Currency Badges on the right of Dashboard
+        # Currency Badges in compact 2x3 grid on the right
         curr_subframe = tk.Frame(self.dashboard_frame, bg=BG_CARD)
-        curr_subframe.pack(side="right", padx=5)
+        curr_subframe.pack(side="right", padx=4)
         
-        self.hud_dm_lbl = tk.Label(curr_subframe, text="💎 0 DM", font=("Segoe UI", 9, "bold"), fg=ACCENT_PINK, bg=BG_CARD, compound="left", image=self.get_photo("dm", (20, 20)) or "")
-        self.hud_dm_lbl.pack(side="left", padx=8)
+        self.hud_dm_lbl = tk.Label(curr_subframe, text="💎 0 DM", font=("Segoe UI", 8, "bold"), fg=ACCENT_PINK, bg=BG_CARD, compound="left", image=self.get_photo("dm", (18, 18)) or "")
+        self.hud_dm_lbl.grid(row=0, column=0, sticky="w", padx=(4, 10), pady=1)
         
-        self.hud_kc_lbl = tk.Label(curr_subframe, text="🪙 0 KC", font=("Segoe UI", 9, "bold"), fg=ACCENT_GOLD, bg=BG_CARD, compound="left", image=self.get_photo("kc", (20, 20)) or "")
-        self.hud_kc_lbl.pack(side="left", padx=8)
+        self.hud_kc_lbl = tk.Label(curr_subframe, text="🪙 0 KC", font=("Segoe UI", 8, "bold"), fg=ACCENT_GOLD, bg=BG_CARD, compound="left", image=self.get_photo("kc", (18, 18)) or "")
+        self.hud_kc_lbl.grid(row=0, column=1, sticky="w", padx=(4, 10), pady=1)
         
-        self.hud_spl_lbl = tk.Label(curr_subframe, text="⚡ 0 SPL", font=("Segoe UI", 9, "bold"), fg=ACCENT_CYAN, bg=BG_CARD, compound="left", image=self.get_photo("spl", (20, 20)) or "")
-        self.hud_spl_lbl.pack(side="left", padx=8)
+        self.hud_spl_lbl = tk.Label(curr_subframe, text="⚡ 0 SPL", font=("Segoe UI", 8, "bold"), fg=ACCENT_CYAN, bg=BG_CARD, compound="left", image=self.get_photo("spl", (18, 18)) or "")
+        self.hud_spl_lbl.grid(row=0, column=2, sticky="w", padx=(4, 4), pady=1)
         
-        self.hud_bl_lbl = tk.Label(curr_subframe, text="🩸 0 BL", font=("Segoe UI", 9, "bold"), fg=ACCENT_RED, bg=BG_CARD, compound="left", image=self.get_photo("bloodnium", (20, 20)) or "")
-        self.hud_bl_lbl.pack(side="left", padx=8)
+        self.hud_bl_lbl = tk.Label(curr_subframe, text="🩸 0 BL", font=("Segoe UI", 8, "bold"), fg=ACCENT_RED, bg=BG_CARD, compound="left", image=self.get_photo("bloodnium", (18, 18)) or "")
+        self.hud_bl_lbl.grid(row=1, column=0, sticky="w", padx=(4, 10), pady=1)
         
-        self.hud_re_lbl = tk.Label(curr_subframe, text="♻️ 0 RE", font=("Segoe UI", 9, "bold"), fg=ACCENT_GREEN, bg=BG_CARD, compound="left", image=self.get_photo("re_point", (20, 20)) or "")
-        self.hud_re_lbl.pack(side="left", padx=8)
+        self.hud_re_lbl = tk.Label(curr_subframe, text="♻️ 0 RE", font=("Segoe UI", 8, "bold"), fg=ACCENT_GREEN, bg=BG_CARD, compound="left", image=self.get_photo("re_point", (18, 18)) or "")
+        self.hud_re_lbl.grid(row=1, column=1, sticky="w", padx=(4, 10), pady=1)
         
-        self.hud_bp_lbl = tk.Label(curr_subframe, text="📋 0/1370 (0%)", font=("Segoe UI", 9, "bold"), fg=ACCENT_GOLD, bg=BG_CARD, compound="left", image=self.get_photo("blueprint", (20, 20)) or "")
-        self.hud_bp_lbl.pack(side="left", padx=8)
+        self.hud_bp_lbl = tk.Label(curr_subframe, text="📋 0/1370 (0%)", font=("Segoe UI", 8, "bold"), fg=ACCENT_GOLD, bg=BG_CARD, compound="left", image=self.get_photo("blueprint", (18, 18)) or "")
+        self.hud_bp_lbl.grid(row=1, column=2, sticky="w", padx=(4, 4), pady=1)
 
         self.notebook = ttk.Notebook(self)
         self.notebook.pack(fill="both", expand=True, padx=10, pady=4)
@@ -708,8 +718,36 @@ class CompleteSaveEditorGUI(
             i18n.set_language(new_lang)
             self._refresh_all_language_texts()
 
+    def _apply_dynamic_fonts(self):
+        """Updates font typography for active language (e.g. Microsoft YaHei UI for zh, Segoe UI for Western languages)."""
+        font_family = get_ui_font(size=9)[0]
+        self.option_add("*font", (font_family, 9))
+        self.option_add("*TCombobox*Listbox.font", (font_family, 9))
+        self.option_add("*ComboboxListbox*font", (font_family, 9))
+
+        if hasattr(self, "style"):
+            self.style.configure(".", font=(font_family, 9))
+            self.style.configure("Header.TLabel", font=(font_family, 11, "bold"))
+            self.style.configure("Title.TLabel", font=(font_family, 13, "bold"))
+            self.style.configure("StatGold.TLabel", font=(font_family, 10, "bold"))
+            self.style.configure("TLabelframe.Label", font=(font_family, 9, "bold"))
+            self.style.configure("Card.TLabelframe.Label", font=(font_family, 9, "bold"))
+            self.style.configure("TButton", font=(font_family, 9))
+            self.style.configure("Accent.TButton", font=(font_family, 9, "bold"))
+            self.style.configure("Danger.TButton", font=(font_family, 9, "bold"))
+            self.style.configure("Success.TButton", font=(font_family, 9, "bold"))
+            self.style.configure("TNotebook.Tab", font=(font_family, 9, "bold"))
+            self.style.configure("Treeview", font=(font_family, 9))
+            self.style.configure("Treeview.Heading", font=(font_family, 9, "bold"))
+
+        if hasattr(self, "lbl_file"): self.lbl_file.config(font=(font_family, 9, "bold"))
+        if hasattr(self, "lbl_lang"): self.lbl_lang.config(font=(font_family, 9, "bold"))
+        if hasattr(self, "player_name_lbl"): self.player_name_lbl.config(font=(font_family, 12, "bold"))
+        if hasattr(self, "player_meta_lbl"): self.player_meta_lbl.config(font=(font_family, 8))
+
     def _refresh_all_language_texts(self):
         """Dynamically re-applies all translated titles and strings across the UI and rebuilds tabs."""
+        self._apply_dynamic_fonts()
         self.title(t("app_title"))
         if hasattr(self, "lbl_file"): self.lbl_file.config(text=t("save_file"))
         if hasattr(self, "browse_btn"): self.browse_btn.config(text=t("browse"))
@@ -795,6 +833,11 @@ class CompleteSaveEditorGUI(
             return
         try:
             data, ver = decompress_save(path)
+        except Exception as e:
+            messagebox.showerror(t("error"), t("mb_decompress_error", err=e))
+            return
+
+        try:
             self.save_json = data
             self.version = ver
             self.save_path = path
@@ -811,7 +854,7 @@ class CompleteSaveEditorGUI(
             self.refresh_all_views()
             self.status_var.set(t("status_save_loaded", file=os.path.basename(path)))
         except Exception as e:
-            messagebox.showerror(t("error"), t("mb_decompress_error", err=e))
+            messagebox.showerror(t("error"), str(e))
 
     def refresh_all_views(self):
         if not self.save_json:

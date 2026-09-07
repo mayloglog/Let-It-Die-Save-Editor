@@ -63,18 +63,28 @@ class DecalsTabMixin:
         ctrl_frame = ttk.Frame(left_box)
         ctrl_frame.pack(fill="x", pady=2)
         
+        btn_all_p = ttk.Button(ctrl_frame, text=t("decal_unlock_all"), style="Accent.TButton", command=self.unlock_all_decals_preset)
+        btn_all_p.pack(side="right", padx=1)
+
+        self.decal_unlock_qty_var = tk.StringVar(value="3")
+        ttk.Entry(ctrl_frame, textvariable=self.decal_unlock_qty_var, width=3, justify="center").pack(side="right", padx=1)
+        ttk.Label(ctrl_frame, text=t("decal_copies_lbl")).pack(side="right", padx=(2, 0))
+
+        btn_meta = ttk.Button(ctrl_frame, text=t("decal_pack_meta"), command=self.add_meta_decals_preset)
+        btn_meta.pack(side="right", padx=1)
+
         ttk.Label(ctrl_frame, text=t("decal_search")).pack(side="left", padx=2)
         self.decal_search_var = tk.StringVar()
         self.decal_search_var.trace_add("write", lambda *args: self.filter_decals_list())
-        ttk.Entry(ctrl_frame, textvariable=self.decal_search_var, width=13).pack(side="left", padx=2)
+        ttk.Entry(ctrl_frame, textvariable=self.decal_search_var, width=10).pack(side="left", padx=2)
         
-        ttk.Label(ctrl_frame, text=t("decal_rare_lbl")).pack(side="left", padx=(4, 1))
+        ttk.Label(ctrl_frame, text=t("decal_rare_lbl")).pack(side="left", padx=(3, 1))
         self.decal_rarity_filter_var = tk.StringVar(value=t("decal_all"))
-        cb_rarity = ttk.Combobox(ctrl_frame, textvariable=self.decal_rarity_filter_var, values=[t("decal_all"), "1★", "2★", "3★", "4★", "5★"], state="readonly", width=6)
+        cb_rarity = ttk.Combobox(ctrl_frame, textvariable=self.decal_rarity_filter_var, values=[t("decal_all"), "1★", "2★", "3★", "4★", "5★"], state="readonly", width=5)
         cb_rarity.pack(side="left", padx=2)
         cb_rarity.bind("<<ComboboxSelected>>", lambda e: self.filter_decals_list())
 
-        ttk.Label(ctrl_frame, text=t("decal_type_lbl")).pack(side="left", padx=(4, 1))
+        ttk.Label(ctrl_frame, text=t("decal_type_lbl")).pack(side="left", padx=(3, 1))
         self.decal_type_defs = [
             ("ALL", "decal_all"),
             ("PREMIUM", "decal_premium"),
@@ -82,11 +92,11 @@ class DecalsTabMixin:
         ]
         self._decal_type_map = {t(k): code for code, k in self.decal_type_defs}
         self.decal_type_filter_var = tk.StringVar(value=t("decal_all"))
-        cb_dtype = ttk.Combobox(ctrl_frame, textvariable=self.decal_type_filter_var, values=list(self._decal_type_map.keys()), state="readonly", width=12)
+        cb_dtype = ttk.Combobox(ctrl_frame, textvariable=self.decal_type_filter_var, values=list(self._decal_type_map.keys()), state="readonly", width=9)
         cb_dtype.pack(side="left", padx=2)
         cb_dtype.bind("<<ComboboxSelected>>", lambda e: self.filter_decals_list())
 
-        ttk.Label(ctrl_frame, text=t("decal_poss_lbl")).pack(side="left", padx=(4, 1))
+        ttk.Label(ctrl_frame, text=t("decal_poss_lbl")).pack(side="left", padx=(3, 1))
         self.decal_poss_defs = [
             ("ALL", "decal_all"),
             ("OWNED", "decal_owned"),
@@ -94,19 +104,9 @@ class DecalsTabMixin:
         ]
         self._decal_poss_map = {t(k): code for code, k in self.decal_poss_defs}
         self.decal_poss_filter_var = tk.StringVar(value=t("decal_all"))
-        cb_dposs = ttk.Combobox(ctrl_frame, textvariable=self.decal_poss_filter_var, values=list(self._decal_poss_map.keys()), state="readonly", width=14)
+        cb_dposs = ttk.Combobox(ctrl_frame, textvariable=self.decal_poss_filter_var, values=list(self._decal_poss_map.keys()), state="readonly", width=9)
         cb_dposs.pack(side="left", padx=2)
         cb_dposs.bind("<<ComboboxSelected>>", lambda e: self.filter_decals_list())
-
-        btn_meta = ttk.Button(ctrl_frame, text=t("decal_pack_meta"), command=self.add_meta_decals_preset)
-        btn_meta.pack(side="right", padx=1)
-
-        btn_all_p = ttk.Button(ctrl_frame, text=t("decal_unlock_all"), style="Accent.TButton", command=self.unlock_all_decals_preset)
-        btn_all_p.pack(side="right", padx=1)
-
-        self.decal_unlock_qty_var = tk.StringVar(value="3")
-        ttk.Entry(ctrl_frame, textvariable=self.decal_unlock_qty_var, width=3, justify="center").pack(side="right", padx=1)
-        ttk.Label(ctrl_frame, text=t("decal_copies_lbl")).pack(side="right", padx=(2, 0))
 
         # Row 2: Eventos / Colaboraciones Quick Buttons Bar
         ctrl_frame_events = ttk.Frame(left_box)
@@ -117,12 +117,12 @@ class DecalsTabMixin:
         
         decal_event_buttons = [
             (t("decal_event_all"), "TODOS"),
-            ("💥 World of Tanks", "WOT"),
-            ("⚔️ No More Heroes", "NMH"),
-            ("🎯 Killer7", "KILLER7"),
-            ("🌀 Gravity Rush", "GRAVITY_RUSH"),
-            ("💀 Deathverse", "DEATHVERSE"),
-            (t("decal_event_tengoku"), "TENGOKU_META")
+            ("💥 WoT", "WOT"),
+            ("⚔️ NMH", "NMH"),
+            ("🎯 K7", "KILLER7"),
+            ("🌀 GR", "GRAVITY_RUSH"),
+            ("💀 DV", "DEATHVERSE"),
+            ("👑 Tengoku", "TENGOKU_META")
         ]
         for btn_text, mode in decal_event_buttons:
             ttk.Button(ctrl_frame_events, text=btn_text, command=lambda m=mode: self._set_decal_event_filter(m)).pack(side="left", padx=1)
@@ -375,15 +375,31 @@ class DecalsTabMixin:
         
         type_code = getattr(self, "_decal_type_map", {}).get(type_filter)
         if not type_code:
-            if "Premium" in type_filter or "_P" in type_filter or "高级" in type_filter: type_code = "PREMIUM"
-            elif "Estándar" in type_filter or "Standard" in type_filter or "标准" in type_filter: type_code = "STANDARD"
-            else: type_code = "ALL"
+            upper_t = str(type_filter).upper()
+            if upper_t in ("ALL", "PREMIUM", "STANDARD"):
+                type_code = upper_t
+            elif type_filter in ("Todas", "All", "全部", t("decal_all")):
+                type_code = "ALL"
+            elif "Premium" in type_filter or "_P" in type_filter or "高级" in type_filter:
+                type_code = "PREMIUM"
+            elif "Estándar" in type_filter or "Standard" in type_filter or "标准" in type_filter:
+                type_code = "STANDARD"
+            else:
+                type_code = "ALL"
 
         poss_code = getattr(self, "_decal_poss_map", {}).get(poss_filter)
         if not poss_code:
-            if "> 0" in poss_filter or "Poseídas" in poss_filter or "Possessed" in poss_filter or "已拥有" in poss_filter: poss_code = "OWNED"
-            elif "(0)" in poss_filter or "Faltantes" in poss_filter or "Missing" in poss_filter or "缺失" in poss_filter: poss_code = "MISSING"
-            else: poss_code = "ALL"
+            upper_p = str(poss_filter).upper()
+            if upper_p in ("ALL", "OWNED", "MISSING"):
+                poss_code = upper_p
+            elif poss_filter in ("Todas", "All", "全部", t("decal_all")):
+                poss_code = "ALL"
+            elif "> 0" in poss_filter or "Poseídas" in poss_filter or "Possessed" in poss_filter or "已拥有" in poss_filter:
+                poss_code = "OWNED"
+            elif "(0)" in poss_filter or "Faltantes" in poss_filter or "Missing" in poss_filter or "缺失" in poss_filter:
+                poss_code = "MISSING"
+            else:
+                poss_code = "ALL"
 
         psskl_counts = {}
         if self.save_json:
@@ -434,7 +450,8 @@ class DecalsTabMixin:
             desc_es = info.get("desc_es", "")
             desc_en = info.get("desc_en", "")
             desc_zh = info.get("desc_zh", "")
-            full_txt = f"{did} {name_en} {name_es} {name_zh} {desc_en} {desc_es} {desc_zh}".lower()
+            extra_lang_texts = " ".join(str(v) for k, v in info.items() if (k.startswith("name") or k.startswith("desc")) and isinstance(v, str))
+            full_txt = f"{did} {name_en} {name_es} {desc_en} {desc_es} {extra_lang_texts}".lower()
 
             # 4. Event / Collab filter
             if event_filter != "TODOS":

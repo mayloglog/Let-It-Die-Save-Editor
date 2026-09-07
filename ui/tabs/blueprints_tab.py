@@ -215,16 +215,16 @@ class BlueprintsTabMixin:
         left_box = ttk.Frame(paned)
         paned.add(left_box, weight=3)
         
-        # Row 1: Search + Slot + Faction
+        # Row 1: Search + Slot + Faction + Sets Viewer
         ctrl_frame = ttk.Frame(left_box)
-        ctrl_frame.pack(fill="x", pady=3)
+        ctrl_frame.pack(fill="x", pady=2)
         
         ttk.Label(ctrl_frame, text=t("bp_search")).pack(side="left", padx=2)
         self.bp_search_var = tk.StringVar()
         self.bp_search_var.trace_add("write", lambda *args: self.filter_blueprints_list())
-        ttk.Entry(ctrl_frame, textvariable=self.bp_search_var, width=15).pack(side="left", padx=2)
+        ttk.Entry(ctrl_frame, textvariable=self.bp_search_var, width=11).pack(side="left", padx=2)
         
-        ttk.Label(ctrl_frame, text=t("bp_slot_lbl")).pack(side="left", padx=(6, 2))
+        ttk.Label(ctrl_frame, text=t("bp_slot_lbl")).pack(side="left", padx=(4, 1))
         self.bp_slot_defs = [
             ("ALL", "bp_slot_all"),
             ("head", "bp_slot_helmets"),
@@ -234,11 +234,11 @@ class BlueprintsTabMixin:
         ]
         self._bp_slot_map = {t(k): code for code, k in self.bp_slot_defs}
         self.bp_cat_combo_var = tk.StringVar(value=t("bp_slot_all"))
-        cb_bp_cat = ttk.Combobox(ctrl_frame, textvariable=self.bp_cat_combo_var, values=list(self._bp_slot_map.keys()), state="readonly", width=11)
+        cb_bp_cat = ttk.Combobox(ctrl_frame, textvariable=self.bp_cat_combo_var, values=list(self._bp_slot_map.keys()), state="readonly", width=9)
         cb_bp_cat.pack(side="left", padx=2)
         cb_bp_cat.bind("<<ComboboxSelected>>", lambda e: self.filter_blueprints_list())
         
-        ttk.Label(ctrl_frame, text=t("bp_faction_lbl")).pack(side="left", padx=(6, 2))
+        ttk.Label(ctrl_frame, text=t("bp_faction_lbl")).pack(side="left", padx=(4, 1))
         self.bp_fac_defs = [
             ("ALL", "bp_fac_all"),
             ("DOD", "bp_fac_dod"),
@@ -253,16 +253,16 @@ class BlueprintsTabMixin:
         ]
         self._bp_fac_map = {t(k): code for code, k in self.bp_fac_defs}
         self.bp_faction_var = tk.StringVar(value=t("bp_fac_all"))
-        cb_faction = ttk.Combobox(ctrl_frame, textvariable=self.bp_faction_var, values=list(self._bp_fac_map.keys()), state="readonly", width=18)
+        cb_faction = ttk.Combobox(ctrl_frame, textvariable=self.bp_faction_var, values=list(self._bp_fac_map.keys()), state="readonly", width=11)
         cb_faction.pack(side="left", padx=2)
         cb_faction.bind("<<ComboboxSelected>>", lambda e: self.filter_blueprints_list())
         
         btn_sets_viewer = ttk.Button(ctrl_frame, text=t("bp_view_sets_btn"), style="Accent.TButton", command=self._open_armor_set_viewer)
-        btn_sets_viewer.pack(side="right", padx=3)
+        btn_sets_viewer.pack(side="right", padx=2)
         
         # Row 2: Possession Filter + Level + Actions
         ctrl_frame2 = ttk.Frame(left_box)
-        ctrl_frame2.pack(fill="x", pady=3)
+        ctrl_frame2.pack(fill="x", pady=2)
         
         ttk.Label(ctrl_frame2, text=t("bp_poss_lbl")).pack(side="left", padx=2)
         self.bp_poss_defs = [
@@ -274,11 +274,11 @@ class BlueprintsTabMixin:
         ]
         self._bp_poss_map = {t(k): code for code, k in self.bp_poss_defs}
         self.bp_possession_filter_var = tk.StringVar(value=t("bp_poss_all"))
-        cb_poss = ttk.Combobox(ctrl_frame2, textvariable=self.bp_possession_filter_var, values=list(self._bp_poss_map.keys()), state="readonly", width=18)
+        cb_poss = ttk.Combobox(ctrl_frame2, textvariable=self.bp_possession_filter_var, values=list(self._bp_poss_map.keys()), state="readonly", width=10)
         cb_poss.pack(side="left", padx=2)
         cb_poss.bind("<<ComboboxSelected>>", lambda e: self.filter_blueprints_list())
 
-        ttk.Label(ctrl_frame2, text=t("bp_dmg_lbl")).pack(side="left", padx=(4, 2))
+        ttk.Label(ctrl_frame2, text=t("bp_dmg_lbl")).pack(side="left", padx=(3, 1))
         self.bp_dmg_defs = [
             ("ALL", "bp_dmg_all"),
             ("SLASH", "bp_dmg_slash"),
@@ -290,20 +290,20 @@ class BlueprintsTabMixin:
         ]
         self._bp_dmg_map = {t(k): code for code, k in self.bp_dmg_defs}
         self.bp_dmg_type_var = tk.StringVar(value=t("bp_dmg_all"))
-        cb_dmg = ttk.Combobox(ctrl_frame2, textvariable=self.bp_dmg_type_var, values=list(self._bp_dmg_map.keys()), state="readonly", width=15)
+        cb_dmg = ttk.Combobox(ctrl_frame2, textvariable=self.bp_dmg_type_var, values=list(self._bp_dmg_map.keys()), state="readonly", width=9)
         cb_dmg.pack(side="left", padx=2)
         cb_dmg.bind("<<ComboboxSelected>>", lambda e: self.filter_blueprints_list())
         
-        ttk.Label(ctrl_frame2, text=t("bp_unlock_all_lbl")).pack(side="left", padx=(6, 2))
+        ttk.Label(ctrl_frame2, text=t("bp_unlock_all_lbl")).pack(side="left", padx=(4, 1))
         self.bp_unlock_all_lvl_var = tk.StringVar(value="+19")
         cb_bp_all_lvl = ttk.Combobox(ctrl_frame2, textvariable=self.bp_unlock_all_lvl_var, values=["+19", "+24", "+4", "+3", "+2", "+1"], width=5, state="readonly")
         cb_bp_all_lvl.pack(side="left", padx=1)
         
         btn_all_bp = ttk.Button(ctrl_frame2, text=t("bp_unlock_all_btn"), style="Accent.TButton", command=self.unlock_all_blueprints_preset)
-        btn_all_bp.pack(side="right", padx=2)
+        btn_all_bp.pack(side="right", padx=1)
         
         btn_repair_bps = ttk.Button(ctrl_frame2, text=t("bp_repair_btn"), command=self._repair_blueprints_action)
-        btn_repair_bps.pack(side="right", padx=2)
+        btn_repair_bps.pack(side="right", padx=1)
         
         # Row 3: Collabs & Quick Events Filter Bar
         ctrl_frame3 = ttk.Frame(left_box)
@@ -314,11 +314,11 @@ class BlueprintsTabMixin:
         
         collab_buttons = [
             (t("bp_collab_all"), "TODOS"),
-            ("💥 World of Tanks", "WOT"),
-            ("⚔️ No More Heroes", "NMH"),
-            ("🏆 TDM Seasons", "TDM"),
-            (t("bp_collab_re"), "RE"),
-            ("💀 4 Forcemen", "44CE")
+            ("💥 WoT", "WOT"),
+            ("⚔️ NMH", "NMH"),
+            ("🏆 TDM", "TDM"),
+            ("♻️ RE", "RE"),
+            ("💀 44CE", "44CE")
         ]
         for btn_text, mode in collab_buttons:
             ttk.Button(ctrl_frame3, text=btn_text, command=lambda m=mode: self._set_collab_filter(m)).pack(side="left", padx=1)
@@ -418,15 +418,15 @@ class BlueprintsTabMixin:
         endgame_box.pack(fill="x", pady=4)
         
         endgame_defs = [
-            ("white_steel", "44CE White Steel (D.O.D. Arms)"),
-            ("red_napalm", "44CE Red Napalm (War Ensemble)"),
-            ("black_thunder", "44CE Black Thunder (Candle Wolf)"),
-            ("pale_wind", "44CE Pale Wind (M.I.L.K.)"),
+            ("white_steel", t("bp_set_white_steel")),
+            ("red_napalm", t("bp_set_red_napalm")),
+            ("black_thunder", t("bp_set_black_thunder")),
+            ("pale_wind", t("bp_set_pale_wind")),
             ("jackals_gear", t("bp_set_jackals")),
             ("tengoku_weapons", t("bp_set_tengoku")),
         ]
         self._endgame_set_map = {label: key for key, label in endgame_defs}
-        self.endgame_set_var = tk.StringVar(value="44CE White Steel (D.O.D. Arms)")
+        self.endgame_set_var = tk.StringVar(value=t("bp_set_white_steel"))
         cb_endgame = ttk.Combobox(endgame_box, textvariable=self.endgame_set_var, values=list(self._endgame_set_map.keys()), state="readonly", width=28)
         cb_endgame.pack(fill="x", pady=2)
         ttk.Button(endgame_box, text=t("bp_inject_set_btn"), style="Accent.TButton", command=self._inject_endgame_set_action).pack(fill="x", pady=2)
@@ -847,11 +847,12 @@ class BlueprintsTabMixin:
         sel = self.endgame_set_var.get()
         key = getattr(self, "_endgame_set_map", {}).get(sel)
         if not key:
-            if "Red Napalm" in sel: key = "red_napalm"
-            elif "Black Thunder" in sel: key = "black_thunder"
-            elif "Pale Wind" in sel: key = "pale_wind"
-            elif "Jackal" in sel: key = "jackals_gear"
-            elif "Tengoku" in sel: key = "tengoku_weapons"
+            if any(k in sel for k in ("Red Napalm", "红凝固汽油")): key = "red_napalm"
+            elif any(k in sel for k in ("Black Thunder", "黑雷")): key = "black_thunder"
+            elif any(k in sel for k in ("Pale Wind", "苍白之风")): key = "pale_wind"
+            elif any(k in sel for k in ("Jackal", "豺狼")): key = "jackals_gear"
+            elif any(k in sel for k in ("Tengoku", "天狱")): key = "tengoku_weapons"
+            elif any(k in sel for k in ("White Steel", "白钢")): key = "white_steel"
             else: key = "white_steel"
         
         name, added = modifiers.inject_endgame_set(self.save_json, set_key=key, count=1, dur=50000, lvl=20)
@@ -899,49 +900,42 @@ class BlueprintsTabMixin:
 
         slot_target = getattr(self, "_bp_slot_map", {}).get(cat_filter)
         if not slot_target:
-            if cat_filter in ("ALL", "Todos", "All", "全部", t("bp_slot_all")): slot_target = "ALL"
-            elif cat_filter.lower() == "head" or any(k in cat_filter for k in ("Casco", "Helmet", "头盔", "头")): slot_target = "head"
-            elif cat_filter.lower() == "chest" or any(k in cat_filter for k in ("Pecho", "Body", "胸甲", "胸")): slot_target = "chest"
-            elif cat_filter.lower() == "legs" or any(k in cat_filter for k in ("Pierna", "Leg", "Pant", "裤子", "腿")): slot_target = "legs"
-            elif cat_filter.lower() == "weapon" or any(k in cat_filter for k in ("Arma", "Weapon", "武器")): slot_target = "weapon"
-            else: slot_target = "ALL"
+            if cat_filter in ("ALL", "head", "chest", "legs", "weapon"):
+                slot_target = cat_filter
+            elif cat_filter in ("Todos", "All", "全部", t("bp_slot_all")):
+                slot_target = "ALL"
+            else:
+                slot_target = "ALL"
 
         fac_target = getattr(self, "_bp_fac_map", {}).get(fac_filter)
         if not fac_target:
-            if fac_filter in ("ALL", "Todas", "All", "全部", t("bp_fac_all")): fac_target = "ALL"
-            elif fac_filter.upper() in ("DOD", "MIL", "FAN", "SPO", "FORCEMEN", "JACKAL", "RE", "SPE", "GEN"): fac_target = fac_filter.upper()
-            elif "D.O.D" in fac_filter: fac_target = "DOD"
-            elif "WAR" in fac_filter: fac_target = "MIL"
-            elif "CANDLE" in fac_filter: fac_target = "FAN"
-            elif "M.I.L.K" in fac_filter or "MILK" in fac_filter: fac_target = "SPO"
-            elif "FORCEMEN" in fac_filter or "TENGOKU" in fac_filter or "44CE" in fac_filter: fac_target = "FORCEMEN"
-            elif "JACKAL" in fac_filter: fac_target = "JACKAL"
-            elif "RE" in fac_filter: fac_target = "RE"
-            elif any(k in fac_filter for k in ("Especial", "Special", "特殊")): fac_target = "SPE"
-            elif any(k in fac_filter for k in ("General", "Other", "Otras", "其他")): fac_target = "GEN"
-            else: fac_target = "ALL"
+            upper = str(fac_filter).upper()
+            if upper in ("ALL", "DOD", "MIL", "FAN", "SPO", "FORCEMEN", "JACKAL", "RE", "SPE", "GEN"):
+                fac_target = upper
+            elif fac_filter in ("Todas", "All", "全部", t("bp_fac_all")):
+                fac_target = "ALL"
+            else:
+                fac_target = "ALL"
 
         poss_target = getattr(self, "_bp_poss_map", {}).get(poss_filter)
         if not poss_target:
-            if poss_filter in ("ALL", "Todos", "All", "全部", t("bp_poss_all")): poss_target = "ALL"
-            elif poss_filter.upper() in ("STORAGE", "SHOP", "RND", "LOCKED"): poss_target = poss_filter.upper()
-            elif any(k in poss_filter for k in ("Almacén", "Storage", "仓库")): poss_target = "STORAGE"
-            elif any(k in poss_filter for k in ("Desbloqueados", "Unlocked", "已解锁", "Shop", "Tienda", "商店")): poss_target = "SHOP"
-            elif any(k in poss_filter for k in ("I+D", "R&D", "研发")): poss_target = "RND"
-            elif any(k in poss_filter for k in ("Bloqueados", "Locked", "已锁定", "未解锁")): poss_target = "LOCKED"
-            else: poss_target = "ALL"
+            upper = str(poss_filter).upper()
+            if upper in ("ALL", "STORAGE", "SHOP", "RND", "LOCKED"):
+                poss_target = upper
+            elif poss_filter in ("Todos", "All", "全部", t("bp_poss_all")):
+                poss_target = "ALL"
+            else:
+                poss_target = "ALL"
 
         dmg_target = getattr(self, "_bp_dmg_map", {}).get(dmg_filter)
         if not dmg_target:
-            if dmg_filter in ("ALL", "Todos", "All", "全部", t("bp_dmg_all")): dmg_target = "ALL"
-            elif dmg_filter.upper() in ("SLASH", "BLUNT", "PIERCE", "FIRE", "ELECTRIC", "POISON"): dmg_target = dmg_filter.upper()
-            elif any(k in dmg_filter for k in ("Corte", "Slash", "斩击")): dmg_target = "SLASH"
-            elif any(k in dmg_filter for k in ("Golpe", "Blunt", "打击")): dmg_target = "BLUNT"
-            elif any(k in dmg_filter for k in ("Perforación", "Pierce", "突刺")): dmg_target = "PIERCE"
-            elif any(k in dmg_filter for k in ("Fuego", "Fire", "火焰")): dmg_target = "FIRE"
-            elif any(k in dmg_filter for k in ("Electricidad", "Electric", "电击")): dmg_target = "ELECTRIC"
-            elif any(k in dmg_filter for k in ("Veneno", "Poison", "毒素")): dmg_target = "POISON"
-            else: dmg_target = "ALL"
+            upper = str(dmg_filter).upper()
+            if upper in ("ALL", "SLASH", "BLUNT", "PIERCE", "FIRE", "ELECTRIC", "POISON"):
+                dmg_target = upper
+            elif dmg_filter in ("Todos", "All", "全部", t("bp_dmg_all")):
+                dmg_target = "ALL"
+            else:
+                dmg_target = "ALL"
         
         pr_map = modifiers.get_part_research_status(self.save_json) if self.save_json else {}
         storage_gear = modifiers.get_storage_equipment_counts(self.save_json) if self.save_json else {}
@@ -1002,14 +996,18 @@ class BlueprintsTabMixin:
                 if dmg_target not in w_dmgs:
                     continue
                 
-            # 5. Search query (matches name_es, name_en, name_zh, bp_id, or set_code)
-            name_zh = item.get("name_zh", "")
+            # 5. Search query (dynamically matches bp_id, set_code, or any name_* translation)
             if query:
-                if (query not in bp_id.lower() and 
-                    query not in name_es.lower() and 
-                    query not in name_en.lower() and
-                    query not in name_zh.lower() and
-                    query not in set_code.lower()):
+                matched_query = (
+                    query in bp_id.lower() or
+                    query in set_code.lower() or
+                    any(
+                        query in str(v).lower()
+                        for k, v in item.items()
+                        if (k.startswith("name") or k.startswith("desc")) and isinstance(v, str)
+                    )
+                )
+                if not matched_query:
                     continue
                     
             # 6. Collab / Event Filter

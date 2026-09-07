@@ -23,7 +23,7 @@ cur = conn.cursor()
 
 print("1. Building master localization dictionaries...")
 sections = ['PT_ARM', 'PT_HEAD', 'PT_BODY', 'PT_LEG', 'SKILL_NAME', 'SKILL_DESCRIPTION', 'MATERIAL', 'MATERIAL_DSC', 'MUSHROOM', 'MUSHROOM_BEAST', 'MUSHROOM_DSC']
-cur.execute(f"SELECT sct, id, lang, txt FROM master_text WHERE sct IN ({','.join('?' for _ in sections)}) AND lang IN ('int', 'esn');", sections)
+cur.execute(f"SELECT sct, id, lang, txt FROM master_text WHERE sct IN ({','.join('?' for _ in sections)}) AND lang IN ('int', 'esn', 'kan', 'chn');", sections)
 
 text_db = {}
 for sct, tid, lang, txt in cur.fetchall():
@@ -35,7 +35,8 @@ def get_loc(sct, tid, default=""):
     t_entry = text_db.get(key, {})
     name_es = t_entry.get("esn") or t_entry.get("int") or default
     name_en = t_entry.get("int") or default
-    return name_es, name_en
+    name_zh = t_entry.get("kan") or t_entry.get("chn") or name_en
+    return name_es, name_en, name_zh
 
 ATTR_MAP = {
     'ATKATTR_SLASH': 'SLASH',

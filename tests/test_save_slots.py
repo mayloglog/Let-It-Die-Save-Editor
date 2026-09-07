@@ -149,6 +149,48 @@ class TestSaveSlots(unittest.TestCase):
         info_session = save_slots.get_slot_info(4)
         self.assertEqual(info_session["custom_name"], "Speedrun Tengoku")
 
+    def test_quick_restore_latest_backup_and_sidecar_cache(self):
+        # 1. Save to slot 5
+        save_slots.save_current_to_slot(self.save_data, self.version, 5)
+
+        # 2. Modify data and save as session backup
+        mod_data = dict(self.save_data)
+        mod_data["soul"]["free_money"] = 999111
+        save_slots.record_session_backup(5, mod_data, self.version, force=True)
+
+        info = save_slots.get_slot_info(5, force_refresh=True)
+        latest = info.get("latest_backup")
+        self.assertIsNotNone(latest)
+        self.assertIn("meta", latest)
+        self.assertEqual(latest["meta"].get("kill_coins"), 999111)
+
+        # Verify sidecar .meta.json exists
+        sidecar_path = latest["path"] + ".meta.json"
+        self.assertTrue(os.path.exists(sidecar_path))
+
+        # 3. Simulate another modification on slot
+        mod_data2 = dict(self.save_data)
+        mod_data2["soul"]["free_money"] = 1000
+        save_slots.save_current_to_slot(mod_data2, self.version, 5)
+        self.assertEqual(save_slots.get_slot_info(5)["meta"]["kill_coins"], 1000)
+
+        # 4. Quick restore latest backup
+        latest_current = save_slots.get_slot_info(5)["latest_backup"]
+        target_active = os.path.join(self.tmp_dir, "active_steam.sav")
+        shutil.copyfile(REAL_SAVE_PATH, target_active)
+
+        ok, restored_bak = save_slots.quick_restore_latest_backup(5, active_target_path=target_active)
+        self.assertTrue(ok)
+        self.assertEqual(restored_bak["filename"], latest_current["filename"])
+
+        # Check restored KC in slot save
+        refreshed_info = save_slots.get_slot_info(5, force_refresh=True)
+        self.assertEqual(refreshed_info["meta"]["kill_coins"], 999111)
+
+        # Check active save restored as well
+        active_data, _ = save_io.decompress_save(target_active)
+        self.assertEqual(active_data["soul"]["free_money"], 999111)
+
 
 if __name__ == "__main__":
     unittest.main()

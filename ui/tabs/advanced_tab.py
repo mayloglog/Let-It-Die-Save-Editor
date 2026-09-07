@@ -18,6 +18,7 @@ from ui.theme import (
     FG_TEXT, FG_MUTED, ACCENT_GOLD, ACCENT_CYAN, ACCENT_GREEN, ACCENT_RED
 )
 import core.save_slots as save_slots
+from ui.components import ScrollableFrame
 from ui.dialogs.slot_backups_dialog import SlotBackupsDialog
 
 
@@ -83,9 +84,15 @@ class AdvancedTabMixin:
         )
         self.lbl_banner_path.pack(side="left", padx=(10, 0))
 
-        # Banner Stats Row
+        ttk.Button(
+            banner_top,
+            text="🔄 " + t("rebind_tool_open_btn"),
+            command=self._open_account_compatibility_dialog
+        ).pack(side="right")
+
+        # Banner Stats Rows (2 lines to avoid horizontal overflow)
         self.banner_stats_frame = tk.Frame(self.slot_banner_frame, bg=BG_CARD)
-        self.banner_stats_frame.pack(fill="x", pady=(4, 2))
+        self.banner_stats_frame.pack(fill="x", pady=(2, 1))
 
         self.lbl_banner_fighter = tk.Label(
             self.banner_stats_frame,
@@ -94,55 +101,35 @@ class AdvancedTabMixin:
             fg=FG_TEXT,
             bg=BG_CARD
         )
-        self.lbl_banner_fighter.pack(side="left", padx=(0, 16))
+        self.lbl_banner_fighter.pack(side="left")
+
+        self.banner_stats_frame2 = tk.Frame(self.slot_banner_frame, bg=BG_CARD)
+        self.banner_stats_frame2.pack(fill="x", pady=(1, 2))
 
         self.lbl_banner_floor_hater = tk.Label(
-            self.banner_stats_frame,
+            self.banner_stats_frame2,
             text="",
-            font=("Segoe UI", 9),
+            font=("Segoe UI", 8),
             fg=ACCENT_CYAN,
             bg=BG_CARD
         )
         self.lbl_banner_floor_hater.pack(side="left", padx=(0, 16))
 
         self.lbl_banner_coins = tk.Label(
-            self.banner_stats_frame,
+            self.banner_stats_frame2,
             text="",
-            font=("Segoe UI", 9),
+            font=("Segoe UI", 8),
             fg=ACCENT_GOLD,
             bg=BG_CARD
         )
         self.lbl_banner_coins.pack(side="left")
 
-        # Main Scrollable Slots Grid Container
-        grid_container = tk.Frame(self.subtab_slots, bg=BG_DARK)
-        grid_container.grid(row=1, column=0, sticky="nsew")
-        grid_container.columnconfigure(0, weight=1)
-        grid_container.rowconfigure(0, weight=1)
-
-        self.slots_canvas = tk.Canvas(grid_container, bg=BG_DARK, highlightthickness=0)
-        slots_scrollbar = ttk.Scrollbar(grid_container, orient="vertical", command=self.slots_canvas.yview)
-        self.slots_canvas.configure(yscrollcommand=slots_scrollbar.set)
-
-        self.slots_inner_frame = tk.Frame(self.slots_canvas, bg=BG_DARK)
-        self.slots_canvas_window = self.slots_canvas.create_window((0, 0), window=self.slots_inner_frame, anchor="nw")
-
-        self.slots_canvas.grid(row=0, column=0, sticky="nsew")
-        slots_scrollbar.grid(row=0, column=1, sticky="ns")
-
-        # Responsive canvas resizing
-        def _on_canvas_configure(event):
-            self.slots_canvas.itemconfig(self.slots_canvas_window, width=event.width)
-        self.slots_canvas.bind("<Configure>", _on_canvas_configure)
-        self.slots_inner_frame.bind(
-            "<Configure>",
-            lambda e: self.slots_canvas.configure(scrollregion=self.slots_canvas.bbox("all"))
-        )
-
-        # Mousewheel scroll binding
-        def _on_mousewheel(event):
-            self.slots_canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
-        self.slots_canvas.bind_all("<MouseWheel>", _on_mousewheel, add="+")
+        # Main Scrollable Slots Grid Container using ScrollableFrame
+        self.slots_scroll = scroll = ScrollableFrame(self.subtab_slots)
+        scroll.grid(row=1, column=0, sticky="nsew")
+        self.slots_inner_frame = scroll.content
+        self.slots_canvas = scroll.canvas
+        scroll.canvas.configure(bg=BG_DARK)
 
         # 2 Columns grid inside inner frame
         self.slots_inner_frame.columnconfigure(0, weight=1)
@@ -297,32 +284,59 @@ class AdvancedTabMixin:
                 bg=BG_CARD
             ).pack(anchor="w")
 
+            if backups_cnt > 0:
+                tk.Label(
+                    body_f,
+                    text=f"🛡️ {t('slot_lbl_backups_count', count=backups_cnt)}",
+                    font=("Segoe UI", 7),
+                    fg=ACCENT_CYAN,
+                    bg=BG_CARD
+                ).pack(anchor="w", pady=(2, 0))
+
             # Actions for empty slot
-            act_f = tk.Frame(card, bg=BG_CARD, pady=4)
-            act_f.pack(fill="x")
+            act_f1 = tk.Frame(card, bg=BG_CARD, pady=2)
+            act_f1.pack(fill="x")
 
             btn_save = ttk.Button(
-                act_f,
+                act_f1,
                 text=t("slot_btn_save_here"),
                 style="Accent.TButton",
                 command=lambda s=slot_num: self._save_current_to_slot_action(s)
             )
-            btn_save.pack(side="left", padx=(0, 4))
+            btn_save.pack(side="left", fill="x", expand=True, padx=(0, 3))
 
             btn_import = ttk.Button(
-                act_f,
+                act_f1,
                 text=t("slot_btn_import_file"),
                 command=lambda s=slot_num: self._import_file_to_slot_action(s)
             )
-            btn_import.pack(side="left", padx=(0, 4))
+            btn_import.pack(side="left", fill="x", expand=True, padx=(3, 3))
 
             btn_ren = ttk.Button(
-                act_f,
+                act_f1,
                 text="✏️",
                 width=3,
                 command=lambda s=slot_num: self._rename_slot_action(s)
             )
             btn_ren.pack(side="left")
+
+            if backups_cnt > 0:
+                act_f2 = tk.Frame(card, bg=BG_CARD, pady=2)
+                act_f2.pack(fill="x")
+
+                btn_quick_bak = ttk.Button(
+                    act_f2,
+                    text=t("slot_btn_use_latest_session"),
+                    command=lambda s=slot_num: self._quick_use_latest_backup_action(s)
+                )
+                btn_quick_bak.pack(side="left", fill="x", expand=True, padx=(0, 3))
+
+                btn_bak = ttk.Button(
+                    act_f2,
+                    text=t("slot_btn_view_backups", count=backups_cnt),
+                    command=lambda s=slot_num: self._open_slot_backups_action(s)
+                )
+                btn_bak.pack(side="left", fill="x", expand=True, padx=(3, 0))
 
         else:
             # Occupied state with full metadata
@@ -341,7 +355,7 @@ class AdvancedTabMixin:
             hrs = meta.get("playtime_hours", 0)
             last_saved = meta.get("last_saved", "")
 
-            info_f = tk.Frame(card, bg=BG_CARD, pady=4)
+            info_f = tk.Frame(card, bg=BG_CARD, pady=2)
             info_f.pack(fill="x")
 
             # Row 1: Player & Fighter
@@ -359,7 +373,7 @@ class AdvancedTabMixin:
                 font=("Segoe UI", 8),
                 fg=ACCENT_CYAN,
                 bg=BG_CARD
-            ).pack(anchor="w", pady=(1, 2))
+            ).pack(anchor="w", pady=(1, 1))
 
             # Row 2: Floor & Haters & Playtime
             tk.Label(
@@ -368,7 +382,7 @@ class AdvancedTabMixin:
                 font=("Segoe UI", 8, "bold"),
                 fg=ACCENT_GOLD,
                 bg=BG_CARD
-            ).pack(anchor="w", pady=(0, 2))
+            ).pack(anchor="w", pady=(0, 1))
 
             # Row 3: Coins
             tk.Label(
@@ -377,58 +391,83 @@ class AdvancedTabMixin:
                 font=("Segoe UI", 8),
                 fg=FG_TEXT,
                 bg=BG_CARD
-            ).pack(anchor="w", pady=(0, 2))
+            ).pack(anchor="w", pady=(0, 1))
 
-            # Row 4: Backups Count
+            # Row 4: Backups / Sessions info
+            latest_bak = slot_data.get("latest_backup")
+            latest_meta = (latest_bak.get("meta") or {}) if latest_bak else {}
+            if latest_bak and not latest_meta.get("error"):
+                lb_f_name = latest_meta.get("fighter_name", "Fighter")
+                lb_f_lvl = latest_meta.get("fighter_lvl", 1)
+                lb_flr = latest_meta.get("max_floor", 1)
+                lb_date = latest_bak.get("date_str", "")
+                lb_summary = f"🕒 {t('slot_lbl_latest_session_short', date=lb_date, fighter=lb_f_name, lvl=lb_f_lvl, floor=lb_flr)}"
+            elif backups_cnt > 0:
+                lb_summary = f"🛡️ {t('slot_lbl_backups_count', count=backups_cnt)} • {last_saved}"
+            else:
+                lb_summary = f"🛡️ {t('slot_lbl_backups_count', count=backups_cnt)}"
+
             tk.Label(
                 info_f,
-                text=f"🛡️ {t('slot_lbl_backups_count', count=backups_cnt)} • {last_saved}",
+                text=lb_summary,
                 font=("Segoe UI", 7),
-                fg=FG_MUTED,
+                fg=ACCENT_CYAN if latest_bak else FG_MUTED,
                 bg=BG_CARD
-            ).pack(anchor="w", pady=(0, 4))
+            ).pack(anchor="w", pady=(0, 3))
 
-            # Action Buttons Row
-            act_f = tk.Frame(card, bg=BG_CARD, pady=2)
-            act_f.pack(fill="x")
+            # Action Buttons Rows (2 balanced rows for responsive fit)
+            act_row1 = tk.Frame(card, bg=BG_CARD, pady=1)
+            act_row1.pack(fill="x")
 
             # Load into Game button
             btn_load = ttk.Button(
-                act_f,
+                act_row1,
                 text=t("slot_btn_load_active"),
                 style="Accent.TButton" if not is_active else "",
                 command=lambda s=slot_num: self._load_slot_action(s)
             )
-            btn_load.pack(side="left", padx=(0, 3))
+            btn_load.pack(side="left", fill="x", expand=True, padx=(0, 3))
+
+            # Quick Use Latest Session button
+            if backups_cnt > 0:
+                btn_quick_bak = ttk.Button(
+                    act_row1,
+                    text=t("slot_btn_use_latest_session"),
+                    command=lambda s=slot_num: self._quick_use_latest_backup_action(s)
+                )
+                btn_quick_bak.pack(side="left", fill="x", expand=True, padx=(3, 0))
+
+            act_row2 = tk.Frame(card, bg=BG_CARD, pady=2)
+            act_row2.pack(fill="x")
 
             # Save Current into Slot button
             btn_save = ttk.Button(
-                act_f,
+                act_row2,
                 text=t("slot_btn_save_here"),
                 command=lambda s=slot_num: self._save_current_to_slot_action(s)
             )
-            btn_save.pack(side="left", padx=(0, 3))
+            btn_save.pack(side="left", fill="x", expand=True, padx=(0, 3))
 
             # View Slot Backups button
             btn_bak = ttk.Button(
-                act_f,
+                act_row2,
                 text=t("slot_btn_view_backups", count=backups_cnt),
                 command=lambda s=slot_num: self._open_slot_backups_action(s)
             )
-            btn_bak.pack(side="left", padx=(0, 3))
+            btn_bak.pack(side="left", fill="x", expand=True, padx=(3, 3))
 
             # Rename button
             btn_ren = ttk.Button(
-                act_f,
+                act_row2,
                 text="✏️",
                 width=3,
                 command=lambda s=slot_num: self._rename_slot_action(s)
             )
-            btn_ren.pack(side="left", padx=(0, 3))
+            btn_ren.pack(side="left", padx=(0, 2))
 
             # Clear Slot button
             btn_clear = ttk.Button(
-                act_f,
+                act_row2,
                 text="🗑️",
                 width=3,
                 command=lambda s=slot_num: self._clear_slot_action(s)
@@ -554,6 +593,43 @@ class AdvancedTabMixin:
             parent=self
         )
 
+    def _quick_use_latest_backup_action(self, slot_num):
+        slot_info = save_slots.get_slot_info(slot_num)
+        latest = slot_info.get("latest_backup")
+        if not latest:
+            messagebox.showwarning(t("notice"), t("slot_bak_empty"), parent=self)
+            return
+
+        if not self.save_path or not os.path.exists(self.save_path):
+            messagebox.showwarning(t("notice"), t("mb_load_save_first"), parent=self)
+            return
+
+        meta = latest.get("meta") or {}
+        f_name = meta.get("fighter_name", "Fighter")
+        flr = meta.get("max_floor", 1)
+        d_str = latest.get("date_str", "")
+
+        if not messagebox.askyesno(
+            t("confirm"),
+            t("slot_confirm_quick_restore", slot=slot_num, file=latest["filename"], fighter=f_name, floor=flr, date=d_str),
+            parent=self
+        ):
+            return
+
+        try:
+            save_slots.restore_slot_backup(slot_num, latest["filename"], active_target_path=self.save_path)
+            if hasattr(self, "set_current_active_slot_num"):
+                self.set_current_active_slot_num(slot_num)
+            self.load_save(self.save_path)
+            self.refresh_slots_view()
+            messagebox.showinfo(
+                t("notice"),
+                t("slot_quick_restore_ok", slot=slot_num, file=latest["filename"]),
+                parent=self
+            )
+        except Exception as e:
+            messagebox.showerror(t("error"), str(e), parent=self)
+
     def _open_slot_backups_action(self, slot_num):
         def on_restored(s_num, active_updated=False):
             if active_updated and self.save_path:
@@ -581,6 +657,24 @@ class AdvancedTabMixin:
         self.refresh_slots_view()
         messagebox.showinfo(t("notice"), t("slot_cleared_ok", slot=slot_num), parent=self)
 
+    def _open_account_compatibility_dialog(self, initial_path=None):
+        from ui.dialogs.account_compatibility_dialog import AccountCompatibilityDialog
+
+        def on_applied(new_active_path=None, rebound_data=None):
+            if new_active_path and hasattr(self, "load_save"):
+                self.load_save(new_active_path)
+            elif hasattr(self, "save_path") and self.save_path:
+                self.load_save(self.save_path)
+            self.refresh_slots_view()
+
+        AccountCompatibilityDialog(
+            self,
+            active_save_path=getattr(self, "save_path", None),
+            active_save_dict=getattr(self, "save_json", None),
+            initial_file_path=initial_path,
+            on_applied_cb=on_applied
+        )
+
     def _import_file_to_slot_action(self, slot_num):
         fn = filedialog.askopenfilename(
             title=t("slot_btn_import_file"),
@@ -590,7 +684,39 @@ class AdvancedTabMixin:
         if not fn:
             return
         try:
-            save_slots.import_save_file_to_slot(fn, slot_num)
+            import core.account_rebind as account_rebind
+            data, ver = save_io.decompress_save(fn)
+            my_ident = account_rebind.detect_active_account_identity(
+                active_save_dict=getattr(self, "save_json", None),
+                active_save_path=getattr(self, "save_path", None)
+            )
+            my_steam = my_ident.get("steam_id", "")
+            foreign_ident = account_rebind.extract_save_identity(data)
+            foreign_steam = foreign_ident.get("steam_id", "")
+
+            target_steam = None
+            target_name = None
+
+            if my_steam and foreign_steam and my_steam != "---" and foreign_steam != "---" and foreign_steam != my_steam:
+                # Ask user if they want to make it compatible
+                res = messagebox.askyesnocancel(
+                    t("confirm"),
+                    t(
+                        "slot_import_foreign_confirm",
+                        file=os.path.basename(fn),
+                        foreign_steam=foreign_steam,
+                        foreign_name=foreign_ident.get("player_name", "Senpai"),
+                        my_steam=my_steam,
+                        my_name=my_ident.get("player_name", "Senpai")
+                    ),
+                    parent=self
+                )
+                if res is None:  # User clicked cancel
+                    return
+                if res is True:  # Yes, make compatible
+                    target_steam = my_steam
+
+            save_slots.import_save_file_to_slot(fn, slot_num, target_steam_id=target_steam, target_player_name=target_name)
             self.refresh_slots_view()
             messagebox.showinfo(t("notice"), t("slot_import_success", slot=slot_num), parent=self)
         except Exception as e:
@@ -600,11 +726,15 @@ class AdvancedTabMixin:
     # 2. TOOLS & CACHE SUB-TAB (JSON Tools, Repairs, CDN Asset Cache)
     # =========================================================================
     def _build_tools_cache_subtab(self):
-        self.subtab_tools.columnconfigure(0, weight=1)
-        self.subtab_tools.columnconfigure(1, weight=1)
+        self.tools_scroll = scroll = ScrollableFrame(self.subtab_tools)
+        scroll.pack(fill="both", expand=True)
+        container = scroll.content
+
+        container.columnconfigure(0, weight=1)
+        container.columnconfigure(1, weight=1)
 
         # Left: JSON Tools & Links
-        box_tools = ttk.LabelFrame(self.subtab_tools, text=t("bak_tools_title"), padding=12)
+        box_tools = ttk.LabelFrame(container, text=t("bak_tools_title"), padding=12)
         box_tools.grid(row=0, column=0, sticky="nsew", padx=6, pady=6)
 
         ttk.Label(box_tools, text=t("bak_json_lbl"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD).pack(anchor="w", pady=2)
@@ -614,11 +744,16 @@ class AdvancedTabMixin:
         ttk.Button(json_f, text=t("bak_import_json"), command=self.import_json).pack(side="left", padx=2, fill="x", expand=True)
 
         ttk.Separator(box_tools, orient="horizontal").pack(fill="x", pady=8)
+        ttk.Label(box_tools, text="🔄 " + t("rebind_tool_section_title"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD).pack(anchor="w", pady=2)
+        ttk.Label(box_tools, text=t("rebind_tool_section_desc"), font=("Segoe UI", 8), foreground=FG_MUTED).pack(anchor="w", pady=2)
+        ttk.Button(box_tools, text="🔄 " + t("rebind_tool_open_btn"), style="Accent.TButton", command=self._open_account_compatibility_dialog).pack(anchor="w", pady=4)
+
+        ttk.Separator(box_tools, orient="horizontal").pack(fill="x", pady=8)
         ttk.Label(box_tools, text=t("bak_links_lbl"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD).pack(anchor="w", pady=2)
         ttk.Label(box_tools, text=t("bak_links_txt"), font=("Segoe UI", 8), foreground=FG_MUTED).pack(anchor="w", pady=2)
 
         # Right: Optional Advanced Repairs
-        box_rep = ttk.LabelFrame(self.subtab_tools, text=t("adv_repairs_title"), padding=12)
+        box_rep = ttk.LabelFrame(container, text=t("adv_repairs_title"), padding=12)
         box_rep.grid(row=0, column=1, sticky="nsew", padx=6, pady=6)
 
         ttk.Label(box_rep, text=t("adv_repair_tdm_btn") + " / " + t("adv_repair_fighters_btn"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD).pack(anchor="w", pady=2)
@@ -628,7 +763,7 @@ class AdvancedTabMixin:
         ttk.Button(rep_f, text=t("adv_repair_fighters_btn"), command=self._repair_fighters_action).pack(side="left", padx=2, fill="x", expand=True)
 
         # Row 1: CDN Assets & Cache Manager
-        box_assets = ttk.LabelFrame(self.subtab_tools, text=t("asset_box_title"), padding=12)
+        box_assets = ttk.LabelFrame(container, text=t("asset_box_title"), padding=12)
         box_assets.grid(row=1, column=0, columnspan=2, sticky="nsew", padx=6, pady=6)
 
         ttk.Label(box_assets, text=t("asset_box_desc"), font=("Segoe UI", 8), foreground=FG_MUTED).pack(anchor="w", pady=2)

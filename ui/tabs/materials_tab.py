@@ -5,6 +5,7 @@ Materials & R&D Tab Mixin for LET IT DIE Save Editor.
 
 import os
 import sys
+import json
 import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog
 
@@ -55,20 +56,20 @@ class MaterialsTabMixin:
         left_box = ttk.Frame(paned)
         paned.add(left_box, weight=3)
         
-        # Row 1: Search, Category, Stock Filter, Rarity, Actions
+        # Row 1: Search, Category, Stock Filter, Rarity
         ctrl_frame = ttk.Frame(left_box)
         ctrl_frame.pack(fill="x", pady=2)
         
         ttk.Label(ctrl_frame, text=t("mat_search")).pack(side="left", padx=2)
         self.mat_search_var = tk.StringVar()
         self.mat_search_var.trace_add("write", lambda *args: self.filter_materials_list())
-        ttk.Entry(ctrl_frame, textvariable=self.mat_search_var, width=12).pack(side="left", padx=2)
+        ttk.Entry(ctrl_frame, textvariable=self.mat_search_var, width=11).pack(side="left", padx=2)
         
         self._mat_cat_map = {t(k): code for code, k in CANONICAL_MATERIAL_CATEGORIES}
         cats = list(self._mat_cat_map.keys())
         self.mat_cat_var = tk.StringVar(value=cats[0] if cats else t("mat_cat_all"))
         ttk.Label(ctrl_frame, text=t("mat_cat_lbl")).pack(side="left", padx=(4, 1))
-        cb_cat = ttk.Combobox(ctrl_frame, textvariable=self.mat_cat_var, values=cats, state="readonly", width=26)
+        cb_cat = ttk.Combobox(ctrl_frame, textvariable=self.mat_cat_var, values=cats, state="readonly", width=16)
         cb_cat.pack(side="left", padx=2)
         cb_cat.bind("<<ComboboxSelected>>", lambda e: self.filter_materials_list())
 
@@ -80,37 +81,37 @@ class MaterialsTabMixin:
             t("mat_out_stock"): "OUT_OF_STOCK"
         }
         self.mat_stock_filter_var = tk.StringVar(value=t("mat_all"))
-        cb_stock = ttk.Combobox(ctrl_frame, textvariable=self.mat_stock_filter_var, values=list(self._stock_filter_map.keys()), state="readonly", width=14)
+        cb_stock = ttk.Combobox(ctrl_frame, textvariable=self.mat_stock_filter_var, values=list(self._stock_filter_map.keys()), state="readonly", width=11)
         cb_stock.pack(side="left", padx=2)
         cb_stock.bind("<<ComboboxSelected>>", lambda e: self.filter_materials_list())
 
         ttk.Label(ctrl_frame, text=t("mat_rarity_lbl")).pack(side="left", padx=(4, 1))
         self.mat_rarity_filter_var = tk.StringVar(value=t("decal_all"))
-        cb_mrarity = ttk.Combobox(ctrl_frame, textvariable=self.mat_rarity_filter_var, values=[t("decal_all"), "1★", "2★", "3★", "4★", "5★", "6★", "7★", "8★"], state="readonly", width=6)
+        cb_mrarity = ttk.Combobox(ctrl_frame, textvariable=self.mat_rarity_filter_var, values=[t("decal_all"), "1★", "2★", "3★", "4★", "5★", "6★", "7★", "8★"], state="readonly", width=5)
         cb_mrarity.pack(side="left", padx=2)
         cb_mrarity.bind("<<ComboboxSelected>>", lambda e: self.filter_materials_list())
-        
-        btn_open_storage = ttk.Button(ctrl_frame, text="📦 Coin Locker", command=self._open_storage_manager)
-        btn_open_storage.pack(side="right", padx=1)
 
-        btn_all_mat = ttk.Button(ctrl_frame, text=t("mat_max_stock_btn"), style="Accent.TButton", command=self.max_all_materials_preset)
-        btn_all_mat.pack(side="right", padx=1)
-
-        # Row 2: Pisos de la Torre (Wiki Tower Sections Quick Bar)
+        # Row 2: Pisos de la Torre (Wiki Tower Sections Quick Bar) & Actions
         ctrl_frame_floors = ttk.Frame(left_box)
         ctrl_frame_floors.pack(fill="x", pady=2)
         
+        btn_all_mat = ttk.Button(ctrl_frame_floors, text=t("mat_max_stock_btn"), style="Accent.TButton", command=self.max_all_materials_preset)
+        btn_all_mat.pack(side="right", padx=1)
+
+        btn_open_storage = ttk.Button(ctrl_frame_floors, text="📦 Coin Locker", command=self._open_storage_manager)
+        btn_open_storage.pack(side="right", padx=1)
+
         ttk.Label(ctrl_frame_floors, text=t("mat_floors_lbl"), font=("Segoe UI", 8, "bold"), foreground=ACCENT_GOLD).pack(side="left", padx=2)
         self.mat_floor_filter = tk.StringVar(value="TODOS")
         
         floor_buttons = [
             (t("mat_floor_all"), "TODOS"),
-            ("🏢 1F-10F (DOD)", "1_10"),
-            ("🏭 11F-20F (WE)", "11_20"),
-            ("🏰 21F-30F (CW)", "21_30"),
-            ("🏟️ 31F-40F (MILK)", "31_40"),
-            ("🌌 41F-50F (Battle)", "41_50"),
-            ("👑 51F+ (Tengoku)", "51_PLUS")
+            ("1-10F", "1_10"),
+            ("11-20F", "11_20"),
+            ("21-30F", "21_30"),
+            ("31-40F", "31_40"),
+            ("41-50F", "41_50"),
+            ("51F+", "51_PLUS")
         ]
         for btn_text, mode in floor_buttons:
             ttk.Button(ctrl_frame_floors, text=btn_text, command=lambda m=mode: self._set_mat_floor_filter(m)).pack(side="left", padx=1)
@@ -504,6 +505,7 @@ class MaterialsTabMixin:
             cat_code = "ALL"
 
         stock_filter = self.mat_stock_filter_var.get() if hasattr(self, "mat_stock_filter_var") else "Todo"
+        stock_mode = getattr(self, "_stock_filter_map", {}).get(stock_filter)
         rarity_filter = self.mat_rarity_filter_var.get() if hasattr(self, "mat_rarity_filter_var") else "Todas"
         floor_filter = self.mat_floor_filter.get() if hasattr(self, "mat_floor_filter") else "TODOS"
         
@@ -541,7 +543,6 @@ class MaterialsTabMixin:
                     continue
                     
                 # Stock filter
-                stock_mode = getattr(self, "_stock_filter_map", {}).get(stock_filter)
                 if stock_mode == "IN_STOCK" and cnt <= 0:
                     continue
                 elif stock_mode == "LOW_STOCK" and (cnt <= 0 or cnt >= 10):
@@ -585,9 +586,9 @@ class MaterialsTabMixin:
                         continue
 
                 # Query search with smart multi-word matching & Tier aliases
-                name_zh = m.get("name_zh", "")
                 if query_tokens:
-                    searchable = f"{name_es} {name_en} {name_zh} {cat} {self._localize_material_category(cat)} {self._localize_material_category_zh(cat)} {itemid} t{r} tier {r} tier{r} {r}★ {r}star {name_en.replace('.', '')} {name_es.replace('.', '')}".lower()
+                    extra_names = " ".join(str(v) for k, v in m.items() if (k.startswith("name") or k.startswith("desc")) and isinstance(v, str))
+                    searchable = f"{extra_names} {name_es} {name_en} {cat} {self._localize_material_category(cat)} {self._localize_material_category_zh(cat)} {itemid} t{r} tier {r} tier{r} {r}★ {r}star {name_en.replace('.', '')} {name_es.replace('.', '')}".lower()
                     if not all(token in searchable for token in query_tokens):
                         continue
 
@@ -645,12 +646,19 @@ class MaterialsTabMixin:
                     continue
 
                 cnt = stock_map.get(itemid, 0)
-                if ("> 0" in stock_filter or "En Stock" in stock_filter or "In Stock" in stock_filter or "已拥有" in stock_filter or "有库存" in stock_filter) and cnt <= 0:
+                if stock_mode == "IN_STOCK" and cnt <= 0:
                     continue
-                elif ("< 10" in stock_filter or "Stock Bajo" in stock_filter or "Low Stock" in stock_filter or "低库存" in stock_filter) and (cnt <= 0 or cnt >= 10):
+                elif stock_mode == "LOW_STOCK" and (cnt <= 0 or cnt >= 10):
                     continue
-                elif ("(0)" in stock_filter or "Agotado" in stock_filter or "Out of Stock" in stock_filter or "缺货" in stock_filter or "无库存" in stock_filter) and cnt > 0:
+                elif stock_mode == "OUT_OF_STOCK" and cnt > 0:
                     continue
+                elif not stock_mode:
+                    if ("> 0" in stock_filter or "En Stock" in stock_filter or "In Stock" in stock_filter or "已拥有" in stock_filter or "有库存" in stock_filter) and cnt <= 0:
+                        continue
+                    elif ("< 10" in stock_filter or "Stock Bajo" in stock_filter or "Low Stock" in stock_filter or "低库存" in stock_filter) and (cnt <= 0 or cnt >= 10):
+                        continue
+                    elif ("(0)" in stock_filter or "Agotado" in stock_filter or "Out of Stock" in stock_filter or "缺货" in stock_filter or "无库存" in stock_filter) and cnt > 0:
+                        continue
 
                 r = info.get("rarity", 1)
                 if "★" in rarity_filter:
@@ -667,9 +675,9 @@ class MaterialsTabMixin:
                 cooked_es = info.get("cooked_name_es", "")
                 cat_display = t("cat_mushroom") if item_type == "MUSHROOM" else t("cat_beast")
 
-                name_zh = info.get("name_zh", "")
                 if query_tokens:
-                    searchable = f"{name_es} {name_en} {name_zh} {itemid} {item_type} {cat_display} {cooked_en} {cooked_es} mushroom seta shroom beast criatura t{r} tier{r} {r}★ {r}star".lower()
+                    extra_names = " ".join(str(v) for k, v in info.items() if (k.startswith("name") or k.startswith("desc") or "cooked" in k) and isinstance(v, str))
+                    searchable = f"{extra_names} {name_es} {name_en} {itemid} {item_type} {cat_display} {cooked_en} {cooked_es} mushroom seta shroom beast criatura t{r} tier{r} {r}★ {r}star".lower()
                     if not all(token in searchable for token in query_tokens):
                         continue
 

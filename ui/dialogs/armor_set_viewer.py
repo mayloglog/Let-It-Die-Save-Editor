@@ -16,8 +16,8 @@ class ArmorSetViewerDialog(tk.Toplevel):
         self.save_json = save_json
         self.armor_sets = armor_sets
         self.title(t("dialog_armor_viewer_title"))
-        self.geometry("1140x840")
-        self.minsize(1020, 720)
+        self.geometry("1100x760")
+        self.minsize(940, 580)
         self.configure(bg=BG_DARK)
         self.transient(parent)
         self.grab_set()

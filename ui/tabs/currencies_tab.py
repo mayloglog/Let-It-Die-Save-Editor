@@ -8,6 +8,7 @@ from tkinter import ttk
 import modifiers
 import i18n
 from i18n import t
+from ui.components import ScrollableFrame
 from ui.theme import (
     BG_CARD, BG_DARK, BG_PANEL, FG_MUTED,
     ACCENT_GOLD, ACCENT_CYAN, ACCENT_GREEN, ACCENT_RED,
@@ -17,14 +18,15 @@ class CurrenciesTabMixin:
     """Provides methods for constructing and handling the Currencies & VIP Tab."""
 
     def _build_currencies_tab(self):
-        self.tab_currencies.columnconfigure(0, weight=1, uniform="tab1")
-        self.tab_currencies.columnconfigure(1, weight=1, uniform="tab1")
-        self.tab_currencies.rowconfigure(0, weight=1, uniform="tab1_row")
-        self.tab_currencies.rowconfigure(1, weight=1, uniform="tab1_row")
-        self.tab_currencies.rowconfigure(2, weight=0)
+        self.currencies_scroll = scroll = ScrollableFrame(self.tab_currencies)
+        scroll.pack(fill="both", expand=True)
+        container = scroll.content
+
+        container.columnconfigure(0, weight=1, uniform="tab1")
+        container.columnconfigure(1, weight=1, uniform="tab1")
         
         # Card 1 (Top-Left): Currencies
-        box_curr = ttk.LabelFrame(self.tab_currencies, text=t("curr_box_title"), padding=12)
+        box_curr = ttk.LabelFrame(container, text=t("curr_box_title"), padding=12)
         box_curr.grid(row=0, column=0, sticky="nsew", padx=6, pady=6)
         
         entries = [
@@ -49,7 +51,7 @@ class CurrenciesTabMixin:
         btn_max_all.pack(fill="x", pady=(10, 2))
 
         # Card 2 (Top-Right): Waiting Room Upgrades
-        box_wr = ttk.LabelFrame(self.tab_currencies, text=t("wr_box_title"), padding=12)
+        box_wr = ttk.LabelFrame(container, text=t("wr_box_title"), padding=12)
         box_wr.grid(row=0, column=1, sticky="nsew", padx=6, pady=6)
         
         upgrades = [
@@ -75,7 +77,7 @@ class CurrenciesTabMixin:
         ttk.Label(box_wr, text=t("wr_hint"), font=("Segoe UI", 8), foreground=FG_MUTED, wraplength=280).pack(fill="x", pady=(6, 0))
 
         # Card 3 (Bottom-Left): VIP Royal Express
-        box_vip = ttk.LabelFrame(self.tab_currencies, text=t("vip_box_title"), padding=12)
+        box_vip = ttk.LabelFrame(container, text=t("vip_box_title"), padding=12)
         box_vip.grid(row=1, column=0, sticky="nsew", padx=6, pady=6)
         
         self.vip_status_lbl = ttk.Label(box_vip, text=t("vip_inactive"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD)
@@ -93,13 +95,16 @@ class CurrenciesTabMixin:
         ttk.Button(vip_f, text=t("deactivate_vip_btn", "❌ Cancelar"), command=self._deactivate_vip_action).pack(side="left", padx=4)
         
         vip_quick = ttk.Frame(box_vip)
-        vip_quick.pack(fill="x", pady=4)
+        vip_quick.pack(fill="x", pady=(4, 2))
         ttk.Button(vip_quick, text=t("vip_30d_btn", "🎫 30 Días (+99 Reserva)"), style="Accent.TButton", command=lambda: self._set_vip_entry_and_act(30, passes=99)).pack(side="left", fill="x", expand=True, padx=2)
         ttk.Button(vip_quick, text=t("vip_1d_btn", "🎟️ 1 Día (+99 Reserva)"), command=lambda: self._set_vip_entry_and_act(1, passes=99)).pack(side="left", fill="x", expand=True, padx=2)
-        ttk.Button(vip_quick, text=t("vip_stock_passes", "📦 +99 Pases Reserva"), command=lambda: self._set_vip_entry_and_act(30, passes=99)).pack(side="left", fill="x", expand=True, padx=2)
+
+        vip_quick2 = ttk.Frame(box_vip)
+        vip_quick2.pack(fill="x", pady=(2, 2))
+        ttk.Button(vip_quick2, text=t("vip_stock_passes", "📦 +99 Pases Reserva"), command=lambda: self._set_vip_entry_and_act(30, passes=99)).pack(fill="x", padx=2)
 
         # Card 4 (Bottom-Right): Account Perks & Death Bag Expansion
-        box_perks = ttk.LabelFrame(self.tab_currencies, text=t("account_perks_title"), padding=12)
+        box_perks = ttk.LabelFrame(container, text=t("account_perks_title"), padding=12)
         box_perks.grid(row=1, column=1, sticky="nsew", padx=6, pady=6)
         
         # Death Bag Expansion
@@ -125,7 +130,7 @@ class CurrenciesTabMixin:
         btn_set_cont.pack(side="left", padx=4)
 
         # Row 2 (Footer): Account Profile & Metadata
-        box_acct = ttk.LabelFrame(self.tab_currencies, text=t("account_summary_title"), padding=10)
+        box_acct = ttk.LabelFrame(container, text=t("account_summary_title"), padding=10)
         box_acct.grid(row=2, column=0, columnspan=2, sticky="nsew", padx=6, pady=(4, 6))
         
         acct_f = ttk.Frame(box_acct)

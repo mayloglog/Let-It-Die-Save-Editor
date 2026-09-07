@@ -86,7 +86,7 @@ class CreateFighterDialog(tk.Toplevel):
         # 4. Model / Appearance
         tk.Label(form_frame, text=t("f_lbl_model"), font=("Segoe UI", 9, "bold"), bg=BG_DARK, fg=FG_MAIN).grid(row=3, column=0, sticky="w", pady=8)
 
-        self.models_list = [f"Female {i} (BODY_FEMALE_{i:03d})" for i in range(1, 9)] + [f"Male {i} (BODY_MALE_{i:03d})" for i in range(1, 9)]
+        self.models_list = [f"{t('gender_female')} {i} (BODY_FEMALE_{i:03d})" for i in range(1, 9)] + [f"{t('gender_male')} {i} (BODY_MALE_{i:03d})" for i in range(1, 9)]
         self.model_var = tk.StringVar(value=self.models_list[0])
         
         from ui.dialogs.fighter_model_gallery import get_fighter_model_art

@@ -208,16 +208,35 @@ def get_backup_metadata(bak_path):
     """
     Extracts summary metadata for a backup (.bak) file.
     Returns dict with fighter_name, max_floor, haters_killed, currencies, date_str.
+    Uses a fast sidecar .meta.json cache for instantaneous retrieval.
     """
     if not os.path.exists(bak_path):
         return {}
+    
+    st = os.stat(bak_path)
+    meta_cache_path = bak_path + ".meta.json"
+    if os.path.exists(meta_cache_path):
+        try:
+            with open(meta_cache_path, "r", encoding="utf-8") as f:
+                cached = json.load(f)
+                if cached.get("_file_mtime") == st.st_mtime and cached.get("_file_size") == st.st_size:
+                    return cached
+        except Exception:
+            pass
+
     try:
         data, ver = save_io.decompress_save(bak_path)
         meta = extract_save_metadata(data)
-        st = os.stat(bak_path)
         meta["mtime"] = st.st_mtime
         meta["date_str"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(st.st_mtime))
         meta["size_kb"] = st.st_size // 1024
+        meta["_file_mtime"] = st.st_mtime
+        meta["_file_size"] = st.st_size
+        try:
+            with open(meta_cache_path, "w", encoding="utf-8") as f:
+                json.dump(meta, f, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
         return meta
     except Exception as e:
         return {"error": str(e)}
@@ -246,6 +265,7 @@ def get_slot_info(slot_num, force_refresh=False):
                     st = os.stat(fp)
                     is_orig = "ORIGINAL" in f
                     is_session = "_session_" in f
+                    b_meta = get_backup_metadata(fp)
                     backups.append({
                         "filename": f,
                         "path": fp,
@@ -253,13 +273,17 @@ def get_slot_info(slot_num, force_refresh=False):
                         "mtime": st.st_mtime,
                         "date_str": time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(st.st_mtime)),
                         "is_original": is_orig,
-                        "is_session": is_session
+                        "is_session": is_session,
+                        "meta": b_meta
                     })
                 except Exception:
                     pass
 
     # Sort backups: ORIGINAL first, then newest descending
     backups.sort(key=lambda b: (0 if b["is_original"] else 1, -b["mtime"]))
+    latest_backup = None
+    if backups:
+        latest_backup = max(backups, key=lambda b: b["mtime"])
 
     # Read existing meta for custom_name and cache validity
     meta = {}
@@ -281,6 +305,7 @@ def get_slot_info(slot_num, force_refresh=False):
             "backups_dir": backups_dir,
             "backups_count": len(backups),
             "backups": backups,
+            "latest_backup": latest_backup,
             "custom_name": custom_name,
             "meta": meta
         }
@@ -321,6 +346,7 @@ def get_slot_info(slot_num, force_refresh=False):
         "backups_dir": backups_dir,
         "backups_count": len(backups),
         "backups": backups,
+        "latest_backup": latest_backup,
         "custom_name": meta.get("custom_name", ""),
         "meta": meta
     }
@@ -477,6 +503,20 @@ def record_session_backup(slot_num, save_json, save_version, min_interval_sec=15
         bak_path = os.path.join(backups_dir, bak_filename)
         save_io.save_to_file(save_json, bak_path, version=save_version, make_backup=False)
 
+        # Pre-cache metadata for immediate instant UI response
+        try:
+            b_meta = extract_save_metadata(save_json)
+            b_st = os.stat(bak_path)
+            b_meta["mtime"] = b_st.st_mtime
+            b_meta["date_str"] = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(b_st.st_mtime))
+            b_meta["size_kb"] = b_st.st_size // 1024
+            b_meta["_file_mtime"] = b_st.st_mtime
+            b_meta["_file_size"] = b_st.st_size
+            with open(bak_path + ".meta.json", "w", encoding="utf-8") as f:
+                json.dump(b_meta, f, indent=2, ensure_ascii=False)
+        except Exception:
+            pass
+
         # Rolling retention: keep 25 most recent backups
         baks = [f for f in os.listdir(backups_dir) if f.endswith(".bak") and not f.endswith(".ORIGINAL.bak")]
         if len(baks) > 25:
@@ -484,6 +524,9 @@ def record_session_backup(slot_num, save_json, save_version, min_interval_sec=15
             for old in baks[:-25]:
                 try:
                     os.remove(os.path.join(backups_dir, old))
+                    meta_old = os.path.join(backups_dir, old + ".meta.json")
+                    if os.path.exists(meta_old):
+                        os.remove(meta_old)
                 except Exception:
                     pass
 
@@ -557,6 +600,21 @@ def restore_slot_backup(slot_num, bak_filename, active_target_path=None):
     return True
 
 
+def quick_restore_latest_backup(slot_num, active_target_path=None):
+    """
+    Finds the most recent backup for the given slot and restores it to the slot
+    and optionally to the active save file.
+    Returns (True, backup_dict) on success, or raises FileNotFoundError.
+    """
+    info = get_slot_info(slot_num)
+    latest = info.get("latest_backup")
+    if not latest:
+        raise FileNotFoundError(f"No backups available for slot {slot_num}")
+
+    restore_slot_backup(slot_num, latest["filename"], active_target_path=active_target_path)
+    return True, latest
+
+
 def clear_slot(slot_num):
     """Clears a slot (removes savedata.sav and slot_meta.json, but preserves historical backups)."""
     slot_save = get_slot_save_path(slot_num)
@@ -577,12 +635,22 @@ def clear_slot(slot_num):
     return True
 
 
-def import_save_file_to_slot(src_path, slot_num):
-    """Imports an external .sav file directly into a slot."""
+def import_save_file_to_slot(src_path, slot_num, target_steam_id=None, target_player_name=None):
+    """
+    Imports an external .sav file directly into a slot.
+    Optionally rebinds to target_steam_id and target_player_name to ensure full compatibility.
+    """
     ensure_slots_directory()
     if not os.path.exists(src_path):
         raise FileNotFoundError(f"Source save not found: {src_path}")
 
     # Validate by decompressing
     data, ver = save_io.decompress_save(src_path)
+    if target_steam_id:
+        import core.account_rebind as account_rebind
+        account_rebind.rebind_save_to_account(
+            data,
+            target_steam_id=target_steam_id,
+            target_player_name=target_player_name
+        )
     return save_current_to_slot(data, ver, slot_num)

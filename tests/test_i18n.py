@@ -256,6 +256,56 @@ class TestI18n(unittest.TestCase):
             ]
             self.assertGreaterEqual(len(poison_weapons), 10, "Poison filter must return weapons from encyclopedia")
 
+    def test_gender_and_forcemen_keys_parity(self):
+        for lang in ("en", "es", "zh"):
+            i18n.set_language(lang)
+            for k in ("gender_female", "gender_male", "bp_set_white_steel", "bp_set_red_napalm", "bp_set_black_thunder", "bp_set_pale_wind", "f_tut_btn"):
+                val = t(k)
+                self.assertTrue(bool(val) and val != k, f"Missing or unrendered key {k} in {lang}")
+
+    def test_equipment_chinese_localization(self):
+        from core.helpers import ALL_EQUIPMENT_FILE
+        import json
+        with open(ALL_EQUIPMENT_FILE, "r", encoding="utf-8") as f:
+            items = json.load(f)
+        
+        machete = next((it for it in items if it.get("id") == "PT_ARM_WP001_001"), None)
+        self.assertIsNotNone(machete)
+        self.assertEqual(machete.get("name_zh"), "丛林大砍刀")
+        
+        i18n.set_language("zh")
+        self.assertEqual(i18n.get_item_name(machete), "丛林大砍刀")
+        
+        i18n.set_language("en")
+        self.assertEqual(i18n.get_item_name(machete), "Jungle Machete")
+        
+        i18n.set_language("es")
+        self.assertEqual(i18n.get_item_name(machete), "Machete de selva")
+
+    def test_get_ui_font(self):
+        from ui.theme import get_ui_font
+        i18n.set_language("zh")
+        font_zh = get_ui_font()
+        self.assertEqual(font_zh[0], "Microsoft YaHei UI")
+        
+        i18n.set_language("en")
+        font_en = get_ui_font()
+        self.assertEqual(font_en[0], "Segoe UI")
+    def test_dynamic_font_and_search_integration(self):
+        from editor_gui import CompleteSaveEditorGUI
+        app = CompleteSaveEditorGUI()
+        app.withdraw()
+        try:
+            i18n.set_language("zh")
+            app._apply_dynamic_fonts()
+            self.assertIn("YaHei", str(app.style.lookup(".", "font")))
+            
+            i18n.set_language("en")
+            app._apply_dynamic_fonts()
+            self.assertIn("Segoe", str(app.style.lookup(".", "font")))
+        finally:
+            app.destroy()
+
 
 if __name__ == "__main__":
     unittest.main()

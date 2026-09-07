@@ -1,14 +1,14 @@
 {
-  "version": "4.1.3",
+  "version": "4.2.0",
   "name": "Let It Die - Complete Save Editor & Encyclopedia",
-  "release_date": "2026-09-06",
+  "release_date": "2026-09-07",
   "repository": "https://github.com/g3usyk/Let-It-Die-Save-Editor",
   "changelog": [
-    "Collaboration event decal fixes: updated filters and metadata for Gravity Rush, World of Tanks, No More Heroes, Killer7, and Deathverse.",
-    "Resolved missing placeholder assets: replaced dummy image files with official extracted textures in decals catalog.",
-    "Save integrity: enhanced duplicate decal sanitization in inventory and equipped slots.",
-    "Localization and tooling: updated translations and added locale integrity validator tools.",
-    "All 100 automated unit tests passing."
+    "Responsive Layout & Space Optimization: Reorganized Top Bar into 2 clean rows, compact 2x3 Currency HUD, ScrollableFrame on Currencies, Tower, Tools, and Save Slots.",
+    "Slot Backups & Sessions: Added 2-row action layout inside each slot card, preventing button clipping and keeping Rename and Delete buttons always accessible.",
+    "Foreign Save Compatibility & Re-binding Tool: Download saves from friends, Reddit, or Nexus Mods and adapt them to your Steam ID and account with 1-click.",
+    "Automatic Session Backups: Double-click to restore session, live metadata preview, and isolated per-slot history.",
+    "All 113 automated unit tests passing 100%."
   ]
 }
 

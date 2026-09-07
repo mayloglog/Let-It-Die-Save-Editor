@@ -12,7 +12,7 @@ import urllib.request
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-CURRENT_VERSION = "4.1.3"
+CURRENT_VERSION = "4.2.0"
 REPO_OWNER = "g3usyk"
 REPO_NAME = "Let-It-Die-Save-Editor"
 RAW_VERSION_URL = f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/main/version.json"

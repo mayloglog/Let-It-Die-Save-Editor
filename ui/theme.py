@@ -16,3 +16,26 @@ ACCENT_GREEN = "#2ecc71"   # Success emerald
 ACCENT_RED = "#e74c3c"     # Danger crimson
 ACCENT_PURPLE = "#bb86fc"  # Cyberpunk neon purple
 ACCENT_PINK = "#ff4081"    # Death Metal vibrant magenta
+
+def get_ui_font(size=9, weight="normal"):
+    """
+    Returns an appropriate font tuple based on active language.
+    For Chinese ('zh'), uses 'Microsoft YaHei UI' for clean CJK glyph rendering.
+    For other languages, uses 'Segoe UI' on Windows / default system sans-serif.
+    """
+    try:
+        import i18n
+        lang = i18n.get_language()
+    except Exception:
+        lang = "en"
+        
+    if lang == "zh":
+        family = "Microsoft YaHei UI"
+    elif lang == "ja":
+        family = "Yu Gothic UI"
+    elif lang == "ko":
+        family = "Malgun Gothic"
+    else:
+        family = "Segoe UI"
+    return (family, size, weight)
+

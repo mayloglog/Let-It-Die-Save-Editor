@@ -43,7 +43,7 @@ class FightersTabMixin:
         # Unlock Freezer (Skip Tutorial) Button
         self.btn_unlock_freezer = ttk.Button(
             left_box,
-            text=t("f_tut_btn", "🎓 Desbloquear Congelador (Saltar Tutorial)"),
+            text=t("f_tut_btn", "🎓 Unlock Freezer (Skip Tutorial)"),
             command=self._unlock_freezer_action
         )
         self.btn_unlock_freezer.pack(fill="x", pady=(0, 4))
@@ -337,6 +337,7 @@ class FightersTabMixin:
                 if matching:
                     did = matching[0].get("sklid", "")
                     d_info = self.decals_map.get(did, {})
+                    d_name = i18n.get_entity_display_title(d_info) or i18n.get_item_name(d_info) or did
                     art_rel = self._find_decal_art(did)
                     is_p = did.endswith("_P") or d_info.get("premium", False)
                     self.f_decal_slots_lbls[s_idx].config(text=t("f_slot_decal_equipped", slot=s_idx+1, name=d_name, id=did), foreground=ACCENT_GOLD)

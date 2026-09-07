@@ -324,6 +324,20 @@ class TestFighters(unittest.TestCase):
         sv = fresh_save.get("gameflg", {}).get("sv", [])
         self.assertTrue(any(f.get("var") == "KGF_TUTORIAL_PROGRESS" and f.get("value") == 100 for f in sv))
 
+    def test_fighter_equipped_decals_preview_name_resolution(self):
+        import i18n
+        decals_map = {
+            "SKL_WWEP_ATKUP_01_P": {"id": "SKL_WWEP_ATKUP_01_P", "name_en": "Dual Wielding Master", "name_es": "Maestro de dos armas", "name_zh": "宫本武藏"},
+            "SKL_SPDUP_01_P": {"id": "SKL_SPDUP_01_P", "name_en": "Sprinter", "name_es": "Corredor", "name_zh": "短跑选手"}
+        }
+        for lang in ("en", "es", "zh"):
+            i18n.set_language(lang)
+            for did, d_info in decals_map.items():
+                d_name = i18n.get_entity_display_title(d_info) or i18n.get_item_name(d_info) or did
+                text = i18n.t("f_slot_decal_equipped", slot=1, name=d_name, id=did)
+                self.assertIn(d_name, text)
+                self.assertIn(did, text)
+
 
 if __name__ == "__main__":
     unittest.main()
