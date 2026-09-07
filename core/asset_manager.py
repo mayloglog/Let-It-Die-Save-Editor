@@ -88,10 +88,10 @@ class AssetManager:
         lower = norm.lower()
         if hasattr(self, "manifest") and self.manifest:
             if lower in self.manifest:
-                return self.manifest[lower]
+                return self.normalize_rel_path(self.manifest[lower])
             stem = os.path.splitext(lower)[0]
             if stem in self.manifest:
-                return self.manifest[stem]
+                return self.normalize_rel_path(self.manifest[stem])
         return norm
 
     def get_local_path(self, rel_path):

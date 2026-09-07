@@ -201,163 +201,75 @@ class DecalsTabMixin:
         ttk.Button(d_quick, text=t("decal_zero"), width=3, command=lambda: self._quick_add_decal(-999)).pack(side="left", fill="x", expand=True, padx=1)
 
     def _find_decal_art(self, decal_id):
+        if not decal_id:
+            return "all_official/decal_std.png"
+
         special_aliases = {
-            "SKL_STMNUP_02": "all_official/golden_heart.png",
-            "SKL_STMNUP_02_P": "all_official/golden_heart_p.png",
-            "SKL_WHITEFEATHER": "all_official/white_feather.png",
-            "SKL_WHITEFEATHER_P": "all_official/white_feather_p.png",
+            "SKL_STMNUP_02": "decals/golden_heart.png",
+            "SKL_STMNUP_02_P": "decals/golden_heart_p.png",
+            "SKL_WHITEFEATHER": "decals/skl_snowwhite.png",
+            "SKL_WHITEFEATHER_P": "decals/skl_snowwhite_p.png",
         }
         if decal_id in special_aliases:
             return special_aliases[decal_id]
 
+        # 1. Direct lookup from icon_map.json (covers 100% of official decals)
+        if hasattr(self, "icon_map") and "decals_icons" in self.icon_map:
+            mapped = self.icon_map["decals_icons"].get(decal_id)
+            if mapped:
+                return str(mapped).replace("\\", "/")
+            base_id = decal_id[:-2] if decal_id.endswith("_P") else decal_id
+            mapped_base = self.icon_map["decals_icons"].get(base_id)
+            if mapped_base:
+                return str(mapped_base).replace("\\", "/")
+
+        is_p = decal_id.endswith("_P")
+        clean = decal_id.lower().replace("skl_", "").replace("_p", "")
+        
         info = self.decals_map.get(decal_id, {})
         name_en = info.get("name_en", "")
-        is_p = decal_id.endswith("_P") or info.get("premium", False)
-        
-        clean = decal_id.lower().replace("skl_", "")
-        if clean.endswith("_p"):
-            clean = clean[:-2]
-            
-        slug_raw = name_en.lower()
-        slugs = []
-        for s in [
-            slug_raw.replace(' ', '_'),
-            slug_raw.replace(' ', '_').replace("'", "%27"),
-            slug_raw.replace(' ', '_').replace("'", ""),
-            slug_raw.replace(' ', '_').replace('-', '_'),
-            slug_raw.replace(' ', ''),
-            slug_raw.replace(' ', '_').replace('-', '_').replace("'", "").replace(":", ""),
-        ]:
-            if s and s not in slugs:
-                slugs.append(s)
+        slug = name_en.lower().replace(" ", "_").replace("-", "_").replace("'", "").replace(":", "") if name_en else ""
 
-        # Initialize disk maps if needed
-        if not hasattr(self, "_ao_disk_map"):
-            self._ao_disk_map = {}
-            for base in [ICONS_DIR, getattr(getattr(self, "asset_manager", None), "cache_dir", "")]:
-                if not base:
-                    continue
-                ao_dir = os.path.join(base, "all_official")
-                if os.path.isdir(ao_dir):
-                    for f in os.listdir(ao_dir):
-                        self._ao_disk_map[f.lower()] = f
-
-        if not hasattr(self, "_decal_disk_map"):
-            self._decal_disk_map = {}
-            for base in [ICONS_DIR, getattr(getattr(self, "asset_manager", None), "cache_dir", "")]:
-                if not base:
-                    continue
-                d_dir = os.path.join(base, "decals")
-                if os.path.isdir(d_dir):
-                    for f in os.listdir(d_dir):
-                        self._decal_disk_map[f.lower()] = f
-
-        def _is_valid_art(rel_path):
-            full_path = os.path.join(ICONS_DIR, rel_path)
-            if not os.path.exists(full_path):
-                return False
-            try:
-                if os.path.getsize(full_path) <= 500:
-                    from PIL import Image
-                    im = Image.open(full_path)
-                    if im.mode in ('RGBA', 'LA') and im.getextrema()[-1][1] == 0:
-                        return False
-            except Exception:
-                pass
-            return True
-
+        exact_candidates = []
         if is_p:
-            # 1. Look for explicit Premium variants only
-            p_cands = []
-            for sv in slugs:
-                p_cands.append(f"{sv}_p.png")
-                p_cands.append(f"{sv}_premium.png")
-                p_cands.append(f"{sv}_decal_p.png")
-            p_cands.append(f"skl_{clean}_p.png")
-            p_cands.append(f"{clean}_p.png")
-            p_cands.append(f"{decal_id.lower()}.png")
-
-            # Check all_official for premium variant
-            for c in p_cands:
-                c_low = c.lower()
-                if c_low in self._ao_disk_map:
-                    rel = f"all_official/{self._ao_disk_map[c_low]}"
-                    if _is_valid_art(rel):
-                        return rel
-
-            # Check decals for premium variant
-            for c in p_cands:
-                c_low = c.lower()
-                if c_low in self._decal_disk_map:
-                    rel = f"decals/{self._decal_disk_map[c_low]}"
-                    if _is_valid_art(rel):
-                        return rel
-
-            # Check icon_map.json
-            if hasattr(self, "icon_map") and "decals_icons" in self.icon_map:
-                mapped = self.icon_map["decals_icons"].get(decal_id)
-                if mapped and _is_valid_art(mapped):
-                    return mapped
-
-            # Fallback to base art if no explicit premium texture exists
-            base_cands = []
-            for sv in slugs:
-                base_cands.append(f"{sv}.png")
-                base_cands.append(f"{sv}_decal.png")
-            base_cands.append(f"skl_{clean}.png")
-            base_cands.append(f"{clean}.png")
-
-            for c in base_cands:
-                c_low = c.lower()
-                if c_low in self._ao_disk_map:
-                    rel = f"all_official/{self._ao_disk_map[c_low]}"
-                    if _is_valid_art(rel):
-                        return rel
-            for c in base_cands:
-                c_low = c.lower()
-                if c_low in self._decal_disk_map:
-                    rel = f"decals/{self._decal_disk_map[c_low]}"
-                    if _is_valid_art(rel):
-                        return rel
-
-            return "all_official/decal_p.png" if "decal_p.png" in self._ao_disk_map else "decals/decal_p.png"
+            exact_candidates += [
+                f"{decal_id.lower()}.png",
+                f"skl_{clean}_p.png",
+                f"{clean}_p.png",
+            ]
+            if slug:
+                exact_candidates += [f"{slug}_p.png", f"skl_{slug}_p.png", f"{slug}.png"]
         else:
-            # 2. Look for Standard variants (strictly non-p)
-            std_cands = []
-            for sv in slugs:
-                std_cands.append(f"{sv}_std.png")
-                std_cands.append(f"{sv}_standard.png")
-                std_cands.append(f"{sv}.png")
-                std_cands.append(f"{sv}_decal.png")
-            std_cands.append(f"skl_{clean}.png")
-            std_cands.append(f"{clean}.png")
-            std_cands.append(f"{decal_id.lower()}.png")
+            exact_candidates += [
+                f"{decal_id.lower()}.png",
+                f"skl_{clean}.png",
+                f"{clean}.png",
+            ]
+            if slug:
+                exact_candidates += [f"{slug}.png", f"skl_{slug}.png"]
 
-            for c in std_cands:
+        # 2. Check AssetManager manifest
+        if hasattr(self, "asset_manager") and getattr(self.asset_manager, "manifest", None):
+            for c in exact_candidates:
                 c_low = c.lower()
-                if c_low.endswith("_p.png") or c_low.endswith("_premium.png"):
-                    continue
-                if c_low in self._ao_disk_map:
-                    rel = f"all_official/{self._ao_disk_map[c_low]}"
-                    if _is_valid_art(rel):
-                        return rel
+                if c_low in self.asset_manager.manifest:
+                    return str(self.asset_manager.manifest[c_low]).replace("\\", "/")
 
-            for c in std_cands:
-                c_low = c.lower()
-                if c_low.endswith("_p.png") or c_low.endswith("_premium.png"):
-                    continue
-                if c_low in self._decal_disk_map:
-                    rel = f"decals/{self._decal_disk_map[c_low]}"
-                    if _is_valid_art(rel):
-                        return rel
+        # 3. Check local disk in ICONS_DIR and cache_dir
+        search_dirs = [ICONS_DIR]
+        if hasattr(self, "asset_manager") and getattr(self.asset_manager, "cache_dir", None):
+            search_dirs.append(self.asset_manager.cache_dir)
 
-            if hasattr(self, "icon_map") and "decals_icons" in self.icon_map:
-                base_cand = decal_id[:-2] if decal_id.endswith("_P") else decal_id
-                mapped = self.icon_map["decals_icons"].get(base_cand)
-                if mapped and not (mapped.lower().endswith("_p.png") or mapped.lower().endswith("_premium.png")) and _is_valid_art(mapped):
-                    return mapped
+        for base in search_dirs:
+            if not base or not os.path.isdir(base):
+                continue
+            for sub in ["decals", "all_official", ""]:
+                for c in exact_candidates:
+                    p = os.path.join(base, sub, c)
+                    if os.path.isfile(p):
+                        return f"{sub}/{c}".lstrip("/")
 
-            return "all_official/decal_std.png" if "decal_std.png" in self._ao_disk_map else "decals/decal_std.png"
+        return "all_official/decal_p.png" if is_p else "all_official/decal_std.png"
 
     def _on_decal_select(self, event):
         sel = self.decals_tree.selection()

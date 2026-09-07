@@ -386,11 +386,16 @@ class CompleteSaveEditorGUI(
                     else:
                         target_size = size
                     im = im.resize(target_size, Image.Resampling.LANCZOS)
-                    _apply_badge(im, target_size)
-                    new_photo = ImageTk.PhotoImage(im)
-                    self.img_cache[key] = new_photo
-                    if on_ready:
-                        self.after(0, lambda: on_ready(new_photo))
+                    def _finish():
+                        try:
+                            new_photo = ImageTk.PhotoImage(im)
+                            self.img_cache[key] = new_photo
+                            if on_ready:
+                                on_ready(new_photo)
+                        except Exception:
+                            pass
+
+                    self.after(0, _finish)
                 except Exception:
                     pass
 
