@@ -132,7 +132,6 @@ class InventoryViewerDialog(tk.Toplevel):
         if not self.save_json:
             return
             
-        is_en = i18n.get_language() == "en"
         cl = self.save_json.get("soul", {}).get("cl", [])
         total_slots = len(cl)
         used_slots = len([c for c in cl if c.get("type") != -1 and c.get("eid")])
@@ -158,7 +157,10 @@ class InventoryViewerDialog(tk.Toplevel):
         items = self.save_json.get("item", {}).get("items", [])
         mat_counts = Counter()
         for it in items:
-            mat_counts[it.get("itemid", "")] += 1
+            if isinstance(it, dict) and it.get("count", 0) > 0:
+                iid = it.get("itemid") or it.get("id")
+                if iid:
+                    mat_counts[iid] += it.get("count", 0)
             
         # 2. Equipment counts from save["part"]["pts"]
         storage_gear, bag_gear = modifiers.get_equipment_inventory_counts(self.save_json)
@@ -193,15 +195,12 @@ class InventoryViewerDialog(tk.Toplevel):
                 info = self.materials_db.get(itemid, {})
                 name_es = info.get("name_es", info.get("name", itemid))
                 name_en = info.get("name_en", "")
-                cat = info.get("category", "Material" if is_en else "Materiales")
+                cat = info.get("category") or t("cat_material")
                 
                 if query and (query not in name_es.lower() and query not in name_en.lower() and query not in itemid.lower() and query not in cat.lower()):
                     continue
                     
-                if is_en:
-                    display_name = f"{name_en} ({name_es})" if name_es and name_en != name_es else (name_en or name_es)
-                else:
-                    display_name = f"{name_es} ({name_en})" if name_en and name_en != name_es else (name_es or name_en)
+                display_name = i18n.get_entity_display_title(info)
                 icon_k = self.parent_app._get_mat_photo_key(itemid, name_en or name_es)
                 thumb = self.parent_app.get_photo(icon_k, size=(24, 24))
                 
@@ -225,20 +224,21 @@ class InventoryViewerDialog(tk.Toplevel):
                 meta = self.shrooms_beasts_db.get(mid, {})
                 is_cooked = (state == 1)
                 if is_cooked:
-                    name_en = meta.get("cooked_name_en") or (meta.get("name_en", mid) + " (Grilled)")
-                    name_es = meta.get("cooked_name_es") or (meta.get("name_es", mid) + " (Asada)")
+                    item_display_obj = {
+                        "name_en": meta.get("cooked_name_en") or (meta.get("name_en", mid) + " (Grilled)"),
+                        "name_es": meta.get("cooked_name_es") or (meta.get("name_es", mid) + " (Asada)"),
+                        "name_zh": (meta.get("name_zh", mid) + " (烤)") if meta.get("name_zh") else None
+                    }
                 else:
-                    name_en = meta.get("name_en", mid)
-                    name_es = meta.get("name_es", mid)
+                    item_display_obj = meta
                     
-                cat = "Mushroom" if is_en else "Seta"
+                cat = t("cat_mushroom")
+                name_en = meta.get("name_en", mid)
+                name_es = meta.get("name_es", mid)
                 if query and (query not in name_es.lower() and query not in name_en.lower() and query not in mid.lower() and query not in cat.lower()):
                     continue
                     
-                if is_en:
-                    display_name = f"{name_en} ({name_es})" if name_es and name_en != name_es else name_en
-                else:
-                    display_name = f"{name_es} ({name_en})" if name_es and name_en != name_es else name_es
+                display_name = i18n.get_entity_display_title(item_display_obj)
                     
                 loc_txt = t("inv_loc_storage") if owner == "COIN_LOCKER" else t("inv_loc_bag")
                 clean_slug = (meta.get("name_en") or mid).lower().replace(" ", "_").replace("-", "_")
@@ -264,15 +264,12 @@ class InventoryViewerDialog(tk.Toplevel):
                 meta = self.shrooms_beasts_db.get(bid, {})
                 name_en = meta.get("name_en", bid)
                 name_es = meta.get("name_es", bid)
-                cat = "Beast" if is_en else "Criatura"
+                cat = t("cat_beast")
                 
                 if query and (query not in name_es.lower() and query not in name_en.lower() and query not in bid.lower() and query not in cat.lower()):
                     continue
                     
-                if is_en:
-                    display_name = f"{name_en} ({name_es})" if name_es and name_en != name_es else name_en
-                else:
-                    display_name = f"{name_es} ({name_en})" if name_es and name_en != name_es else name_es
+                display_name = i18n.get_entity_display_title(meta)
                     
                 loc_txt = t("inv_loc_storage") if owner == "COIN_LOCKER" else t("inv_loc_bag")
                 clean_slug = (meta.get("name_en") or bid).lower().replace(" ", "_").replace("-", "_")
@@ -301,12 +298,12 @@ class InventoryViewerDialog(tk.Toplevel):
                 info = self.equipment_db.get(ptid, {})
                 name_es = info.get("name_es", ptid)
                 name_en = info.get("name_en", "")
-                cat = info.get("type", "Gear" if is_en else "Equipo")
+                cat = info.get("type") or t("cat_gear")
                 
                 if query and (query not in name_es.lower() and query not in name_en.lower() and query not in ptid.lower() and query not in cat.lower()):
                     continue
                     
-                display_name = f"{name_en} ({name_es})" if is_en and name_en else (f"{name_es} ({name_en})" if name_en and name_en != name_es else name_es)
+                display_name = i18n.get_entity_display_title(info)
                 art_rel = self.parent_app._find_equipment_art(ptid)
                 thumb = self.parent_app.get_photo(art_rel, size=(24, 24))
                 
@@ -330,12 +327,12 @@ class InventoryViewerDialog(tk.Toplevel):
                 info = self.equipment_db.get(ptid, {})
                 name_es = info.get("name_es", ptid)
                 name_en = info.get("name_en", "")
-                cat = info.get("type", "Gear" if is_en else "Equipo")
+                cat = info.get("type") or t("cat_gear")
                 
                 if query and (query not in name_es.lower() and query not in name_en.lower() and query not in ptid.lower() and query not in cat.lower()):
                     continue
                     
-                display_name = f"{name_en} ({name_es})" if is_en and name_en else (f"{name_es} ({name_en})" if name_en and name_en != name_es else name_es)
+                display_name = i18n.get_entity_display_title(info)
                 art_rel = self.parent_app._find_equipment_art(ptid)
                 thumb = self.parent_app.get_photo(art_rel, size=(24, 24))
                 

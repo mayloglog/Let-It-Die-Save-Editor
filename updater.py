@@ -12,7 +12,7 @@ import urllib.request
 import tkinter as tk
 from tkinter import ttk, messagebox
 
-CURRENT_VERSION = "4.1.2"
+CURRENT_VERSION = "4.1.3"
 REPO_OWNER = "g3usyk"
 REPO_NAME = "Let-It-Die-Save-Editor"
 RAW_VERSION_URL = f"https://raw.githubusercontent.com/{REPO_OWNER}/{REPO_NAME}/main/version.json"
@@ -212,7 +212,7 @@ class UpdateNotificationDialog(tk.Toplevel):
             for item in changelog:
                 text_box.insert("end", f" • {item}\n\n")
         else:
-            default_changelog = " • General stability fixes and performance improvements.\n" if (hasattr(i18n, "get_language") and i18n.get_language() == "en") else " • Correcciones de estabilidad y mejoras generales del sistema.\n"
+            default_changelog = t("updater_default_changelog")
             text_box.insert("end", default_changelog)
         text_box.config(state="disabled")
 

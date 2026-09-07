@@ -98,6 +98,13 @@ def repair_save_list_structures(save, uid=None):
     if isinstance(vip, dict) and vip.get("friendship", 0) > 1:
         vip["friendship"] = 1
 
+    # Auto-repair legacy / corrupted decal aliases to canonical game engine IDs
+    try:
+        from core.decals import sanitize_save_decals
+        sanitize_save_decals(save)
+    except Exception:
+        pass
+
 def get_equipment_meta(ptid):
     global _EQUIPMENT_META_CACHE
     if _EQUIPMENT_META_CACHE is None:

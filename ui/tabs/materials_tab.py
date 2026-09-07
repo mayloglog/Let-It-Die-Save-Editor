@@ -24,6 +24,26 @@ else:
 
 ICONS_DIR = os.path.join(BASE_DIR, "icons")
 
+CANONICAL_MATERIAL_CATEGORIES = [
+    ("ALL", "mat_cat_all"),
+    ("ALUMINUM", "mat_cat_aluminum"),
+    ("COPPER", "mat_cat_copper"),
+    ("IRON_STEEL", "mat_cat_iron_steel"),
+    ("OIL", "mat_cat_oil"),
+    ("WOOD", "mat_cat_wood"),
+    ("CLOTH", "mat_cat_cloth"),
+    ("DOD", "mat_cat_dod"),
+    ("WAR", "mat_cat_war"),
+    ("CW", "mat_cat_cw"),
+    ("MILK", "mat_cat_milk"),
+    ("BOSS", "mat_cat_boss"),
+    ("JACKAL_TENGOKU", "mat_cat_jackal_tengoku"),
+    ("STEROIDS", "mat_cat_steroids"),
+    ("MUSHROOMS_BEASTS", "mat_cat_mushrooms_beasts"),
+    ("MUSHROOMS", "mat_cat_mushrooms"),
+    ("BEASTS", "mat_cat_beasts"),
+]
+
 
 class MaterialsTabMixin:
     """Provides methods for constructing and handling the Materials R&D Tab."""
@@ -44,78 +64,23 @@ class MaterialsTabMixin:
         self.mat_search_var.trace_add("write", lambda *args: self.filter_materials_list())
         ttk.Entry(ctrl_frame, textvariable=self.mat_search_var, width=12).pack(side="left", padx=2)
         
-        cur_lang = i18n.get_language()
+        self._mat_cat_map = {t(k): code for code, k in CANONICAL_MATERIAL_CATEGORIES}
+        cats = list(self._mat_cat_map.keys())
+        self.mat_cat_var = tk.StringVar(value=cats[0] if cats else t("mat_cat_all"))
         ttk.Label(ctrl_frame, text=t("mat_cat_lbl")).pack(side="left", padx=(4, 1))
-        if cur_lang == "zh":
-            self.mat_cat_var = tk.StringVar(value=t("mat_all"))
-            cats = [
-                t("mat_all"),
-                "铝 (Aluminum)",
-                "铜 (Copper)",
-                "铁与钢 (Iron & Steel)",
-                "油与石油 (Oil)",
-                "木材 (Wood)",
-                "布料与纤维 (Cloth)",
-                "D.O.D. ARMS (Metals)",
-                "WAR ENSEMBLE (Metals)",
-                "CANDLE WOLF (Metals)",
-                "M.I.L.K. (Metals)",
-                "Boss金属 (Boss Metals)",
-                "豺狼与天狱材料 (Jackals & Tengoku)",
-                "类固醇 / Rostest (Fighters)",
-                "🍄 蘑菇与野兽",
-                "🍄 蘑菇 (Mushrooms)",
-                "🐸 野兽 (Beasts)"
-            ]
-        elif cur_lang == "en":
-            self.mat_cat_var = tk.StringVar(value="All")
-            cats = [
-                "All",
-                "Aluminum",
-                "Copper",
-                "Iron & Steel",
-                "Oil",
-                "Wood",
-                "Cloth & Fibers",
-                "D.O.D. ARMS (Metals)",
-                "WAR ENSEMBLE (Metals)",
-                "CANDLE WOLF (Metals)",
-                "M.I.L.K. (Metals)",
-                "Boss Metals",
-                "Jackals & Tengoku Materials",
-                "Steroids / Rostest (Fighters)",
-                "🍄 Mushrooms & Beasts",
-                "🍄 Mushrooms",
-                "🐸 Beasts"
-            ]
-        else:
-            self.mat_cat_var = tk.StringVar(value="Todos")
-            cats = [
-                "Todos",
-                "Aluminio (Aluminum)",
-                "Cobre (Copper)",
-                "Hierro y Acero (Iron & Steel)",
-                "Petróleo y Aceites (Oil)",
-                "Maderas (Wood)",
-                "Textiles y Fibras (Cloth)",
-                "D.O.D. ARMS (Metals)",
-                "WAR ENSEMBLE (Metals)",
-                "CANDLE WOLF (Metals)",
-                "M.I.L.K. (Metals)",
-                "Metales de Jefes (Boss Metals)",
-                "Materiales Jackals y Tengoku",
-                "Esteroides / Rostest (Luchadores)",
-                "🍄 Setas y Criaturas",
-                "🍄 Setas (Mushrooms)",
-                "🐸 Criaturas (Beasts)"
-            ]
-        cb_cat = ttk.Combobox(ctrl_frame, textvariable=self.mat_cat_var, values=cats, state="readonly", width=24)
+        cb_cat = ttk.Combobox(ctrl_frame, textvariable=self.mat_cat_var, values=cats, state="readonly", width=26)
         cb_cat.pack(side="left", padx=2)
         cb_cat.bind("<<ComboboxSelected>>", lambda e: self.filter_materials_list())
 
         ttk.Label(ctrl_frame, text=t("mat_stock_lbl")).pack(side="left", padx=(4, 1))
+        self._stock_filter_map = {
+            t("mat_all"): "ALL",
+            t("mat_in_stock"): "IN_STOCK",
+            t("mat_low_stock"): "LOW_STOCK",
+            t("mat_out_stock"): "OUT_OF_STOCK"
+        }
         self.mat_stock_filter_var = tk.StringVar(value=t("mat_all"))
-        cb_stock = ttk.Combobox(ctrl_frame, textvariable=self.mat_stock_filter_var, values=[t("mat_all"), t("mat_in_stock"), t("mat_low_stock"), t("mat_out_stock")], state="readonly", width=14)
+        cb_stock = ttk.Combobox(ctrl_frame, textvariable=self.mat_stock_filter_var, values=list(self._stock_filter_map.keys()), state="readonly", width=14)
         cb_stock.pack(side="left", padx=2)
         cb_stock.bind("<<ComboboxSelected>>", lambda e: self.filter_materials_list())
 
@@ -216,7 +181,7 @@ class MaterialsTabMixin:
         cap_frame = ttk.LabelFrame(self.mat_card, text=t("mat_locker_cap_title"), padding=8)
         cap_frame.pack(fill="x", pady=(10, 0))
         
-        self.mat_cap_indicator_lbl = ttk.Label(cap_frame, text="Almacén: 0 / 0 casillas", font=("Segoe UI", 9, "bold"))
+        self.mat_cap_indicator_lbl = ttk.Label(cap_frame, text=t("mat_cap_initial_indicator"), font=("Segoe UI", 9, "bold"))
         self.mat_cap_indicator_lbl.pack(anchor="w", pady=2)
         
         exp_row1 = ttk.Frame(cap_frame)
@@ -321,7 +286,7 @@ class MaterialsTabMixin:
         modifiers.add_material_to_storage(self.save_json, itemid, count=qty)
         self._auto_save()
         self.filter_materials_list()
-        self.status_var.set(f"Añadido {qty} u. de {name} a tu Almacén.")
+        self.status_var.set(t("mat_added_to_storage_status", qty=qty, name=name))
 
     def _quick_add_material_qty(self, delta):
         if not self.current_mat_selection or not self.save_json:
@@ -330,7 +295,7 @@ class MaterialsTabMixin:
         modifiers.add_material_to_storage(self.save_json, itemid, count=delta)
         self._auto_save()
         self.filter_materials_list()
-        self.status_var.set(f"Añadido {delta} u. de {name} a tu Almacén.")
+        self.status_var.set(t("mat_added_to_storage_status", qty=delta, name=name))
 
     def _edit_selected_material_count(self, event):
         sel = self.mat_tree.selection()
@@ -341,12 +306,16 @@ class MaterialsTabMixin:
         itemid = vals[3]
         name = self.mat_tree.item(node, "text").strip()
         
-        new_cnt = simpledialog.askinteger("Cantidad de Material", f"Ingresa las unidades para añadir a tu Almacén:\n{name} ({itemid})", initialvalue=50, minvalue=1, maxvalue=500)
+        new_cnt = simpledialog.askinteger(
+            t("mat_custom_qty_title"),
+            t("mat_custom_qty_prompt", name=name, itemid=itemid),
+            initialvalue=50, minvalue=1, maxvalue=500
+        )
         if new_cnt is not None:
             modifiers.add_material_to_storage(self.save_json, itemid, count=new_cnt)
             self._auto_save()
             self.filter_materials_list()
-            self.status_var.set(f"Añadido {new_cnt} u. de {name} a tu Almacén.")
+            self.status_var.set(t("mat_added_to_storage_status", qty=new_cnt, name=name))
 
     def max_all_materials_preset(self):
         if not self.save_json:
@@ -354,11 +323,7 @@ class MaterialsTabMixin:
         modifiers.add_all_materials_to_storage(self.save_json, count=100)
         self._auto_save()
         self.filter_materials_list()
-        self._notify(
-            "Storage Stocked", "Almacén Abastecido",
-            "100 units of ALL 108 R&D materials deposited into Coin Locker!",
-            "¡Se han depositado 100 unidades de TODOS los 108 materiales de R&D en tu Almacén!"
-        )
+        self._notify("mat_notify_stocked_title", "mat_notify_stocked_msg")
 
     def _expand_coin_locker_add(self, amount):
         if not self.save_json:
@@ -411,96 +376,116 @@ class MaterialsTabMixin:
         self.mat_floor_filter.set(mode)
         self.filter_materials_list()
 
-    @staticmethod
-    def _match_material_category(cat_filter, item_cat):
-        if not cat_filter or cat_filter in ("Todos", "All", "全部", t("mat_all"), t("decal_all")):
+    @classmethod
+    def _match_material_category(cls, cat_filter, item_cat):
+        if not cat_filter or cat_filter in ("ALL", "Todos", "All", "全部", t("mat_all"), t("mat_cat_all"), t("decal_all")):
             return True
+            
+        # 1. Direct canonical item check if material dict is passed
+        if isinstance(item_cat, dict):
+            item_cid = item_cat.get("category_id")
+            for code, key in CANONICAL_MATERIAL_CATEGORIES:
+                if cat_filter in (code, t(key)):
+                    return code == "ALL" or item_cid == code
+            item_cat = item_cat.get("category", "")
+            
         fl = cat_filter.lower()
         cl = item_cat.lower()
         
-        if "steroid" in fl or "esteroide" in fl or "rostest" in fl or "类固醇" in fl:
-            return ("esteroide" in cl or "steroid" in cl or "rostest" in cl)
-        if "aluminum" in fl or "aluminio" in fl or "铝" in fl:
+        # 2. Canonical mapping resolution
+        filter_code = None
+        for code, key in CANONICAL_MATERIAL_CATEGORIES:
+            if cat_filter == code or fl == t(key).lower():
+                filter_code = code
+                break
+                
+        code_to_cl_subs = {
+            "ALUMINUM": ["alumin"],
+            "COPPER": ["cobre", "copper"],
+            "IRON_STEEL": ["hierro", "iron", "steel", "acero"],
+            "OIL": ["petr", "oil", "aceite"],
+            "WOOD": ["mader", "wood"],
+            "CLOTH": ["textil", "cloth", "fibra", "fiber"],
+            "DOD": ["d.o.d", "dod"],
+            "WAR": ["war"],
+            "CW": ["candle", "cw"],
+            "MILK": ["m.i.l.k", "milk"],
+            "BOSS": ["boss", "jefe"],
+            "JACKAL_TENGOKU": ["jackal", "tengoku"],
+            "STEROIDS": ["esteroide", "steroid", "rostest"],
+        }
+        if filter_code and filter_code in code_to_cl_subs:
+            if any(sub in cl for sub in code_to_cl_subs[filter_code]):
+                return True
+                
+        # 3. Fallback for custom string patterns & unit tests
+        if any(x in fl for x in ["steroid", "esteroide", "rostest", "类固醇"]):
+            return any(x in cl for x in ["esteroide", "steroid", "rostest"])
+        if any(x in fl for x in ["aluminum", "aluminio", "铝"]):
             return "alumin" in cl
-        if "copper" in fl or "cobre" in fl or "铜" in fl:
-            return ("cobre" in cl or "copper" in cl)
-        if "iron" in fl or "hierro" in fl or "steel" in fl or "acero" in fl or "铁" in fl or "钢" in fl:
-            return ("hierro" in cl or "iron" in cl)
-        if "oil" in fl or "petr" in fl or "aceite" in fl or "油" in fl:
-            return ("petr" in cl or "oil" in cl or "aceite" in cl)
-        if "wood" in fl or "mader" in fl or "木" in fl:
-            return ("mader" in cl or "wood" in cl)
-        if "cloth" in fl or "textil" in fl or "fiber" in fl or "fibra" in fl or "布" in fl:
-            return ("textil" in cl or "cloth" in cl or "fibra" in cl)
-        if "d.o.d" in fl or "dod" in fl:
-            return ("d.o.d" in cl or "dod" in cl)
+        if any(x in fl for x in ["copper", "cobre", "铜"]):
+            return any(x in cl for x in ["cobre", "copper"])
+        if any(x in fl for x in ["iron", "hierro", "steel", "acero", "铁", "钢"]):
+            return any(x in cl for x in ["hierro", "iron", "steel", "acero"])
+        if any(x in fl for x in ["oil", "petr", "aceite", "油"]):
+            return any(x in cl for x in ["petr", "oil", "aceite"])
+        if any(x in fl for x in ["wood", "mader", "木"]):
+            return any(x in cl for x in ["mader", "wood"])
+        if any(x in fl for x in ["cloth", "textil", "fiber", "fibra", "布"]):
+            return any(x in cl for x in ["textil", "cloth", "fibra", "fiber"])
+        if any(x in fl for x in ["d.o.d", "dod"]):
+            return any(x in cl for x in ["d.o.d", "dod"])
         if "war" in fl:
             return "war" in cl
         if "candle" in fl:
             return "candle" in cl
-        if "m.i.l.k" in fl or "milk" in fl:
-            return ("m.i.l.k" in cl or "milk" in cl)
-        if "boss" in fl or "jefe" in fl:
-            return ("boss" in cl or "jefe" in cl)
-        if "jackal" in fl or "tengoku" in cl or "豺狼" in fl or "天狱" in cl:
-            return ("jackal" in cl or "tengoku" in cl)
+        if any(x in fl for x in ["m.i.l.k", "milk"]):
+            return any(x in cl for x in ["m.i.l.k", "milk"])
+        if any(x in fl for x in ["boss", "jefe"]):
+            return any(x in cl for x in ["boss", "jefe"])
+        if any(x in fl for x in ["jackal", "tengoku", "豺狼", "天狱"]):
+            return any(x in cl for x in ["jackal", "tengoku"])
             
         c_key = cat_filter.lower().split()[0].replace("(", "").replace(")", "")
         return c_key in cl
 
     @staticmethod
     def _localize_material_category(cat_str):
+        if not cat_str:
+            return ""
         cl = cat_str.lower()
-        if "esteroide" in cl or "rostest" in cl:
-            return "Steroids / Rostest (Fighters)"
+        if "esteroide" in cl or "rostest" in cl or "steroid" in cl:
+            return t("mat_cat_steroids")
         if "alumin" in cl:
-            return "Aluminum"
+            return t("mat_cat_aluminum")
         if "cobre" in cl or "copper" in cl:
-            return "Copper"
-        if "hierro" in cl or "iron" in cl:
-            return "Iron & Steel"
-        if "petr" in cl or "oil" in cl:
-            return "Oil"
+            return t("mat_cat_copper")
+        if "hierro" in cl or "iron" in cl or "steel" in cl or "acero" in cl:
+            return t("mat_cat_iron_steel")
+        if "petr" in cl or "oil" in cl or "aceite" in cl:
+            return t("mat_cat_oil")
         if "mader" in cl or "wood" in cl:
-            return "Wood"
-        if "textil" in cl or "cloth" in cl:
-            return "Cloth & Fibers"
+            return t("mat_cat_wood")
+        if "textil" in cl or "cloth" in cl or "fibra" in cl or "fiber" in cl:
+            return t("mat_cat_cloth")
+        if "d.o.d" in cl or "dod" in cl:
+            return t("mat_cat_dod")
+        if "war" in cl:
+            return t("mat_cat_war")
+        if "candle" in cl or "cw" in cl:
+            return t("mat_cat_cw")
+        if "m.i.l.k" in cl or "milk" in cl:
+            return t("mat_cat_milk")
         if "boss" in cl or "jefe" in cl:
-            return "Boss Metals"
+            return t("mat_cat_boss")
         if "jackal" in cl or "tengoku" in cl:
-            return "Jackals & Tengoku Materials"
+            return t("mat_cat_jackal_tengoku")
         return cat_str
 
     @staticmethod
     def _localize_material_category_zh(cat_str):
-        cl = cat_str.lower()
-        if "esteroide" in cl or "rostest" in cl or "steroid" in cl:
-            return "类固醇 / Rostest"
-        if "alumin" in cl:
-            return "铝"
-        if "cobre" in cl or "copper" in cl:
-            return "铜"
-        if "hierro" in cl or "iron" in cl:
-            return "铁与钢"
-        if "petr" in cl or "oil" in cl:
-            return "油与石油"
-        if "mader" in cl or "wood" in cl:
-            return "木材"
-        if "textil" in cl or "cloth" in cl or "fiber" in cl or "fibra" in cl:
-            return "布料与纤维"
-        if "boss" in cl or "jefe" in cl:
-            return "Boss金属"
-        if "jackal" in cl or "tengoku" in cl:
-            return "豺狼与天狱"
-        if "d.o.d" in cl or "dod" in cl:
-            return "D.O.D. ARMS"
-        if "war" in cl:
-            return "WAR ENSEMBLE"
-        if "candle" in cl:
-            return "CANDLE WOLF"
-        if "m.i.l.k" in cl or "milk" in cl:
-            return "M.I.L.K."
-        return cat_str
+        # Universal localization handles all languages via t()
+        return MaterialsTabMixin._localize_material_category(cat_str)
 
     def filter_materials_list(self):
         self.mat_tree.delete(*self.mat_tree.get_children())
@@ -508,6 +493,15 @@ class MaterialsTabMixin:
         query = self.mat_search_var.get().lower().strip() if hasattr(self, "mat_search_var") else ""
         query_tokens = query.split() if query else []
         cat_filter = self.mat_cat_var.get() if hasattr(self, "mat_cat_var") else "Todos"
+        cat_map = getattr(self, "_mat_cat_map", {})
+        cat_code = cat_map.get(cat_filter)
+        if not cat_code:
+            for code, k in CANONICAL_MATERIAL_CATEGORIES:
+                if cat_filter in (code, t(k)):
+                    cat_code = code
+                    break
+        if not cat_code:
+            cat_code = "ALL"
 
         stock_filter = self.mat_stock_filter_var.get() if hasattr(self, "mat_stock_filter_var") else "Todo"
         rarity_filter = self.mat_rarity_filter_var.get() if hasattr(self, "mat_rarity_filter_var") else "Todas"
@@ -524,7 +518,8 @@ class MaterialsTabMixin:
         first_row = None
         
         # 1. R&D Materials from masters.db
-        if "🍄" not in cat_filter and "🐸" not in cat_filter:
+        show_rnd_materials = (cat_code not in ("MUSHROOMS", "BEASTS", "MUSHROOMS_BEASTS"))
+        if show_rnd_materials and "🍄" not in cat_filter and "🐸" not in cat_filter:
             for m in self.materials_db:
                 name_es = m.get("name_es", m.get("name", ""))
                 name_en = m.get("name_en", "")
@@ -535,16 +530,31 @@ class MaterialsTabMixin:
                 cnt = stock_map.get(itemid, 0)
                 
                 # Category filter
-                if not self._match_material_category(cat_filter, cat):
+                if cat_code != "ALL":
+                    m_cid = m.get("category_id")
+                    if m_cid:
+                        if m_cid != cat_code:
+                            continue
+                    elif not self._match_material_category(cat_filter, m):
+                        continue
+                elif not self._match_material_category(cat_filter, m):
                     continue
                     
                 # Stock filter
-                if ("> 0" in stock_filter or "En Stock" in stock_filter or "In Stock" in stock_filter or "已拥有" in stock_filter or "有库存" in stock_filter) and cnt <= 0:
+                stock_mode = getattr(self, "_stock_filter_map", {}).get(stock_filter)
+                if stock_mode == "IN_STOCK" and cnt <= 0:
                     continue
-                elif ("< 10" in stock_filter or "Stock Bajo" in stock_filter or "Low Stock" in stock_filter or "低库存" in stock_filter) and (cnt <= 0 or cnt >= 10):
+                elif stock_mode == "LOW_STOCK" and (cnt <= 0 or cnt >= 10):
                     continue
-                elif ("(0)" in stock_filter or "Agotado" in stock_filter or "Out of Stock" in stock_filter or "缺货" in stock_filter or "无库存" in stock_filter) and cnt > 0:
+                elif stock_mode == "OUT_OF_STOCK" and cnt > 0:
                     continue
+                elif not stock_mode:
+                    if ("> 0" in stock_filter or "En Stock" in stock_filter or "In Stock" in stock_filter or "已拥有" in stock_filter or "有库存" in stock_filter) and cnt <= 0:
+                        continue
+                    elif ("< 10" in stock_filter or "Stock Bajo" in stock_filter or "Low Stock" in stock_filter or "低库存" in stock_filter) and (cnt <= 0 or cnt >= 10):
+                        continue
+                    elif ("(0)" in stock_filter or "Agotado" in stock_filter or "Out of Stock" in stock_filter or "缺货" in stock_filter or "无库存" in stock_filter) and cnt > 0:
+                        continue
 
                 # Rarity filter
                 if "★" in rarity_filter:
@@ -584,16 +594,8 @@ class MaterialsTabMixin:
                 stock_str = t("inv_unit_str", qty=cnt) if cnt > 0 else "-"
                 tag = "tag_in_stock" if cnt > 0 else "tag_out_of_stock"
                     
-                cur_lang = i18n.get_language()
-                if cur_lang == "es":
-                    display_title = f"{name_es} ({name_en})" if name_en and name_en != name_es else (name_es or name_en)
-                    cat_display = cat
-                elif cur_lang == "en":
-                    display_title = f"{name_en} ({name_es})" if name_es and name_en != name_es else (name_en or name_es)
-                    cat_display = self._localize_material_category(cat)
-                else:
-                    display_title = f"{name_zh} ({name_en})" if name_zh and name_en and name_zh != name_en else (name_zh or name_en or name_es)
-                    cat_display = self._localize_material_category_zh(cat)
+                display_title = i18n.get_entity_display_title(m)
+                cat_display = self._localize_material_category(cat)
                 icon_k = self._get_mat_photo_key(itemid, name_en or name_es)
                 thumb = self.get_photo(icon_k, size=(36, 36), preserve_aspect=True)
                 node_id = self.mat_tree.insert(
@@ -611,13 +613,13 @@ class MaterialsTabMixin:
                     first_row = node_id
                     
         # 2. Shrooms and Beasts (Tower Exploration)
-        is_shroom_cat = ("🍄" in cat_filter or "🐸" in cat_filter)
+        is_shroom_cat = (cat_code in ("MUSHROOMS", "BEASTS", "MUSHROOMS_BEASTS") or "🍄" in cat_filter or "🐸" in cat_filter)
         allow_shrooms_floors = (is_shroom_cat or floor_filter == "TODOS")
-        show_shrooms = (cat_filter in ["Todos", "All", "全部", t("mat_all"), t("decal_all")] or is_shroom_cat)
+        show_shrooms = (cat_code in ("ALL", "MUSHROOMS", "BEASTS", "MUSHROOMS_BEASTS") or cat_filter in ["Todos", "All", "全部", t("mat_all"), t("decal_all")] or is_shroom_cat)
 
         if show_shrooms and allow_shrooms_floors:
-            only_shrooms = ("(Mushrooms)" in cat_filter or "(Setas)" in cat_filter or "🍄 蘑菇" in cat_filter or cat_filter == "🍄 Mushrooms")
-            only_beasts = ("(Beasts)" in cat_filter or "(Criaturas)" in cat_filter or "🐸 野兽" in cat_filter or cat_filter == "🐸 Beasts")
+            only_shrooms = (cat_code == "MUSHROOMS") or ("(Mushrooms)" in cat_filter or "(Setas)" in cat_filter or "🍄 蘑菇" in cat_filter or cat_filter == "🍄 Mushrooms")
+            only_beasts = (cat_code == "BEASTS") or ("(Beasts)" in cat_filter or "(Criaturas)" in cat_filter or "🐸 野兽" in cat_filter or cat_filter == "🐸 Beasts")
 
             sb_db = getattr(self, "shrooms_beasts_db", {})
             if not sb_db:
@@ -663,15 +665,7 @@ class MaterialsTabMixin:
                 name_es = info.get("name_es", "")
                 cooked_en = info.get("cooked_name_en", "")
                 cooked_es = info.get("cooked_name_es", "")
-                cat_es = info.get("category_es", "Setas" if item_type == "MUSHROOM" else "Criaturas")
-                cat_en = info.get("category_en", "Mushrooms" if item_type == "MUSHROOM" else "Beasts")
-                cur_lang = i18n.get_language()
-                if cur_lang == "es":
-                    cat_display = cat_es
-                elif cur_lang == "en":
-                    cat_display = cat_en
-                else:
-                    cat_display = "蘑菇" if item_type == "MUSHROOM" else "野兽"
+                cat_display = t("cat_mushroom") if item_type == "MUSHROOM" else t("cat_beast")
 
                 name_zh = info.get("name_zh", "")
                 if query_tokens:
@@ -682,12 +676,7 @@ class MaterialsTabMixin:
                 stock_str = t("inv_unit_str", qty=cnt) if cnt > 0 else "-"
                 tag = "tag_in_stock" if cnt > 0 else "tag_out_of_stock"
                 stars = "★" * r
-                if cur_lang == "es":
-                    display_title = f"{name_es} ({name_en})" if name_en and name_en != name_es else (name_es or name_en)
-                elif cur_lang == "en":
-                    display_title = f"{name_en} ({name_es})" if name_es and name_en != name_es else (name_en or name_es)
-                else:
-                    display_title = f"{name_zh} ({name_en})" if name_zh and name_en and name_zh != name_en else (name_zh or name_en or name_es)
+                display_title = i18n.get_entity_display_title(info)
 
                 icon_f = info.get("icon") or f"{itemid.lower()}.png"
                 thumb = self.get_photo(icon_f, size=(36, 36), preserve_aspect=True) or self.get_photo(itemid.lower(), size=(36, 36), preserve_aspect=True)

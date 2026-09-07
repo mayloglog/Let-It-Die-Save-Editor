@@ -1,7 +1,7 @@
 [
   {
-    "id": "SKLATROL_WOT",
-    "base_id": "SKLATROL_WOT",
+    "id": "SKL_PATROL_WOT",
+    "base_id": "SKL_PATROL_WOT",
     "name_es": "PATRULLA DE SERVICIO",
     "name_en": "PATROL DUTY",
     "desc_es": "Muestra enemigos en el mapa permanentemente. Reduce el consumo de vigor al correr y la recuperación un 50%.",
@@ -13,21 +13,8 @@
     "desc_zh": "在地图上永久显示敌人。\n冲刺时的耐力消耗速率\n和疲劳时间均减少50%。\n "
   },
   {
-    "id": "SKLATROL_WOT_P",
-    "base_id": "SKLATROL_WOT",
-    "name_es": "PATRULLA DE SERVICIO",
-    "name_en": "PATROL DUTY",
-    "desc_es": "Muestra enemigos en el mapa permanentemente. Reduce el consumo de vigor al correr y la recuperación un 50%.",
-    "desc_en": "Shows enemies on the map permanently. Decreases Dash stamina consumption and Fatigue Time by 50%.",
-    "rarity": 3,
-    "premium": true,
-    "category": "SKCTG_ASSIST",
-    "name_zh": "PATROL DUTY",
-    "desc_zh": "在地图上永久显示敌人。\n冲刺时的耐力消耗速率\n和疲劳时间均减少50%。\n "
-  },
-  {
-    "id": "SKLECKER_ABILITY_UP",
-    "base_id": "SKLECKER_ABILITY_UP",
+    "id": "SKL_PECKER_ABILITY_UP",
+    "base_id": "SKL_PECKER_ABILITY_UP",
     "name_es": "Rey del carbón",
     "name_en": "King of Coal",
     "desc_es": "Bonus armadura: picos + cono de tráfico. 1 pieza: ATQ y DEF +10%. 2 p.: +20%. 3 p.: +30%.//Completo: anula la ceguera producida por setas batracio estrépito, picos y planchas.",
@@ -39,21 +26,8 @@
     "desc_zh": "“鹤嘴锄”类武器＋“道路惊魂”\n护具组加成。装备单件“道路惊魂”\n护具特效：攻击力和防御力+#0%。\n两件：+#1%。三件：+#2%。//另外，装备全套护具时，\n将使敌人青蛙真菌、鹤嘴锄\n以及熨斗的暂时致盲效果失效。\n "
   },
   {
-    "id": "SKLECKER_ABILITY_UP_P",
-    "base_id": "SKLECKER_ABILITY_UP",
-    "name_es": "Rey del carbón",
-    "name_en": "King of Coal",
-    "desc_es": "Bonus armadura: picos + cono de tráfico. 1 pieza: ATQ y DEF +10%. 2 p.: +20%. 3 p.: +30%.//Completo: anula la ceguera producida por setas batracio estrépito, picos y planchas.",
-    "desc_en": "Pickaxe + Road Shocker armor bonus. Equip 1 piece: Attack Power and Defense +10%. Equip 2: +20%. Equip 3: +30%.//Full set: negates Blindness effect caused by Frongus, Pickaxe, or Iron.",
-    "rarity": 4,
-    "premium": true,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "煤碳王",
-    "desc_zh": "“鹤嘴锄”类武器＋“道路惊魂”\n护具组加成。装备单件“道路惊魂”\n护具特效：攻击力和防御力+#0%。\n两件：+#1%。三件：+#2%。//另外，装备全套护具时，\n将使敌人青蛙真菌、鹤嘴锄\n以及熨斗的暂时致盲效果失效。\n "
-  },
-  {
-    "id": "SKLECKER_ATKUP_01",
-    "base_id": "SKLECKER_ATKUP_01",
+    "id": "SKL_PECKER_ATKUP_01",
+    "base_id": "SKL_PECKER_ATKUP_01",
     "name_es": "Fan del pico",
     "name_en": "Pickaxe Addict",
     "desc_es": "Poder de ATQ +30% con los picos.",
@@ -65,21 +39,8 @@
     "desc_zh": "“鹤嘴锄”类武器的攻击力提升30%。\n "
   },
   {
-    "id": "SKLECKER_ATKUP_01_P",
-    "base_id": "SKLECKER_ATKUP_01",
-    "name_es": "Fan del pico",
-    "name_en": "Pickaxe Addict",
-    "desc_es": "Poder de ATQ +30% con los picos.",
-    "desc_en": "Attack Power +30% for Pickaxes.",
-    "rarity": 4,
-    "premium": true,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "鹤嘴锄瘾",
-    "desc_zh": "“鹤嘴锄”类武器的攻击力提升30%。\n "
-  },
-  {
-    "id": "SKLHOENIX",
-    "base_id": "SKLHOENIX",
+    "id": "SKL_PHOENIX",
+    "base_id": "SKL_PHOENIX",
     "name_es": "Fénix",
     "name_en": "Phoenix",
     "desc_es": "Al fijar esto a luchadores de defensa, cazadores o Haters, se reduce el daño de los ataques de fuego//y se recuperan algunos PS en lugar de recibir daño de fuego.",
@@ -91,21 +52,8 @@
     "desc_zh": "贴在守卫战士、猎人、\n憎恨者身上，\n受到火烧攻击时，\n将减少承受的伤害量，//防止火烧伤害，\n并缓缓恢复HP。\n "
   },
   {
-    "id": "SKLHOENIX_P",
-    "base_id": "SKLHOENIX",
-    "name_es": "Fénix",
-    "name_en": "Phoenix",
-    "desc_es": "Al fijar esto a luchadores de defensa, cazadores o Haters, se reduce el daño de los ataques de fuego//y se recuperan algunos PS en lugar de recibir daño de fuego.",
-    "desc_en": "Decreases damage from Fire attacks, and slightly recovers HP instead of taking Fire damage when//attached to Defense Fighters, Hunters, or Haters.",
-    "rarity": 4,
-    "premium": true,
-    "category": "SKCTG_RESIST",
-    "name_zh": "不死鸟",
-    "desc_zh": "贴在守卫战士、猎人、\n憎恨者身上，\n受到火烧攻击时，\n将减少承受的伤害量，//防止火烧伤害，\n并缓缓恢复HP。\n "
-  },
-  {
-    "id": "SKLITCHING_ATKUP_01",
-    "base_id": "SKLITCHING_ATKUP_01",
+    "id": "SKL_PITCHING_ATKUP_01",
+    "base_id": "SKL_PITCHING_ATKUP_01",
     "name_es": "Fan máquina de bateo",
     "name_en": "Pitching Addict",
     "desc_es": "Poder de ATQ +30% con las máquinas de bateo.",
@@ -117,21 +65,8 @@
     "desc_zh": "“发球机”类武器的攻击力提升30%。\n "
   },
   {
-    "id": "SKLITCHING_ATKUP_01_P",
-    "base_id": "SKLITCHING_ATKUP_01",
-    "name_es": "Fan máquina de bateo",
-    "name_en": "Pitching Addict",
-    "desc_es": "Poder de ATQ +30% con las máquinas de bateo.",
-    "desc_en": "Attack Power +30% for Pitching Machines.",
-    "rarity": 4,
-    "premium": true,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "发球机瘾",
-    "desc_zh": "“发球机”类武器的攻击力提升30%。\n "
-  },
-  {
-    "id": "SKLITCH_M_ABILITY_UP",
-    "base_id": "SKLITCH_M_ABILITY_UP",
+    "id": "SKL_PITCH_M_ABILITY_UP",
+    "base_id": "SKL_PITCH_M_ABILITY_UP",
     "name_es": "Cortadistancia",
     "name_en": "Perfect Closer",
     "desc_es": "Bonus armadura: máquina de bateo + armadura kendo. 1 pieza: 10% prob. de no perder durab. o mun. con máquina de//bateo. 2 p.: 20%. 3 p.: 30%. Completo: bolas de bateo de fuego se convierten al azar en strikes con +200% ATQ.",
@@ -143,21 +78,8 @@
     "desc_zh": "“染血发球机”类武器＋“剑道”\n护具组加成。装备单件“剑道”\n护具特效：#0%的几率不耗损耐久度\n和弹药。两件：#1%。三件：#2%。//另外，装备全套护具时，\n随机生成损伤+#4%的致命触身球。\n "
   },
   {
-    "id": "SKLITCH_M_ABILITY_UP_P",
-    "base_id": "SKLITCH_M_ABILITY_UP",
-    "name_es": "Cortadistancia",
-    "name_en": "Perfect Closer",
-    "desc_es": "Bonus armadura: máquina de bateo + armadura kendo. 1 pieza: 10% prob. de no perder durab. o mun. con máquina de//bateo. 2 p.: 20%. 3 p.: 30%. Completo: bolas de bateo de fuego se convierten al azar en strikes con +200% ATQ.",
-    "desc_en": "Pitching Machine + Kendo armor bonus. Equip 1 piece: Pitching Machine 10% chance of no durability or ammo loss.//Equip 2: 20%. Equip 3: 30%. Full set: fired pitching balls randomly become a +200% damage STRIKE attack.",
-    "rarity": 4,
-    "premium": true,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "完美终结者",
-    "desc_zh": "“染血发球机”类武器＋“剑道”\n护具组加成。装备单件“剑道”\n护具特效：#0%的几率不耗损耐久度\n和弹药。两件：#1%。三件：#2%。//另外，装备全套护具时，\n随机生成损伤+#4%的致命触身球。\n "
-  },
-  {
-    "id": "SKLOISONGENERAL",
-    "base_id": "SKLOISONGENERAL",
+    "id": "SKL_POISONGENERAL",
+    "base_id": "SKL_POISONGENERAL",
     "name_es": "General Veneno",
     "name_en": "Poison General",
     "desc_es": "Recupera PS poco a poco en vez de sufrir daño por envenenamiento. Aumenta el ataque de las armas de veneno//en un 30%, y la resistencia al veneno aumenta en 20%.",
@@ -169,40 +91,14 @@
     "desc_zh": "不会中毒，反而可缓慢恢复HP。\n武器的毒害攻击力提升#0%,\n毒抗性将增加#1%。\n "
   },
   {
-    "id": "SKLOISONGENERAL_P",
-    "base_id": "SKLOISONGENERAL",
-    "name_es": "General Veneno",
-    "name_en": "Poison General",
-    "desc_es": "Recupera PS poco a poco en vez de sufrir daño por envenenamiento. Aumenta el ataque de las armas de veneno//en un 30%, y la resistencia al veneno aumenta en 20%.",
-    "desc_en": "Recover HP slowly instead of taking poison damage. Increases the ATK of poison weapons by 30%, and poison//resistance increases by 20%.",
-    "rarity": 5,
-    "premium": true,
-    "category": "SKCTG_ASSIST",
-    "name_zh": "毒将军",
-    "desc_zh": "不会中毒，反而可缓慢恢复HP。\n武器的毒害攻击力提升#0%,\n毒抗性将增加#1%。\n "
-  },
-  {
-    "id": "SKLOISONMASTER",
-    "base_id": "SKLOISONMASTER",
+    "id": "SKL_POISONMASTER",
+    "base_id": "SKL_POISONMASTER",
     "name_es": "Envenenador experto",
     "name_en": "Poison Master",
     "desc_es": "Recupera PS poco a poco en vez de sufrir daño por envenenamiento. Aumenta un 10% el ataque de las//armas de veneno.",
     "desc_en": "Recover HP slowly instead of taking poison damage. Increases the ATK of poison weapons by 10%.",
     "rarity": 3,
     "premium": false,
-    "category": "SKCTG_ASSIST",
-    "name_zh": "用毒大师",
-    "desc_zh": "不会中毒，反而可缓慢恢复HP。\n武器的毒害攻击力提升10%。\n "
-  },
-  {
-    "id": "SKLOISONMASTER_P",
-    "base_id": "SKLOISONMASTER",
-    "name_es": "Envenenador experto",
-    "name_en": "Poison Master",
-    "desc_es": "Recupera PS poco a poco en vez de sufrir daño por envenenamiento. Aumenta un 10% el ataque de las//armas de veneno.",
-    "desc_en": "Recover HP slowly instead of taking poison damage. Increases the ATK of poison weapons by 10%.",
-    "rarity": 3,
-    "premium": true,
     "category": "SKCTG_ASSIST",
     "name_zh": "用毒大师",
     "desc_zh": "不会中毒，反而可缓慢恢复HP。\n武器的毒害攻击力提升10%。\n "
@@ -884,32 +780,6 @@
     "desc_zh": "贴在守卫战士身上时，\n攻击力提升#0%，防御力\n提升#1%，HP上限提高#2%。\n "
   },
   {
-    "id": "SKL_ATKDEFUPOISN_01",
-    "base_id": "SKL_ATKDEFUPOISN_01",
-    "name_es": "Avispón",
-    "name_en": "Hornet",
-    "desc_es": "Aumenta un 10% el ATQ de las armas de veneno.",
-    "desc_en": "Increases the ATK of poison weapons by 10%.",
-    "rarity": 1,
-    "premium": false,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "大黄蜂",
-    "desc_zh": "武器的毒害攻击力提升10%。\n "
-  },
-  {
-    "id": "SKL_ATKDEFUPOISN_01_P",
-    "base_id": "SKL_ATKDEFUPOISN_01",
-    "name_es": "Avispón",
-    "name_en": "Hornet",
-    "desc_es": "Aumenta un 10% el ATQ de las armas de veneno.",
-    "desc_en": "Increases the ATK of poison weapons by 10%.",
-    "rarity": 1,
-    "premium": true,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "大黄蜂",
-    "desc_zh": "武器的毒害攻击力提升10%。\n "
-  },
-  {
     "id": "SKL_ATKDEFUP_ELEC_01",
     "base_id": "SKL_ATKDEFUP_ELEC_01",
     "name_es": "Electrizante",
@@ -1484,7 +1354,7 @@
   {
     "id": "SKL_ATKUP_SLASHSTRIKE",
     "base_id": "SKL_ATKUP_SLASHSTRIKE",
-    "name_es": "Jupiter-Stil",
+    "name_es": "Estilo Júpiter",
     "name_en": "Jupiter Style",
     "desc_es": "Aumenta un 10% el ATQ con armas contundentes y cortantes.",
     "desc_en": "Boosts ATK of blunt weapons and slashing weapons by 10%.",
@@ -1497,7 +1367,7 @@
   {
     "id": "SKL_ATKUP_SLASHSTRIKE_P",
     "base_id": "SKL_ATKUP_SLASHSTRIKE",
-    "name_es": "Jupiter-Stil",
+    "name_es": "Estilo Júpiter",
     "name_en": "Jupiter Style",
     "desc_es": "Aumenta un 10% el ATQ con armas contundentes y cortantes.",
     "desc_en": "Boosts ATK of blunt weapons and slashing weapons by 10%.",
@@ -2366,21 +2236,8 @@
     "desc_zh": "“麦格农手枪”类武器的攻击力提升#0%。\n发动普通攻击时，\n#1%的几率不耗损耐久度和弹药。\n "
   },
   {
-    "id": "SKL_DEATHROOF",
-    "base_id": "SKL_DEATHROOF",
-    "name_es": "A todo gas",
-    "name_en": "Living on the Edge",
-    "desc_es": "Resiste con 1 PS solo una vez al recibir daño fatal en un saqueo. Los usos se restablecen al continuar o al volver a la sala de espera.",
-    "desc_en": "Hold out with 1 HP just once when taking fatal damage on a raid. This limit resets when you continue or return to the Waiting Room.",
-    "rarity": 2,
-    "premium": false,
-    "category": "SKCTG_RESIST",
-    "name_zh": "九死一生",
-    "desc_zh": "承受致命损伤时\n以1HP存活下来，仅限一次。\n接关或返回等待室后，\n有效次数将被重置。\n "
-  },
-  {
-    "id": "SKL_DEATHROOF_03",
-    "base_id": "SKL_DEATHROOF_03",
+    "id": "SKL_DEATH_PROOF_03",
+    "base_id": "SKL_DEATH_PROOF_03",
     "name_es": "Al límite tres veces",
     "name_en": "Living on the Edge Thrice",
     "desc_es": "Puedes recibir daño crítico y sobrevivir con 1 PS hasta tres veces. Los usos se restablecen al continuar o al volver a la sala//de espera.",
@@ -2390,32 +2247,6 @@
     "category": "SKCTG_RESIST",
     "name_zh": "九死三生",
     "desc_zh": "承受致命损伤时\n以1HP存活下来，仅限三次。\n接关或返回等待室后，\n有效次数将被重置。\n "
-  },
-  {
-    "id": "SKL_DEATHROOF_03_P",
-    "base_id": "SKL_DEATHROOF_03",
-    "name_es": "Al límite tres veces",
-    "name_en": "Living on the Edge Thrice",
-    "desc_es": "Puedes recibir daño crítico y sobrevivir con 1 PS hasta tres veces. Los usos se restablecen al continuar o al volver a la sala//de espera.",
-    "desc_en": "You can receive fatal damage and survive on 1 HP up to three times. This limit resets when you continue or return to the Waiting Room.",
-    "rarity": 5,
-    "premium": true,
-    "category": "SKCTG_RESIST",
-    "name_zh": "九死三生",
-    "desc_zh": "承受致命损伤时\n以1HP存活下来，仅限三次。\n接关或返回等待室后，\n有效次数将被重置。\n "
-  },
-  {
-    "id": "SKL_DEATHROOF_P",
-    "base_id": "SKL_DEATHROOF",
-    "name_es": "A todo gas",
-    "name_en": "Living on the Edge",
-    "desc_es": "Resiste con 1 PS solo una vez al recibir daño fatal en un saqueo. Los usos se restablecen al continuar o al volver a la sala de espera.",
-    "desc_en": "Hold out with 1 HP just once when taking fatal damage on a raid. This limit resets when you continue or return to the Waiting Room.",
-    "rarity": 2,
-    "premium": true,
-    "category": "SKCTG_RESIST",
-    "name_zh": "九死一生",
-    "desc_zh": "承受致命损伤时\n以1HP存活下来，仅限一次。\n接关或返回等待室后，\n有效次数将被重置。\n "
   },
   {
     "id": "SKL_DEATH_PROOF",
@@ -2432,7 +2263,7 @@
   },
   {
     "id": "SKL_DEATH_PROOF_03_P",
-    "base_id": "SKL_DEATHROOF_03",
+    "base_id": "SKL_DEATH_PROOF_03",
     "name_es": "Al límite tres veces",
     "name_en": "Living on the Edge Thrice",
     "desc_es": "Puedes recibir daño crítico y sobrevivir con 1 PS hasta tres veces. Los usos se restablecen al continuar o al volver a la sala//de espera.",
@@ -2445,7 +2276,7 @@
   },
   {
     "id": "SKL_DEATH_PROOF_P",
-    "base_id": "SKL_DEATHROOF",
+    "base_id": "SKL_DEATH_PROOF",
     "name_es": "A todo gas",
     "name_en": "Living on the Edge",
     "desc_es": "Resiste con 1 PS solo una vez al recibir daño fatal en un saqueo. Los usos se restablecen al continuar o al volver a la sala de espera.",
@@ -2665,8 +2496,8 @@
     "desc_zh": "防御力提升#0%。\n "
   },
   {
-    "id": "SKL_DEFUP_DEATHROOF",
-    "base_id": "SKL_DEFUP_DEATHROOF",
+    "id": "SKL_DEFUP_DEATH_PROOF",
+    "base_id": "SKL_DEFUP_DEATH_PROOF",
     "name_es": "Kali Angel",
     "name_en": "Kali Angel",
     "desc_es": "Aumenta un 15% la DEF y te permite sobrevivir un ataque letal con 1 PS. Los usos se restablecen al continuar o al volver a la sala de espera.",
@@ -2678,21 +2509,8 @@
     "desc_zh": "防御力提升15%。承受\n致命损伤时以1HP存活下来，\n仅限一次。接关或返回等待室后，\n有效次数将被重置。\n "
   },
   {
-    "id": "SKL_DEFUP_DEATHROOF_P",
-    "base_id": "SKL_DEFUP_DEATHROOF",
-    "name_es": "Kali Angel",
-    "name_en": "Kali Angel",
-    "desc_es": "Aumenta un 15% la DEF y te permite sobrevivir un ataque letal con 1 PS. Los usos se restablecen al continuar o al volver a la sala de espera.",
-    "desc_en": "Boosts DEF by 15% and enables you to survive one fatal attack with 1 HP. This limit resets when you continue or return to the Waiting Room.",
-    "rarity": 4,
-    "premium": true,
-    "category": "SKCTG_STATUS",
-    "name_zh": "卡丽天使",
-    "desc_zh": "防御力提升15%。承受\n致命损伤时以1HP存活下来，\n仅限一次。接关或返回等待室后，\n有效次数将被重置。\n "
-  },
-  {
     "id": "SKL_DEFUP_DEATH_PROOF_P",
-    "base_id": "SKL_DEFUP_DEATHROOF",
+    "base_id": "SKL_DEFUP_DEATH_PROOF",
     "name_es": "Kali Angel",
     "name_en": "Kali Angel",
     "desc_es": "Aumenta un 15% la DEF y te permite sobrevivir un ataque letal con 1 PS. Los usos se restablecen al continuar o al volver a la sala de espera.",
@@ -3224,27 +3042,14 @@
     "desc_zh": "HP恢复攻击时所造成损伤的3%。\n每次攻击的最大HP恢复量为\nHP上限的3%。\n "
   },
   {
-    "id": "SKL_DREACE_NMH",
-    "base_id": "SKL_DREACE_NMH",
+    "id": "SKL_DR_PEACE_NMH",
+    "base_id": "SKL_DR_PEACE_NMH",
     "name_es": "DR. PEACE",
     "name_en": "DR. PEACE",
     "desc_es": "Reduce ligeramente el tiempo de recarga.",
     "desc_en": "Slightly reduces reload time.",
     "rarity": 3,
     "premium": false,
-    "category": "SKCTG_CONDITION",
-    "name_zh": "DR. PEACE",
-    "desc_zh": "重新装填时间稍微缩短。\n "
-  },
-  {
-    "id": "SKL_DREACE_NMH_P",
-    "base_id": "SKL_DREACE_NMH",
-    "name_es": "DR. PEACE",
-    "name_en": "DR. PEACE",
-    "desc_es": "Reduce ligeramente el tiempo de recarga.",
-    "desc_en": "Slightly reduces reload time.",
-    "rarity": 3,
-    "premium": true,
     "category": "SKCTG_CONDITION",
     "name_zh": "DR. PEACE",
     "desc_zh": "重新装填时间稍微缩短。\n "
@@ -3303,7 +3108,7 @@
   },
   {
     "id": "SKL_DR_PEACE_NMH_P",
-    "base_id": "SKL_DREACE_NMH",
+    "base_id": "SKL_DR_PEACE_NMH",
     "name_es": "DR. PEACE",
     "name_en": "DR. PEACE",
     "desc_es": "Reduce ligeramente el tiempo de recarga.",
@@ -4409,7 +4214,7 @@
   {
     "id": "SKL_HPCUREUP_03",
     "base_id": "SKL_HPCUREUP_03",
-    "name_es": "Apfel",
+    "name_es": "Manzana",
     "name_en": "Apple",
     "desc_es": "Aumenta un 15% la recuperación de PS.",
     "desc_en": "Increases HP recovery by 15%.",
@@ -4422,7 +4227,7 @@
   {
     "id": "SKL_HPCUREUP_03_P",
     "base_id": "SKL_HPCUREUP_03",
-    "name_es": "Apfel",
+    "name_es": "Manzana",
     "name_en": "Apple",
     "desc_es": "Aumenta un 15% la recuperación de PS.",
     "desc_en": "Increases HP recovery by 15%.",
@@ -4513,7 +4318,7 @@
   {
     "id": "SKL_HPUP_ATKUP",
     "base_id": "SKL_HPUP_ATKUP",
-    "name_es": "Panthermodus",
+    "name_es": "Modo Pantera",
     "name_en": "Panther Mode",
     "desc_es": "Aumenta un 20% los PS máximos y un 5% el ATQ.",
     "desc_en": "Boosts max HP by 20% and ATK by 5%.",
@@ -4526,7 +4331,7 @@
   {
     "id": "SKL_HPUP_ATKUP_P",
     "base_id": "SKL_HPUP_ATKUP",
-    "name_es": "Panthermodus",
+    "name_es": "Modo Pantera",
     "name_en": "Panther Mode",
     "desc_es": "Aumenta un 20% los PS máximos y un 5% el ATQ.",
     "desc_en": "Boosts max HP by 20% and ATK by 5%.",
@@ -5397,7 +5202,7 @@
   {
     "id": "SKL_MONEYUP_03",
     "base_id": "SKL_MONEYUP_03",
-    "name_es": "Stasisfeld",
+    "name_es": "Campo Estático",
     "name_en": "Stasis Field",
     "desc_es": "Aumenta un 15% las Kill Coins conseguidas a través de enemigos y tesoros.",
     "desc_en": "Increases Kill Coins gained from enemies and treasure by 15%.",
@@ -5410,7 +5215,7 @@
   {
     "id": "SKL_MONEYUP_03_P",
     "base_id": "SKL_MONEYUP_03",
-    "name_es": "Stasisfeld",
+    "name_es": "Campo Estático",
     "name_en": "Stasis Field",
     "desc_es": "Aumenta un 15% las Kill Coins conseguidas a través de enemigos y tesoros.",
     "desc_en": "Increases Kill Coins gained from enemies and treasure by 15%.",
@@ -5708,7 +5513,7 @@
   },
   {
     "id": "SKL_PATROL_WOT_P",
-    "base_id": "SKLATROL_WOT",
+    "base_id": "SKL_PATROL_WOT",
     "name_es": "PATRULLA DE SERVICIO",
     "name_en": "PATROL DUTY",
     "desc_es": "Muestra enemigos en el mapa permanentemente. Reduce el consumo de vigor al correr y la recuperación un 50%.",
@@ -5721,7 +5526,7 @@
   },
   {
     "id": "SKL_PECKER_ABILITY_UP_P",
-    "base_id": "SKLECKER_ABILITY_UP",
+    "base_id": "SKL_PECKER_ABILITY_UP",
     "name_es": "Rey del carbón",
     "name_en": "King of Coal",
     "desc_es": "Bonus armadura: picos + cono de tráfico. 1 pieza: ATQ y DEF +10%. 2 p.: +20%. 3 p.: +30%.//Completo: anula la ceguera producida por setas batracio estrépito, picos y planchas.",
@@ -5734,7 +5539,7 @@
   },
   {
     "id": "SKL_PECKER_ATKUP_01_P",
-    "base_id": "SKLECKER_ATKUP_01",
+    "base_id": "SKL_PECKER_ATKUP_01",
     "name_es": "Fan del pico",
     "name_en": "Pickaxe Addict",
     "desc_es": "Poder de ATQ +30% con los picos.",
@@ -5747,7 +5552,7 @@
   },
   {
     "id": "SKL_PHOENIX_P",
-    "base_id": "SKLHOENIX",
+    "base_id": "SKL_PHOENIX",
     "name_es": "Fénix",
     "name_en": "Phoenix",
     "desc_es": "Al fijar esto a luchadores de defensa, cazadores o Haters, se reduce el daño de los ataques de fuego//y se recuperan algunos PS en lugar de recibir daño de fuego.",
@@ -5760,7 +5565,7 @@
   },
   {
     "id": "SKL_PITCHING_ATKUP_01_P",
-    "base_id": "SKLITCHING_ATKUP_01",
+    "base_id": "SKL_PITCHING_ATKUP_01",
     "name_es": "Fan máquina de bateo",
     "name_en": "Pitching Addict",
     "desc_es": "Poder de ATQ +30% con las máquinas de bateo.",
@@ -5773,7 +5578,7 @@
   },
   {
     "id": "SKL_PITCH_M_ABILITY_UP_P",
-    "base_id": "SKLITCH_M_ABILITY_UP",
+    "base_id": "SKL_PITCH_M_ABILITY_UP",
     "name_es": "Cortadistancia",
     "name_en": "Perfect Closer",
     "desc_es": "Bonus armadura: máquina de bateo + armadura kendo. 1 pieza: 10% prob. de no perder durab. o mun. con máquina de//bateo. 2 p.: 20%. 3 p.: 30%. Completo: bolas de bateo de fuego se convierten al azar en strikes con +200% ATQ.",
@@ -5786,7 +5591,7 @@
   },
   {
     "id": "SKL_POISONGENERAL_P",
-    "base_id": "SKLOISONGENERAL",
+    "base_id": "SKL_POISONGENERAL",
     "name_es": "General Veneno",
     "name_en": "Poison General",
     "desc_es": "Recupera PS poco a poco en vez de sufrir daño por envenenamiento. Aumenta el ataque de las armas de veneno//en un 30%, y la resistencia al veneno aumenta en 20%.",
@@ -5799,7 +5604,7 @@
   },
   {
     "id": "SKL_POISONMASTER_P",
-    "base_id": "SKLOISONMASTER",
+    "base_id": "SKL_POISONMASTER",
     "name_es": "Envenenador experto",
     "name_en": "Poison Master",
     "desc_es": "Recupera PS poco a poco en vez de sufrir daño por envenenamiento. Aumenta un 10% el ataque de las//armas de veneno.",
@@ -5863,27 +5668,14 @@
     "desc_zh": "袭击开始时，或使用自动扶梯或电梯时，\n狂怒量表的数值+2，仅限一次。\n "
   },
   {
-    "id": "SKL_RESISTUPOISON_01",
-    "base_id": "SKL_RESISTUPOISON_01",
+    "id": "SKL_RESISTUP_POISON_01",
+    "base_id": "SKL_RESISTUP_POISON_01",
     "name_es": "Alma altanera",
     "name_en": "Scornful Susie",
     "desc_es": "Aumenta la resistencia al envenenamiento en un 20%.",
     "desc_en": "Increases Poison Res by 20%.",
     "rarity": 4,
     "premium": false,
-    "category": "SKCTG_RESIST",
-    "name_zh": "毒舌萝莉",
-    "desc_zh": "毒害抗性提高#0％。\n "
-  },
-  {
-    "id": "SKL_RESISTUPOISON_01_P",
-    "base_id": "SKL_RESISTUPOISON_01",
-    "name_es": "Alma altanera",
-    "name_en": "Scornful Susie",
-    "desc_es": "Aumenta la resistencia al envenenamiento en un 20%.",
-    "desc_en": "Increases Poison Res by 20%.",
-    "rarity": 4,
-    "premium": true,
     "category": "SKCTG_RESIST",
     "name_zh": "毒舌萝莉",
     "desc_zh": "毒害抗性提高#0％。\n "
@@ -5942,7 +5734,7 @@
   },
   {
     "id": "SKL_RESISTUP_POISON_01_P",
-    "base_id": "SKL_RESISTUPOISON_01",
+    "base_id": "SKL_RESISTUP_POISON_01",
     "name_es": "Alma altanera",
     "name_en": "Scornful Susie",
     "desc_es": "Aumenta la resistencia al envenenamiento en un 20%.",
@@ -7308,7 +7100,7 @@
   {
     "id": "SKL_STMUP_DASHDODGE",
     "base_id": "SKL_STMUP_DASHDODGE",
-    "name_es": "Lunar-Stil",
+    "name_es": "Estilo Lunar",
     "name_en": "Lunar Style",
     "desc_es": "Reduce el consumo de vigor y la fase de cansancio un 30% al correr, y el consumo de vigor otro 30% al esquivar ataques.",
     "desc_en": "Reduces stamina consumption and fatigue time by 30% when dashing and stamina consumption by 30%  when dodging.",
@@ -7321,7 +7113,7 @@
   {
     "id": "SKL_STMUP_DASHDODGE_P",
     "base_id": "SKL_STMUP_DASHDODGE",
-    "name_es": "Lunar-Stil",
+    "name_es": "Estilo Lunar",
     "name_en": "Lunar Style",
     "desc_es": "Reduce el consumo de vigor y la fase de cansancio un 30% al correr, y el consumo de vigor otro 30% al esquivar ataques.",
     "desc_en": "Reduces stamina consumption and fatigue time by 30% when dashing and stamina consumption by 30%  when dodging.",

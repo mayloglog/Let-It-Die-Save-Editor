@@ -37,6 +37,20 @@ def get_loc(sct, tid, default=""):
     name_en = t_entry.get("int") or default
     return name_es, name_en
 
+ATTR_MAP = {
+    'ATKATTR_SLASH': 'SLASH',
+    'ATKATTR_HIT': 'BLUNT',
+    'ATKATTR_SHOOT': 'PIERCE',
+    'ATKATTR_FIRE': 'FIRE',
+    'ATKATTR_ELEC': 'ELECTRIC',
+    'ATKATTR_POISON': 'POISON'
+}
+cur.execute("SELECT id, attr, value FROM master_part_atkattr WHERE value > 0;")
+atkattr_db = {}
+for pid, attr, val in cur.fetchall():
+    if attr in ATTR_MAP:
+        atkattr_db.setdefault(pid, {})[ATTR_MAP[attr]] = val
+
 print("2. Extracting All 1,370 Equipment & Weapons (master_part)...")
 cur.execute("SELECT id, name, type, drcat, rarity, dur, atk, def, price_b, price_s, lvllmt FROM master_part;")
 equipment_list = []
@@ -86,6 +100,9 @@ for pid, name_key, ptype, drcat, rarity, dur, atk, pdef, price_b, price_s, lvllm
         "sell_kc": price_s,
         "max_lvl": lvllmt
     }
+    if pid in atkattr_db:
+        entry["damage_attr"] = atkattr_db[pid]
+        entry["damage_types"] = sorted(atkattr_db[pid].keys(), key=lambda k: atkattr_db[pid][k], reverse=True)
     equipment_list.append(entry)
     
     if ptype == "PTTP_ARM":

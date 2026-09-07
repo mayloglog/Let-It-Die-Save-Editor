@@ -92,7 +92,7 @@ class FightersTabMixin:
         self.f_title_lbl = ttk.Label(f_meta, text=t("f_select_prompt"), font=("Segoe UI", 13, "bold"), foreground=ACCENT_GOLD)
         self.f_title_lbl.pack(anchor="w")
         
-        self.f_sub_lbl = ttk.Label(f_meta, text="Clase: --- | Nivel: --- | Rango: Tier ---", font=("Segoe UI", 9), foreground=FG_MUTED)
+        self.f_sub_lbl = ttk.Label(f_meta, text=t("f_sub_lbl_placeholder"), font=("Segoe UI", 9), foreground=FG_MUTED)
         self.f_sub_lbl.pack(anchor="w")
         
         # Identity and Configuration Grid
@@ -105,12 +105,19 @@ class FightersTabMixin:
         ttk.Entry(id_frame, textvariable=self.f_name_entry_var, width=16).grid(row=0, column=1, padx=4, pady=3, sticky="w")
         
         ttk.Label(id_frame, text=t("f_lbl_class")).grid(row=0, column=2, sticky="w", padx=4, pady=3)
-        self.f_class_select_var = tk.StringVar(value="BAL (All-Rounder)")
-        classes_opts = [
-            "BAL (All-Rounder)", "BRE (Striker)", "DEF (Defender)", "TEC (Attacker)",
-            "SHT (Shooter)", "COL (Collector)", "SKI (Skill Master)", "LUK (Lucky Star)"
+        self.f_class_options = [
+            (t("cls_opt_bal"), "BAL"),
+            (t("cls_opt_bre"), "BRE"),
+            (t("cls_opt_def"), "DEF"),
+            (t("cls_opt_tec"), "TEC"),
+            (t("cls_opt_sht"), "SHT"),
+            (t("cls_opt_col"), "COL"),
+            (t("cls_opt_ski"), "SKI"),
+            (t("cls_opt_luk"), "LUK"),
         ]
-        cb_cls = ttk.Combobox(id_frame, textvariable=self.f_class_select_var, values=classes_opts, state="readonly", width=18)
+        self.f_class_select_var = tk.StringVar(value=self.f_class_options[0][0])
+        classes_opts = [opt[0] for opt in self.f_class_options]
+        cb_cls = ttk.Combobox(id_frame, textvariable=self.f_class_select_var, values=classes_opts, state="readonly", width=22)
         cb_cls.grid(row=0, column=3, padx=4, pady=3, sticky="w")
         
         # Row 1: Grade (Tier) and Level
@@ -128,7 +135,7 @@ class FightersTabMixin:
         self.f_hp_current_var = tk.StringVar(value="15000")
         ttk.Entry(id_frame, textvariable=self.f_hp_current_var, width=10, justify="center").grid(row=2, column=1, padx=4, pady=3, sticky="w")
         
-        ttk.Label(id_frame, text="Bono MINGO (0-3):").grid(row=2, column=2, sticky="w", padx=4, pady=3)
+        ttk.Label(id_frame, text=t("f_mingo_bonus_lbl")).grid(row=2, column=2, sticky="w", padx=4, pady=3)
         self.f_bag_select_var = tk.StringVar(value="3")
         cb_fbag = ttk.Combobox(id_frame, textvariable=self.f_bag_select_var, values=["0", "1", "2", "3"], state="readonly", width=6)
         cb_fbag.grid(row=2, column=3, padx=4, pady=3, sticky="w")
@@ -162,7 +169,7 @@ class FightersTabMixin:
         btn_gallery.pack(side="left")
         
         # Row 4: Real In-Game Capacity indicator
-        self.f_real_bag_lbl = ttk.Label(id_frame, text="🎒 Capacidad Real: Calculando...", foreground=ACCENT_GOLD, font=("Segoe UI", 9, "bold"))
+        self.f_real_bag_lbl = ttk.Label(id_frame, text=t("f_real_bag_calculating"), foreground=ACCENT_GOLD, font=("Segoe UI", 9, "bold"))
         self.f_real_bag_lbl.grid(row=4, column=0, columnspan=4, sticky="w", padx=4, pady=3)
 
         # Stats Form Grid (3 columns for perfect balance)
@@ -233,7 +240,7 @@ class FightersTabMixin:
         
         preset_r = ttk.Frame(decal_preset_box)
         preset_r.pack(fill="x", pady=2)
-        ttk.Label(preset_r, text="Preset:").pack(side="left", padx=2)
+        ttk.Label(preset_r, text=t("f_preset_lbl")).pack(side="left", padx=2)
         self.decal_preset_var = tk.StringVar(value="Tengoku God Climber (Pisos 51F - 350F+)")
         preset_names = [
             "Tengoku God Climber (Pisos 51F - 350F+)",
@@ -266,22 +273,26 @@ class FightersTabMixin:
         fighters = modifiers.get_all_fighters_info(self.save_json)
         if save_idx < len(fighters):
             f = fighters[save_idx]
-            name = f.get("name", f"Luchador #{tree_idx+1}")
+            name = f.get("name", t("f_default_name", num=tree_idx+1))
             cls_name = f.get("class_name", "All-Rounder")
             cls_code = f.get("class", "BAL")
+            cls_local = t(f"cls_{cls_code.lower()}", default=cls_name)
             grade = f.get("grade", 1)
             lvl = f.get("level", 1)
             hp_cur = f.get("hp", 1000)
             bag = f.get("bag", 20)
 
             self.f_title_lbl.config(text=name)
-            self.f_sub_lbl.config(text=t("f_class_meta", cls=f"{cls_name} ({cls_code})", grd=grade, lvl=lvl))
+            self.f_sub_lbl.config(text=t("f_class_meta", cls=f"{cls_local} ({cls_code})", grd=grade, lvl=lvl))
             
             cls_icon_filename = FIGHTER_CLASSES.get(cls_code, ("", "all-rounder.png"))[1]
             self.set_widget_image(self.f_class_icon_lbl, cls_icon_filename, (48, 48), fallback="all-rounder")
             
             self.f_name_entry_var.set(name)
-            self.f_class_select_var.set(f"{cls_code} ({cls_name})")
+            for opt_text, code in getattr(self, "f_class_options", []):
+                if code == cls_code:
+                    self.f_class_select_var.set(opt_text)
+                    break
             self.f_grade_select_var.set(str(grade))
             self.f_lvl_select_var.set(str(lvl))
             self.f_hp_current_var.set(str(hp_cur))
@@ -326,10 +337,16 @@ class FightersTabMixin:
                 if matching:
                     did = matching[0].get("sklid", "")
                     d_info = self.decals_map.get(did, {})
-                    d_name = i18n.get_item_name(d_info) or did
                     art_rel = self._find_decal_art(did)
+                    is_p = did.endswith("_P") or d_info.get("premium", False)
                     self.f_decal_slots_lbls[s_idx].config(text=t("f_slot_decal_equipped", slot=s_idx+1, name=d_name, id=did), foreground=ACCENT_GOLD)
-                    self.set_widget_image(self.f_decal_slots_lbls[s_idx], art_rel, (28, 28), preserve_aspect=True, fallback="decal_std")
+                    self.set_widget_image(
+                        self.f_decal_slots_lbls[s_idx],
+                        art_rel,
+                        (28, 28),
+                        preserve_aspect=True,
+                        fallback="all_official/decal_p.png" if is_p else "all_official/decal_std.png"
+                    )
                 else:
                     self.f_decal_slots_lbls[s_idx].config(text=t("f_slot_decal_empty", slot=s_idx+1), image="", foreground=FG_MUTED)
 
@@ -416,11 +433,9 @@ class FightersTabMixin:
         modifiers.unlock_tutorial_and_waiting_room(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Freezer Unlocked", "Congelador Desbloqueado",
-            "Tutorial completed! Kiwako Seto's Fighter Freezer and all Waiting Room facilities are now fully accessible.",
-            "¡Tutorial completado! El Congelador de Kiwako Seto y las instalaciones de la Sala de Espera ya están 100% accesibles."
-        )
+        self._notify("f_notify_freezer_unlocked_title", "f_notify_freezer_unlocked_msg")
+
+    _unlock_tutorial_and_freezer_action = _unlock_freezer_action
 
     def _clone_fighter_action(self):
         if not self.save_json:
@@ -446,7 +461,7 @@ class FightersTabMixin:
             
         ok, res = modifiers.clone_fighter(self.save_json, save_idx, new_name=new_name.strip())
         if not ok:
-            messagebox.showerror("Error", str(res))
+            messagebox.showerror(t("error"), str(res))
             return
             
         self._auto_save()
@@ -454,11 +469,7 @@ class FightersTabMixin:
         self.current_fighter_idx = max(0, total_f - 1)
         self.current_fighter_tree_idx = max(0, total_f - 1)
         self.refresh_all_views()
-        self._notify(
-            "Fighter Cloned", "Luchador Clonado",
-            f"Fighter '{orig_name}' successfully cloned as '{new_name}' with identical armors, weapons, deathbag items, stats and decals!\nSaved automatically.",
-            f"¡Luchador '{orig_name}' clonado exitosamente como '{new_name}' con sus armaduras, armas, bolsa, estadísticas y calcomanías idénticas!\nGuardado automáticamente."
-        )
+        self._notify("f_notify_cloned_title", "f_notify_cloned_msg", orig_name=orig_name, new_name=new_name)
 
     def _delete_fighter_action(self):
         if not self.save_json:
@@ -467,7 +478,7 @@ class FightersTabMixin:
         fighters = self.save_json.get("bodyuser", {}).get(uid, [])
         if len(fighters) <= 1:
             messagebox.showwarning(
-                "Aviso",
+                t("notice"),
                 t("f_delete_only_one_err")
             )
             return
@@ -479,7 +490,7 @@ class FightersTabMixin:
         
         if save_idx < len(chr_chrs) and chr_chrs[save_idx].get("state") == "USE":
             messagebox.showwarning(
-                "Aviso",
+                t("notice"),
                 t("f_delete_in_use_err")
             )
             return
@@ -493,17 +504,13 @@ class FightersTabMixin:
             
         ok, res = modifiers.delete_fighter(self.save_json, save_idx)
         if not ok:
-            messagebox.showerror("Error", str(res))
+            messagebox.showerror(t("error"), str(res))
             return
             
         self._auto_save()
         self.current_fighter_tree_idx = max(0, tree_idx - 1)
         self.refresh_all_views()
-        self._notify(
-            "Fighter Deleted", "Luchador Eliminado",
-            f"Fighter '{f_name}' permanently removed from Freezer.\nSaved automatically.",
-            f"¡Luchador '{f_name}' eliminado permanentemente del congelador.\nGuardado automáticamente."
-        )
+        self._notify("f_notify_deleted_title", "f_notify_deleted_msg", name=f_name)
 
     def _save_fighter_changes(self):
         if not self.save_json:
@@ -536,11 +543,7 @@ class FightersTabMixin:
         )
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Fighter Updated", "Luchador Actualizado",
-            f"Custom changes applied to {name} (Fighter #{idx+1})!\nSaved automatically.",
-            f"¡Se han aplicado los cambios personalizados a {name} (Luchador #{idx+1})!\nGuardado automáticamente."
-        )
+        self._notify("f_notify_updated_title", "f_notify_updated_msg", name=name, num=idx+1)
 
     def revive_current_fighter(self):
         if not self.save_json:
@@ -548,11 +551,7 @@ class FightersTabMixin:
         modifiers.revive_all_fighters(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Fighters Revived", "Luchadores Revividos",
-            "All fighters revived to 100% HP and death status removed!",
-            "¡Se ha restaurado la vida al 100% y se ha eliminado el estado de muerte de todos los luchadores!"
-        )
+        self._notify("f_notify_all_revived_title", "f_notify_all_revived_msg")
 
     def max_current_fighter(self):
         if not self.save_json:
@@ -560,11 +559,7 @@ class FightersTabMixin:
         modifiers.max_fighter_level_and_stats(self.save_json, fighter_index=self.current_fighter_idx, level=247)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Fighter Maximized", "Luchador Maximizado",
-            f"Fighter #{self.current_fighter_idx+1} upgraded to Level 247 with maxed stats!",
-            f"¡Luchador #{self.current_fighter_idx+1} mejorado a Nivel 247 con todos sus stats al tope!"
-        )
+        self._notify("f_notify_maximized_title", "f_notify_maximized_msg", num=self.current_fighter_idx+1)
 
     def _apply_decal_preset_action(self):
         if not self.save_json:
@@ -578,11 +573,7 @@ class FightersTabMixin:
         name, count = modifiers.apply_decal_preset_to_inventory(self.save_json, preset_key=key, count=5)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Decal Preset Added", "Preset de Calcomanías Añadido",
-            f"Added x5 Premium copies of all {count} decals from preset:\n\n⭐ {name}\n\nReady to equip at Uncle Death's Grill!",
-            f"¡Se han añadido x5 copias Premium de las {count} calcomanías del preset:\n\n⭐ {name}\n\n¡Listas para equipar en el Grill del Tío Death!"
-        )
+        self._notify("f_notify_decal_preset_title", "f_notify_decal_preset_msg", count=count, name=name)
 
     def _equip_decal_preset_action(self):
         if not self.save_json:
@@ -648,7 +639,7 @@ class FightersTabMixin:
                 t("db_expand_success_msg", target=target, vip=target + 10, path=res['db_path'])
             )
         except Exception as e:
-            messagebox.showerror("Error", f"masters.db:\n{e}")
+            messagebox.showerror(t("error"), f"masters.db:\n{e}")
 
     def _restore_deathbag_masters_action(self):
         if not messagebox.askyesno(
@@ -667,4 +658,4 @@ class FightersTabMixin:
                 t("db_restore_success_msg", path=res['db_path'])
             )
         except Exception as e:
-            messagebox.showerror("Error", f"masters.db:\n{e}")
+            messagebox.showerror(t("error"), f"masters.db:\n{e}")

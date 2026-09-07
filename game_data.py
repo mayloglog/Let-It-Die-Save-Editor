@@ -61,15 +61,37 @@ WEAPON_CATEGORIES = [
 
 # Fighter Classes with Official Engine Codes (master_bodylvl_status_value)
 FIGHTER_CLASSES = {
-    "BAL": ("Todo Terreno (All-Rounder)", "all-rounder.png"),
-    "BRE": ("Delantero (Striker - Foco STR)", "striker.png"),
-    "DEF": ("Defensor (Defender - Foco HP/VIT)", "defender.png"),
-    "TEC": ("Atacante (Attacker - Foco STR/DEX)", "attacker.png"),
-    "SHT": ("Tirador (Shooter - Foco DEX)", "shooter.png"),
-    "COL": ("Recolector (Collector - Bolsa Grande)", "collector.png"),
-    "SKI": ("Maestro de Habilidades (Skill Master)", "skill_master.png"),
-    "LUK": ("Estrella de la Suerte (Lucky Star - KC/Crit)", "lucky_star.png")
+    "BAL": ("All-Rounder", "all-rounder.png"),
+    "BRE": ("Striker", "striker.png"),
+    "DEF": ("Defender", "defender.png"),
+    "TEC": ("Attacker", "attacker.png"),
+    "SHT": ("Shooter", "shooter.png"),
+    "COL": ("Collector", "collector.png"),
+    "SKI": ("Skill Master", "skill_master.png"),
+    "LUK": ("Lucky Star", "lucky_star.png")
 }
+
+def get_fighter_class_name(cls_code):
+    """Returns localized display name for a fighter class code (BAL, BRE, DEF, etc.)."""
+    try:
+        from i18n import t
+        val = t(f"cls_{cls_code.lower()}", default=None)
+        if val and val != f"cls_{cls_code.lower()}":
+            return val
+    except Exception:
+        pass
+    return FIGHTER_CLASSES.get(cls_code, (cls_code, "all-rounder.png"))[0]
+
+def get_weapon_category_name(ptid):
+    """Returns localized display name for a weapon mastery category."""
+    try:
+        from i18n import get_expert_weapon_name
+        return get_expert_weapon_name(ptid)
+    except Exception:
+        for code, name, _ in WEAPON_CATEGORIES:
+            if code == ptid:
+                return name
+        return ptid
 
 CLASS_CODE_ALIASES = {
     "ALL": "BAL",

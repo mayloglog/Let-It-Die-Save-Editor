@@ -89,11 +89,7 @@ class MasteryTabMixin:
             modifiers.set_weapon_mastery(self.save_json, arm_type, level=new_lvl)
             self._auto_save()
             self.filter_mastery_list()
-            self._notify(
-                "Mastery Updated", "Maestría Actualizada",
-                f"Mastery for {arm_type} set to Level {new_lvl}!\nSaved automatically.",
-                f"¡Maestría de {arm_type} establecida al Nivel {new_lvl}!\nGuardado automáticamente."
-            )
+            self._notify("wm_notify_updated_title", "wm_notify_updated_msg", arm_type=arm_type, new_lvl=new_lvl)
 
     def max_all_mastery(self):
         if not self.save_json:
@@ -105,8 +101,4 @@ class MasteryTabMixin:
         modifiers.max_all_weapon_mastery(self.save_json, level=lvl)
         self._auto_save()
         self.filter_mastery_list()
-        self._notify(
-            "Masteries Maximized", "Maestrías Maximizadas",
-            f"All 55 weapon masteries set to Level {lvl} with authentic ABP!\nSaved automatically.",
-            f"¡Todas las 55 maestrías de armas han sido establecidas al Nivel {lvl} con sus PH/ABP auténticos!\nGuardado automáticamente."
-        )
+        self._notify("wm_notify_maxed_title", "wm_notify_maxed_msg", count=55, lvl=lvl)

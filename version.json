@@ -1,14 +1,14 @@
 {
-  "version": "4.1.2",
+  "version": "4.1.3",
   "name": "Let It Die - Complete Save Editor & Encyclopedia",
   "release_date": "2026-09-06",
   "repository": "https://github.com/g3usyk/Let-It-Die-Save-Editor",
   "changelog": [
-    "Fixed Chinese language display: Blueprints, Materials, and Decals now display complete official Chinese names and descriptions extracted from master game data.",
-    "Bilingual display format in lists: shows Chinese names alongside original English names for clearer recognition.",
-    "Multilingual search filter support: search Blueprints, Materials, and Decals in English, Spanish, or Chinese seamlessly.",
-    "Integrated external JSON translation files under locales/ (en.json, es.json, zh.json) with fallback and dynamic reload.",
-    "All 86 automated unit tests passing across English, Spanish, and Chinese."
+    "Collaboration event decal fixes: updated filters and metadata for Gravity Rush, World of Tanks, No More Heroes, Killer7, and Deathverse.",
+    "Resolved missing placeholder assets: replaced dummy image files with official extracted textures in decals catalog.",
+    "Save integrity: enhanced duplicate decal sanitization in inventory and equipped slots.",
+    "Localization and tooling: updated translations and added locale integrity validator tools.",
+    "All 100 automated unit tests passing."
   ]
 }
 

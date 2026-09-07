@@ -11,6 +11,7 @@ from tkinter import ttk, messagebox, simpledialog
 import modifiers
 import i18n
 from i18n import t
+from core.decals import DECAL_ALIASES
 from ui.theme import ACCENT_GOLD, ACCENT_CYAN, FG_MUTED
 from ui.components import ScrollableFrame
 
@@ -22,6 +23,30 @@ else:
     BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 
 ICONS_DIR = os.path.join(BASE_DIR, "icons")
+
+# Official Gravity Rush Collaboration Decals (Nos. 162-172 in master_skill)
+GRAVITY_RUSH_DECAL_IDS = {
+    # 1. Kat (No. 172)
+    "SKL_GRAVITY_DROPKICK", "SKL_GRAVITY_DROPKICK_P",
+    # 2. Raven (No. 171)
+    "SKL_RG_STARTUP_SPDUP", "SKL_RG_STARTUP_SPDUP_P",
+    # 3. Dusty (Nos. 164, 165)
+    "SKL_NDFALL_AUSTEALTH", "SKL_NDFALL_AUSTEALTH_P",
+    # 4. Kali Angel (No. 169)
+    "SKL_DEFUP_DEATH_PROOF", "SKL_DEFUP_DEATH_PROOF_P",
+    # 5. Durga Angel (No. 170)
+    "SKL_CRIUP_DECDUR_DOWN", "SKL_CRIUP_DECDUR_DOWN_P",
+    # 6. Jupiter Style (No. 167)
+    "SKL_ATKUP_SLASHSTRIKE", "SKL_ATKUP_SLASHSTRIKE_P",
+    # 7. Lunar Style (No. 168)
+    "SKL_STMUP_DASHDODGE", "SKL_STMUP_DASHDODGE_P",
+    # 8. Panther Mode (No. 163)
+    "SKL_HPUP_ATKUP", "SKL_HPUP_ATKUP_P",
+    # 9. Apple (No. 162)
+    "SKL_HPCUREUP_03", "SKL_HPCUREUP_03_P",
+    # 10. Stasis Field (No. 166)
+    "SKL_MONEYUP_03", "SKL_MONEYUP_03_P",
+}
 
 
 class DecalsTabMixin:
@@ -50,14 +75,26 @@ class DecalsTabMixin:
         cb_rarity.bind("<<ComboboxSelected>>", lambda e: self.filter_decals_list())
 
         ttk.Label(ctrl_frame, text=t("decal_type_lbl")).pack(side="left", padx=(4, 1))
+        self.decal_type_defs = [
+            ("ALL", "decal_all"),
+            ("PREMIUM", "decal_premium"),
+            ("STANDARD", "decal_standard"),
+        ]
+        self._decal_type_map = {t(k): code for code, k in self.decal_type_defs}
         self.decal_type_filter_var = tk.StringVar(value=t("decal_all"))
-        cb_dtype = ttk.Combobox(ctrl_frame, textvariable=self.decal_type_filter_var, values=[t("decal_all"), t("decal_premium"), t("decal_standard")], state="readonly", width=12)
+        cb_dtype = ttk.Combobox(ctrl_frame, textvariable=self.decal_type_filter_var, values=list(self._decal_type_map.keys()), state="readonly", width=12)
         cb_dtype.pack(side="left", padx=2)
         cb_dtype.bind("<<ComboboxSelected>>", lambda e: self.filter_decals_list())
 
         ttk.Label(ctrl_frame, text=t("decal_poss_lbl")).pack(side="left", padx=(4, 1))
+        self.decal_poss_defs = [
+            ("ALL", "decal_all"),
+            ("OWNED", "decal_owned"),
+            ("MISSING", "decal_missing"),
+        ]
+        self._decal_poss_map = {t(k): code for code, k in self.decal_poss_defs}
         self.decal_poss_filter_var = tk.StringVar(value=t("decal_all"))
-        cb_dposs = ttk.Combobox(ctrl_frame, textvariable=self.decal_poss_filter_var, values=[t("decal_all"), t("decal_owned"), t("decal_missing")], state="readonly", width=14)
+        cb_dposs = ttk.Combobox(ctrl_frame, textvariable=self.decal_poss_filter_var, values=list(self._decal_poss_map.keys()), state="readonly", width=14)
         cb_dposs.pack(side="left", padx=2)
         cb_dposs.bind("<<ComboboxSelected>>", lambda e: self.filter_decals_list())
 
@@ -84,7 +121,8 @@ class DecalsTabMixin:
             ("⚔️ No More Heroes", "NMH"),
             ("🎯 Killer7", "KILLER7"),
             ("🌀 Gravity Rush", "GRAVITY_RUSH"),
-            ("🗼 Tengoku & Meta", "TENGOKU_META")
+            ("💀 Deathverse", "DEATHVERSE"),
+            (t("decal_event_tengoku"), "TENGOKU_META")
         ]
         for btn_text, mode in decal_event_buttons:
             ttk.Button(ctrl_frame_events, text=btn_text, command=lambda m=mode: self._set_decal_event_filter(m)).pack(side="left", padx=1)
@@ -98,7 +136,7 @@ class DecalsTabMixin:
         
         decal_style_buttons = [
             (t("decal_style_all"), "TODOS"),
-            ("⚔️ Addicts", "ADDICTS"),
+            (t("decal_style_addicts"), "ADDICTS"),
             (t("decal_style_crit"), "CRIT_DMG"),
             (t("decal_style_tank"), "TANK_DEF"),
             (t("decal_style_vamp"), "VAMP_SURV"),
@@ -164,50 +202,45 @@ class DecalsTabMixin:
 
     def _find_decal_art(self, decal_id):
         special_aliases = {
-            "SKL_STMNUP_02": "decals/golden_heart.png",
-            "SKL_STMNUP_02_P": "decals/golden_heart_p.png",
-            "SKL_WHITEFEATHER": "decals/skl_snowwhite.png",
-            "SKL_WHITEFEATHER_P": "decals/skl_snowwhite_p.png",
+            "SKL_STMNUP_02": "all_official/golden_heart.png",
+            "SKL_STMNUP_02_P": "all_official/golden_heart_p.png",
+            "SKL_WHITEFEATHER": "all_official/white_feather.png",
+            "SKL_WHITEFEATHER_P": "all_official/white_feather_p.png",
         }
         if decal_id in special_aliases:
             return special_aliases[decal_id]
 
-        if hasattr(self, "icon_map") and "decals_icons" in self.icon_map:
-            mapped = self.icon_map["decals_icons"].get(decal_id) or self.icon_map["decals_icons"].get(decal_id.replace("_P", ""))
-            if mapped:
-                return mapped
-
-        is_p = decal_id.endswith("_P")
-        clean = decal_id.lower().replace("skl_", "").replace("_p", "")
-        
         info = self.decals_map.get(decal_id, {})
         name_en = info.get("name_en", "")
-        slug = name_en.lower().replace(" ", "_").replace("-", "_").replace("'", "").replace(":", "") if name_en else ""
+        is_p = decal_id.endswith("_P") or info.get("premium", False)
+        
+        clean = decal_id.lower().replace("skl_", "")
+        if clean.endswith("_p"):
+            clean = clean[:-2]
+            
+        slug_raw = name_en.lower()
+        slugs = []
+        for s in [
+            slug_raw.replace(' ', '_'),
+            slug_raw.replace(' ', '_').replace("'", "%27"),
+            slug_raw.replace(' ', '_').replace("'", ""),
+            slug_raw.replace(' ', '_').replace('-', '_'),
+            slug_raw.replace(' ', ''),
+            slug_raw.replace(' ', '_').replace('-', '_').replace("'", "").replace(":", ""),
+        ]:
+            if s and s not in slugs:
+                slugs.append(s)
 
-        exact_candidates = []
-        if is_p:
-            exact_candidates += [
-                f"{decal_id.lower()}.png",
-                f"skl_{clean}_p.png",
-                f"{clean}_p.png",
-            ]
-            if slug:
-                exact_candidates += [f"{slug}_p.png", f"skl_{slug}_p.png", f"{slug}.png"]
-        else:
-            exact_candidates += [
-                f"{decal_id.lower()}.png",
-                f"skl_{clean}.png",
-                f"{clean}.png",
-            ]
-            if slug:
-                exact_candidates += [f"{slug}.png", f"skl_{slug}.png"]
-
-        # Check AssetManager manifest
-        if hasattr(self, "asset_manager") and getattr(self.asset_manager, "manifest", None):
-            for c in exact_candidates:
-                c_low = c.lower()
-                if c_low in self.asset_manager.manifest:
-                    return self.asset_manager.manifest[c_low]
+        # Initialize disk maps if needed
+        if not hasattr(self, "_ao_disk_map"):
+            self._ao_disk_map = {}
+            for base in [ICONS_DIR, getattr(getattr(self, "asset_manager", None), "cache_dir", "")]:
+                if not base:
+                    continue
+                ao_dir = os.path.join(base, "all_official")
+                if os.path.isdir(ao_dir):
+                    for f in os.listdir(ao_dir):
+                        self._ao_disk_map[f.lower()] = f
 
         if not hasattr(self, "_decal_disk_map"):
             self._decal_disk_map = {}
@@ -219,15 +252,112 @@ class DecalsTabMixin:
                     for f in os.listdir(d_dir):
                         self._decal_disk_map[f.lower()] = f
 
-        for c in exact_candidates:
-            if c in self._decal_disk_map:
-                return f"decals/{self._decal_disk_map[c]}"
+        def _is_valid_art(rel_path):
+            full_path = os.path.join(ICONS_DIR, rel_path)
+            if not os.path.exists(full_path):
+                return False
+            try:
+                if os.path.getsize(full_path) <= 500:
+                    from PIL import Image
+                    im = Image.open(full_path)
+                    if im.mode in ('RGBA', 'LA') and im.getextrema()[-1][1] == 0:
+                        return False
+            except Exception:
+                pass
+            return True
 
-        for c in [f"skl_{clean}.png", f"{clean}.png"]:
-            if c in self._decal_disk_map:
-                return f"decals/{self._decal_disk_map[c]}"
+        if is_p:
+            # 1. Look for explicit Premium variants only
+            p_cands = []
+            for sv in slugs:
+                p_cands.append(f"{sv}_p.png")
+                p_cands.append(f"{sv}_premium.png")
+                p_cands.append(f"{sv}_decal_p.png")
+            p_cands.append(f"skl_{clean}_p.png")
+            p_cands.append(f"{clean}_p.png")
+            p_cands.append(f"{decal_id.lower()}.png")
 
-        return "decals/decal_p.png" if is_p else "decals/decal_std.png"
+            # Check all_official for premium variant
+            for c in p_cands:
+                c_low = c.lower()
+                if c_low in self._ao_disk_map:
+                    rel = f"all_official/{self._ao_disk_map[c_low]}"
+                    if _is_valid_art(rel):
+                        return rel
+
+            # Check decals for premium variant
+            for c in p_cands:
+                c_low = c.lower()
+                if c_low in self._decal_disk_map:
+                    rel = f"decals/{self._decal_disk_map[c_low]}"
+                    if _is_valid_art(rel):
+                        return rel
+
+            # Check icon_map.json
+            if hasattr(self, "icon_map") and "decals_icons" in self.icon_map:
+                mapped = self.icon_map["decals_icons"].get(decal_id)
+                if mapped and _is_valid_art(mapped):
+                    return mapped
+
+            # Fallback to base art if no explicit premium texture exists
+            base_cands = []
+            for sv in slugs:
+                base_cands.append(f"{sv}.png")
+                base_cands.append(f"{sv}_decal.png")
+            base_cands.append(f"skl_{clean}.png")
+            base_cands.append(f"{clean}.png")
+
+            for c in base_cands:
+                c_low = c.lower()
+                if c_low in self._ao_disk_map:
+                    rel = f"all_official/{self._ao_disk_map[c_low]}"
+                    if _is_valid_art(rel):
+                        return rel
+            for c in base_cands:
+                c_low = c.lower()
+                if c_low in self._decal_disk_map:
+                    rel = f"decals/{self._decal_disk_map[c_low]}"
+                    if _is_valid_art(rel):
+                        return rel
+
+            return "all_official/decal_p.png" if "decal_p.png" in self._ao_disk_map else "decals/decal_p.png"
+        else:
+            # 2. Look for Standard variants (strictly non-p)
+            std_cands = []
+            for sv in slugs:
+                std_cands.append(f"{sv}_std.png")
+                std_cands.append(f"{sv}_standard.png")
+                std_cands.append(f"{sv}.png")
+                std_cands.append(f"{sv}_decal.png")
+            std_cands.append(f"skl_{clean}.png")
+            std_cands.append(f"{clean}.png")
+            std_cands.append(f"{decal_id.lower()}.png")
+
+            for c in std_cands:
+                c_low = c.lower()
+                if c_low.endswith("_p.png") or c_low.endswith("_premium.png"):
+                    continue
+                if c_low in self._ao_disk_map:
+                    rel = f"all_official/{self._ao_disk_map[c_low]}"
+                    if _is_valid_art(rel):
+                        return rel
+
+            for c in std_cands:
+                c_low = c.lower()
+                if c_low.endswith("_p.png") or c_low.endswith("_premium.png"):
+                    continue
+                if c_low in self._decal_disk_map:
+                    rel = f"decals/{self._decal_disk_map[c_low]}"
+                    if _is_valid_art(rel):
+                        return rel
+
+            if hasattr(self, "icon_map") and "decals_icons" in self.icon_map:
+                base_cand = decal_id[:-2] if decal_id.endswith("_P") else decal_id
+                mapped = self.icon_map["decals_icons"].get(base_cand)
+                if mapped and not (mapped.lower().endswith("_p.png") or mapped.lower().endswith("_premium.png")) and _is_valid_art(mapped):
+                    return mapped
+
+            return "all_official/decal_std.png" if "decal_std.png" in self._ao_disk_map else "decals/decal_std.png"
 
     def _on_decal_select(self, event):
         sel = self.decals_tree.selection()
@@ -247,12 +377,20 @@ class DecalsTabMixin:
         self.decal_title_lbl.config(text=f"{text}\n({did}) • {stars_str}")
         self.decal_type_lbl.config(text=t("decal_type_and_owned", type=dtype, cnt=cnt))
         
-        info = self.decals_map.get(did) or self.decals_map.get(did.replace("_P", "")) or {}
-        desc = i18n.get_item_desc(info) or ("Official Combat Skill Decal" if i18n.get_language() == "en" else "Calcomanía Oficial de Combate")
+        base_id = did[:-2] if did.endswith("_P") else did
+        info = self.decals_map.get(did) or self.decals_map.get(base_id) or {}
+        desc = i18n.get_item_desc(info) or t("decal_default_desc")
         self.decal_desc_lbl.config(text=desc)
         
         art_rel = self._find_decal_art(did)
-        self.set_widget_image(self.decal_art_lbl, art_rel, size=(160, 160), preserve_aspect=True, fallback="decal_p" if did.endswith("_P") else "decal_std")
+        is_p = did.endswith("_P") or info.get("premium", False)
+        self.set_widget_image(
+            self.decal_art_lbl,
+            art_rel,
+            size=(160, 160),
+            preserve_aspect=True,
+            fallback="all_official/decal_p.png" if is_p else "all_official/decal_std.png"
+        )
 
     def _update_current_decal_qty(self):
         if not self.current_decal_selection or not self.save_json:
@@ -265,7 +403,7 @@ class DecalsTabMixin:
         modifiers.add_or_update_decals(self.save_json, [did], count=val, premium=did.endswith("_P"))
         self.filter_decals_list()
         self._auto_save()
-        self.status_var.set(f"Cantidad de {did} actualizada a x{val} y guardada.")
+        self.status_var.set(t("decal_qty_updated", did=did, val=val))
 
     def _quick_add_decal(self, delta):
         try:
@@ -298,11 +436,19 @@ class DecalsTabMixin:
         messagebox.showinfo(t("mb_all_decals_title"), t("mb_all_decals_msg", qty=qty))
 
     def _set_decal_event_filter(self, mode):
-        self.decal_event_filter.set(mode)
+        current = self.decal_event_filter.get() if hasattr(self, "decal_event_filter") else "TODOS"
+        if current == mode and mode != "TODOS":
+            self.decal_event_filter.set("TODOS")
+        else:
+            self.decal_event_filter.set(mode)
         self.filter_decals_list()
 
     def _set_decal_style_filter(self, mode):
-        self.decal_style_filter.set(mode)
+        current = self.decal_style_filter.get() if hasattr(self, "decal_style_filter") else "TODOS"
+        if current == mode and mode != "TODOS":
+            self.decal_style_filter.set("TODOS")
+        else:
+            self.decal_style_filter.set(mode)
         self.filter_decals_list()
 
     def filter_decals_list(self):
@@ -315,30 +461,49 @@ class DecalsTabMixin:
         event_filter = self.decal_event_filter.get() if hasattr(self, "decal_event_filter") else "TODOS"
         style_filter = self.decal_style_filter.get() if hasattr(self, "decal_style_filter") else "TODOS"
         
+        type_code = getattr(self, "_decal_type_map", {}).get(type_filter)
+        if not type_code:
+            if "Premium" in type_filter or "_P" in type_filter or "高级" in type_filter: type_code = "PREMIUM"
+            elif "Estándar" in type_filter or "Standard" in type_filter or "标准" in type_filter: type_code = "STANDARD"
+            else: type_code = "ALL"
+
+        poss_code = getattr(self, "_decal_poss_map", {}).get(poss_filter)
+        if not poss_code:
+            if "> 0" in poss_filter or "Poseídas" in poss_filter or "Possessed" in poss_filter or "已拥有" in poss_filter: poss_code = "OWNED"
+            elif "(0)" in poss_filter or "Faltantes" in poss_filter or "Missing" in poss_filter or "缺失" in poss_filter: poss_code = "MISSING"
+            else: poss_code = "ALL"
+
         psskl_counts = {}
         if self.save_json:
             psskl_list = self.save_json.get("soul", {}).get("skl", {}).get("psskl", [])
             for item in psskl_list:
-                psskl_counts[item.get("sklid", "")] = item.get("cnt", 0)
+                raw_id = item.get("sklid", "")
+                if not raw_id:
+                    continue
+                canonical = DECAL_ALIASES.get(raw_id, raw_id)
+                psskl_counts[canonical] = max(psskl_counts.get(canonical, 0), item.get("cnt", 0))
                 
         first_row = None
-        all_ids = set([d["id"] for d in self.decals_db]) | set(psskl_counts.keys())
+        all_ids = set([d["id"] for d in self.decals_db if d["id"] not in DECAL_ALIASES]) | set(psskl_counts.keys())
         
         for did in sorted(all_ids):
+            if did in DECAL_ALIASES:
+                continue
             is_p = did.endswith("_P")
             cnt = psskl_counts.get(did, 0)
-            info = self.decals_map.get(did) or self.decals_map.get(did.replace("_P", "")) or {}
+            base_id = did[:-2] if is_p else did
+            info = self.decals_map.get(did) or self.decals_map.get(base_id) or {}
             
             # 1. Type filter
-            if ("Premium" in type_filter or "_P" in type_filter or "高级" in type_filter) and not is_p:
+            if type_code == "PREMIUM" and not is_p:
                 continue
-            elif ("Estándar" in type_filter or "Standard" in type_filter or "标准" in type_filter) and is_p:
+            elif type_code == "STANDARD" and is_p:
                 continue
                 
             # 2. Possession filter
-            if ("> 0" in poss_filter or "Poseídas" in poss_filter or "Possessed" in poss_filter or "已拥有" in poss_filter) and cnt <= 0:
+            if poss_code == "OWNED" and cnt <= 0:
                 continue
-            elif ("(0)" in poss_filter or "Faltantes" in poss_filter or "Missing" in poss_filter or "缺失" in poss_filter) and cnt > 0:
+            elif poss_code == "MISSING" and cnt > 0:
                 continue
 
             # 3. Rarity filter
@@ -362,40 +527,53 @@ class DecalsTabMixin:
             # 4. Event / Collab filter
             if event_filter != "TODOS":
                 if event_filter == "WOT":
-                    if not any(k in full_txt for k in ["wot", "world of tanks", "tiger ii", "t-34", "sklatrol_wot"]):
+                    if not ("_wot" in did.lower() or "wot" in did.lower() or any(k in full_txt for k in ["world of tanks", "tiger ii", "t-34"])):
                         continue
                 elif event_filter == "NMH":
-                    if not any(k in full_txt for k in ["travis", "sylvia", "shinobu", "bad girl", "nmh", "beam katana", "heroes"]):
+                    if not ("_nmh" in did.lower() or any(k in full_txt for k in ["travis", "sylvia", "shinobu", "bad girl", "beam katana", "no more heroes"])):
                         continue
                 elif event_filter == "KILLER7":
-                    if not any(k in full_txt for k in ["garcian", "dan smith", "kaede", "kevin", "coyote", "mask de smith", "con smith", "killer7", "harman"]):
+                    if not ("_k7" in did.lower() or any(k in full_txt for k in ["garcian", "dan smith", "kaede", "kevin", "coyote", "mask de smith", "con smith", "killer7", "harman", "iwazaru", "samantha", "queen of the wolves"])):
                         continue
                 elif event_filter == "GRAVITY_RUSH":
-                    if not any(k in full_txt for k in ["kat", "raven", "gravity rush", "dusty"]):
+                    if did not in GRAVITY_RUSH_DECAL_IDS and "gravity rush" not in full_txt:
+                        continue
+                elif event_filter == "DEATHVERSE":
+                    if not any(k in full_txt for k in ["deathverse", "uncle-d2", "bryan zemeckis"]):
                         continue
                 elif event_filter == "TENGOKU_META":
-                    if not any(k in full_txt for k in ["ultimate fighter", "golden gym", "serial killer", "joker", "super heavy tank", "king of the wolves", "tengoku"]):
+                    meta_keys = ["ultimate fighter", "golden gym", "serial killer", "joker", "super heavy tank", "king of the wolves", "tengoku", "professional cosplayer", "special unit captain", "critical attack", "below the belt", "spy", "rich man"]
+                    if not any(k in full_txt for k in meta_keys):
                         continue
 
             # 5. Playstyle filter
             if style_filter != "TODOS":
                 if style_filter == "ADDICTS":
-                    if not ("addict" in full_txt or "fanático" in full_txt or "_atkup_" in did.lower()):
+                    if not ("_atkup_" in did.lower() or "addict" in full_txt or "fanático" in full_txt or "fan de la" in full_txt or "狂热" in full_txt):
                         continue
                 elif style_filter == "CRIT_DMG":
-                    if not any(k in full_txt for k in ["one shot one kill", "critical", "crítico", "bull", "barbarian", "clover", "five-leaf clover"]):
+                    if not any(k in full_txt for k in ["one shot one kill", "un disparo", "critical", "crítico", "bull", "toro", "barbarian", "bárbaro", "clover", "trébol", "five-leaf", "暴击", "一击必杀"]):
                         continue
                 elif style_filter == "TANK_DEF":
-                    if not any(k in full_txt for k in ["tank", "diamond", "poison eater", "defender", "iron wall", "gourmand"]):
+                    if not any(k in full_txt for k in ["tank", "tanque", "diamond", "diamante", "poison eater", "comeveneno", "defender", "defensor", "iron wall", "muro de hierro", "gourmand", "glotón", "heavy tank", "super heavy tank", "防御", "坦克"]):
                         continue
                 elif style_filter == "VAMP_SURV":
-                    if not any(k in full_txt for k in ["vampire", "vampiro", "super long tail", "mosquito", "golden heart", "heart"]):
+                    if not any(k in full_txt for k in ["vampire", "vampiro", "super long tail", "cola super larga", "mosquito", "golden heart", "corazón de oro", "drain", "drenaje", "吸血", "回血", "survivor", "superviviente"]):
                         continue
                 elif style_filter == "FARM_QOL":
-                    if not any(k in full_txt for k in ["treasure hunter", "marathon", "rich man", "express pass", "lucky shot", "oriental medicine"]):
+                    if not any(k in full_txt for k in ["treasure hunter", "cazatesoros", "marathon", "maratón", "rich man", "ricachón", "express pass", "lucky shot", "tiro afortunado", "oriental medicine", "medicina oriental", "golden lucky", "寻宝", "跑图", "qol"]):
                         continue
                 elif style_filter == "SETS":
-                    if not any(k in full_txt for k in ["cosplayer", "clay figurine", "combat diver", "happy wheeler"]):
+                    is_set = (
+                        "_ability_up" in did.lower() or 
+                        "armor bonus" in desc_en.lower() or 
+                        "bonificación de armadura" in desc_es.lower() or 
+                        "套装" in desc_zh.lower() or 
+                        "full set" in desc_en.lower() or 
+                        "conjunto completo" in desc_es.lower() or 
+                        any(k in full_txt for k in ["cosplayer", "clay figurine", "combat diver", "happy wheeler", "trigger happy", "disparo alegre", "king of coal", "rey del carbón", "robin hood", "flashdance", "pinch hitter", "thunder road", "pro bowler", "hagakure"])
+                    )
+                    if not is_set:
                         continue
 
             # 6. Search query
@@ -403,27 +581,23 @@ class DecalsTabMixin:
                 if query not in full_txt:
                     continue
                     
-            cur_lang = i18n.get_language()
-            if cur_lang == "en":
-                display_name = f"{name_en} ({name_es})" if name_es and name_en != name_es else (name_en or name_es)
-                std_txt = "STANDARD"
-                prem_txt = "PREMIUM"
-            elif cur_lang == "zh":
-                name_zh = info.get("name_zh")
-                display_name = f"{name_zh} ({name_en})" if name_zh and name_en and name_zh != name_en else (name_zh or name_en or name_es)
-                std_txt = "标准"
-                prem_txt = "高级"
-            else:
-                display_name = f"{name_es} ({name_en})" if name_en and name_en != name_es else (name_es or name_en)
-                std_txt = "ESTÁNDAR"
-                prem_txt = "PREMIUM"
+            display_name = i18n.get_entity_display_title(info)
+            std_txt = t("decal_badge_std")
+            prem_txt = t("decal_badge_prem")
             stars_str = f"{d_rarity}★"
             art_rel = self._find_decal_art(did)
             thumb = self.get_photo(art_rel, size=(36, 36), preserve_aspect=True)
             node_id = self.decals_tree.insert("", "end", text=f" {display_name}", image=thumb or "", values=(stars_str, did, prem_txt if is_p else std_txt, f"x{cnt}" if cnt > 0 else "-"))
             self.tree_images[node_id] = thumb
             if not thumb and art_rel:
-                self.set_tree_item_image(self.decals_tree, node_id, art_rel, size=(36, 36), preserve_aspect=True, fallback="decal_p" if is_p else "decal_std")
+                self.set_tree_item_image(
+                    self.decals_tree,
+                    node_id,
+                    art_rel,
+                    size=(36, 36),
+                    preserve_aspect=True,
+                    fallback="all_official/decal_p.png" if is_p else "all_official/decal_std.png"
+                )
             if not first_row:
                 first_row = node_id
                 
@@ -441,7 +615,13 @@ class DecalsTabMixin:
         curr_raw = str(vals[3]).replace("x", "").replace("-", "0").strip()
         curr_cnt = int(curr_raw) if curr_raw.isdigit() else 0
         
-        new_cnt = simpledialog.askinteger("Cantidad de Calcomanías", f"Ingresa la cantidad para:\n{did}\n(0 a 99):", initialvalue=curr_cnt, minvalue=0, maxvalue=99)
+        new_cnt = simpledialog.askinteger(
+            t("decal_dialog_title"),
+            t("decal_dialog_prompt", did=did),
+            initialvalue=curr_cnt,
+            minvalue=0,
+            maxvalue=99
+        )
         if new_cnt is not None:
             modifiers.add_or_update_decals(self.save_json, [did], count=new_cnt, premium=did.endswith("_P"))
             self.filter_decals_list()

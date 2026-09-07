@@ -36,14 +36,24 @@ LOCALES_DIR = _find_locales_dir()
 
 def _detect_system_language():
     try:
-        loc = locale.getdefaultlocale()[0] or ""
+        loc = locale.getlocale()[0] or ""
         loc_lower = loc.lower()
-        if "es" in loc_lower:
+        if "es" in loc_lower or "spanish" in loc_lower:
             return "es"
-        elif "zh" in loc_lower:
+        elif "zh" in loc_lower or "chinese" in loc_lower:
             return "zh"
-        elif "ja" in loc_lower:
+        elif "ja" in loc_lower or "japanese" in loc_lower:
             return "ja"
+        elif "de" in loc_lower or "german" in loc_lower:
+            return "de"
+        elif "fr" in loc_lower or "french" in loc_lower:
+            return "fr"
+        elif "ru" in loc_lower or "russian" in loc_lower:
+            return "ru"
+        elif "ko" in loc_lower or "korean" in loc_lower:
+            return "ko"
+        elif "pt" in loc_lower or "portuguese" in loc_lower:
+            return "pt"
         else:
             return "en"
     except Exception:
@@ -51,6 +61,17 @@ def _detect_system_language():
 
 # Master Translations Dictionary populated from locales/*.json
 TRANSLATIONS = {}
+EXPERT_WEAPON_NAMES_ES = {}
+EXPERT_WEAPON_NAMES_EN = {}
+
+def _refresh_legacy_dicts():
+    global EXPERT_WEAPON_NAMES_ES, EXPERT_WEAPON_NAMES_EN
+    EXPERT_WEAPON_NAMES_ES = {
+        k[3:]: v for k, v in TRANSLATIONS.get("es", {}).items() if k.startswith("wp_PTARMTP_")
+    }
+    EXPERT_WEAPON_NAMES_EN = {
+        k[3:]: v for k, v in TRANSLATIONS.get("en", {}).items() if k.startswith("wp_PTARMTP_")
+    }
 
 def load_translations_from_disk():
     global TRANSLATIONS
@@ -72,6 +93,7 @@ def load_translations_from_disk():
             loaded[fallback_lang] = {}
             
     TRANSLATIONS = loaded
+    _refresh_legacy_dicts()
     return TRANSLATIONS
 
 # Initial load
@@ -113,29 +135,33 @@ _current_language = None
 def get_language():
     global _current_language
     if _current_language is None:
-        _current_language = load_saved_language()
+        _current_language = load_saved_language(detect_system=not os.path.exists(CONFIG_FILE))
     return _current_language
 
 def set_language(lang_code):
     global _current_language
     lang_code = str(lang_code).lower().strip()
-    if lang_code in TRANSLATIONS or lang_code in ("es", "en", "zh"):
+    if lang_code in TRANSLATIONS or lang_code in get_available_languages():
         _current_language = lang_code
         save_language_preference(lang_code)
 
 DEFAULT_LANGUAGE = "en"
 
-def load_saved_language():
+def load_saved_language(detect_system=False):
     """Loads saved language preference from config.json. Defaults to English ('en') if not set."""
     if os.path.exists(CONFIG_FILE):
         try:
             with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                 cfg = json.load(f)
                 lang = cfg.get("language")
-                if lang and (lang in TRANSLATIONS or lang in ("es", "en", "zh")):
+                if lang and (lang in TRANSLATIONS or lang in get_available_languages()):
                     return lang
         except Exception:
             pass
+    if detect_system:
+        detected = _detect_system_language()
+        if detected in TRANSLATIONS:
+            return detected
     return DEFAULT_LANGUAGE
 
 def save_language_preference(lang_code):
@@ -158,19 +184,17 @@ def save_language_preference(lang_code):
 
 def t(key, default=None, **kwargs):
     """
-    Translates a key into current language with fallback cascade (lang -> en -> es -> default/key).
+    Translates a key into current language with universal fallback cascade (lang -> en -> default/key).
     Supports safe format interpolation with kwargs.
     """
     lang = get_language()
     val = TRANSLATIONS.get(lang, {}).get(key)
     if val is None and lang != "en":
         val = TRANSLATIONS.get("en", {}).get(key)
-    if val is None and lang != "es":
-        val = TRANSLATIONS.get("es", {}).get(key)
     if val is None:
         val = default if default is not None else key
     
-    if kwargs:
+    if kwargs and isinstance(val, str):
         try:
             return val.format(**kwargs)
         except Exception:
@@ -185,11 +209,31 @@ def get_item_name(item):
     val = item.get(f"name_{lang}")
     if val:
         return val
-    fallback_id = str(item.get("id", item.get("itemid", "")))
-    if lang == "es":
-        return item.get("name_es") or item.get("name_en") or item.get("name") or fallback_id
-    else:
-        return item.get("name_en") or item.get("name_es") or item.get("name") or fallback_id
+    if lang != "en" and item.get("name_en"):
+        return item["name_en"]
+    if item.get("name"):
+        return item["name"]
+    if item.get("name_es"):
+        return item["name_es"]
+    return str(item.get("id", item.get("itemid", "")))
+
+def get_entity_display_title(item, with_en_subtitle=False):
+    """
+    Returns localized entity title with clean fallback cascade.
+    Defaults to with_en_subtitle=False so only the localized name in the selected language is shown
+    without appending '(English Name)'.
+    """
+    if not item:
+        return ""
+    local_name = get_item_name(item)
+    if not with_en_subtitle:
+        return local_name or ""
+
+    lang = get_language()
+    name_en = item.get("name_en") or item.get("name")
+    if lang != "en" and name_en and local_name != name_en:
+        return f"{local_name} ({name_en})"
+    return local_name or ""
 
 def get_item_desc(item):
     """Universal description resolver with fallback cascade across languages."""
@@ -198,13 +242,17 @@ def get_item_desc(item):
     lang = get_language()
     desc = item.get(f"desc_{lang}")
     if not desc:
-        if lang == "es":
-            desc = item.get("desc_es") or item.get("desc_en") or ""
+        if lang != "en" and item.get("desc_en"):
+            desc = item["desc_en"]
+        elif item.get("desc"):
+            desc = item["desc"]
+        elif item.get("desc_es"):
+            desc = item["desc_es"]
         else:
-            desc = item.get("desc_en") or item.get("desc_es") or ""
-    if "//" in desc:
+            desc = ""
+    if desc and "//" in desc:
         desc = desc.replace("//", "\n")
-    return desc
+    return desc or ""
 
 def get_set_name(set_obj):
     """Universal set name resolver with fallback cascade across languages."""
@@ -214,10 +262,13 @@ def get_set_name(set_obj):
     val = set_obj.get(f"name_{lang}")
     if val:
         return val
-    if lang == "es":
-        return set_obj.get("name_es") or set_obj.get("name_en") or set_obj.get("id", "")
-    else:
-        return set_obj.get("name_en") or set_obj.get("name_es") or set_obj.get("id", "")
+    if lang != "en" and set_obj.get("name_en"):
+        return set_obj["name_en"]
+    if set_obj.get("name"):
+        return set_obj["name"]
+    if set_obj.get("name_es"):
+        return set_obj["name_es"]
+    return str(set_obj.get("id", ""))
 
 def get_expert_weapon_name(ptid):
     """Returns localized weapon mastery category name using translation keys with fallback."""
@@ -226,15 +277,12 @@ def get_expert_weapon_name(ptid):
     if localized and localized != key:
         return localized
     
-    if get_language() == "en":
-        return EXPERT_WEAPON_NAMES_EN.get(ptid, EXPERT_WEAPON_NAMES_ES.get(ptid, ptid))
-    else:
-        return EXPERT_WEAPON_NAMES_ES.get(ptid, EXPERT_WEAPON_NAMES_EN.get(ptid, ptid))
+    lang = get_language()
+    val = TRANSLATIONS.get(lang, {}).get(key)
+    if val:
+        return val
+    val_en = TRANSLATIONS.get("en", {}).get(key)
+    if val_en:
+        return val_en
+    return EXPERT_WEAPON_NAMES_EN.get(ptid, EXPERT_WEAPON_NAMES_ES.get(ptid, ptid))
 
-# Legacy backward-compatibility dictionaries populated dynamically
-EXPERT_WEAPON_NAMES_ES = {
-    k[3:]: v for k, v in TRANSLATIONS.get("es", {}).items() if k.startswith("wp_PTARMTP_")
-}
-EXPERT_WEAPON_NAMES_EN = {
-    k[3:]: v for k, v in TRANSLATIONS.get("en", {}).items() if k.startswith("wp_PTARMTP_")
-}

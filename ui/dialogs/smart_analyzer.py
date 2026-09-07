@@ -221,7 +221,7 @@ class SmartInventoryAnalyzerDialog(tk.Toplevel):
         added_types, added_units = modifiers.smart_top_up_materials(self.save_json, target_qty=target)
         self.refresh_analysis()
         if self.on_modified_cb:
-            self.on_modified_cb(f"Smart Top-Up: {added_types} materials leveled to {target} (+{added_units})." if i18n.get_language() == "en" else f"Top-Up Inteligente: Nivelados {added_types} materiales a {target} unidades (+{added_units} unidades).")
+            self.on_modified_cb(t("smart_topup_cb_msg", added_types=added_types, target=target, added_units=added_units))
         messagebox.showinfo(
             t("analyzer_topup_done_title"),
             t("analyzer_topup_done_msg", target=target, types=added_types, units=added_units)
@@ -243,7 +243,7 @@ class SmartInventoryAnalyzerDialog(tk.Toplevel):
         old_c, new_c = modifiers.expand_storage_capacity(self.save_json, target_capacity=target)
         self.refresh_analysis()
         if self.on_modified_cb:
-            self.on_modified_cb(f"Coin locker expanded: {old_c:,} -> {new_c:,} slots." if i18n.get_language() == "en" else f"Almacén ampliado de {old_c:,} a {new_c:,} casillas.")
+            self.on_modified_cb(t("smart_locker_cb_msg", old=old_c, new=new_c))
         messagebox.showinfo(
             t("analyzer_expand_done_title"),
             t("analyzer_expand_done_msg", old_cap=old_c, new_cap=new_c)

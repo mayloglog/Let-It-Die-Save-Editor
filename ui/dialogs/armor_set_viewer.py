@@ -46,10 +46,7 @@ class ArmorSetViewerDialog(tk.Toplevel):
         
         ttk.Label(row1, text=t("dialog_armor_set_label"), font=("Segoe UI", 11, "bold"), foreground=ACCENT_GOLD).pack(side="left", padx=(0, 8))
         
-        if cur_lang == "es":
-            set_names = [f"{s.get('name_es', s['name_en'])} ({s['name_en']}) • {s['faction']}" for s in self.armor_sets]
-        else:
-            set_names = [f"{s['name_en']} • {s['faction']}" for s in self.armor_sets]
+        set_names = [f"{i18n.get_entity_display_title(s)} • {s.get('faction', '')}" for s in self.armor_sets]
         self.cb_set_var = tk.StringVar(value=set_names[self.set_index] if self.armor_sets else "")
         cb_sets = ttk.Combobox(row1, textvariable=self.cb_set_var, values=set_names, state="readonly", width=52)
         cb_sets.pack(side="left", padx=4)
@@ -203,9 +200,9 @@ class ArmorSetViewerDialog(tk.Toplevel):
     def _on_set_changed(self, event=None):
         sel_idx = self.cb_set_var.get()
         for idx, s in enumerate(self.armor_sets):
-            lbl_es = f"{s.get('name_es', s['name_en'])} ({s['name_en']}) • {s['faction']}"
-            lbl_en = f"{s['name_en']} • {s['faction']}"
-            if sel_idx in (lbl_es, lbl_en):
+            expected = f"{i18n.get_entity_display_title(s)} • {s.get('faction', '')}"
+            lbl_clean = f"{i18n.get_item_name(s)} • {s.get('faction', '')}"
+            if sel_idx in (expected, lbl_clean) or sel_idx.startswith(i18n.get_item_name(s)):
                 self.set_index = idx
                 break
         self.display_current_set()
@@ -221,7 +218,7 @@ class ArmorSetViewerDialog(tk.Toplevel):
         
         s_obj = self.armor_sets[self.set_index]
         cur_lang = i18n.get_language()
-        s_name = s_obj.get('name_es', s_obj['name_en']) if cur_lang == "es" else s_obj['name_en']
+        s_name = i18n.get_set_name(s_obj)
         self.faction_lbl.config(text=t("asv_faction_fmt", faction=s_obj['faction']))
         
         # Highlight active tier button
@@ -256,7 +253,7 @@ class ArmorSetViewerDialog(tk.Toplevel):
         else:
             self.model_lbl.config(image="", text=t("asv_render_progress"))
             
-        t_name = t_obj['tier_name'] if cur_lang == "es" else t_obj.get('tier_name_en', t_obj['tier_name'])
+        t_name = self._get_tier_name(t_obj)
         self.model_title_lbl.config(text=f"{s_name} ({t_name})")
         
         # 2. Update piece cards
@@ -283,10 +280,7 @@ class ArmorSetViewerDialog(tk.Toplevel):
             card_ui["current_pid"] = p["id"]
             
             # Title
-            if cur_lang == "es":
-                name_str = f"{p['name_es']} ({p['name']})" if p.get('name_es') and p['name_es'] != p['name'] else p['name']
-            else:
-                name_str = f"{p['name']} ({p.get('name_es')})" if cur_lang != "en" and p.get('name_es') and p.get('name_es') != p['name'] else p['name']
+            name_str = i18n.get_entity_display_title(p)
             card_ui["title_lbl"].config(text=f"{name_str}  [{p['id']}]")
             
             if slot_key == "weapon":
@@ -344,7 +338,7 @@ class ArmorSetViewerDialog(tk.Toplevel):
                 card_ui["icon_lbl"].config(text="")
                 self.img_refs.append(icon_photo)
             else:
-                card_ui["icon_lbl"].config(image="", text="[Icono]")
+                card_ui["icon_lbl"].config(image="", text=t("icon_placeholder"))
                 
             # Card image
             target_card = p.get("card")
@@ -381,20 +375,8 @@ class ArmorSetViewerDialog(tk.Toplevel):
         self.parent_app.filter_blueprints_list()
         self.display_current_set()
         
-        is_en = i18n.get_language() == "en"
-        is_es = (i18n.get_language() == "es")
         title = t("asv_notify_unlocked_title")
-        msg = (
-            f"¡El objeto '{pid}' y toda su rama inferior han sido desbloqueados!\n\n"
-            f"1. 🛒 Chokufunsha: Disponibles en tienda (+4) para comprar con Kill Coins.\n"
-            f"2. 📦 Almacén: Se ha entregado 1 unidad (+{plus_lvl}, Dur 100%) en tu Almacén.\n"
-            f"3. 💾 Partida guardada automáticamente."
-        ) if is_es else (
-            f"'{pid}' and its ancestor branch successfully unlocked!\n\n"
-            f"1. 🛒 Chokufunsha: Available in Shop (+4) to purchase with Kill Coins.\n"
-            f"2. 📦 Storage: 1 unit (+{plus_lvl}, 100% Durability) delivered to Coin Locker.\n"
-            f"3. 💾 Save updated automatically."
-        )
+        msg = t("asv_notify_unlocked_msg", pid=pid, plus_lvl=plus_lvl)
         messagebox.showinfo(title, msg)
 
     def add_single_piece_storage(self, pid):
@@ -406,13 +388,8 @@ class ArmorSetViewerDialog(tk.Toplevel):
         self.parent_app.filter_blueprints_list()
         self.display_current_set()
         
-        is_es = (i18n.get_language() == "es")
         title = t("asv_notify_added_title")
-        msg = (
-            f"¡Se ha añadido 1 unidad de '{pid}' (+{plus_lvl}, Dur 100%) a tu Almacén!\nGuardado automáticamente."
-        ) if is_es else (
-            f"1 unit of '{pid}' (+{plus_lvl}, Dur 100%) added to Coin Locker!\nSaved automatically."
-        )
+        msg = t("asv_notify_added_msg", pid=pid, plus_lvl=plus_lvl)
         messagebox.showinfo(title, msg)
 
     def unlock_current_tier_set(self):
@@ -453,29 +430,17 @@ class ArmorSetViewerDialog(tk.Toplevel):
                     auto_unlock_ancestors=True
                 )
                 modifiers.add_equipment_to_storage(self.save_json, pid, count=1, lvl=int_lvl, dur=50000)
-                unlocked.append(f"{p['name']} ({p.get('name_es', p['name'])})")
+                unlocked.append(i18n.get_entity_display_title(p))
                 
         self._auto_save_and_sync()
         self.parent_app.filter_blueprints_list()
         self.display_current_set()
         
-        is_es = (i18n.get_language() == "es")
         title = t("asv_notify_set_unlocked_title")
-        s_name = s_obj.get('name_es', s_obj['name_en']) if is_es else s_obj['name_en']
-        t_name = t_obj['tier_name'] if is_es else t_obj.get('tier_name_en', t_obj['tier_name'])
-        msg = (
-            f"¡El {s_name} ({t_name}), sus tiers inferiores y su arma han sido desbloqueados!\n\n"
-            f"🛒 Tienda Chokufunsha: Las piezas, los tiers previos y el arma están listos para comprar con Kill Coins.\n"
-            f"📦 Almacén: Se ha entregado 1 copia de cada armadura + el arma (Nivel +{plus_lvl}, 100% Durabilidad) en tu Almacén.\n"
-            f"💾 Partida guardada automáticamente.\n\n"
-            + "\n".join([f"• {u}" for u in unlocked])
-        ) if is_es else (
-            f"{s_name} ({t_name}), preceding branch tiers, and signature weapon unlocked!\n\n"
-            f"🛒 Chokufunsha: Pieces, lower tiers, and weapon ready to purchase in Shop with KC.\n"
-            f"📦 Storage: 1 copy of each armor piece + weapon (+{plus_lvl}, 100% Durability) added to Coin Locker.\n"
-            f"💾 Save file updated automatically.\n\n"
-            + "\n".join([f"• {u}" for u in unlocked])
-        )
+        s_name = i18n.get_set_name(s_obj)
+        t_name = self._get_tier_name(t_obj)
+        header_msg = t("asv_notify_tier_unlocked_msg", set_name=s_name, tier_name=t_name, plus_lvl=plus_lvl)
+        msg = header_msg + "\n\n" + "\n".join([f"• {u}" for u in unlocked])
         messagebox.showinfo(title, msg)
 
     def add_current_tier_set_storage(self):
@@ -492,24 +457,24 @@ class ArmorSetViewerDialog(tk.Toplevel):
             p = t_obj.get(slot)
             if p and p.get("id"):
                 modifiers.add_equipment_to_storage(self.save_json, p["id"], count=1, lvl=int_lvl, dur=50000)
-                added.append(f"{p['name']} ({p.get('name_es', p['name'])})")
+                added.append(i18n.get_entity_display_title(p))
                 
         self._auto_save_and_sync()
         self.parent_app.filter_blueprints_list()
         self.display_current_set()
         
-        is_es = (i18n.get_language() == "es")
         title = t("asv_notify_set_added_title")
-        msg = (
-            f"¡Se han añadido al Almacén las 3 piezas del set + el arma característica (Nivel +{plus_lvl}, Dur 100%)!\n\n"
-            + "\n".join([f"• {a}" for a in added])
-            + "\n\nPartida guardada automáticamente."
-        ) if is_es else (
-            f"Added 3 armor pieces + signature weapon (+{plus_lvl}, Dur 100%) to Coin Locker!\n\n"
-            + "\n".join([f"• {a}" for a in added])
-            + "\n\nSaved automatically."
-        )
+        s_name = i18n.get_set_name(s_obj)
+        t_name = self._get_tier_name(t_obj)
+        header_msg = t("asv_notify_tier_added_msg", set_name=s_name, tier_name=t_name, plus_lvl=plus_lvl)
+        msg = header_msg + "\n\n" + "\n".join([f"• {a}" for a in added])
         messagebox.showinfo(title, msg)
+
+    def _get_tier_name(self, t_obj):
+        if not t_obj:
+            return ""
+        cur_lang = i18n.get_language()
+        return t_obj.get(f'tier_name_{cur_lang}') or (t_obj.get('tier_name') if cur_lang == "es" else t_obj.get('tier_name_en', t_obj.get('tier_name', "")))
 
 if __name__ == "__main__":
     from editor_gui import CompleteSaveEditorGUI

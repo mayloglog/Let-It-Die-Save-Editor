@@ -672,7 +672,7 @@ class AdvancedTabMixin:
                     asset_paths.add(p)
 
         if not asset_paths:
-            messagebox.showinfo(t("notice"), "No assets to download.")
+            messagebox.showinfo(t("notice"), t("asset_no_downloads"))
             return
 
         total = len(asset_paths)

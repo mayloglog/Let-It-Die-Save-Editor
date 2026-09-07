@@ -12,7 +12,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_001.png",
-    "name_zh": "心脏菇"
+    "name_zh": "心脏菇",
+    "cooked_name_zh": "心脏菇 (烤)"
   },
   "MSR_002": {
     "id": "MSR_002",
@@ -27,7 +28,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_002.png",
-    "name_zh": "大碗饭菇"
+    "name_zh": "大碗饭菇",
+    "cooked_name_zh": "大碗饭菇 (烤)"
   },
   "MSR_006": {
     "id": "MSR_006",
@@ -42,7 +44,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_006.png",
-    "name_zh": "飞拳菇"
+    "name_zh": "飞拳菇",
+    "cooked_name_zh": "飞拳菇 (烤)"
   },
   "MSR_007": {
     "id": "MSR_007",
@@ -57,7 +60,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_007.png",
-    "name_zh": "结晶菇"
+    "name_zh": "结晶菇",
+    "cooked_name_zh": "结晶菇 (烤)"
   },
   "MSR_009": {
     "id": "MSR_009",
@@ -72,7 +76,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_009.png",
-    "name_zh": "熔岩菇"
+    "name_zh": "熔岩菇",
+    "cooked_name_zh": "熔岩菇 (烤)"
   },
   "MSR_010": {
     "id": "MSR_010",
@@ -87,7 +92,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_010.png",
-    "name_zh": "毛茸茸菇"
+    "name_zh": "毛茸茸菇",
+    "cooked_name_zh": "毛茸茸菇 (烤)"
   },
   "MSR_012": {
     "id": "MSR_012",
@@ -102,7 +108,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_012.png",
-    "name_zh": "毁灭菇"
+    "name_zh": "毁灭菇",
+    "cooked_name_zh": "毁灭菇 (烤)"
   },
   "MSR_013": {
     "id": "MSR_013",
@@ -117,7 +124,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_013.png",
-    "name_zh": "瑜珈菇"
+    "name_zh": "瑜珈菇",
+    "cooked_name_zh": "瑜珈菇 (烤)"
   },
   "MSR_014": {
     "id": "MSR_014",
@@ -132,7 +140,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_014.png",
-    "name_zh": "脑菇"
+    "name_zh": "脑菇",
+    "cooked_name_zh": "脑菇 (烤)"
   },
   "MSR_015": {
     "id": "MSR_015",
@@ -147,7 +156,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_015.png",
-    "name_zh": "透明菇"
+    "name_zh": "透明菇",
+    "cooked_name_zh": "透明菇 (烤)"
   },
   "MSR_016": {
     "id": "MSR_016",
@@ -162,7 +172,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_016.png",
-    "name_zh": "耐力菇"
+    "name_zh": "耐力菇",
+    "cooked_name_zh": "耐力菇 (烤)"
   },
   "MSR_017": {
     "id": "MSR_017",
@@ -177,7 +188,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_017.png",
-    "name_zh": "诱饵菇"
+    "name_zh": "诱饵菇",
+    "cooked_name_zh": "诱饵菇 (烤)"
   },
   "MSR_020": {
     "id": "MSR_020",
@@ -192,7 +204,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_020.png",
-    "name_zh": "慢动真菌"
+    "name_zh": "慢动真菌",
+    "cooked_name_zh": "慢动真菌 (烤)"
   },
   "MSR_021": {
     "id": "MSR_021",
@@ -207,7 +220,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_021.png",
-    "name_zh": "电击菇"
+    "name_zh": "电击菇",
+    "cooked_name_zh": "电击菇 (烤)"
   },
   "MSR_022": {
     "id": "MSR_022",
@@ -222,7 +236,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_022.png",
-    "name_zh": "欢乐真菌"
+    "name_zh": "欢乐真菌",
+    "cooked_name_zh": "欢乐真菌 (烤)"
   },
   "MSR_023": {
     "id": "MSR_023",
@@ -237,7 +252,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_023.png",
-    "name_zh": "爆破菇"
+    "name_zh": "爆破菇",
+    "cooked_name_zh": "爆破菇 (烤)"
   },
   "MSR_024": {
     "id": "MSR_024",
@@ -252,7 +268,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_024.png",
-    "name_zh": "强壮菇"
+    "name_zh": "强壮菇",
+    "cooked_name_zh": "强壮菇 (烤)"
   },
   "MSR_025": {
     "id": "MSR_025",
@@ -267,7 +284,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_025.png",
-    "name_zh": "防护菇"
+    "name_zh": "防护菇",
+    "cooked_name_zh": "防护菇 (烤)"
   },
   "MSR_029": {
     "id": "MSR_029",
@@ -282,7 +300,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_029.png",
-    "name_zh": "赌博菇"
+    "name_zh": "赌博菇",
+    "cooked_name_zh": "赌博菇 (烤)"
   },
   "MSR_031": {
     "id": "MSR_031",
@@ -297,7 +316,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_031.png",
-    "name_zh": "青蛙真菌"
+    "name_zh": "青蛙真菌",
+    "cooked_name_zh": "青蛙真菌 (烤)"
   },
   "MSR_032": {
     "id": "MSR_032",
@@ -312,7 +332,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_032.png",
-    "name_zh": "金色蛙真菌"
+    "name_zh": "金色蛙真菌",
+    "cooked_name_zh": "金色蛙真菌 (烤)"
   },
   "MSR_033": {
     "id": "MSR_033",
@@ -327,7 +348,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_033.png",
-    "name_zh": "鼠菇"
+    "name_zh": "鼠菇",
+    "cooked_name_zh": "鼠菇 (烤)"
   },
   "MSR_034": {
     "id": "MSR_034",
@@ -342,7 +364,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_034.png",
-    "name_zh": "金色鼠菇"
+    "name_zh": "金色鼠菇",
+    "cooked_name_zh": "金色鼠菇 (烤)"
   },
   "MSR_035": {
     "id": "MSR_035",
@@ -357,7 +380,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_035.png",
-    "name_zh": "螫刺菇"
+    "name_zh": "螫刺菇",
+    "cooked_name_zh": "螫刺菇 (烤)"
   },
   "MSR_036": {
     "id": "MSR_036",
@@ -372,7 +396,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_036.png",
-    "name_zh": "金色螫刺菇"
+    "name_zh": "金色螫刺菇",
+    "cooked_name_zh": "金色螫刺菇 (烤)"
   },
   "MSR_037": {
     "id": "MSR_037",
@@ -387,7 +412,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_037.png",
-    "name_zh": "鱼腥真菌"
+    "name_zh": "鱼腥真菌",
+    "cooked_name_zh": "鱼腥真菌 (烤)"
   },
   "MSR_038": {
     "id": "MSR_038",
@@ -402,7 +428,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_038.png",
-    "name_zh": "金色鱼腥真菌"
+    "name_zh": "金色鱼腥真菌",
+    "cooked_name_zh": "金色鱼腥真菌 (烤)"
   },
   "MSR_039": {
     "id": "MSR_039",
@@ -417,7 +444,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_039.png",
-    "name_zh": "蜗牛菇"
+    "name_zh": "蜗牛菇",
+    "cooked_name_zh": "蜗牛菇 (烤)"
   },
   "MSR_040": {
     "id": "MSR_040",
@@ -432,7 +460,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_040.png",
-    "name_zh": "金色蜗牛菇"
+    "name_zh": "金色蜗牛菇",
+    "cooked_name_zh": "金色蜗牛菇 (烤)"
   },
   "MSR_041": {
     "id": "MSR_041",
@@ -447,7 +476,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_041.png",
-    "name_zh": "龙菇"
+    "name_zh": "龙菇",
+    "cooked_name_zh": "龙菇 (烤)"
   },
   "MSR_042": {
     "id": "MSR_042",
@@ -462,7 +492,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_042.png",
-    "name_zh": "金龙菇"
+    "name_zh": "金龙菇",
+    "cooked_name_zh": "金龙菇 (烤)"
   },
   "MSR_043": {
     "id": "MSR_043",
@@ -477,7 +508,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_043.png",
-    "name_zh": "生命菇"
+    "name_zh": "生命菇",
+    "cooked_name_zh": "生命菇 (烤)"
   },
   "MSR_044": {
     "id": "MSR_044",
@@ -492,7 +524,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_044.png",
-    "name_zh": "金色生命菇"
+    "name_zh": "金色生命菇",
+    "cooked_name_zh": "金色生命菇 (烤)"
   },
   "MSR_045": {
     "id": "MSR_045",
@@ -507,7 +540,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_045.png",
-    "name_zh": "吸血鬼菇"
+    "name_zh": "吸血鬼菇",
+    "cooked_name_zh": "吸血鬼菇 (烤)"
   },
   "MSR_046": {
     "id": "MSR_046",
@@ -522,7 +556,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_046.png",
-    "name_zh": "金色吸血鬼菇"
+    "name_zh": "金色吸血鬼菇",
+    "cooked_name_zh": "金色吸血鬼菇 (烤)"
   },
   "MSR_047": {
     "id": "MSR_047",
@@ -537,7 +572,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_047.png",
-    "name_zh": "万年菇"
+    "name_zh": "万年菇",
+    "cooked_name_zh": "万年菇 (烤)"
   },
   "MSR_048": {
     "id": "MSR_048",
@@ -552,7 +588,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_048.png",
-    "name_zh": "金色万年菇"
+    "name_zh": "金色万年菇",
+    "cooked_name_zh": "金色万年菇 (烤)"
   },
   "MSR_049": {
     "id": "MSR_049",
@@ -567,7 +604,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_049.png",
-    "name_zh": "橡菇"
+    "name_zh": "橡菇",
+    "cooked_name_zh": "橡菇 (烤)"
   },
   "MSR_050": {
     "id": "MSR_050",
@@ -582,7 +620,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_050.png",
-    "name_zh": "金色橡菇"
+    "name_zh": "金色橡菇",
+    "cooked_name_zh": "金色橡菇 (烤)"
   },
   "MSR_051": {
     "id": "MSR_051",
@@ -597,7 +636,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_051.png",
-    "name_zh": "铜技能菇"
+    "name_zh": "铜技能菇",
+    "cooked_name_zh": "铜技能菇 (烤)"
   },
   "MSR_052": {
     "id": "MSR_052",
@@ -612,7 +652,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_052.png",
-    "name_zh": "银技能菇"
+    "name_zh": "银技能菇",
+    "cooked_name_zh": "银技能菇 (烤)"
   },
   "MSR_053": {
     "id": "MSR_053",
@@ -627,7 +668,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_053.png",
-    "name_zh": "金技能菇"
+    "name_zh": "金技能菇",
+    "cooked_name_zh": "金技能菇 (烤)"
   },
   "MSR_200": {
     "id": "MSR_200",
@@ -642,7 +684,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_200.png",
-    "name_zh": "铜蛋菇"
+    "name_zh": "铜蛋菇",
+    "cooked_name_zh": "铜蛋菇 (烤)"
   },
   "MSR_201": {
     "id": "MSR_201",
@@ -657,7 +700,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_201.png",
-    "name_zh": "银蛋菇"
+    "name_zh": "银蛋菇",
+    "cooked_name_zh": "银蛋菇 (烤)"
   },
   "MSR_202": {
     "id": "MSR_202",
@@ -672,7 +716,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_202.png",
-    "name_zh": "金蛋菇"
+    "name_zh": "金蛋菇",
+    "cooked_name_zh": "金蛋菇 (烤)"
   },
   "MSR_300": {
     "id": "MSR_300",
@@ -687,7 +732,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_300.png",
-    "name_zh": "赤红螫刺菇"
+    "name_zh": "赤红螫刺菇",
+    "cooked_name_zh": "赤红螫刺菇 (烤)"
   },
   "MSR_301": {
     "id": "MSR_301",
@@ -702,7 +748,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_301.png",
-    "name_zh": "武士头盔菇"
+    "name_zh": "武士头盔菇",
+    "cooked_name_zh": "武士头盔菇 (烤)"
   },
   "MSR_302": {
     "id": "MSR_302",
@@ -717,7 +764,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_302.png",
-    "name_zh": "伞骨真菌"
+    "name_zh": "伞骨真菌",
+    "cooked_name_zh": "伞骨真菌 (烤)"
   },
   "MSR_303": {
     "id": "MSR_303",
@@ -732,7 +780,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_303.png",
-    "name_zh": "伪脑菇"
+    "name_zh": "伪脑菇",
+    "cooked_name_zh": "伪脑菇 (烤)"
   },
   "MSR_304": {
     "id": "MSR_304",
@@ -747,7 +796,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_304.png",
-    "name_zh": "猫眼菇"
+    "name_zh": "猫眼菇",
+    "cooked_name_zh": "猫眼菇 (烤)"
   },
   "MSR_305": {
     "id": "MSR_305",
@@ -762,7 +812,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_305.png",
-    "name_zh": "大弹涂鱼菇"
+    "name_zh": "大弹涂鱼菇",
+    "cooked_name_zh": "大弹涂鱼菇 (烤)"
   },
   "MSR_306": {
     "id": "MSR_306",
@@ -777,7 +828,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_306.png",
-    "name_zh": "铜阳伞菇"
+    "name_zh": "铜阳伞菇",
+    "cooked_name_zh": "铜阳伞菇 (烤)"
   },
   "MSR_307": {
     "id": "MSR_307",
@@ -792,7 +844,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_307.png",
-    "name_zh": "银阳伞菇"
+    "name_zh": "银阳伞菇",
+    "cooked_name_zh": "银阳伞菇 (烤)"
   },
   "MSR_308": {
     "id": "MSR_308",
@@ -807,7 +860,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_308.png",
-    "name_zh": "金阳伞菇"
+    "name_zh": "金阳伞菇",
+    "cooked_name_zh": "金阳伞菇 (烤)"
   },
   "MSR_309": {
     "id": "MSR_309",
@@ -822,7 +876,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_309.png",
-    "name_zh": "铜南瓜菇"
+    "name_zh": "铜南瓜菇",
+    "cooked_name_zh": "铜南瓜菇 (烤)"
   },
   "MSR_310": {
     "id": "MSR_310",
@@ -837,7 +892,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_310.png",
-    "name_zh": "银南瓜菇"
+    "name_zh": "银南瓜菇",
+    "cooked_name_zh": "银南瓜菇 (烤)"
   },
   "MSR_311": {
     "id": "MSR_311",
@@ -852,7 +908,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_311.png",
-    "name_zh": "金南瓜菇"
+    "name_zh": "金南瓜菇",
+    "cooked_name_zh": "金南瓜菇 (烤)"
   },
   "MSR_312": {
     "id": "MSR_312",
@@ -867,7 +924,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_312.png",
-    "name_zh": "铜雪盖菇"
+    "name_zh": "铜雪盖菇",
+    "cooked_name_zh": "铜雪盖菇 (烤)"
   },
   "MSR_313": {
     "id": "MSR_313",
@@ -882,7 +940,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_313.png",
-    "name_zh": "银雪盖菇"
+    "name_zh": "银雪盖菇",
+    "cooked_name_zh": "银雪盖菇 (烤)"
   },
   "MSR_314": {
     "id": "MSR_314",
@@ -897,7 +956,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_314.png",
-    "name_zh": "金雪盖菇"
+    "name_zh": "金雪盖菇",
+    "cooked_name_zh": "金雪盖菇 (烤)"
   },
   "MSR_400": {
     "id": "MSR_400",
@@ -912,7 +972,8 @@
     "category_en": "Mushrooms",
     "category_es": "Setas",
     "icon": "msr_400.png",
-    "name_zh": "泼溅菇"
+    "name_zh": "泼溅菇",
+    "cooked_name_zh": "泼溅菇 (烤)"
   },
   "MSR_401": {
     "id": "MSR_401",
@@ -927,7 +988,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_401.png",
-    "name_zh": "大型泼溅菇"
+    "name_zh": "大型泼溅菇",
+    "cooked_name_zh": "大型泼溅菇 (烤)"
   },
   "MSR_402": {
     "id": "MSR_402",
@@ -942,7 +1004,8 @@
     "category_en": "Special Shrooms",
     "category_es": "Setas Especiales",
     "icon": "msr_402.png",
-    "name_zh": "超巨大泼溅菇"
+    "name_zh": "超巨大泼溅菇",
+    "cooked_name_zh": "超巨大泼溅菇 (烤)"
   },
   "BST_BASS": {
     "id": "BST_BASS",
@@ -957,7 +1020,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_bass.png",
-    "name_zh": "鱼"
+    "name_zh": "鱼",
+    "cooked_name_zh": "鱼 (烤)"
   },
   "BST_BASS02": {
     "id": "BST_BASS02",
@@ -972,7 +1036,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_bass02.png",
-    "name_zh": "凸眼大弹涂鱼"
+    "name_zh": "凸眼大弹涂鱼",
+    "cooked_name_zh": "凸眼大弹涂鱼 (烤)"
   },
   "BST_CASSOWARY": {
     "id": "BST_CASSOWARY",
@@ -987,7 +1052,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_cassowary.png",
-    "name_zh": "鸟"
+    "name_zh": "鸟",
+    "cooked_name_zh": "鸟 (烤)"
   },
   "BST_CRAB": {
     "id": "BST_CRAB",
@@ -1002,7 +1068,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_crab.png",
-    "name_zh": "螃蟹"
+    "name_zh": "螃蟹",
+    "cooked_name_zh": "螃蟹 (烤)"
   },
   "BST_FROG": {
     "id": "BST_FROG",
@@ -1017,7 +1084,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_frog.png",
-    "name_zh": "青蛙"
+    "name_zh": "青蛙",
+    "cooked_name_zh": "青蛙 (烤)"
   },
   "BST_GBASS": {
     "id": "BST_GBASS",
@@ -1032,7 +1100,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gbass.png",
-    "name_zh": "金色鱼"
+    "name_zh": "金色鱼",
+    "cooked_name_zh": "金色鱼 (烤)"
   },
   "BST_GCASSOWARY": {
     "id": "BST_GCASSOWARY",
@@ -1047,7 +1116,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gcassowary.png",
-    "name_zh": "金色鸟"
+    "name_zh": "金色鸟",
+    "cooked_name_zh": "金色鸟 (烤)"
   },
   "BST_GCRAB": {
     "id": "BST_GCRAB",
@@ -1062,7 +1132,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gcrab.png",
-    "name_zh": "金色螃蟹"
+    "name_zh": "金色螃蟹",
+    "cooked_name_zh": "金色螃蟹 (烤)"
   },
   "BST_GFROG": {
     "id": "BST_GFROG",
@@ -1077,7 +1148,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gfrog.png",
-    "name_zh": "金色蛙"
+    "name_zh": "金色蛙",
+    "cooked_name_zh": "金色蛙 (烤)"
   },
   "BST_GHONEYCOMB": {
     "id": "BST_GHONEYCOMB",
@@ -1092,7 +1164,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_ghoneycomb.png",
-    "name_zh": "金蜂巢"
+    "name_zh": "金蜂巢",
+    "cooked_name_zh": "金蜂巢 (烤)"
   },
   "BST_GLIZARD": {
     "id": "BST_GLIZARD",
@@ -1107,7 +1180,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_glizard.png",
-    "name_zh": "金色蜥蜴"
+    "name_zh": "金色蜥蜴",
+    "cooked_name_zh": "金色蜥蜴 (烤)"
   },
   "BST_GPILLBUG": {
     "id": "BST_GPILLBUG",
@@ -1122,7 +1196,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gpillbug.png",
-    "name_zh": "金色鼠妇"
+    "name_zh": "金色鼠妇",
+    "cooked_name_zh": "金色鼠妇 (烤)"
   },
   "BST_GRAT": {
     "id": "BST_GRAT",
@@ -1137,7 +1212,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_grat.png",
-    "name_zh": "金色鼠"
+    "name_zh": "金色鼠",
+    "cooked_name_zh": "金色鼠 (烤)"
   },
   "BST_GSCORPION": {
     "id": "BST_GSCORPION",
@@ -1152,7 +1228,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gscorpion.png",
-    "name_zh": "金色蝎子"
+    "name_zh": "金色蝎子",
+    "cooked_name_zh": "金色蝎子 (烤)"
   },
   "BST_GSNAIL": {
     "id": "BST_GSNAIL",
@@ -1167,7 +1244,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gsnail.png",
-    "name_zh": "金色蜗牛"
+    "name_zh": "金色蜗牛",
+    "cooked_name_zh": "金色蜗牛 (烤)"
   },
   "BST_GTURTLE": {
     "id": "BST_GTURTLE",
@@ -1182,7 +1260,8 @@
     "category_en": "Golden Beasts",
     "category_es": "Criaturas Doradas",
     "icon": "bst_gturtle.png",
-    "name_zh": "金色龟"
+    "name_zh": "金色龟",
+    "cooked_name_zh": "金色龟 (烤)"
   },
   "BST_HONEYCOMB": {
     "id": "BST_HONEYCOMB",
@@ -1197,7 +1276,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_honeycomb.png",
-    "name_zh": "蜂巢"
+    "name_zh": "蜂巢",
+    "cooked_name_zh": "蜂巢 (烤)"
   },
   "BST_LIZARD": {
     "id": "BST_LIZARD",
@@ -1212,7 +1292,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_lizard.png",
-    "name_zh": "蜥蜴"
+    "name_zh": "蜥蜴",
+    "cooked_name_zh": "蜥蜴 (烤)"
   },
   "BST_PILLBUG": {
     "id": "BST_PILLBUG",
@@ -1227,7 +1308,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_pillbug.png",
-    "name_zh": "鼠妇"
+    "name_zh": "鼠妇",
+    "cooked_name_zh": "鼠妇 (烤)"
   },
   "BST_RAT": {
     "id": "BST_RAT",
@@ -1242,7 +1324,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_rat.png",
-    "name_zh": "老鼠"
+    "name_zh": "老鼠",
+    "cooked_name_zh": "老鼠 (烤)"
   },
   "BST_SCORPION": {
     "id": "BST_SCORPION",
@@ -1257,7 +1340,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_scorpion.png",
-    "name_zh": "蝎子"
+    "name_zh": "蝎子",
+    "cooked_name_zh": "蝎子 (烤)"
   },
   "BST_SCORPION02": {
     "id": "BST_SCORPION02",
@@ -1272,7 +1356,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_scorpion02.png",
-    "name_zh": "赤红蝎"
+    "name_zh": "赤红蝎",
+    "cooked_name_zh": "赤红蝎 (烤)"
   },
   "BST_SNAIL": {
     "id": "BST_SNAIL",
@@ -1287,7 +1372,8 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_snail.png",
-    "name_zh": "蜗牛"
+    "name_zh": "蜗牛",
+    "cooked_name_zh": "蜗牛 (烤)"
   },
   "BST_TURTLE": {
     "id": "BST_TURTLE",
@@ -1302,6 +1388,7 @@
     "category_en": "Beasts",
     "category_es": "Criaturas",
     "icon": "bst_turtle.png",
-    "name_zh": "乌龟"
+    "name_zh": "乌龟",
+    "cooked_name_zh": "乌龟 (烤)"
   }
 }

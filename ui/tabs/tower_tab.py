@@ -26,13 +26,13 @@ class TowerTabMixin:
         box_left.grid(row=0, column=0, sticky="nsew", padx=6, pady=6)
         
         # 1. Elevators & Map Discovery
-        ttk.Label(box_left, text="🗺️ " + t("tw_elev_title", "Ascensores y Mapa Completo"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD).pack(anchor="w", pady=2)
-        ttk.Label(box_left, text=t("tw_elev_sub", "Desbloquea los 61 ascensores, 980 habitaciones, 1,119 escaleras y 122 puertas de la Torre."), font=("Segoe UI", 8), foreground=FG_MUTED).pack(anchor="w", pady=1)
-        btn_unlock_elevators = ttk.Button(box_left, text=t("tw_elev_btn", "🗺️ Desbloquear Ascensores y Mapa"), style="Accent.TButton", command=self._unlock_elevators_action)
+        ttk.Label(box_left, text="🗺️ " + t("tw_elev_title"), font=("Segoe UI", 9, "bold"), foreground=ACCENT_GOLD).pack(anchor="w", pady=2)
+        ttk.Label(box_left, text=t("tw_elev_sub"), font=("Segoe UI", 8), foreground=FG_MUTED).pack(anchor="w", pady=1)
+        btn_unlock_elevators = ttk.Button(box_left, text=t("tw_elev_btn"), style="Accent.TButton", command=self._unlock_elevators_action)
         btn_unlock_elevators.pack(fill="x", pady=(2, 4))
         
         # 1b. Skip Tutorial & Unlock Waiting Room / Fighter Freezer
-        btn_unlock_tutorial = ttk.Button(box_left, text=t("tw_tut_btn", "🎓 Desbloquear Sala y Congelador"), command=self._unlock_tutorial_action)
+        btn_unlock_tutorial = ttk.Button(box_left, text=t("tw_tut_btn"), command=self._unlock_tutorial_action)
         btn_unlock_tutorial.pack(fill="x", pady=(0, 8))
         
         # 2. Stamp Rally Perfect
@@ -147,11 +147,7 @@ class TowerTabMixin:
             return
         cnt = modifiers.complete_all_quests(self.save_json)
         self._auto_save()
-        self._notify(
-            "Quests Completed", "Misiones Completadas",
-            f"Marked {cnt} official quests as completed!\n\nYou can claim hundreds of Death Metals, rare metals, and blueprints from your Rewards Box.",
-            f"¡Se han marcado como completadas {cnt} misiones oficiales de la Torre de Barbs!\n\nPuedes recoger cientos de Death Metals, metales raros y planos en tu Buzón de Recompensas."
-        )
+        self._notify("tw_notify_quests_title", "tw_notify_quests_msg", cnt=cnt)
 
     def _unlock_magazines_and_radio_action(self):
         if not self.save_json:
@@ -159,11 +155,7 @@ class TowerTabMixin:
         modifiers.unlock_all_magazines(self.save_json)
         modifiers.unlock_all_radio_music(self.save_json)
         self._auto_save()
-        self._notify(
-            "Collectibles Unlocked", "Coleccionables Desbloqueados",
-            "All 36 magazines and Uncle Death comics unlocked! Radio Jukebox enabled with all channels.",
-            "¡Se han desbloqueado las 36 revistas y cómics del Tío Death y se ha habilitado la Gramola de Radio con todos los canales!"
-        )
+        self._notify("tw_notify_collectibles_title", "tw_notify_collectibles_msg")
 
     def _rescue_stuck_fighter_action(self):
         if not self.save_json:
@@ -171,11 +163,7 @@ class TowerTabMixin:
         modifiers.reset_floor_to_waiting_room(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Fighter Rescued", "Luchador Rescatado",
-            "Fighter safely extracted back to the Waiting Room!\n\nAny stuck floor loading transitions or escalator deadlocks have been cleared.",
-            "¡Luchador extraído de forma segura de vuelta a la Sala de Espera!\n\nSe han resuelto los bloqueos de pantalla de carga y transiciones de escalera atascadas."
-        )
+        self._notify("tw_notify_rescued_title", "tw_notify_rescued_msg")
 
     def _unlock_elevators_action(self):
         if not self.save_json:
@@ -183,11 +171,7 @@ class TowerTabMixin:
         modifiers.unlock_all_elevators(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Tower & Elevators Fully Unlocked", "Torre y Ascensores Desbloqueados",
-            "Full access enabled to all 61 Tower elevators (Floors 1-40, 41-50, and Tengoku 51+)!\n\nAll 980 tower rooms & 1,119 escalators revealed on the Map, 122 gates opened, and Floor 41+ Waiting Room gate unlocked!",
-            "¡Acceso completo a los 61 ascensores de la Torre (pisos 1 al 40, 41-50 y Tengoku 51+)!\n\n¡Los 980 cuartos y 1,119 escaleras han sido revelados en el Mapa, 122 puertas desbloqueadas y el portal a Pisos 41+ habilitado en la Sala de Espera!"
-        )
+        self._notify("tw_notify_elevators_full_title", "tw_notify_elevators_full_msg")
 
     def _unlock_tutorial_action(self):
         if not self.save_json:
@@ -195,22 +179,14 @@ class TowerTabMixin:
         modifiers.unlock_tutorial_and_waiting_room(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Waiting Room & Freezer Unlocked", "Sala de Espera y Congelador Desbloqueados",
-            "Tutorial completed and Waiting Room fully unlocked!\n\n• Fighter Freezer (Kiwako Seto): Unlocked\n• Chokufunsha Shop & Mushroom Club: Unlocked\n• Naomi Detox Quests & Direct Hell VIP Elevator: Unlocked\n• Player safely returned to Waiting Room",
-            "¡Tutorial completado y Sala de Espera completamente desbloqueada!\n\n• Congelador de Luchadores (Kiwako Seto): Desbloqueado\n• Tienda Chokufunsha y Club Setas: Desbloqueados\n• Mostrador de Misiones y Ascensor VIP: Desbloqueados\n• Jugador posicionado de forma segura en la Sala de Espera"
-        )
+        self._notify("tw_notify_tutorial_unlocked_title", "tw_notify_tutorial_unlocked_msg")
 
     def _set_stamps_perfect_action(self):
         if not self.save_json:
             return
         modifiers.set_all_stamps_perfect(self.save_json)
         self._auto_save()
-        self._notify(
-            "Stamps in PERFECT", "Sellos en PERFECT",
-            "All 40 Stamp Rally stamps marked as PERFECT!\n\nUncle Death Scythe unlocked at Chokufunsha +4 and 1 copy delivered to Storage.",
-            "¡Todos los 40 sellos del Stamp Rally marcados en PERFECT!\n\nGuadaña del Tío Death desbloqueada al Nivel +4 en Chokufunsha y 1 unidad entregada en tu Almacén."
-        )
+        self._notify("tw_notify_stamps_perfect_title", "tw_notify_stamps_perfect_msg")
 
     def _set_max_floor_action(self):
         if not self.save_json:
@@ -222,11 +198,7 @@ class TowerTabMixin:
         modifiers.set_tower_max_floor(self.save_json, max_floor=fl)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Tower Record", "Récord de Torre",
-            f"Tower record max floor set to Floor {fl} successfully!",
-            f"¡Piso máximo alcanzado establecido al Piso {fl} con éxito!"
-        )
+        self._notify("tw_notify_record_title", "tw_notify_record_msg", fl=fl)
 
     def _reset_interrupt_action(self):
         if not self.save_json:
@@ -234,11 +206,7 @@ class TowerTabMixin:
         old = modifiers.reset_tower_interruptions(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Penalties Cleared", "Penalizaciones Limpiadas",
-            f"Cleared {old:,} tower disconnections and penalty counters!\n\nYour fighters are completely protected from disconnections and forced rescue fees.",
-            f"¡Se han eliminado {old:,} interrupciones y cierres de la torre!\n\nTus luchadores están completamente protegidos de penalizaciones por desconexión."
-        )
+        self._notify("tw_notify_penalties_cleared_title", "tw_notify_penalties_cleared_msg", old=old)
 
     def _expand_bag_action(self):
         if not self.save_json:
@@ -250,11 +218,7 @@ class TowerTabMixin:
         modifiers.expand_death_bag(self.save_json, fighter_index=self.current_fighter_idx, slots=slots)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Death Bag Expanded", "Bolsa Expandida",
-            f"Current fighter death bag expanded to {slots} slots!",
-            f"¡Bolsa del luchador actual ampliada a {slots} casillas!"
-        )
+        self._notify("tw_notify_bag_expanded_title", "tw_notify_bag_expanded_msg", slots=slots)
 
     def _set_continues_action(self):
         if not self.save_json:
@@ -265,11 +229,7 @@ class TowerTabMixin:
             cnt = 999
         modifiers.set_free_continues(self.save_json, count=cnt)
         self._auto_save()
-        self._notify(
-            "Free Continues", "Continues Establecidos",
-            f"Granted {cnt} unlimited free revives directly in the Tower!",
-            f"¡Se han otorgado {cnt} revives gratuitos ilimitados en la torre!"
-        )
+        self._notify("tw_notify_continues_title", "tw_notify_continues_msg", cnt=cnt)
 
     def _set_tdm_rank_action(self):
         if not self.save_json:
@@ -280,41 +240,25 @@ class TowerTabMixin:
         modifiers.set_tdm_rank(self.save_json, rank_id=rank_id, points=points)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "TDM Rank Updated", "Rango TDM Actualizado",
-            f"Tokyo Death Metro rank set to {sel} with {points:,} points!",
-            f"¡Rango de Tokyo Death Metro establecido a {sel} con {points:,} puntos!"
-        )
+        self._notify("tw_notify_tdm_rank_title", "tw_notify_tdm_rank_msg", sel=sel, points=points)
 
     def _complete_compendiums_action(self):
         if not self.save_json:
             return
         m_cnt, b_cnt = modifiers.complete_encyclopedia_books(self.save_json)
         self._auto_save()
-        self._notify(
-            "Compendiums Completed", "Compendios Completados",
-            f"All {m_cnt} Mushrooms and {b_cnt} Beasts registered in Uncle Death's Book!\n\nMarked as discovered, eaten, thrown, and cooked.",
-            f"¡Se han registrado al 100% las {m_cnt} Setas y {b_cnt} Bestias en el Libro del Tío Death!\n\nMarcadas como descubiertas, comidas, lanzadas y cocinadas."
-        )
+        self._notify("tw_notify_compendiums_title", "tw_notify_compendiums_msg", m_cnt=m_cnt, b_cnt=b_cnt)
 
     def _unlock_hub_action(self):
         if not self.save_json:
             return
         total, unlocked = modifiers.unlock_all_hub_customizations(self.save_json)
         self._auto_save()
-        self._notify(
-            "Waiting Room Unlocked", "Sala de Espera Desbloqueada",
-            f"All {total} Waiting Room themes, floors, and decorations unlocked ({unlocked} newly enabled)!",
-            f"¡Se han desbloqueado todas las {total} personalizaciones oficiales de la Sala de Espera ({unlocked} activadas)!"
-        )
+        self._notify("tw_notify_hub_title", "tw_notify_hub_msg", total=total, unlocked=unlocked)
 
     def _reset_wandering_shop_action(self):
         if not self.save_json:
             return
         modifiers.reset_wandering_shop_timer(self.save_json)
         self._auto_save()
-        self._notify(
-            "Secret Shop Reset", "Tienda Reseteada",
-            "Chokufunsha wandering shop timer reset! Gyaku-Funsha is ready to trade on designated floors.",
-            "¡Se ha reseteado el temporizador de Chokufunsha ambulante!\n\nGyaku-Funsha aparecerá inmediatamente en sus pisos designados."
-        )
+        self._notify("tw_notify_wandering_shop_title", "tw_notify_wandering_shop_msg")

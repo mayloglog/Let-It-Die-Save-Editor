@@ -108,5 +108,155 @@ class TestI18n(unittest.TestCase):
         self.assertTrue(MaterialsTabMixin._match_material_category("Boss金属 (Boss Metals)", "Boss Metals"))
         self.assertTrue(MaterialsTabMixin._match_material_category("类固醇 / Rostest (Fighters)", "Esteroides / Rostest"))
 
+    def test_get_entity_display_title(self):
+        fake_gear = {
+            "id": "WEAPON_TEST",
+            "name_en": "Laser Saber",
+            "name_es": "Sable Láser",
+            "name_zh": "激光军刀"
+        }
+        i18n.set_language("es")
+        self.assertEqual(i18n.get_entity_display_title(fake_gear), "Sable Láser")
+        self.assertEqual(i18n.get_entity_display_title(fake_gear, with_en_subtitle=True), "Sable Láser (Laser Saber)")
+
+        i18n.set_language("en")
+        self.assertEqual(i18n.get_entity_display_title(fake_gear), "Laser Saber")
+
+        i18n.set_language("zh")
+        self.assertEqual(i18n.get_entity_display_title(fake_gear), "激光军刀")
+        self.assertEqual(i18n.get_entity_display_title(fake_gear, with_en_subtitle=True), "激光军刀 (Laser Saber)")
+
+    def test_canonical_material_categories_and_forge_keys(self):
+        from ui.tabs.materials_tab import CANONICAL_MATERIAL_CATEGORIES
+
+        for lang in ("es", "en", "zh"):
+            i18n.set_language(lang)
+            for _, cat_key in CANONICAL_MATERIAL_CATEGORIES:
+                label = t(cat_key)
+                self.assertTrue(bool(label) and label != cat_key, f"Missing category translation: {cat_key} in {lang}")
+
+            for forge_code in ("store_uncapped", "rnd_uncapped", "store_plus4", "store", "finished_lvl", "remodel", "map"):
+                k = f"bp_forge_{forge_code}"
+                rendered = t(k, plus_lvl=4, next_lvl=5, level=4)
+                self.assertTrue(bool(rendered) and rendered != k, f"Missing forge key: {k} in {lang}")
+
+    def test_system_language_detection(self):
+        detected = i18n._detect_system_language()
+        self.assertIsInstance(detected, str)
+        self.assertIn(detected, i18n.get_available_languages())
+
+    def test_gui_tabs_filtering_in_all_languages(self):
+        from editor_gui import CompleteSaveEditorGUI
+        app = CompleteSaveEditorGUI()
+        app.withdraw()
+        try:
+            for lang in ("es", "en", "zh"):
+                i18n.set_language(lang)
+                app.filter_blueprints_list()
+                app.filter_materials_list()
+                app.filter_decals_list()
+        finally:
+            app.destroy()
+
+    def test_locales_linter_validation(self):
+        from tools.validate_locales import validate_all_locales
+        is_valid, errors, stats = validate_all_locales()
+        self.assertTrue(is_valid, f"Locales validation failed: {errors}")
+        self.assertGreater(stats.get("total_keys_by_lang", {}).get("en", 0), 800)
+
+    def test_fighter_classes_localized(self):
+        from game_data import get_fighter_class_name
+        i18n.set_language("en")
+        self.assertEqual(get_fighter_class_name("BAL"), "All-Rounder")
+        self.assertEqual(get_fighter_class_name("BRE"), "Striker")
+
+        i18n.set_language("es")
+        self.assertEqual(get_fighter_class_name("BAL"), "Todo Terreno")
+        self.assertEqual(get_fighter_class_name("BRE"), "Delantero")
+
+        i18n.set_language("zh")
+        self.assertEqual(get_fighter_class_name("BAL"), "全能战士")
+        self.assertEqual(get_fighter_class_name("BRE"), "强攻手")
+
+    def test_real_bag_calculating_localized(self):
+        i18n.set_language("en")
+        self.assertIn("Calculating", t("f_real_bag_calculating"))
+        i18n.set_language("es")
+        self.assertIn("Calculando", t("f_real_bag_calculating"))
+        i18n.set_language("zh")
+        self.assertIn("计算中", t("f_real_bag_calculating"))
+
+    def test_canonical_category_id_matching(self):
+        from ui.tabs.materials_tab import MaterialsTabMixin
+        dummy_mat = {"itemid": "ITMT_ALUMI_1", "category_id": "ALUMINUM", "category": "Aluminio"}
+        for lang in ("en", "es", "zh"):
+            i18n.set_language(lang)
+            # Both canonical code and translated label should match
+            self.assertTrue(MaterialsTabMixin._match_material_category("ALUMINUM", dummy_mat))
+            self.assertTrue(MaterialsTabMixin._match_material_category(t("mat_cat_aluminum"), dummy_mat))
+            self.assertFalse(MaterialsTabMixin._match_material_category("COPPER", dummy_mat))
+            self.assertFalse(MaterialsTabMixin._match_material_category(t("mat_cat_copper"), dummy_mat))
+
+    def test_weapon_damage_type_language_agnostic(self):
+        from ui.tabs.blueprints_tab import BlueprintsTabMixin
+        mixin = BlueprintsTabMixin()
+        # Test purely by ID (no names attached)
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP001_001"}), "SLASH")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP005_001"}), "BLUNT")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP004_001"}), "PIERCE")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP007_001"}), "FIRE")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP055_001"}), "ELECTRIC")
+        # Poison weapons
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP020_001"}), "POISON")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP042_001"}), "POISON")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP048_001"}), "POISON")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP058_001"}), "POISON")
+        # Test with Tengoku Tier 4 uncap ID (no name)
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP001_0H4"}), "SLASH")
+        self.assertEqual(mixin._get_weapon_damage_type({"id": "PT_ARM_WP042_0H4"}), "POISON")
+
+    def test_weapon_multi_damage_types(self):
+        """Verify hybrid weapons support multiple damage attributes simultaneously."""
+        from ui.tabs.blueprints_tab import BlueprintsTabMixin
+        mixin = BlueprintsTabMixin()
+        
+        # 1. Enriched item with damage_types list
+        spiked_bat = {
+            "id": "PT_ARM_WP005_002",
+            "name_en": "Spiked Bat",
+            "damage_types": ["BLUNT", "POISON"],
+            "damage_attr": {"BLUNT": 50, "POISON": 50}
+        }
+        bat_types = mixin._get_weapon_damage_types(spiked_bat)
+        self.assertIn("BLUNT", bat_types)
+        self.assertIn("POISON", bat_types)
+        self.assertNotIn("SLASH", bat_types)
+
+        machete = {
+            "id": "PT_ARM_WP001_004",
+            "name_en": "Battle Machete",
+            "damage_types": ["SLASH", "FIRE"],
+            "damage_attr": {"SLASH": 60, "FIRE": 40}
+        }
+        machete_types = mixin._get_weapon_damage_types(machete)
+        self.assertIn("SLASH", machete_types)
+        self.assertIn("FIRE", machete_types)
+        self.assertNotIn("BLUNT", machete_types)
+
+        # 2. Verify encyclopedia items contain poison weapons
+        import json
+        import os
+        from core.helpers import ALL_EQUIPMENT_FILE
+        if os.path.exists(ALL_EQUIPMENT_FILE):
+            with open(ALL_EQUIPMENT_FILE, "r", encoding="utf-8") as f:
+                encyclopedia = json.load(f)
+            poison_weapons = [
+                item for item in encyclopedia
+                if "POISON" in mixin._get_weapon_damage_types(item)
+            ]
+            self.assertGreaterEqual(len(poison_weapons), 10, "Poison filter must return weapons from encyclopedia")
+
+
 if __name__ == "__main__":
     unittest.main()
+

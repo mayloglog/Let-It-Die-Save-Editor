@@ -20,7 +20,7 @@ import modifiers
 import updater
 from core.asset_manager import AssetManager
 import i18n
-from i18n import t, get_item_name, get_item_desc, get_set_name
+from i18n import t, get_item_name, get_item_desc, get_set_name, get_entity_display_title
 
 # Base paths
 if getattr(sys, "frozen", False):
@@ -83,7 +83,7 @@ class CompleteSaveEditorGUI(
 
     def __init__(self):
         super().__init__()
-        local_v = updater.get_local_version_info().get("version", "4.1.2")
+        local_v = updater.get_local_version_info().get("version", "4.1.3")
         self.title(f"LET IT DIE (Offline) - Deep Save Editor Pro v{local_v} (Master Cyberpunk Edition)")
         self.geometry("1240x820")
         self.minsize(1040, 700)
@@ -263,8 +263,13 @@ class CompleteSaveEditorGUI(
                 self.decals_db = json.load(f)
                 for d in self.decals_db:
                     self.decals_map[d["id"]] = d
-                    self.decals_map[d["id"].replace("_P", "")] = d
-                    self.decals_map[f"{d['id'].replace('_P', '')}_P"] = d
+                for d in self.decals_db:
+                    base_id = d["id"][:-2] if d["id"].endswith("_P") else d["id"]
+                    if base_id not in self.decals_map:
+                        self.decals_map[base_id] = d
+                    p_id = f"{base_id}_P"
+                    if p_id not in self.decals_map:
+                        self.decals_map[p_id] = d
         self.armor_sets = []
         self.armor_set_by_item_id = {}
         if os.path.exists(ARMOR_SETS_PATH):
@@ -285,21 +290,37 @@ class CompleteSaveEditorGUI(
             with open(SHROOMS_BEASTS_DB_PATH, "r", encoding="utf-8") as f:
                 self.shrooms_beasts_db = json.load(f)
 
-    def get_photo(self, rel_path, size=(28, 28), preserve_aspect=False, on_ready=None):
+    def get_photo(self, rel_path, size=(28, 28), preserve_aspect=False, on_ready=None, badge=None):
         if not rel_path:
             return None
-        key = (rel_path, size, preserve_aspect)
+        key = (rel_path, size, preserve_aspect, badge)
         if key in self.img_cache:
             return self.img_cache[key]
             
         clean_rel = str(rel_path).replace("\\", "/")
         found_path = None
+
+        # 0. Check direct path under ICONS_DIR if rel_path specifies a subdirectory or is absolute
+        if os.path.isabs(clean_rel) and os.path.exists(clean_rel):
+            found_path = clean_rel
+        elif "/" in clean_rel:
+            search_roots = [ICONS_DIR]
+            if hasattr(self, "asset_manager") and getattr(self.asset_manager, "cache_dir", None):
+                search_roots.append(self.asset_manager.cache_dir)
+            for base_dir in search_roots:
+                if not base_dir or not os.path.isdir(base_dir):
+                    continue
+                p = os.path.join(base_dir, clean_rel)
+                if os.path.exists(p) and not os.path.isdir(p):
+                    found_path = p
+                    break
         
         # 1. Fast O(1) index lookup
-        clean_base = os.path.basename(clean_rel).lower()
-        clean_stem = os.path.splitext(clean_base)[0]
-        idx = getattr(self, "_icon_index", {})
-        found_path = idx.get(clean_base) or idx.get(clean_stem)
+        if not found_path:
+            clean_base = os.path.basename(clean_rel).lower()
+            clean_stem = os.path.splitext(clean_base)[0]
+            idx = getattr(self, "_icon_index", {})
+            found_path = idx.get(clean_base) or idx.get(clean_stem)
         
         # 2. Check icon_map if not found directly
         remote_mapped = None
@@ -339,6 +360,9 @@ class CompleteSaveEditorGUI(
                     if found_path:
                         break
 
+        def _apply_badge(im_target, t_size):
+            pass
+
         # 4. If still missing on disk, request asynchronous download via CDN
         if not found_path and hasattr(self, "asset_manager"):
             fetch_target = remote_mapped or clean_rel
@@ -362,6 +386,7 @@ class CompleteSaveEditorGUI(
                     else:
                         target_size = size
                     im = im.resize(target_size, Image.Resampling.LANCZOS)
+                    _apply_badge(im, target_size)
                     new_photo = ImageTk.PhotoImage(im)
                     self.img_cache[key] = new_photo
                     if on_ready:
@@ -374,6 +399,10 @@ class CompleteSaveEditorGUI(
         if found_path:
             try:
                 img = Image.open(found_path).convert("RGBA")
+                # Safeguard: If image is a 100% transparent dummy placeholder, treat as missing
+                alpha_ext = img.getextrema()[3]
+                if alpha_ext[1] == 0:
+                    raise ValueError("Image is a transparent dummy placeholder")
                 if preserve_aspect:
                     max_w, max_h = size
                     w, h = img.size
@@ -382,6 +411,7 @@ class CompleteSaveEditorGUI(
                 else:
                     target_size = size
                 img = img.resize(target_size, Image.Resampling.LANCZOS)
+                _apply_badge(img, target_size)
                 photo = ImageTk.PhotoImage(img)
                 self.img_cache[key] = photo
                 return photo
@@ -389,7 +419,7 @@ class CompleteSaveEditorGUI(
                 pass
         return None
 
-    def set_widget_image(self, widget, rel_path, size, preserve_aspect=False, fallback=None):
+    def set_widget_image(self, widget, rel_path, size, preserve_aspect=False, fallback=None, badge=None):
         """Safely sets an image on a Tkinter widget (Label/Button), updating it reactively when CDN download completes."""
         def _apply(img):
             try:
@@ -399,14 +429,14 @@ class CompleteSaveEditorGUI(
             except Exception:
                 pass
 
-        photo = self.get_photo(rel_path, size=size, preserve_aspect=preserve_aspect, on_ready=_apply)
+        photo = self.get_photo(rel_path, size=size, preserve_aspect=preserve_aspect, on_ready=_apply, badge=badge)
         if not photo and fallback:
-            photo = self.get_photo(fallback, size=size, preserve_aspect=preserve_aspect)
+            photo = self.get_photo(fallback, size=size, preserve_aspect=preserve_aspect, badge=badge)
         if photo:
             _apply(photo)
         return photo
 
-    def set_tree_item_image(self, tree, item_id, rel_path, size, preserve_aspect=False, fallback=None):
+    def set_tree_item_image(self, tree, item_id, rel_path, size, preserve_aspect=False, fallback=None, badge=None):
         """Safely sets an image on a Tkinter Treeview row, updating it reactively when CDN download completes."""
         def _apply(img):
             try:
@@ -416,9 +446,9 @@ class CompleteSaveEditorGUI(
             except Exception:
                 pass
 
-        photo = self.get_photo(rel_path, size=size, preserve_aspect=preserve_aspect, on_ready=_apply)
+        photo = self.get_photo(rel_path, size=size, preserve_aspect=preserve_aspect, on_ready=_apply, badge=badge)
         if not photo and fallback:
-            photo = self.get_photo(fallback, size=size, preserve_aspect=preserve_aspect)
+            photo = self.get_photo(fallback, size=size, preserve_aspect=preserve_aspect, badge=badge)
         if photo:
             _apply(photo)
         return photo
@@ -863,21 +893,22 @@ class CompleteSaveEditorGUI(
             f = all_fighters[idx]
             slot_num = idx + 1
             name = f.get("name", f"Luchador #{slot_num}")
+            cls_code = f.get("class", "BAL")
             cls_name = f.get("class_name", "All-Rounder")
+            cls_local = t(f"cls_{cls_code.lower()}", default=cls_name)
             lvl = f.get("level", 1)
             grade = f.get("grade", 1)
             hp = f.get("hp", 1000)
             state = t("f_state_alive") if hp > 0 else t("f_state_dead")
             lvl_str = t("fighter_level_fmt", lvl=lvl, grade=grade)
             
-            cls_code = f.get("class", "BAL")
             cls_icon_filename = FIGHTER_CLASSES.get(cls_code, ("", "all-rounder.png"))[1]
             body_val = f.get("body", "BODY_FEMALE_001")
             model_art = f"all_official/{body_val.lower()}.png"
             thumb = self.get_photo(model_art, (32, 36), preserve_aspect=True) or \
                     self.get_photo(cls_icon_filename, (36, 36), preserve_aspect=True) or \
                     self.get_photo("all-rounder", (36, 36), preserve_aspect=True)
-            node_id = self.fighters_tree.insert("", "end", text=f" {name} ({cls_name})", image=thumb or "", values=(slot_num, lvl_str, state))
+            node_id = self.fighters_tree.insert("", "end", text=f" {name} ({cls_local})", image=thumb or "", values=(slot_num, lvl_str, state))
             self.tree_images[node_id] = thumb
             self._tree_node_to_save_idx[node_id] = idx
             self._tree_node_to_tree_idx[node_id] = idx
@@ -900,7 +931,9 @@ class CompleteSaveEditorGUI(
             tdm_txt = t("hud_tdm")
             b_prefix = t("hud_bag")
             s_suffix = t("hud_slots")
-            self.player_name_lbl.config(text=f"{f_prefix} {f0.get('name', 'Principal')} • {f0.get('class_name', 'All-Rounder')} (Tier {f0.get('grade', 1)} ★)")
+            f0_cls = f0.get("class", "BAL")
+            f0_cls_local = t(f"cls_{f0_cls.lower()}", default=f0.get("class_name", "All-Rounder"))
+            self.player_name_lbl.config(text=f"{f_prefix} {f0.get('name', 'Principal')} • {f0_cls_local} (Tier {f0.get('grade', 1)} ★)")
             self.player_meta_lbl.config(text=f"UID: {self.save_json.get('soul', {}).get('uid', '---')} | {r_prefix} {base_up.get('rank', 100)} | {tdm_txt} | {b_prefix} {f0.get('bag', 20)} {s_suffix}")
             
         # 3. Filter other lists
@@ -928,7 +961,7 @@ class CompleteSaveEditorGUI(
 
     def save_current(self):
         if not self.save_json or not self.save_path:
-            self._notify("Warning", "Aviso", "No save file loaded to save.", "No hay ninguna partida cargada para guardar.", kind="warning")
+            self._notify("warn_no_save_title", "warn_no_save_msg", kind="warning")
             return
         try:
             def _parse_safe_int(val, default=0):
@@ -975,7 +1008,7 @@ class CompleteSaveEditorGUI(
                 except Exception as ex:
                     messagebox.showerror(t("error"), str(ex))
         except Exception as e:
-            self._notify("Error Saving", "Error al Guardar", f"Could not save game file:\n{e}", f"No se pudo guardar la partida:\n{e}", kind="error")
+            self._notify("err_save_title", "err_save_msg", err=e, kind="error")
 
     def export_json(self):
         if not self.save_json:

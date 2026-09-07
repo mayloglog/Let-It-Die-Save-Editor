@@ -16,7 +16,9 @@
     "nextptid": "",
     "can_uncap": true,
     "next_name_es": "",
-    "next_name_en": ""
+    "next_name_en": "",
+    "damage_attr": {},
+    "damage_types": []
   },
   {
     "id": "PT_ARM_Food",
@@ -35,7 +37,9 @@
     "nextptid": "",
     "can_uncap": true,
     "next_name_es": "",
-    "next_name_en": ""
+    "next_name_en": "",
+    "damage_attr": {},
+    "damage_types": []
   },
   {
     "id": "PT_ARM_Sand",
@@ -55,7 +59,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "砂"
+    "name_zh": "砂",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP000_001",
@@ -75,7 +85,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "拳头"
+    "name_zh": "拳头",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP001_001",
@@ -95,7 +111,13 @@
     "can_uncap": false,
     "next_name_es": "Machete de selva E",
     "next_name_en": "Jungle Machete E",
-    "name_zh": "丛林大砍刀"
+    "name_zh": "丛林大砍刀",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_002",
@@ -115,7 +137,15 @@
     "can_uncap": false,
     "next_name_es": "Machete de batalla E",
     "next_name_en": "Battle Machete E",
-    "name_zh": "战斗大砍刀"
+    "name_zh": "战斗大砍刀",
+    "damage_attr": {
+      "FIRE": 40,
+      "SLASH": 60
+    },
+    "damage_types": [
+      "SLASH",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP001_003",
@@ -135,7 +165,13 @@
     "can_uncap": false,
     "next_name_es": "Machete de batalla",
     "next_name_en": "Battle Machete",
-    "name_zh": "丛林大砍刀 E"
+    "name_zh": "丛林大砍刀 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_004",
@@ -155,7 +191,15 @@
     "can_uncap": false,
     "next_name_es": "Machete de batalla E",
     "next_name_en": "Battle Machete E",
-    "name_zh": "战斗大砍刀 E"
+    "name_zh": "战斗大砍刀 E",
+    "damage_attr": {
+      "FIRE": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_005",
@@ -175,7 +219,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "战斗大砍刀 E"
+    "name_zh": "战斗大砍刀 E",
+    "damage_attr": {
+      "FIRE": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0B1",
@@ -195,7 +247,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "丛林大砍刀 E RG"
+    "name_zh": "丛林大砍刀 E RG",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0H4",
@@ -215,7 +273,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "芬里尔"
+    "name_zh": "芬里尔",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0N1",
@@ -235,7 +299,13 @@
     "can_uncap": false,
     "next_name_es": "Beam Katana 2",
     "next_name_en": "Beam Katana 2",
-    "name_zh": "Beam Katana 1"
+    "name_zh": "Beam Katana 1",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0N2",
@@ -255,7 +325,15 @@
     "can_uncap": false,
     "next_name_es": "Beam Katana 4",
     "next_name_en": "Beam Katana 4",
-    "name_zh": "Beam Katana 3"
+    "name_zh": "Beam Katana 3",
+    "damage_attr": {
+      "ELECTRIC": 40,
+      "SLASH": 60
+    },
+    "damage_types": [
+      "SLASH",
+      "ELECTRIC"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0N3",
@@ -275,7 +353,13 @@
     "can_uncap": false,
     "next_name_es": "Beam Katana 3",
     "next_name_en": "Beam Katana 3",
-    "name_zh": "Beam Katana 2"
+    "name_zh": "Beam Katana 2",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0N4",
@@ -295,7 +379,15 @@
     "can_uncap": false,
     "next_name_es": "Beam Katana 4",
     "next_name_en": "Beam Katana 4",
-    "name_zh": "Beam Katana 4"
+    "name_zh": "Beam Katana 4",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP001_0N5",
@@ -315,7 +407,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "Beam Katana 4"
+    "name_zh": "Beam Katana 4",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_001",
@@ -335,7 +435,13 @@
     "can_uncap": false,
     "next_name_es": "Navaja de bolsillo E",
     "next_name_en": "Butterfly Knife E",
-    "name_zh": "蝴蝶刀"
+    "name_zh": "蝴蝶刀",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_002",
@@ -355,7 +461,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo de combate E",
     "next_name_en": "Combat Knife E",
-    "name_zh": "战斗刀"
+    "name_zh": "战斗刀",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_003",
@@ -375,7 +487,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo de combate",
     "next_name_en": "Combat Knife",
-    "name_zh": "蝴蝶刀 E"
+    "name_zh": "蝴蝶刀 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_004",
@@ -395,7 +513,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo de combate E",
     "next_name_en": "Combat Knife E",
-    "name_zh": "战斗刀 E"
+    "name_zh": "战斗刀 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_005",
@@ -415,7 +539,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "战斗刀 E"
+    "name_zh": "战斗刀 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0H4",
@@ -435,7 +565,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "诺斯费拉图"
+    "name_zh": "诺斯费拉图",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0N1",
@@ -455,7 +591,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo no 2",
     "next_name_en": "No Knife 2",
-    "name_zh": "No刀 1"
+    "name_zh": "No刀 1",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0N2",
@@ -475,7 +617,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo no 3",
     "next_name_en": "No Knife 3",
-    "name_zh": "No刀 3"
+    "name_zh": "No刀 3",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0N3",
@@ -495,7 +643,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo no 3",
     "next_name_en": "No Knife 3",
-    "name_zh": "No刀 2"
+    "name_zh": "No刀 2",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0N4",
@@ -515,7 +669,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "No刀 3"
+    "name_zh": "No刀 3",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0Y1",
@@ -535,7 +695,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo sí 2",
     "next_name_en": "Yes Knife 2",
-    "name_zh": "Yes刀 1"
+    "name_zh": "Yes刀 1",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0Y2",
@@ -555,7 +721,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo sí 3",
     "next_name_en": "Yes Knife 3",
-    "name_zh": "Yes刀 3"
+    "name_zh": "Yes刀 3",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0Y3",
@@ -575,7 +747,13 @@
     "can_uncap": false,
     "next_name_es": "Cuchillo sí 3",
     "next_name_en": "Yes Knife 3",
-    "name_zh": "Yes刀 2"
+    "name_zh": "Yes刀 2",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP002_0Y4",
@@ -595,7 +773,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "Yes刀 3"
+    "name_zh": "Yes刀 3",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP003_001",
@@ -615,7 +799,13 @@
     "can_uncap": false,
     "next_name_es": "Hacha de acero S",
     "next_name_en": "Steel Axe S",
-    "name_zh": "钢铁斧"
+    "name_zh": "钢铁斧",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP003_002",
@@ -635,7 +825,13 @@
     "can_uncap": false,
     "next_name_es": "Hacha de destrucción S",
     "next_name_en": "Axe of Destruction S",
-    "name_zh": "破坏之斧"
+    "name_zh": "破坏之斧",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP003_003",
@@ -655,7 +851,13 @@
     "can_uncap": false,
     "next_name_es": "Hacha de destrucción",
     "next_name_en": "Axe of Destruction",
-    "name_zh": "钢铁斧 S"
+    "name_zh": "钢铁斧 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP003_004",
@@ -675,7 +877,13 @@
     "can_uncap": false,
     "next_name_es": "Hacha de destrucción S",
     "next_name_en": "Axe of Destruction S",
-    "name_zh": "破坏之斧 S"
+    "name_zh": "破坏之斧 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP003_005",
@@ -695,7 +903,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "破坏之斧 S"
+    "name_zh": "破坏之斧 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP003_0H4",
@@ -715,7 +929,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "阿斯塔罗特"
+    "name_zh": "阿斯塔罗特",
+    "damage_attr": {
+      "POISON": 60,
+      "SLASH": 40
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP004_001",
@@ -735,7 +957,13 @@
     "can_uncap": false,
     "next_name_es": "Ballesta de ladrón S",
     "next_name_en": "Robber Crossbow S",
-    "name_zh": "盗贼十字弩"
+    "name_zh": "盗贼十字弩",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP004_002",
@@ -755,7 +983,13 @@
     "can_uncap": false,
     "next_name_es": "Ballesta de asesino S",
     "next_name_en": "Assassin’s Crossbow S",
-    "name_zh": "刺客十字弩"
+    "name_zh": "刺客十字弩",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP004_003",
@@ -775,7 +1009,13 @@
     "can_uncap": false,
     "next_name_es": "Ballesta de asesino",
     "next_name_en": "Assassin’s Crossbow",
-    "name_zh": "盗贼十字弩 S"
+    "name_zh": "盗贼十字弩 S",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP004_004",
@@ -795,7 +1035,13 @@
     "can_uncap": false,
     "next_name_es": "Ballesta de asesino S",
     "next_name_en": "Assassin’s Crossbow S",
-    "name_zh": "刺客十字弩 S"
+    "name_zh": "刺客十字弩 S",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP004_005",
@@ -815,7 +1061,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "刺客十字弩 S"
+    "name_zh": "刺客十字弩 S",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP004_0H4",
@@ -835,7 +1087,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "穆斯贝尔海姆"
+    "name_zh": "穆斯贝尔海姆",
+    "damage_attr": {
+      "FIRE": 30,
+      "PIERCE": 70
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP005_001",
@@ -855,7 +1115,13 @@
     "can_uncap": false,
     "next_name_es": "Bate de metal A",
     "next_name_en": "Metal Bat A",
-    "name_zh": "金属球棒"
+    "name_zh": "金属球棒",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP005_002",
@@ -875,7 +1141,15 @@
     "can_uncap": false,
     "next_name_es": "Bate con pinchos A",
     "next_name_en": "Spiked Bat A",
-    "name_zh": "铁钉球棒"
+    "name_zh": "铁钉球棒",
+    "damage_attr": {
+      "BLUNT": 50,
+      "POISON": 50
+    },
+    "damage_types": [
+      "BLUNT",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP005_003",
@@ -895,7 +1169,13 @@
     "can_uncap": false,
     "next_name_es": "Bate con pinchos",
     "next_name_en": "Spiked Bat",
-    "name_zh": "金属球棒 A"
+    "name_zh": "金属球棒 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP005_004",
@@ -915,7 +1195,15 @@
     "can_uncap": false,
     "next_name_es": "Bate con pinchos A",
     "next_name_en": "Spiked Bat A",
-    "name_zh": "铁钉球棒 A"
+    "name_zh": "铁钉球棒 A",
+    "damage_attr": {
+      "BLUNT": 50,
+      "POISON": 50
+    },
+    "damage_types": [
+      "BLUNT",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP005_005",
@@ -935,7 +1223,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "铁钉球棒 A"
+    "name_zh": "铁钉球棒 A",
+    "damage_attr": {
+      "BLUNT": 50,
+      "POISON": 50
+    },
+    "damage_types": [
+      "BLUNT",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP005_0H4",
@@ -955,7 +1251,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "雷电"
+    "name_zh": "雷电",
+    "damage_attr": {
+      "ELECTRIC": 40,
+      "BLUNT": 60
+    },
+    "damage_types": [
+      "BLUNT",
+      "ELECTRIC"
+    ]
   },
   {
     "id": "PT_ARM_WP006_001",
@@ -975,7 +1279,13 @@
     "can_uncap": false,
     "next_name_es": "Puño americano circular +",
     "next_name_en": "Buzzsaw Knuckles +",
-    "name_zh": "圆锯指虎"
+    "name_zh": "圆锯指虎",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP006_002",
@@ -995,7 +1305,13 @@
     "can_uncap": false,
     "next_name_es": "Triturador circular +",
     "next_name_en": "Buzzsaw Masher +",
-    "name_zh": "圆锯捣碎机"
+    "name_zh": "圆锯捣碎机",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP006_003",
@@ -1015,7 +1331,13 @@
     "can_uncap": false,
     "next_name_es": "Triturador circular",
     "next_name_en": "Buzzsaw Masher",
-    "name_zh": "圆锯指虎 +"
+    "name_zh": "圆锯指虎 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP006_004",
@@ -1035,7 +1357,13 @@
     "can_uncap": false,
     "next_name_es": "Triturador circular +",
     "next_name_en": "Buzzsaw Masher +",
-    "name_zh": "圆锯捣碎机 +"
+    "name_zh": "圆锯捣碎机 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP006_005",
@@ -1055,7 +1383,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "圆锯捣碎机 +"
+    "name_zh": "圆锯捣碎机 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP006_0H4",
@@ -1075,7 +1409,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "电子开关"
+    "name_zh": "电子开关",
+    "damage_attr": {
+      "ELECTRIC": 20,
+      "SLASH": 80
+    },
+    "damage_types": [
+      "SLASH",
+      "ELECTRIC"
+    ]
   },
   {
     "id": "PT_ARM_WP007_001",
@@ -1095,7 +1437,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzallamas FFWF-103 E",
     "next_name_en": "FFWF-103 Flamethrower E",
-    "name_zh": "FFWF-103火焰喷射器"
+    "name_zh": "FFWF-103火焰喷射器",
+    "damage_attr": {
+      "FIRE": 70,
+      "PIERCE": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_002",
@@ -1115,7 +1465,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzallamas FFWF-285 E",
     "next_name_en": "FFWF-285 Flamethrower E",
-    "name_zh": "FFWF-285火焰喷射器"
+    "name_zh": "FFWF-285火焰喷射器",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_003",
@@ -1135,7 +1493,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzallamas FFWF-285",
     "next_name_en": "FFWF-285 Flamethrower",
-    "name_zh": "FFWF-103火焰喷射器 E"
+    "name_zh": "FFWF-103火焰喷射器 E",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_004",
@@ -1155,7 +1521,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzallamas FFWF-285 E",
     "next_name_en": "FFWF-285 Flamethrower E",
-    "name_zh": "FFWF-285火焰喷射器 E"
+    "name_zh": "FFWF-285火焰喷射器 E",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_005",
@@ -1175,7 +1549,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "FFWF-285火焰喷射器 E"
+    "name_zh": "FFWF-285火焰喷射器 E",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_0A1",
@@ -1195,7 +1577,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "FFWF-103火焰喷射器 TDM"
+    "name_zh": "FFWF-103火焰喷射器 TDM",
+    "damage_attr": {
+      "FIRE": 70,
+      "PIERCE": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_0A2",
@@ -1215,7 +1605,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "FFWF-285火焰喷射器 TDM"
+    "name_zh": "FFWF-285火焰喷射器 TDM",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_0A3",
@@ -1235,7 +1633,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "FFWF-103火焰喷射器 E TDM"
+    "name_zh": "FFWF-103火焰喷射器 E TDM",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_0A4",
@@ -1255,7 +1661,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzallamas FFWF-285 E TDM",
     "next_name_en": "FFWF-285 Flamethrower E TDM",
-    "name_zh": "FFWF-285火焰喷射器 E TDM"
+    "name_zh": "FFWF-285火焰喷射器 E TDM",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP007_0A5",
@@ -1275,7 +1689,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "FFWF-285火焰喷射器 E TDM"
+    "name_zh": "FFWF-285火焰喷射器 E TDM",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP011_001",
@@ -1295,7 +1717,13 @@
     "can_uncap": false,
     "next_name_es": "Martillo de hierro +",
     "next_name_en": "Iron Hammer +",
-    "name_zh": "榔头"
+    "name_zh": "榔头",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_002",
@@ -1315,7 +1743,13 @@
     "can_uncap": false,
     "next_name_es": "Martillo de asalto +",
     "next_name_en": "Strike Hammer +",
-    "name_zh": "痛击榔头"
+    "name_zh": "痛击榔头",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_003",
@@ -1335,7 +1769,13 @@
     "can_uncap": false,
     "next_name_es": "Martillo de asalto",
     "next_name_en": "Strike Hammer",
-    "name_zh": "榔头 +"
+    "name_zh": "榔头 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_004",
@@ -1355,7 +1795,13 @@
     "can_uncap": false,
     "next_name_es": "Martillo de asalto +",
     "next_name_en": "Strike Hammer +",
-    "name_zh": "痛击榔头 +"
+    "name_zh": "痛击榔头 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_005",
@@ -1375,7 +1821,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "痛击榔头 +"
+    "name_zh": "痛击榔头 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_0B1",
@@ -1395,7 +1847,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "榔头 RG"
+    "name_zh": "榔头 RG",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_0C1",
@@ -1415,7 +1873,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "榔头 EXRG"
+    "name_zh": "榔头 EXRG",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP011_0H4",
@@ -1435,7 +1899,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "疯子"
+    "name_zh": "疯子",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP012_001",
@@ -1455,7 +1925,13 @@
     "can_uncap": false,
     "next_name_es": "Pico de guerra definitivo",
     "next_name_en": "Definitive Combat Pickaxe",
-    "name_zh": "战斗鹤嘴锄"
+    "name_zh": "战斗鹤嘴锄",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP012_002",
@@ -1475,7 +1951,13 @@
     "can_uncap": false,
     "next_name_es": "Rastrillo homicida +",
     "next_name_en": "Murderous Rake +",
-    "name_zh": "残暴耙子"
+    "name_zh": "残暴耙子",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP012_003",
@@ -1495,7 +1977,13 @@
     "can_uncap": false,
     "next_name_es": "Rastrillo homicida",
     "next_name_en": "Murderous Rake",
-    "name_zh": "最终战斗鹤嘴锄"
+    "name_zh": "最终战斗鹤嘴锄",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP012_004",
@@ -1515,7 +2003,13 @@
     "can_uncap": false,
     "next_name_es": "Rastrillo homicida +",
     "next_name_en": "Murderous Rake +",
-    "name_zh": "残暴耙子 +"
+    "name_zh": "残暴耙子 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP012_005",
@@ -1535,7 +2029,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "残暴耙子 +"
+    "name_zh": "残暴耙子 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP012_0H4",
@@ -1555,7 +2055,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死亡追猎者"
+    "name_zh": "死亡追猎者",
+    "damage_attr": {
+      "POISON": 20,
+      "SLASH": 80
+    },
+    "damage_types": [
+      "SLASH",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP013_001",
@@ -1575,7 +2083,13 @@
     "can_uncap": false,
     "next_name_es": "Lanza de caballero S",
     "next_name_en": "Knight’s Lance S",
-    "name_zh": "骑士之矛"
+    "name_zh": "骑士之矛",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP013_002",
@@ -1595,7 +2109,13 @@
     "can_uncap": false,
     "next_name_es": "Lanza espiritual S",
     "next_name_en": "Spirit Lance S",
-    "name_zh": "精灵之矛"
+    "name_zh": "精灵之矛",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP013_003",
@@ -1615,7 +2135,13 @@
     "can_uncap": false,
     "next_name_es": "Lanza espiritual",
     "next_name_en": "Spirit Lance",
-    "name_zh": "骑士之矛 S"
+    "name_zh": "骑士之矛 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP013_004",
@@ -1635,7 +2161,13 @@
     "can_uncap": false,
     "next_name_es": "Lanza espiritual S",
     "next_name_en": "Spirit Lance S",
-    "name_zh": "精灵之矛 S"
+    "name_zh": "精灵之矛 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP013_005",
@@ -1655,7 +2187,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "精灵之矛 S"
+    "name_zh": "精灵之矛 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP013_0H4",
@@ -1675,7 +2213,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "贝尔芬格"
+    "name_zh": "贝尔芬格",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP016_001",
@@ -1695,7 +2239,13 @@
     "can_uncap": false,
     "next_name_es": "Espada Masamune S",
     "next_name_en": "Masamune Blade S",
-    "name_zh": "正宗"
+    "name_zh": "正宗",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP016_002",
@@ -1715,7 +2265,13 @@
     "can_uncap": false,
     "next_name_es": "Espada Muramasa S",
     "next_name_en": "Muramasa Blade S",
-    "name_zh": "村正"
+    "name_zh": "村正",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP016_003",
@@ -1735,7 +2291,13 @@
     "can_uncap": false,
     "next_name_es": "Espada Muramasa",
     "next_name_en": "Muramasa Blade",
-    "name_zh": "正宗 S"
+    "name_zh": "正宗 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP016_004",
@@ -1755,7 +2317,13 @@
     "can_uncap": false,
     "next_name_es": "Espada Muramasa S",
     "next_name_en": "Muramasa Blade S",
-    "name_zh": "村正 S"
+    "name_zh": "村正 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP016_005",
@@ -1775,7 +2343,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "村正 S"
+    "name_zh": "村正 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP016_0H4",
@@ -1795,7 +2369,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "高天原"
+    "name_zh": "高天原",
+    "damage_attr": {
+      "ELECTRIC": 20,
+      "SLASH": 80
+    },
+    "damage_types": [
+      "SLASH",
+      "ELECTRIC"
+    ]
   },
   {
     "id": "PT_ARM_WP017_001",
@@ -1815,7 +2397,13 @@
     "can_uncap": false,
     "next_name_es": "Revólver Glinty E",
     "next_name_en": "Glinty Magnum E",
-    "name_zh": "闪亮麦格农"
+    "name_zh": "闪亮麦格农",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_002",
@@ -1835,7 +2423,13 @@
     "can_uncap": false,
     "next_name_es": "Revólver Bronson E",
     "next_name_en": "Bronson Magnum E",
-    "name_zh": "布朗森麦格农"
+    "name_zh": "布朗森麦格农",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_003",
@@ -1855,7 +2449,13 @@
     "can_uncap": false,
     "next_name_es": "Revólver Bronson",
     "next_name_en": "Bronson Magnum",
-    "name_zh": "闪亮麦格农 E"
+    "name_zh": "闪亮麦格农 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_004",
@@ -1875,7 +2475,13 @@
     "can_uncap": false,
     "next_name_es": "Revólver Bronson E",
     "next_name_en": "Bronson Magnum E",
-    "name_zh": "布朗森麦格农 E"
+    "name_zh": "布朗森麦格农 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_005",
@@ -1895,7 +2501,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "布朗森麦格农 E"
+    "name_zh": "布朗森麦格农 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_0A1",
@@ -1915,7 +2527,13 @@
     "can_uncap": false,
     "next_name_es": "Demon Gun 2",
     "next_name_en": "Demon Gun 2",
-    "name_zh": "Demon Gun 1"
+    "name_zh": "Demon Gun 1",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_0A2",
@@ -1935,7 +2553,13 @@
     "can_uncap": false,
     "next_name_es": "Demon Gun 4",
     "next_name_en": "Demon Gun 4",
-    "name_zh": "Demon Gun 3"
+    "name_zh": "Demon Gun 3",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_0A3",
@@ -1955,7 +2579,13 @@
     "can_uncap": false,
     "next_name_es": "Demon Gun 3",
     "next_name_en": "Demon Gun 3",
-    "name_zh": "Demon Gun 2"
+    "name_zh": "Demon Gun 2",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_0A4",
@@ -1975,7 +2605,13 @@
     "can_uncap": false,
     "next_name_es": "Demon Gun 4",
     "next_name_en": "Demon Gun 4",
-    "name_zh": "Demon Gun 4"
+    "name_zh": "Demon Gun 4",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_0A5",
@@ -1995,7 +2631,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "Demon Gun 4"
+    "name_zh": "Demon Gun 4",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP017_0H4",
@@ -2015,7 +2657,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "致命武器"
+    "name_zh": "致命武器",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP018_001",
@@ -2035,7 +2685,15 @@
     "can_uncap": false,
     "next_name_es": "Bastón eléctrico E",
     "next_name_en": "Stun Rod E",
-    "name_zh": "电击棍"
+    "name_zh": "电击棍",
+    "damage_attr": {
+      "ELECTRIC": 70,
+      "BLUNT": 30
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP018_002",
@@ -2055,7 +2713,15 @@
     "can_uncap": false,
     "next_name_es": "Megaturdidor E",
     "next_name_en": "Stun Master E",
-    "name_zh": "电击大师"
+    "name_zh": "电击大师",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP018_003",
@@ -2075,7 +2741,15 @@
     "can_uncap": false,
     "next_name_es": "Megaturdidor",
     "next_name_en": "Stun Master",
-    "name_zh": "电击棍 E"
+    "name_zh": "电击棍 E",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP018_004",
@@ -2095,7 +2769,15 @@
     "can_uncap": false,
     "next_name_es": "Megaturdidor E",
     "next_name_en": "Stun Master E",
-    "name_zh": "电击大师 E"
+    "name_zh": "电击大师 E",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP018_005",
@@ -2115,7 +2797,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "电击大师 E"
+    "name_zh": "电击大师 E",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP019_001",
@@ -2135,7 +2825,13 @@
     "can_uncap": false,
     "next_name_es": "Espada larga S",
     "next_name_en": "Longsword S",
-    "name_zh": "长剑"
+    "name_zh": "长剑",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP019_002",
@@ -2155,7 +2851,13 @@
     "can_uncap": false,
     "next_name_es": "Espada matadragones S",
     "next_name_en": "Dragon Buster Sword S",
-    "name_zh": "屠龙剑"
+    "name_zh": "屠龙剑",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP019_003",
@@ -2175,7 +2877,15 @@
     "can_uncap": false,
     "next_name_es": "Espada matadragones",
     "next_name_en": "Dragon Buster Sword",
-    "name_zh": "长剑 S"
+    "name_zh": "长剑 S",
+    "damage_attr": {
+      "FIRE": 80,
+      "SLASH": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP019_004",
@@ -2195,7 +2905,15 @@
     "can_uncap": false,
     "next_name_es": "Espada matadragones S",
     "next_name_en": "Dragon Buster Sword S",
-    "name_zh": "屠龙剑 S"
+    "name_zh": "屠龙剑 S",
+    "damage_attr": {
+      "FIRE": 80,
+      "SLASH": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP019_005",
@@ -2215,7 +2933,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "屠龙剑 S"
+    "name_zh": "屠龙剑 S",
+    "damage_attr": {
+      "FIRE": 80,
+      "SLASH": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP019_0H4",
@@ -2235,7 +2961,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "阿斯加德"
+    "name_zh": "阿斯加德",
+    "damage_attr": {
+      "ELECTRIC": 80,
+      "SLASH": 20
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP020_001",
@@ -2255,7 +2989,15 @@
     "can_uncap": false,
     "next_name_es": "Garra de hierro S",
     "next_name_en": "Iron Claw S",
-    "name_zh": "铁爪"
+    "name_zh": "铁爪",
+    "damage_attr": {
+      "POISON": 70,
+      "SLASH": 30
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP020_002",
@@ -2275,7 +3017,15 @@
     "can_uncap": false,
     "next_name_es": "Garra de tormento S",
     "next_name_en": "Nightmare Claw S",
-    "name_zh": "恶梦之爪"
+    "name_zh": "恶梦之爪",
+    "damage_attr": {
+      "POISON": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP020_003",
@@ -2295,7 +3045,15 @@
     "can_uncap": false,
     "next_name_es": "Garra de tormento",
     "next_name_en": "Nightmare Claw",
-    "name_zh": "铁爪 S"
+    "name_zh": "铁爪 S",
+    "damage_attr": {
+      "POISON": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP020_004",
@@ -2315,7 +3073,15 @@
     "can_uncap": false,
     "next_name_es": "Garra de tormento S",
     "next_name_en": "Nightmare Claw S",
-    "name_zh": "恶梦之爪 S"
+    "name_zh": "恶梦之爪 S",
+    "damage_attr": {
+      "POISON": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP020_005",
@@ -2335,7 +3101,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "恶梦之爪 S"
+    "name_zh": "恶梦之爪 S",
+    "damage_attr": {
+      "POISON": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP021_001",
@@ -2355,7 +3129,13 @@
     "can_uncap": false,
     "next_name_es": "Escopeta Pitbull E",
     "next_name_en": "Pitbull Shotgun E",
-    "name_zh": "比特犬散弹枪"
+    "name_zh": "比特犬散弹枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP021_002",
@@ -2375,7 +3155,13 @@
     "can_uncap": false,
     "next_name_es": "Escopeta Cerbero E",
     "next_name_en": "Cerberus Shotgun E",
-    "name_zh": "地狱三头犬散弹枪"
+    "name_zh": "地狱三头犬散弹枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP021_003",
@@ -2395,7 +3181,13 @@
     "can_uncap": false,
     "next_name_es": "Escopeta Cerbero",
     "next_name_en": "Cerberus Shotgun",
-    "name_zh": "比特犬散弹枪 E"
+    "name_zh": "比特犬散弹枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP021_004",
@@ -2415,7 +3207,13 @@
     "can_uncap": false,
     "next_name_es": "Escopeta Cerbero E",
     "next_name_en": "Cerberus Shotgun E",
-    "name_zh": "地狱三头犬散弹枪 E"
+    "name_zh": "地狱三头犬散弹枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP021_005",
@@ -2435,7 +3233,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "地狱三头犬散弹枪 E"
+    "name_zh": "地狱三头犬散弹枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP023_001",
@@ -2455,7 +3259,13 @@
     "can_uncap": false,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "地雷"
+    "name_zh": "地雷",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP024_001",
@@ -2475,7 +3285,13 @@
     "can_uncap": false,
     "next_name_es": "Mangual de asalto S",
     "next_name_en": "Striker Flail S",
-    "name_zh": "痛击连枷"
+    "name_zh": "痛击连枷",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP024_002",
@@ -2495,7 +3311,13 @@
     "can_uncap": false,
     "next_name_es": "Mangual triturador S",
     "next_name_en": "Armor Breaking Flail S",
-    "name_zh": "破甲连枷"
+    "name_zh": "破甲连枷",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP024_003",
@@ -2515,7 +3337,13 @@
     "can_uncap": false,
     "next_name_es": "Mangual triturador",
     "next_name_en": "Armor Breaking Flail",
-    "name_zh": "痛击连枷 S"
+    "name_zh": "痛击连枷 S",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP024_004",
@@ -2535,7 +3363,13 @@
     "can_uncap": false,
     "next_name_es": "Mangual triturador S",
     "next_name_en": "Armor Breaking Flail S",
-    "name_zh": "破甲连枷  S"
+    "name_zh": "破甲连枷  S",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP024_005",
@@ -2555,7 +3389,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "破甲连枷  S"
+    "name_zh": "破甲连枷  S",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP024_0H4",
@@ -2575,7 +3415,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "乌洛波洛斯"
+    "name_zh": "乌洛波洛斯",
+    "damage_attr": {
+      "BLUNT": 50,
+      "POISON": 50
+    },
+    "damage_types": [
+      "BLUNT",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP025_001",
@@ -2595,7 +3443,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de caza DUKE-02 E",
     "next_name_en": "DUKE-02 Sniper Rifle E",
-    "name_zh": "DUKE-02狙击步枪"
+    "name_zh": "DUKE-02狙击步枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_002",
@@ -2615,7 +3469,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de caza DUKE-13 E",
     "next_name_en": "DUKE-13 Sniper Rifle E",
-    "name_zh": "DUKE-13狙击步枪"
+    "name_zh": "DUKE-13狙击步枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_003",
@@ -2635,7 +3495,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de caza DUKE-13",
     "next_name_en": "DUKE-13 Sniper Rifle",
-    "name_zh": "DUKE-02狙击步枪 E"
+    "name_zh": "DUKE-02狙击步枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_004",
@@ -2655,7 +3521,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de caza DUKE-13 E",
     "next_name_en": "DUKE-13 Sniper Rifle E",
-    "name_zh": "DUKE-13狙击步枪 E"
+    "name_zh": "DUKE-13狙击步枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_005",
@@ -2675,7 +3547,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "DUKE-13狙击步枪 E"
+    "name_zh": "DUKE-13狙击步枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0A4",
@@ -2694,7 +3572,13 @@
     "nextptid": "",
     "can_uncap": true,
     "next_name_es": "",
-    "next_name_en": ""
+    "next_name_en": "",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0H4",
@@ -2714,7 +3598,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "地狱犬"
+    "name_zh": "地狱犬",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0K1",
@@ -2734,7 +3624,13 @@
     "can_uncap": false,
     "next_name_es": "GLIDER 2",
     "next_name_en": "GLIDER 2",
-    "name_zh": "GLIDER 1"
+    "name_zh": "GLIDER 1",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0K2",
@@ -2754,7 +3650,13 @@
     "can_uncap": false,
     "next_name_es": "GLIDER 4",
     "next_name_en": "GLIDER 4",
-    "name_zh": "GLIDER 3"
+    "name_zh": "GLIDER 3",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0K3",
@@ -2774,7 +3676,13 @@
     "can_uncap": false,
     "next_name_es": "GLIDER 3",
     "next_name_en": "GLIDER 3",
-    "name_zh": "GLIDER 2"
+    "name_zh": "GLIDER 2",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0K4",
@@ -2794,7 +3702,13 @@
     "can_uncap": false,
     "next_name_es": "GLIDER 4",
     "next_name_en": "GLIDER 4",
-    "name_zh": "GLIDER 4"
+    "name_zh": "GLIDER 4",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP025_0K5",
@@ -2814,7 +3728,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "GLIDER 4"
+    "name_zh": "GLIDER 4",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP026_001",
@@ -2834,7 +3754,15 @@
     "can_uncap": false,
     "next_name_es": "Sable cercenador A",
     "next_name_en": "Cleaver Saber A",
-    "name_zh": "切肉军刀"
+    "name_zh": "切肉军刀",
+    "damage_attr": {
+      "ELECTRIC": 60,
+      "SLASH": 40
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_002",
@@ -2854,7 +3782,15 @@
     "can_uncap": false,
     "next_name_es": "Sable de avispón A",
     "next_name_en": "Hornet Saber A",
-    "name_zh": "大黄蜂军刀"
+    "name_zh": "大黄蜂军刀",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_003",
@@ -2874,7 +3810,15 @@
     "can_uncap": false,
     "next_name_es": "Sable de avispón",
     "next_name_en": "Hornet Saber",
-    "name_zh": "切肉军刀 A"
+    "name_zh": "切肉军刀 A",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_004",
@@ -2894,7 +3838,15 @@
     "can_uncap": false,
     "next_name_es": "Sable de avispón A",
     "next_name_en": "Hornet Saber A",
-    "name_zh": "大黄蜂军刀 A"
+    "name_zh": "大黄蜂军刀 A",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_005",
@@ -2914,7 +3866,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "大黄蜂军刀 A"
+    "name_zh": "大黄蜂军刀 A",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_0A1",
@@ -2934,7 +3894,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "切肉军刀 TDM"
+    "name_zh": "切肉军刀 TDM",
+    "damage_attr": {
+      "ELECTRIC": 60,
+      "SLASH": 40
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_0A2",
@@ -2954,7 +3922,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "大黄蜂军刀 TDM"
+    "name_zh": "大黄蜂军刀 TDM",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_0A3",
@@ -2974,7 +3950,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "切肉军刀 A TDM"
+    "name_zh": "切肉军刀 A TDM",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_0A4",
@@ -2994,7 +3978,15 @@
     "can_uncap": false,
     "next_name_es": "Sable de avispón A TDM",
     "next_name_en": "Hornet Saber A TDM",
-    "name_zh": "大黄蜂军刀 A TDM"
+    "name_zh": "大黄蜂军刀 A TDM",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_0A5",
@@ -3014,7 +4006,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "大黄蜂军刀 A TDM"
+    "name_zh": "大黄蜂军刀 A TDM",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP026_0H4",
@@ -3034,7 +4034,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "绯红玫瑰"
+    "name_zh": "绯红玫瑰",
+    "damage_attr": {
+      "ELECTRIC": 60,
+      "SLASH": 40
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP028_001",
@@ -3054,7 +4062,13 @@
     "can_uncap": false,
     "next_name_es": "Lanzador mortífero A",
     "next_name_en": "Bloody Pitching Machine A",
-    "name_zh": "染血发球机"
+    "name_zh": "染血发球机",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP028_002",
@@ -3074,7 +4088,13 @@
     "can_uncap": false,
     "next_name_es": "Lanzador abominable A",
     "next_name_en": "Ghastly Pitching Machine A",
-    "name_zh": "死灵发球机"
+    "name_zh": "死灵发球机",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP028_003",
@@ -3094,7 +4114,13 @@
     "can_uncap": false,
     "next_name_es": "Lanzador abominable",
     "next_name_en": "Ghastly Pitching Machine",
-    "name_zh": "染血发球机 A"
+    "name_zh": "染血发球机 A",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP028_004",
@@ -3114,7 +4140,13 @@
     "can_uncap": false,
     "next_name_es": "Lanzador abominable A",
     "next_name_en": "Ghastly Pitching Machine A",
-    "name_zh": "死灵发球机 A"
+    "name_zh": "死灵发球机 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP028_005",
@@ -3134,7 +4166,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死灵发球机 A"
+    "name_zh": "死灵发球机 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP028_0A1",
@@ -3154,7 +4192,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "染血发球机 TDM"
+    "name_zh": "染血发球机 TDM",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP028_0A2",
@@ -3174,7 +4218,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死灵发球机 TDM"
+    "name_zh": "死灵发球机 TDM",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP028_0A3",
@@ -3194,7 +4244,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "染血发球机 A TDM"
+    "name_zh": "染血发球机 A TDM",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP028_0A4",
@@ -3214,7 +4270,13 @@
     "can_uncap": false,
     "next_name_es": "Lanzador abominable A TDM",
     "next_name_en": "Ghastly Pitching Machine A TDM",
-    "name_zh": "死灵发球机 A TDM"
+    "name_zh": "死灵发球机 A TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP028_0A5",
@@ -3234,7 +4296,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死灵发球机 A TDM"
+    "name_zh": "死灵发球机 A TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP029_001",
@@ -3254,7 +4322,15 @@
     "can_uncap": false,
     "next_name_es": "Vara de fuego S",
     "next_name_en": "Flame Wand S",
-    "name_zh": "火焰杖"
+    "name_zh": "火焰杖",
+    "damage_attr": {
+      "FIRE": 70,
+      "PIERCE": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP029_002",
@@ -3274,7 +4350,15 @@
     "can_uncap": false,
     "next_name_es": "Vara calcinadora S",
     "next_name_en": "Wand of Conflagration S",
-    "name_zh": "劫火之杖"
+    "name_zh": "劫火之杖",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP029_003",
@@ -3294,7 +4378,15 @@
     "can_uncap": false,
     "next_name_es": "Vara calcinadora",
     "next_name_en": "Wand of Conflagration",
-    "name_zh": "火焰杖 S"
+    "name_zh": "火焰杖 S",
+    "damage_attr": {
+      "FIRE": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP029_004",
@@ -3314,7 +4406,15 @@
     "can_uncap": false,
     "next_name_es": "Vara calcinadora S",
     "next_name_en": "Wand of Conflagration S",
-    "name_zh": "劫火之杖 S"
+    "name_zh": "劫火之杖 S",
+    "damage_attr": {
+      "FIRE": 70,
+      "PIERCE": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP029_005",
@@ -3334,7 +4434,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "劫火之杖 S"
+    "name_zh": "劫火之杖 S",
+    "damage_attr": {
+      "FIRE": 70,
+      "PIERCE": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP030_001",
@@ -3354,7 +4462,13 @@
     "can_uncap": false,
     "next_name_es": "Guante reforzado A",
     "next_name_en": "Loaded Glove A",
-    "name_zh": "猛击手套"
+    "name_zh": "猛击手套",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP030_002",
@@ -3374,7 +4488,13 @@
     "can_uncap": false,
     "next_name_es": "Guante de boxeo con púas A",
     "next_name_en": "Spiked Boxing Glove A",
-    "name_zh": "铁钉拳击手套"
+    "name_zh": "铁钉拳击手套",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP030_003",
@@ -3394,7 +4514,13 @@
     "can_uncap": false,
     "next_name_es": "Guante de boxeo con púas",
     "next_name_en": "Spiked Boxing Glove",
-    "name_zh": "猛击手套 A"
+    "name_zh": "猛击手套 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP030_004",
@@ -3414,7 +4540,13 @@
     "can_uncap": false,
     "next_name_es": "Guante de boxeo con púas A",
     "next_name_en": "Spiked Boxing Glove A",
-    "name_zh": "铁钉拳击手套 A"
+    "name_zh": "铁钉拳击手套 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP030_005",
@@ -3434,7 +4566,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "铁钉拳击手套 A"
+    "name_zh": "铁钉拳击手套 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP030_0H4",
@@ -3454,7 +4592,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "造假比赛"
+    "name_zh": "造假比赛",
+    "damage_attr": {
+      "BLUNT": 1,
+      "POISON": 99
+    },
+    "damage_types": [
+      "POISON",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP031_001",
@@ -3474,7 +4620,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-A1 E",
     "next_name_en": "KAMAS-A1 Assault Rifle E",
-    "name_zh": "KAMAS-A1突击步枪"
+    "name_zh": "KAMAS-A1突击步枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_002",
@@ -3494,7 +4646,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-SP E",
     "next_name_en": "KAMAS-SP Assault Rifle E",
-    "name_zh": "KAMAS-SP突击步枪"
+    "name_zh": "KAMAS-SP突击步枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_003",
@@ -3514,7 +4672,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-SP",
     "next_name_en": "KAMAS-SP Assault Rifle",
-    "name_zh": "KAMAS-A1突击步枪 E"
+    "name_zh": "KAMAS-A1突击步枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_004",
@@ -3534,7 +4698,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-SP E",
     "next_name_en": "KAMAS-SP Assault Rifle E",
-    "name_zh": "KAMAS-SP突击步枪 E"
+    "name_zh": "KAMAS-SP突击步枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_005",
@@ -3554,7 +4724,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "KAMAS-SP突击步枪 E"
+    "name_zh": "KAMAS-SP突击步枪 E",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0A1",
@@ -3574,7 +4750,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-WoT02",
     "next_name_en": "KAMAS-WoT Assault Rifle02",
-    "name_zh": "KAMAS-WoT突击步枪01"
+    "name_zh": "KAMAS-WoT突击步枪01",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0A2",
@@ -3594,7 +4776,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-WoT04",
     "next_name_en": "KAMAS-WoT Assault Rifle04",
-    "name_zh": "KAMAS-WoT突击步枪03"
+    "name_zh": "KAMAS-WoT突击步枪03",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0A3",
@@ -3614,7 +4802,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-WoT03",
     "next_name_en": "KAMAS-WoT Assault Rifle03",
-    "name_zh": "KAMAS-WoT突击步枪02"
+    "name_zh": "KAMAS-WoT突击步枪02",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0A4",
@@ -3634,7 +4828,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-WoT04",
     "next_name_en": "KAMAS-WoT Assault Rifle04",
-    "name_zh": "KAMAS-WoT突击步枪04"
+    "name_zh": "KAMAS-WoT突击步枪04",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0A5",
@@ -3654,7 +4854,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "KAMAS-WoT突击步枪04"
+    "name_zh": "KAMAS-WoT突击步枪04",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0B1",
@@ -3674,7 +4880,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-A1 E RE",
     "next_name_en": "KAMAS-A1 Assault Rifle E RE",
-    "name_zh": "KAMAS-A1突击步枪 RE"
+    "name_zh": "KAMAS-A1突击步枪 RE",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0B2",
@@ -3694,7 +4906,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-SP E RE",
     "next_name_en": "KAMAS-SP Assault Rifle E RE",
-    "name_zh": "KAMAS-SP突击步枪 RE"
+    "name_zh": "KAMAS-SP突击步枪 RE",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0B3",
@@ -3714,7 +4932,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-SP RE",
     "next_name_en": "KAMAS-SP Assault Rifle RE",
-    "name_zh": "KAMAS-A1突击步枪 E RE"
+    "name_zh": "KAMAS-A1突击步枪 E RE",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0B4",
@@ -3734,7 +4958,13 @@
     "can_uncap": false,
     "next_name_es": "Fusil de asalto KAMAS-SP E RE",
     "next_name_en": "KAMAS-SP Assault Rifle E RE",
-    "name_zh": "KAMAS-SP突击步枪 E RE"
+    "name_zh": "KAMAS-SP突击步枪 E RE",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0B5",
@@ -3754,7 +4984,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "KAMAS-SP突击步枪 E RE"
+    "name_zh": "KAMAS-SP突击步枪 E RE",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP031_0H4",
@@ -3774,7 +5010,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "疯狂警察"
+    "name_zh": "疯狂警察",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP032_001",
@@ -3794,7 +5036,13 @@
     "can_uncap": false,
     "next_name_es": "Pistola de clavos +",
     "next_name_en": "Nail Gun +",
-    "name_zh": "钉枪"
+    "name_zh": "钉枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP032_002",
@@ -3814,7 +5062,13 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de clavos +",
     "next_name_en": "Nail Blaster +",
-    "name_zh": "爆钉枪"
+    "name_zh": "爆钉枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP032_003",
@@ -3834,7 +5088,13 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de clavos",
     "next_name_en": "Nail Blaster",
-    "name_zh": "钉枪 +"
+    "name_zh": "钉枪 +",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP032_004",
@@ -3854,7 +5114,13 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de clavos +",
     "next_name_en": "Nail Blaster +",
-    "name_zh": "爆钉枪 +"
+    "name_zh": "爆钉枪 +",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP032_005",
@@ -3874,7 +5140,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "爆钉枪 +"
+    "name_zh": "爆钉枪 +",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP033_001",
@@ -3894,7 +5166,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó brutal A",
     "next_name_en": "Brutal Yo-Yo A",
-    "name_zh": "暴虐溜溜球"
+    "name_zh": "暴虐溜溜球",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP033_002",
@@ -3914,7 +5192,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó cercenador A",
     "next_name_en": "Yo-Yo Blade A",
-    "name_zh": "溜溜球刃"
+    "name_zh": "溜溜球刃",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP033_003",
@@ -3934,7 +5218,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó cercenador",
     "next_name_en": "Yo-Yo Blade",
-    "name_zh": "暴虐溜溜球 A"
+    "name_zh": "暴虐溜溜球 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP033_004",
@@ -3954,7 +5244,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó cercenador A",
     "next_name_en": "Yo-Yo Blade A",
-    "name_zh": "溜溜球刃 A"
+    "name_zh": "溜溜球刃 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP033_005",
@@ -3974,7 +5270,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "溜溜球刃 A"
+    "name_zh": "溜溜球刃 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP034_001",
@@ -3994,7 +5296,15 @@
     "can_uncap": false,
     "next_name_es": "Soplete +",
     "next_name_en": "Welding Gun +",
-    "name_zh": "电弧焊接枪"
+    "name_zh": "电弧焊接枪",
+    "damage_attr": {
+      "ELECTRIC": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP034_002",
@@ -4014,7 +5324,15 @@
     "can_uncap": false,
     "next_name_es": "Soplete de plasma +",
     "next_name_en": "Plasma Welding Gun +",
-    "name_zh": "电浆焊接枪"
+    "name_zh": "电浆焊接枪",
+    "damage_attr": {
+      "FIRE": 70,
+      "PIERCE": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP034_003",
@@ -4034,7 +5352,15 @@
     "can_uncap": false,
     "next_name_es": "Soplete de plasma",
     "next_name_en": "Plasma Welding Gun",
-    "name_zh": "电弧焊接枪 +"
+    "name_zh": "电弧焊接枪 +",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP034_004",
@@ -4054,7 +5380,15 @@
     "can_uncap": false,
     "next_name_es": "Soplete de plasma +",
     "next_name_en": "Plasma Welding Gun +",
-    "name_zh": "电浆焊接枪 +"
+    "name_zh": "电浆焊接枪 +",
+    "damage_attr": {
+      "FIRE": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP034_005",
@@ -4074,7 +5408,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "电浆焊接枪 +"
+    "name_zh": "电浆焊接枪 +",
+    "damage_attr": {
+      "FIRE": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP035_001",
@@ -4094,7 +5436,15 @@
     "can_uncap": false,
     "next_name_es": "Machacabolos A",
     "next_name_en": "Bowling Stomper A",
-    "name_zh": "保龄球践踏者"
+    "name_zh": "保龄球践踏者",
+    "damage_attr": {
+      "ELECTRIC": 20,
+      "BLUNT": 80
+    },
+    "damage_types": [
+      "BLUNT",
+      "ELECTRIC"
+    ]
   },
   {
     "id": "PT_ARM_WP035_002",
@@ -4114,7 +5464,13 @@
     "can_uncap": false,
     "next_name_es": "Triturabolos A",
     "next_name_en": "Bowling Crusher A",
-    "name_zh": "保龄球粉碎者"
+    "name_zh": "保龄球粉碎者",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_003",
@@ -4134,7 +5490,15 @@
     "can_uncap": false,
     "next_name_es": "Triturabolos",
     "next_name_en": "Bowling Crusher",
-    "name_zh": "保龄球践踏者 A"
+    "name_zh": "保龄球践踏者 A",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_004",
@@ -4154,7 +5518,13 @@
     "can_uncap": false,
     "next_name_es": "Triturabolos A",
     "next_name_en": "Bowling Crusher A",
-    "name_zh": "保龄球粉碎者 A"
+    "name_zh": "保龄球粉碎者 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_005",
@@ -4174,7 +5544,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "保龄球粉碎者 A"
+    "name_zh": "保龄球粉碎者 A",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_0A1",
@@ -4194,7 +5570,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "保龄球践踏者 TDM"
+    "name_zh": "保龄球践踏者 TDM",
+    "damage_attr": {
+      "ELECTRIC": 20,
+      "BLUNT": 80
+    },
+    "damage_types": [
+      "BLUNT",
+      "ELECTRIC"
+    ]
   },
   {
     "id": "PT_ARM_WP035_0A2",
@@ -4214,7 +5598,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "保龄球粉碎者 TDM"
+    "name_zh": "保龄球粉碎者 TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_0A3",
@@ -4234,7 +5624,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "保龄球践踏者 A TDM"
+    "name_zh": "保龄球践踏者 A TDM",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_0A4",
@@ -4254,7 +5652,13 @@
     "can_uncap": false,
     "next_name_es": "Triturabolos A TDM",
     "next_name_en": "Bowling Crusher A TDM",
-    "name_zh": "保龄球粉碎者 A TDM"
+    "name_zh": "保龄球粉碎者 A TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP035_0A5",
@@ -4274,7 +5678,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "保龄球粉碎者 A TDM"
+    "name_zh": "保龄球粉碎者 A TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP036_001",
@@ -4294,7 +5704,13 @@
     "can_uncap": false,
     "next_name_es": "Brazo taladrador +",
     "next_name_en": "Drill Arm +",
-    "name_zh": "钻头手臂"
+    "name_zh": "钻头手臂",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_002",
@@ -4314,7 +5730,13 @@
     "can_uncap": false,
     "next_name_es": "Taladradora +",
     "next_name_en": "Drill Buster +",
-    "name_zh": "钻头爆能枪"
+    "name_zh": "钻头爆能枪",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_003",
@@ -4334,7 +5756,13 @@
     "can_uncap": false,
     "next_name_es": "Taladradora",
     "next_name_en": "Drill Buster",
-    "name_zh": "钻头手臂 +"
+    "name_zh": "钻头手臂 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_004",
@@ -4354,7 +5782,13 @@
     "can_uncap": false,
     "next_name_es": "Taladradora +",
     "next_name_en": "Drill Buster +",
-    "name_zh": "钻头爆能枪 +"
+    "name_zh": "钻头爆能枪 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_005",
@@ -4374,7 +5808,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "钻头爆能枪 +"
+    "name_zh": "钻头爆能枪 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_0A1",
@@ -4394,7 +5834,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "钻头手臂 TDM"
+    "name_zh": "钻头手臂 TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_0A2",
@@ -4414,7 +5860,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "钻头爆能枪 TDM"
+    "name_zh": "钻头爆能枪 TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_0A3",
@@ -4434,7 +5886,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "钻头手臂 + TDM"
+    "name_zh": "钻头手臂 + TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_0A4",
@@ -4454,7 +5912,13 @@
     "can_uncap": false,
     "next_name_es": "Taladradora + TDM",
     "next_name_en": "Drill Buster + TDM",
-    "name_zh": "钻头爆能枪 + TDM"
+    "name_zh": "钻头爆能枪 + TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP036_0A5",
@@ -4474,7 +5938,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "钻头爆能枪 + TDM"
+    "name_zh": "钻头爆能枪 + TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP037_001",
@@ -4494,7 +5964,13 @@
     "can_uncap": false,
     "next_name_es": "Hierro candente +",
     "next_name_en": "Red Hot Iron +",
-    "name_zh": "炽热熨斗"
+    "name_zh": "炽热熨斗",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP037_002",
@@ -4514,7 +5990,15 @@
     "can_uncap": false,
     "next_name_es": "Hierro infernal +",
     "next_name_en": "Death Burner Iron +",
-    "name_zh": "死亡之燃熨斗"
+    "name_zh": "死亡之燃熨斗",
+    "damage_attr": {
+      "FIRE": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP037_003",
@@ -4534,7 +6018,13 @@
     "can_uncap": false,
     "next_name_es": "Hierro infernal",
     "next_name_en": "Death Burner Iron",
-    "name_zh": "炽热熨斗 +"
+    "name_zh": "炽热熨斗 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP037_004",
@@ -4554,7 +6044,15 @@
     "can_uncap": false,
     "next_name_es": "Hierro infernal +",
     "next_name_en": "Death Burner Iron +",
-    "name_zh": "死亡之燃熨斗 +"
+    "name_zh": "死亡之燃熨斗 +",
+    "damage_attr": {
+      "FIRE": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP037_005",
@@ -4574,7 +6072,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死亡之燃熨斗 +"
+    "name_zh": "死亡之燃熨斗 +",
+    "damage_attr": {
+      "FIRE": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP037_0H4",
@@ -4594,7 +6100,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "狒狒王"
+    "name_zh": "狒狒王",
+    "damage_attr": {
+      "BLUNT": 80,
+      "POISON": 20
+    },
+    "damage_types": [
+      "BLUNT",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP038_001",
@@ -4614,7 +6128,13 @@
     "can_uncap": false,
     "next_name_es": "Pala táctica E",
     "next_name_en": "Tactical Shovel E",
-    "name_zh": "战术铲"
+    "name_zh": "战术铲",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP038_002",
@@ -4634,7 +6154,13 @@
     "can_uncap": false,
     "next_name_es": "Pala fuerzas especiales E",
     "next_name_en": "Special Forces Shovel E",
-    "name_zh": "特种部队铲"
+    "name_zh": "特种部队铲",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP038_003",
@@ -4654,7 +6180,13 @@
     "can_uncap": false,
     "next_name_es": "Pala de fuerzas especiales",
     "next_name_en": "Special Forces Shovel",
-    "name_zh": "战术铲 E"
+    "name_zh": "战术铲 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP038_004",
@@ -4674,7 +6206,13 @@
     "can_uncap": false,
     "next_name_es": "Pala fuerzas especiales E",
     "next_name_en": "Special Forces Shovel E",
-    "name_zh": "特种部队铲 E"
+    "name_zh": "特种部队铲 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP038_005",
@@ -4694,7 +6232,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "特种部队铲 E"
+    "name_zh": "特种部队铲 E",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP038_0H4",
@@ -4714,7 +6258,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "爆燃"
+    "name_zh": "爆燃",
+    "damage_attr": {
+      "FIRE": 10,
+      "BLUNT": 90
+    },
+    "damage_types": [
+      "BLUNT",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP039_001",
@@ -4734,7 +6286,15 @@
     "can_uncap": false,
     "next_name_es": "Shuriken ciclónico S",
     "next_name_en": "Cyclone Shuriken S",
-    "name_zh": "旋风手里剑"
+    "name_zh": "旋风手里剑",
+    "damage_attr": {
+      "POISON": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP039_002",
@@ -4754,7 +6314,15 @@
     "can_uncap": false,
     "next_name_es": "Shuriken huracanado S",
     "next_name_en": "Tornado Shuriken S",
-    "name_zh": "龙卷风手里剑"
+    "name_zh": "龙卷风手里剑",
+    "damage_attr": {
+      "POISON": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP039_003",
@@ -4774,7 +6342,15 @@
     "can_uncap": false,
     "next_name_es": "Shuriken huracanado",
     "next_name_en": "Tornado Shuriken",
-    "name_zh": "旋风手里剑 S"
+    "name_zh": "旋风手里剑 S",
+    "damage_attr": {
+      "POISON": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP039_004",
@@ -4794,7 +6370,15 @@
     "can_uncap": false,
     "next_name_es": "Shuriken huracanado S",
     "next_name_en": "Tornado Shuriken S",
-    "name_zh": "龙卷风手里剑 S"
+    "name_zh": "龙卷风手里剑 S",
+    "damage_attr": {
+      "POISON": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP039_005",
@@ -4814,7 +6398,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "龙卷风手里剑 S"
+    "name_zh": "龙卷风手里剑 S",
+    "damage_attr": {
+      "POISON": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP039_0H4",
@@ -4834,7 +6426,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "霹雳神"
+    "name_zh": "霹雳神",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP040_001",
@@ -4854,7 +6454,15 @@
     "can_uncap": false,
     "next_name_es": "Bastón ígneo A",
     "next_name_en": "Fireball Baton A",
-    "name_zh": "火球指挥棒"
+    "name_zh": "火球指挥棒",
+    "damage_attr": {
+      "FIRE": 80,
+      "BLUNT": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP040_002",
@@ -4874,7 +6482,15 @@
     "can_uncap": false,
     "next_name_es": "Bastón infernal A",
     "next_name_en": "Inferno Baton A",
-    "name_zh": "地狱之火指挥棒"
+    "name_zh": "地狱之火指挥棒",
+    "damage_attr": {
+      "FIRE": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP040_003",
@@ -4894,7 +6510,15 @@
     "can_uncap": false,
     "next_name_es": "Bastón infernal",
     "next_name_en": "Inferno Baton",
-    "name_zh": "火球指挥棒 A"
+    "name_zh": "火球指挥棒 A",
+    "damage_attr": {
+      "FIRE": 50,
+      "BLUNT": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP040_004",
@@ -4914,7 +6538,15 @@
     "can_uncap": false,
     "next_name_es": "Bastón infernal A",
     "next_name_en": "Inferno Baton A",
-    "name_zh": "地狱之火指挥棒 A"
+    "name_zh": "地狱之火指挥棒 A",
+    "damage_attr": {
+      "FIRE": 80,
+      "BLUNT": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP040_005",
@@ -4934,7 +6566,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "地狱之火指挥棒 A"
+    "name_zh": "地狱之火指挥棒 A",
+    "damage_attr": {
+      "FIRE": 80,
+      "BLUNT": 20
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP040_0H4",
@@ -4954,7 +6594,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "午夜皇后"
+    "name_zh": "午夜皇后",
+    "damage_attr": {
+      "FIRE": 70,
+      "BLUNT": 30
+    },
+    "damage_types": [
+      "FIRE",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP041_001",
@@ -4974,7 +6622,13 @@
     "can_uncap": false,
     "next_name_es": "Psicomotor A",
     "next_name_en": "Motor Psycho A",
-    "name_zh": "摩托狂人"
+    "name_zh": "摩托狂人",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP041_002",
@@ -4994,7 +6648,13 @@
     "can_uncap": false,
     "next_name_es": "Motor ejecutor A",
     "next_name_en": "Executioner’s Ride A",
-    "name_zh": "处刑者之旅"
+    "name_zh": "处刑者之旅",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP041_003",
@@ -5014,7 +6674,13 @@
     "can_uncap": false,
     "next_name_es": "Motor ejecutor",
     "next_name_en": "Executioner’s Ride",
-    "name_zh": "摩托狂人 A"
+    "name_zh": "摩托狂人 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_004",
@@ -5034,7 +6700,13 @@
     "can_uncap": false,
     "next_name_es": "Motor ejecutor A",
     "next_name_en": "Executioner’s Ride A",
-    "name_zh": "处刑者之旅 A"
+    "name_zh": "处刑者之旅 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_005",
@@ -5054,7 +6726,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "处刑者之旅 A"
+    "name_zh": "处刑者之旅 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0A1",
@@ -5074,7 +6752,13 @@
     "can_uncap": false,
     "next_name_es": "Motor ejecutor A ZX",
     "next_name_en": "Executioner’s Ride A ZX",
-    "name_zh": "处刑者之旅 ZX"
+    "name_zh": "处刑者之旅 ZX",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0A3",
@@ -5094,7 +6778,13 @@
     "can_uncap": false,
     "next_name_es": "Motor ejecutor A ZX",
     "next_name_en": "Executioner’s Ride A ZX",
-    "name_zh": "处刑者之旅 A ZX"
+    "name_zh": "处刑者之旅 A ZX",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0A5",
@@ -5114,7 +6804,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "处刑者之旅 A ZX"
+    "name_zh": "处刑者之旅 A ZX",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0B1",
@@ -5134,7 +6830,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "摩托狂人 TDM"
+    "name_zh": "摩托狂人 TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0B2",
@@ -5154,7 +6856,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "处刑者之旅 TDM"
+    "name_zh": "处刑者之旅 TDM",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0B3",
@@ -5174,7 +6882,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "摩托狂人 A TDM"
+    "name_zh": "摩托狂人 A TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0B4",
@@ -5194,7 +6908,13 @@
     "can_uncap": false,
     "next_name_es": "Motor ejecutor A TDM",
     "next_name_en": "Executioner’s Ride A TDM",
-    "name_zh": "处刑者之旅 A TDM"
+    "name_zh": "处刑者之旅 A TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0B5",
@@ -5214,7 +6934,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "处刑者之旅 A TDM"
+    "name_zh": "处刑者之旅 A TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP041_0H4",
@@ -5234,7 +6960,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "皇帝"
+    "name_zh": "皇帝",
+    "damage_attr": {
+      "FIRE": 20,
+      "BLUNT": 80
+    },
+    "damage_types": [
+      "BLUNT",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP042_001",
@@ -5254,7 +6988,15 @@
     "can_uncap": false,
     "next_name_es": "Picadora de cerdos +",
     "next_name_en": "Pork Chopper +",
-    "name_zh": "屠猪刀"
+    "name_zh": "屠猪刀",
+    "damage_attr": {
+      "POISON": 30,
+      "SLASH": 70
+    },
+    "damage_types": [
+      "SLASH",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP042_002",
@@ -5274,7 +7016,13 @@
     "can_uncap": false,
     "next_name_es": "Picadora de zombis +",
     "next_name_en": "Zombie Chopper +",
-    "name_zh": "僵尸屠刀"
+    "name_zh": "僵尸屠刀",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP042_003",
@@ -5294,7 +7042,15 @@
     "can_uncap": false,
     "next_name_es": "Picadora de zombis",
     "next_name_en": "Zombie Chopper",
-    "name_zh": "屠猪刀 +"
+    "name_zh": "屠猪刀 +",
+    "damage_attr": {
+      "POISON": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "POISON",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP042_004",
@@ -5314,7 +7070,13 @@
     "can_uncap": false,
     "next_name_es": "Picadora de zombis +",
     "next_name_en": "Zombie Chopper +",
-    "name_zh": "僵尸屠刀 +"
+    "name_zh": "僵尸屠刀 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP042_005",
@@ -5334,7 +7096,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "僵尸屠刀 +"
+    "name_zh": "僵尸屠刀 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP042_0H4",
@@ -5354,7 +7122,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "掠食者"
+    "name_zh": "掠食者",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP043_001",
@@ -5374,7 +7148,13 @@
     "can_uncap": false,
     "next_name_es": "Palo de hockey fatídico A",
     "next_name_en": "Apocalyptic Hockey Stick A",
-    "name_zh": "末日曲棍球杆"
+    "name_zh": "末日曲棍球杆",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP043_002",
@@ -5394,7 +7174,13 @@
     "can_uncap": false,
     "next_name_es": "Palo de hockey homicida A",
     "next_name_en": "Murderer’s Hockey Stick A",
-    "name_zh": "杀人曲棍球杆"
+    "name_zh": "杀人曲棍球杆",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP043_003",
@@ -5414,7 +7200,13 @@
     "can_uncap": false,
     "next_name_es": "Palo de hockey homicida",
     "next_name_en": "Murderer’s Hockey Stick",
-    "name_zh": "末日曲棍球杆 A"
+    "name_zh": "末日曲棍球杆 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP043_004",
@@ -5434,7 +7226,13 @@
     "can_uncap": false,
     "next_name_es": "Palo de hockey homicida A",
     "next_name_en": "Murderer’s Hockey Stick A",
-    "name_zh": "杀人曲棍球杆 A"
+    "name_zh": "杀人曲棍球杆 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP043_005",
@@ -5454,7 +7252,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "杀人曲棍球杆 A"
+    "name_zh": "杀人曲棍球杆 A",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP043_0H4",
@@ -5474,7 +7278,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "审判日"
+    "name_zh": "审判日",
+    "damage_attr": {
+      "FIRE": 20,
+      "BLUNT": 80
+    },
+    "damage_types": [
+      "BLUNT",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP044_001",
@@ -5494,7 +7306,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzacohetes +",
     "next_name_en": "Fireworks Launcher +",
-    "name_zh": "烟火发射器"
+    "name_zh": "烟火发射器",
+    "damage_attr": {
+      "FIRE": 10,
+      "PIERCE": 90
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP044_002",
@@ -5514,7 +7334,15 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de cohetes +",
     "next_name_en": "Fireworks Blaster +",
-    "name_zh": "烟火爆能炮"
+    "name_zh": "烟火爆能炮",
+    "damage_attr": {
+      "FIRE": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP044_003",
@@ -5534,7 +7362,15 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de cohetes",
     "next_name_en": "Fireworks Blaster",
-    "name_zh": "烟火发射器 +"
+    "name_zh": "烟火发射器 +",
+    "damage_attr": {
+      "FIRE": 40,
+      "PIERCE": 60
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP044_004",
@@ -5554,7 +7390,15 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de cohetes +",
     "next_name_en": "Fireworks Blaster +",
-    "name_zh": "烟火爆能枪 +"
+    "name_zh": "烟火爆能枪 +",
+    "damage_attr": {
+      "FIRE": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP044_005",
@@ -5574,7 +7418,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "烟火爆能枪 +"
+    "name_zh": "烟火爆能枪 +",
+    "damage_attr": {
+      "FIRE": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP044_0H4",
@@ -5594,7 +7446,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "龙"
+    "name_zh": "龙",
+    "damage_attr": {
+      "FIRE": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_001",
@@ -5614,7 +7474,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzamisiles M-404 E",
     "next_name_en": "M-404 Rocket Launcher E",
-    "name_zh": "M-404火箭发射器"
+    "name_zh": "M-404火箭发射器",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_002",
@@ -5634,7 +7502,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzamisiles M-844 E",
     "next_name_en": "M-844 Rocket Launcher E",
-    "name_zh": "M-844火箭发射器"
+    "name_zh": "M-844火箭发射器",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_003",
@@ -5654,7 +7530,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzamisiles M-844",
     "next_name_en": "M-844 Rocket Launcher",
-    "name_zh": "M-404火箭发射器 E"
+    "name_zh": "M-404火箭发射器 E",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_004",
@@ -5674,7 +7558,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzamisiles M-844 E",
     "next_name_en": "M-844 Rocket Launcher E",
-    "name_zh": "M-844火箭发射器 E"
+    "name_zh": "M-844火箭发射器 E",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_005",
@@ -5694,7 +7586,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M-844火箭发射器 E"
+    "name_zh": "M-844火箭发射器 E",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_0A1",
@@ -5714,7 +7614,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M-404火箭发射器 TDM"
+    "name_zh": "M-404火箭发射器 TDM",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_0A2",
@@ -5734,7 +7642,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M-844火箭发射器 TDM"
+    "name_zh": "M-844火箭发射器 TDM",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_0A3",
@@ -5754,7 +7670,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M-404火箭发射器 E TDM"
+    "name_zh": "M-404火箭发射器 E TDM",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_0A4",
@@ -5774,7 +7698,15 @@
     "can_uncap": false,
     "next_name_es": "Lanzamisiles M-844 E TDM",
     "next_name_en": "M-844 Rocket Launcher E TDM",
-    "name_zh": "M-844火箭发射器 E TDM"
+    "name_zh": "M-844火箭发射器 E TDM",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_0A5",
@@ -5794,7 +7726,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M-844火箭发射器 E TDM"
+    "name_zh": "M-844火箭发射器 E TDM",
+    "damage_attr": {
+      "FIRE": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP045_0H4",
@@ -5814,7 +7754,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "瘟疫"
+    "name_zh": "瘟疫",
+    "damage_attr": {
+      "POISON": 20,
+      "PIERCE": 80
+    },
+    "damage_types": [
+      "PIERCE",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP046_001",
@@ -5834,7 +7782,13 @@
     "can_uncap": false,
     "next_name_es": "Arco de caza A",
     "next_name_en": "Hunting Bow A",
-    "name_zh": "狩猎弓"
+    "name_zh": "狩猎弓",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP046_002",
@@ -5854,7 +7808,15 @@
     "can_uncap": false,
     "next_name_es": "Arco punzante A",
     "next_name_en": "Stinger Bow A",
-    "name_zh": "刺针弓"
+    "name_zh": "刺针弓",
+    "damage_attr": {
+      "FIRE": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP046_003",
@@ -5874,7 +7836,15 @@
     "can_uncap": false,
     "next_name_es": "Arco punzante",
     "next_name_en": "Stinger Bow",
-    "name_zh": "狩猎弓 A"
+    "name_zh": "狩猎弓 A",
+    "damage_attr": {
+      "ELECTRIC": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP046_004",
@@ -5894,7 +7864,15 @@
     "can_uncap": false,
     "next_name_es": "Arco punzante A",
     "next_name_en": "Stinger Bow A",
-    "name_zh": "刺针弓 A"
+    "name_zh": "刺针弓 A",
+    "damage_attr": {
+      "POISON": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP046_005",
@@ -5914,7 +7892,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "刺针弓 A"
+    "name_zh": "刺针弓 A",
+    "damage_attr": {
+      "POISON": 50,
+      "PIERCE": 50
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP046_0H4",
@@ -5934,7 +7920,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "多米尼翁"
+    "name_zh": "多米尼翁",
+    "damage_attr": {
+      "ELECTRIC": 80,
+      "PIERCE": 20
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_001",
@@ -5954,7 +7948,15 @@
     "can_uncap": false,
     "next_name_es": "Vara de rayo S",
     "next_name_en": "Lightning Wand S",
-    "name_zh": "雷电杖"
+    "name_zh": "雷电杖",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_002",
@@ -5974,7 +7976,15 @@
     "can_uncap": false,
     "next_name_es": "Vara de Tor S",
     "next_name_en": "Thor’s Wand S",
-    "name_zh": "雷神之杖"
+    "name_zh": "雷神之杖",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_003",
@@ -5994,7 +8004,15 @@
     "can_uncap": false,
     "next_name_es": "Vara de Tor",
     "next_name_en": "Thor’s Wand",
-    "name_zh": "雷电杖 S"
+    "name_zh": "雷电杖 S",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_004",
@@ -6014,7 +8032,15 @@
     "can_uncap": false,
     "next_name_es": "Vara de Tor S",
     "next_name_en": "Thor’s Wand S",
-    "name_zh": "雷神之杖 S"
+    "name_zh": "雷神之杖 S",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_005",
@@ -6034,7 +8060,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "雷神之杖 S"
+    "name_zh": "雷神之杖 S",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_0A1",
@@ -6054,7 +8088,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "雷电杖 TDM"
+    "name_zh": "雷电杖 TDM",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_0A2",
@@ -6074,7 +8116,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "雷神之杖 TDM"
+    "name_zh": "雷神之杖 TDM",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_0A3",
@@ -6094,7 +8144,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "雷电杖 S TDM"
+    "name_zh": "雷电杖 S TDM",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_0A4",
@@ -6114,7 +8172,15 @@
     "can_uncap": false,
     "next_name_es": "Vara de Tor S TDM",
     "next_name_en": "Thor’s Wand S TDM",
-    "name_zh": "雷神之杖 S TDM"
+    "name_zh": "雷神之杖 S TDM",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP047_0A5",
@@ -6134,7 +8200,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "雷神之杖 S TDM"
+    "name_zh": "雷神之杖 S TDM",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP048_001",
@@ -6154,7 +8228,13 @@
     "can_uncap": false,
     "next_name_es": "Motosierra de víbora +",
     "next_name_en": "Chainsaw Viper +",
-    "name_zh": "电锯毒蛇"
+    "name_zh": "电锯毒蛇",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP048_002",
@@ -6174,7 +8254,13 @@
     "can_uncap": false,
     "next_name_es": "Motosierra de escualo +",
     "next_name_en": "Chainsaw Shark +",
-    "name_zh": "电锯鲨鱼"
+    "name_zh": "电锯鲨鱼",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP048_003",
@@ -6194,7 +8280,13 @@
     "can_uncap": false,
     "next_name_es": "Motosierra de escualo",
     "next_name_en": "Chainsaw Shark",
-    "name_zh": "电锯毒蛇 +"
+    "name_zh": "电锯毒蛇 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP048_004",
@@ -6214,7 +8306,13 @@
     "can_uncap": false,
     "next_name_es": "Motosierra de escualo +",
     "next_name_en": "Chainsaw Shark +",
-    "name_zh": "电锯鲨鱼 +"
+    "name_zh": "电锯鲨鱼 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP048_005",
@@ -6234,7 +8332,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "电锯鲨鱼 +"
+    "name_zh": "电锯鲨鱼 +",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP048_0H4",
@@ -6254,7 +8358,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "黑曼巴"
+    "name_zh": "黑曼巴",
+    "damage_attr": {
+      "POISON": 40,
+      "SLASH": 60
+    },
+    "damage_types": [
+      "SLASH",
+      "POISON"
+    ]
   },
   {
     "id": "PT_ARM_WP050_001",
@@ -6274,7 +8386,13 @@
     "can_uncap": false,
     "next_name_es": "Guadaña de la Parca",
     "next_name_en": "Grim Reaper’s Scythe",
-    "name_zh": "死神之镰"
+    "name_zh": "死神之镰",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_002",
@@ -6294,7 +8412,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死神之镰"
+    "name_zh": "死神之镰",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_003",
@@ -6314,7 +8438,13 @@
     "can_uncap": false,
     "next_name_es": "Guadaña de la Parca",
     "next_name_en": "Grim Reaper’s Scythe",
-    "name_zh": "死神之镰"
+    "name_zh": "死神之镰",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_004",
@@ -6334,7 +8464,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死神之镰"
+    "name_zh": "死神之镰",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_0R1",
@@ -6354,7 +8490,13 @@
     "can_uncap": false,
     "next_name_es": "Guadaña de la Parca R2",
     "next_name_en": "Grim Reaper’s Scythe R2",
-    "name_zh": "死神之镰 R1"
+    "name_zh": "死神之镰 R1",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_0R2",
@@ -6374,7 +8516,13 @@
     "can_uncap": false,
     "next_name_es": "Guadaña de la Parca R3",
     "next_name_en": "Grim Reaper’s Scythe R3",
-    "name_zh": "死神之镰 R3"
+    "name_zh": "死神之镰 R3",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_0R3",
@@ -6394,7 +8542,13 @@
     "can_uncap": false,
     "next_name_es": "Guadaña de la Parca R3",
     "next_name_en": "Grim Reaper’s Scythe R3",
-    "name_zh": "死神之镰 R2"
+    "name_zh": "死神之镰 R2",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP050_0R4",
@@ -6414,7 +8568,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "死神之镰 R3"
+    "name_zh": "死神之镰 R3",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP051_001",
@@ -6434,7 +8594,13 @@
     "can_uncap": false,
     "next_name_es": "Espada de Jackal R",
     "next_name_en": "Jackal Sword R",
-    "name_zh": "豺狼之剑"
+    "name_zh": "豺狼之剑",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP051_002",
@@ -6454,7 +8620,13 @@
     "can_uncap": false,
     "next_name_es": "Espada de Jackal D",
     "next_name_en": "Jackal Sword D",
-    "name_zh": "豺狼之剑 D"
+    "name_zh": "豺狼之剑 D",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP051_003",
@@ -6474,7 +8646,13 @@
     "can_uncap": false,
     "next_name_es": "Espada de Jackal R",
     "next_name_en": "Jackal Sword R",
-    "name_zh": "豺狼之剑 R"
+    "name_zh": "豺狼之剑 R",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP051_005",
@@ -6494,7 +8672,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "豺狼之剑 R"
+    "name_zh": "豺狼之剑 R",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP051_0D5",
@@ -6514,7 +8698,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "豺狼之剑 D"
+    "name_zh": "豺狼之剑 D",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP052_001",
@@ -6534,7 +8724,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó de Jackal R",
     "next_name_en": "Jackal Yo-Yo R",
-    "name_zh": "豺狼溜溜球"
+    "name_zh": "豺狼溜溜球",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP052_002",
@@ -6554,7 +8750,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó de Jackal D",
     "next_name_en": "Jackal Yo-Yo D",
-    "name_zh": "豺狼溜溜球 D"
+    "name_zh": "豺狼溜溜球 D",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP052_003",
@@ -6574,7 +8776,13 @@
     "can_uncap": false,
     "next_name_es": "Yoyó de Jackal R",
     "next_name_en": "Jackal Yo-Yo R",
-    "name_zh": "豺狼溜溜球 R"
+    "name_zh": "豺狼溜溜球 R",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP052_005",
@@ -6594,7 +8802,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "豺狼溜溜球 R"
+    "name_zh": "豺狼溜溜球 R",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP052_0D5",
@@ -6614,7 +8828,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "豺狼溜溜球 D"
+    "name_zh": "豺狼溜溜球 D",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP053_001",
@@ -6634,7 +8854,13 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de Jackal R",
     "next_name_en": "Jackal Blaster R",
-    "name_zh": "豺狼爆能枪"
+    "name_zh": "豺狼爆能枪",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP053_002",
@@ -6654,7 +8880,13 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de Jackal D",
     "next_name_en": "Jackal Blaster D",
-    "name_zh": "豺狼爆能枪 D"
+    "name_zh": "豺狼爆能枪 D",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP053_003",
@@ -6674,7 +8906,13 @@
     "can_uncap": false,
     "next_name_es": "Metralleta de Jackal R",
     "next_name_en": "Jackal Blaster R",
-    "name_zh": "豺狼爆能枪 R"
+    "name_zh": "豺狼爆能枪 R",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP053_005",
@@ -6694,7 +8932,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "豺狼爆能枪 R"
+    "name_zh": "豺狼爆能枪 R",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP053_0D5",
@@ -6714,7 +8958,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "豺狼爆能枪 D"
+    "name_zh": "豺狼爆能枪 D",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP054_001",
@@ -6734,7 +8984,13 @@
     "can_uncap": false,
     "next_name_es": "Triturador de púas",
     "next_name_en": "Spike Crusher",
-    "name_zh": "尖刺粉碎者"
+    "name_zh": "尖刺粉碎者",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP054_005",
@@ -6754,7 +9010,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "尖刺粉碎者"
+    "name_zh": "尖刺粉碎者",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP054_0H1",
@@ -6774,7 +9036,15 @@
     "can_uncap": false,
     "next_name_es": "Triturador del infierno",
     "next_name_en": "Hell Spike Crusher",
-    "name_zh": "地狱尖刺粉碎者"
+    "name_zh": "地狱尖刺粉碎者",
+    "damage_attr": {
+      "BLUNT": 40,
+      "POISON": 60
+    },
+    "damage_types": [
+      "POISON",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP054_0H5",
@@ -6794,7 +9064,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "地狱尖刺粉碎者"
+    "name_zh": "地狱尖刺粉碎者",
+    "damage_attr": {
+      "BLUNT": 40,
+      "POISON": 60
+    },
+    "damage_types": [
+      "POISON",
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP055_001",
@@ -6814,7 +9092,15 @@
     "can_uncap": false,
     "next_name_es": "Masajeador estático",
     "next_name_en": "Static Massager",
-    "name_zh": "触电按摩器"
+    "name_zh": "触电按摩器",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP055_005",
@@ -6834,7 +9120,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "触电按摩器"
+    "name_zh": "触电按摩器",
+    "damage_attr": {
+      "ELECTRIC": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP055_0H1",
@@ -6854,7 +9148,15 @@
     "can_uncap": false,
     "next_name_es": "Masajeador infeccioso",
     "next_name_en": "Viral Massager",
-    "name_zh": "感染按摩器"
+    "name_zh": "感染按摩器",
+    "damage_attr": {
+      "POISON": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP055_0H5",
@@ -6874,7 +9176,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "感染按摩器"
+    "name_zh": "感染按摩器",
+    "damage_attr": {
+      "POISON": 90,
+      "PIERCE": 10
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP056_001",
@@ -6894,7 +9204,13 @@
     "can_uncap": false,
     "next_name_es": "M2G-87",
     "next_name_en": "M2G-87",
-    "name_zh": "M2G-87"
+    "name_zh": "M2G-87",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP056_005",
@@ -6914,7 +9230,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M2G-87"
+    "name_zh": "M2G-87",
+    "damage_attr": {
+      "PIERCE": 100
+    },
+    "damage_types": [
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP056_0H1",
@@ -6934,7 +9256,15 @@
     "can_uncap": false,
     "next_name_es": "M2G-87 Mod.1 FireFly",
     "next_name_en": "M2G-87 Mod.1 FireFly",
-    "name_zh": "M2G-87 Mod.1 FireFly"
+    "name_zh": "M2G-87 Mod.1 FireFly",
+    "damage_attr": {
+      "FIRE": 30,
+      "PIERCE": 70
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP056_0H5",
@@ -6954,7 +9284,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "M2G-87 Mod.1 FireFly"
+    "name_zh": "M2G-87 Mod.1 FireFly",
+    "damage_attr": {
+      "FIRE": 30,
+      "PIERCE": 70
+    },
+    "damage_types": [
+      "PIERCE",
+      "FIRE"
+    ]
   },
   {
     "id": "PT_ARM_WP057_001",
@@ -6974,7 +9312,13 @@
     "can_uncap": false,
     "next_name_es": "Vajra de luz",
     "next_name_en": "Vajra of Light",
-    "name_zh": "光明金刚杵"
+    "name_zh": "光明金刚杵",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP057_005",
@@ -6994,7 +9338,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "光明金刚杵"
+    "name_zh": "光明金刚杵",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP057_0H1",
@@ -7014,7 +9364,15 @@
     "can_uncap": false,
     "next_name_es": "Dios Vajra",
     "next_name_en": "Vajra of God",
-    "name_zh": "神金刚"
+    "name_zh": "神金刚",
+    "damage_attr": {
+      "ELECTRIC": 80,
+      "SLASH": 20
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP057_0H5",
@@ -7034,7 +9392,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "神金刚"
+    "name_zh": "神金刚",
+    "damage_attr": {
+      "ELECTRIC": 80,
+      "SLASH": 20
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP058_001",
@@ -7054,7 +9420,15 @@
     "can_uncap": false,
     "next_name_es": "Cabeza de Medusa",
     "next_name_en": "Head of Medusa",
-    "name_zh": "梅杜莎之首"
+    "name_zh": "梅杜莎之首",
+    "damage_attr": {
+      "POISON": 60,
+      "PIERCE": 40
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP058_005",
@@ -7074,7 +9448,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "梅杜莎之首"
+    "name_zh": "梅杜莎之首",
+    "damage_attr": {
+      "POISON": 60,
+      "PIERCE": 40
+    },
+    "damage_types": [
+      "POISON",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP058_0H1",
@@ -7094,7 +9476,15 @@
     "can_uncap": false,
     "next_name_es": "Cabeza de Euríale",
     "next_name_en": "Head of Euryale",
-    "name_zh": "尤瑞艾莉之首"
+    "name_zh": "尤瑞艾莉之首",
+    "damage_attr": {
+      "ELECTRIC": 60,
+      "PIERCE": 40
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP058_0H5",
@@ -7114,7 +9504,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "尤瑞艾莉之首"
+    "name_zh": "尤瑞艾莉之首",
+    "damage_attr": {
+      "ELECTRIC": 60,
+      "PIERCE": 40
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP059_001",
@@ -7134,7 +9532,13 @@
     "can_uncap": false,
     "next_name_es": "Trineo mortal",
     "next_name_en": "Mortal Bobslayer",
-    "name_zh": "亡命雪车"
+    "name_zh": "亡命雪车",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP059_005",
@@ -7154,7 +9558,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "亡命雪车"
+    "name_zh": "亡命雪车",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP059_0H1",
@@ -7174,7 +9584,13 @@
     "can_uncap": false,
     "next_name_es": "Trineo inmortal",
     "next_name_en": "Immortal Bobslayer",
-    "name_zh": "不朽的雪车"
+    "name_zh": "不朽的雪车",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP059_0H5",
@@ -7194,7 +9610,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "不朽的雪车"
+    "name_zh": "不朽的雪车",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP060_001",
@@ -7214,7 +9636,13 @@
     "can_uncap": false,
     "next_name_es": "Espada larga S RE",
     "next_name_en": "Longsword S RE",
-    "name_zh": "长剑 RE"
+    "name_zh": "长剑 RE",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP060_002",
@@ -7234,7 +9662,13 @@
     "can_uncap": false,
     "next_name_es": "Espada matadragones S RE",
     "next_name_en": "Dragon Buster Sword S RE",
-    "name_zh": "屠龙剑 RE"
+    "name_zh": "屠龙剑 RE",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP060_003",
@@ -7254,7 +9688,15 @@
     "can_uncap": false,
     "next_name_es": "Espada matadragones RE",
     "next_name_en": "Dragon Buster Sword RE",
-    "name_zh": "长剑 S RE"
+    "name_zh": "长剑 S RE",
+    "damage_attr": {
+      "FIRE": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP060_004",
@@ -7274,7 +9716,15 @@
     "can_uncap": false,
     "next_name_es": "Espada matadragones S RE",
     "next_name_en": "Dragon Buster Sword S RE",
-    "name_zh": "屠龙剑 S RE"
+    "name_zh": "屠龙剑 S RE",
+    "damage_attr": {
+      "FIRE": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP060_005",
@@ -7294,7 +9744,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "屠龙剑 S RE"
+    "name_zh": "屠龙剑 S RE",
+    "damage_attr": {
+      "FIRE": 50,
+      "SLASH": 50
+    },
+    "damage_types": [
+      "FIRE",
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP061_001",
@@ -7314,7 +9772,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "正宗 TDM"
+    "name_zh": "正宗 TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP061_002",
@@ -7334,7 +9798,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "村正 TDM"
+    "name_zh": "村正 TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP061_003",
@@ -7354,7 +9824,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "正宗 S TDM"
+    "name_zh": "正宗 S TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP061_004",
@@ -7374,7 +9850,13 @@
     "can_uncap": false,
     "next_name_es": "Espada Muramasa S TDM",
     "next_name_en": "Muramasa Blade S TDM",
-    "name_zh": "村正 S TDM"
+    "name_zh": "村正 S TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP061_005",
@@ -7394,7 +9876,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "村正 S TDM"
+    "name_zh": "村正 S TDM",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP062_001",
@@ -7414,7 +9902,13 @@
     "can_uncap": false,
     "next_name_es": "Nudillos león S",
     "next_name_en": "Lion Knuckles S",
-    "name_zh": "狮子指虎"
+    "name_zh": "狮子指虎",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP062_002",
@@ -7434,7 +9928,13 @@
     "can_uncap": false,
     "next_name_es": "Nudillos león clásico S",
     "next_name_en": "Classic Lion Knuckles S",
-    "name_zh": "经典狮子指虎"
+    "name_zh": "经典狮子指虎",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP062_003",
@@ -7454,7 +9954,13 @@
     "can_uncap": false,
     "next_name_es": "Nudillos león clásico",
     "next_name_en": "Classic Lion Knuckles",
-    "name_zh": "狮子指虎 S"
+    "name_zh": "狮子指虎 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP062_004",
@@ -7474,7 +9980,13 @@
     "can_uncap": false,
     "next_name_es": "Nudillos león clásico S",
     "next_name_en": "Classic Lion Knuckles S",
-    "name_zh": "经典狮子指虎 S"
+    "name_zh": "经典狮子指虎 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP062_005",
@@ -7494,7 +10006,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "经典狮子指虎 S"
+    "name_zh": "经典狮子指虎 S",
+    "damage_attr": {
+      "SLASH": 100
+    },
+    "damage_types": [
+      "SLASH"
+    ]
   },
   {
     "id": "PT_ARM_WP063_001",
@@ -7514,7 +10032,15 @@
     "can_uncap": false,
     "next_name_es": "Pistola eléctrica pulso E",
     "next_name_en": "Pulse Stun Gun E",
-    "name_zh": "脉冲电击枪"
+    "name_zh": "脉冲电击枪",
+    "damage_attr": {
+      "ELECTRIC": 99,
+      "PIERCE": 1
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP063_002",
@@ -7534,7 +10060,15 @@
     "can_uncap": false,
     "next_name_es": "Pistola eléc. pulso Tron E",
     "next_name_en": "Pulse Tron Stun Gun E",
-    "name_zh": "脉冲真空管电击枪"
+    "name_zh": "脉冲真空管电击枪",
+    "damage_attr": {
+      "ELECTRIC": 99,
+      "PIERCE": 1
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP063_003",
@@ -7554,7 +10088,15 @@
     "can_uncap": false,
     "next_name_es": "Pistola eléc. pulso Tron",
     "next_name_en": "Pulse Tron Stun Gun",
-    "name_zh": "脉冲电击枪 E"
+    "name_zh": "脉冲电击枪 E",
+    "damage_attr": {
+      "ELECTRIC": 99,
+      "PIERCE": 1
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP063_004",
@@ -7574,7 +10116,15 @@
     "can_uncap": false,
     "next_name_es": "Pistola eléc. pulso Tron E",
     "next_name_en": "Pulse Tron Stun Gun E",
-    "name_zh": "脉冲真空管电击枪 E"
+    "name_zh": "脉冲真空管电击枪 E",
+    "damage_attr": {
+      "ELECTRIC": 99,
+      "PIERCE": 1
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP063_005",
@@ -7594,7 +10144,15 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "脉冲真空管电击枪 E"
+    "name_zh": "脉冲真空管电击枪 E",
+    "damage_attr": {
+      "ELECTRIC": 99,
+      "PIERCE": 1
+    },
+    "damage_types": [
+      "ELECTRIC",
+      "PIERCE"
+    ]
   },
   {
     "id": "PT_ARM_WP064_001",
@@ -7614,7 +10172,13 @@
     "can_uncap": false,
     "next_name_es": "Rebelión maderera +",
     "next_name_en": "Timber Rebellion +",
-    "name_zh": "反抗木材"
+    "name_zh": "反抗木材",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP064_002",
@@ -7634,7 +10198,13 @@
     "can_uncap": false,
     "next_name_es": "Disturbio maderero +",
     "next_name_en": "Timber Riot +",
-    "name_zh": "木材暴动"
+    "name_zh": "木材暴动",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP064_003",
@@ -7654,7 +10224,13 @@
     "can_uncap": false,
     "next_name_es": "Disturbio maderero",
     "next_name_en": "Timber Riot",
-    "name_zh": "反抗木材 +"
+    "name_zh": "反抗木材 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP064_004",
@@ -7674,7 +10250,13 @@
     "can_uncap": false,
     "next_name_es": "Disturbio maderero +",
     "next_name_en": "Timber Riot +",
-    "name_zh": "木材暴动 +"
+    "name_zh": "木材暴动 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_ARM_WP064_005",
@@ -7694,7 +10276,13 @@
     "can_uncap": true,
     "next_name_es": "",
     "next_name_en": "",
-    "name_zh": "木材暴动 +"
+    "name_zh": "木材暴动 +",
+    "damage_attr": {
+      "BLUNT": 100
+    },
+    "damage_types": [
+      "BLUNT"
+    ]
   },
   {
     "id": "PT_DIY_BTM_001",

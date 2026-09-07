@@ -25,6 +25,67 @@ else:
 
 ICONS_DIR = os.path.join(BASE_DIR, "icons")
 
+# Official game weapon series damage type mapping (PT_ARM_WPxxx -> Damage Type)
+WP_SERIES_DAMAGE = {
+    "000": "BLUNT",    # Fists
+    "001": "SLASH",    # Jungle Machete
+    "002": "SLASH",    # Butterfly Knife
+    "003": "SLASH",    # Steel Axe
+    "004": "PIERCE",   # Robber Crossbow
+    "005": "BLUNT",    # Metal Bat
+    "006": "SLASH",    # Buzzsaw Knuckles
+    "007": "FIRE",     # FFWF Flamethrower
+    "011": "BLUNT",    # Iron Hammer
+    "012": "SLASH",    # Combat Pickaxe / Rake
+    "013": "PIERCE",   # Knight's Lance
+    "016": "SLASH",    # Masamune Blade
+    "017": "PIERCE",   # Glinty Magnum
+    "018": "ELECTRIC", # Stun Rod
+    "019": "SLASH",    # Longsword / Dragon Buster
+    "020": "POISON",   # Iron Claw / Nightmare Claw
+    "021": "PIERCE",   # Pitbull Shotgun
+    "023": "FIRE",     # Landmine
+    "024": "BLUNT",    # Striker Flail
+    "025": "PIERCE",   # DUKE Sniper Rifle
+    "026": "ELECTRIC", # Cleaver Saber
+    "028": "BLUNT",    # Pitching Machine
+    "029": "FIRE",     # Flame Wand
+    "030": "BLUNT",    # Loaded Glove / Boxing
+    "031": "PIERCE",   # KAMAS Assault Rifle
+    "032": "PIERCE",   # Nail Gun
+    "033": "SLASH",    # Brutal Yo-Yo
+    "034": "ELECTRIC", # Plasma Welding Gun
+    "035": "BLUNT",    # Bowling Stomper
+    "036": "PIERCE",   # Drill Arm
+    "037": "FIRE",     # Red Hot Iron / Death Burner Iron
+    "038": "SLASH",    # Tactical Shovel
+    "039": "SLASH",    # Cyclone Shuriken
+    "040": "FIRE",     # Fireball Baton
+    "041": "BLUNT",    # Motor Psycho
+    "042": "POISON",   # Pork Chopper / Zombie Chopper / Predator
+    "043": "BLUNT",    # Apocalyptic Hockey Stick
+    "044": "FIRE",     # Fireworks Launcher
+    "045": "PIERCE",   # M-404 Rocket Launcher
+    "046": "PIERCE",   # Hunting Bow
+    "047": "ELECTRIC", # Lightning Wand / Thor's Wand
+    "048": "POISON",   # Chainsaw Viper / Shark / Black Mamba
+    "050": "SLASH",    # Grim Reaper Scythe
+    "051": "SLASH",    # Jackal Sword
+    "052": "SLASH",    # Jackal Yo-Yo
+    "053": "PIERCE",   # Jackal Blaster
+    "054": "BLUNT",    # Spike Crusher
+    "055": "ELECTRIC", # Static Massager
+    "056": "PIERCE",   # M2G-87
+    "057": "ELECTRIC", # Vajra of Light / God
+    "058": "POISON",   # Head of Medusa
+    "059": "SLASH",    # Mortal Bobslayer
+    "060": "SLASH",    # Longsword RE
+    "061": "SLASH",    # Masamune Blade TDM
+    "062": "BLUNT",    # Lion Knuckles
+    "063": "ELECTRIC", # Pulse Stun Gun
+    "064": "BLUNT",    # Timber Rebellion
+}
+
 
 class BlueprintsTabMixin:
     """Provides methods for constructing and handling the Blueprints / R&D Tab."""
@@ -60,10 +121,10 @@ class BlueprintsTabMixin:
             faction = t("faction_milk")
             faction_key = "SPO"
         elif any(k in itemid for k in ["PT_TBR", "TENGOKU", "WHITE", "NAPALM", "THUNDER", "WIND"]):
-            faction = "⚡ 4 FORCEMEN & TENGOKU"
+            faction = t("faction_forcemen")
             faction_key = "FORCEMEN"
         elif any(k in itemid for k in ["PT_JAC", "PT_JCL", "JACKAL"]):
-            faction = "🕶️ JACKALS"
+            faction = t("faction_jackals")
             faction_key = "JACKAL"
         elif "PT_REC" in itemid:
             faction = t("faction_re")
@@ -97,28 +158,55 @@ class BlueprintsTabMixin:
             
         return slot, slot_key, faction, faction_key, clean_set
 
-    def _get_weapon_damage_type(self, item):
-        itemid = item["id"].lower()
-        name = f"{item.get('name_en','')} {item.get('name_es','')}".lower()
-        full = f"{itemid} {name}"
+    def _get_weapon_damage_types(self, item):
+        """Returns set of all damage types inflicted by weapon (e.g. {'SLASH', 'FIRE'})."""
+        # 1. From enriched encyclopedia data (master_part_atkattr)
+        dt = item.get("damage_types")
+        if dt:
+            return set(dt) if isinstance(dt, list) else {dt}
+        da = item.get("damage_attr")
+        if da and isinstance(da, dict):
+            return set(da.keys())
+
+        # 2. Canonical weapon series mapping via official WPxxx code
+        itemid = item.get("id", "")
+        m = re.search(r"WP(\d{3})", itemid, re.IGNORECASE)
+        if m:
+            wp_code = m.group(1)
+            if wp_code in WP_SERIES_DAMAGE:
+                return {WP_SERIES_DAMAGE[wp_code]}
+
+        # 3. Universal name and ID fallback keywords
+        name_en = item.get("name_en", "").lower()
+        name_es = item.get("name_es", "").lower()
+        full = f"{itemid.lower()} {name_en} {name_es}"
         
-        # Elemental first
-        if any(k in full for k in ["flamethrower", "fire", "fuego", "flame", "torch", "antorcha", "lanzallamas"]):
-            return "FIRE"
-        if any(k in full for k in ["electric", "electricidad", "static", "massager", "masajeador", "stun", "shock", "lightning", "rayo"]):
-            return "ELECTRIC"
-        if any(k in full for k in ["poison", "veneno", "toxin", "claw", "garra"]):
-            return "POISON"
-            
-        # Physical
-        if any(k in full for k in ["kamas", "rifle", "sniper", "francotirador", "nail", "clavos", "magnum", "pistol", "gun", "crossbow", "ballesta", "shotgun", "escopeta", "pitching", "béisbol", "bow", "arco", "rocket", "harpoon", "arpon"]):
-            return "PIERCE"
+        found = set()
+        if any(k in full for k in ["poison", "veneno", "toxin", "claw", "garra", "chopper", "viper", "mamba", "medusa", "euryale"]):
+            found.add("POISON")
+        if any(k in full for k in ["flamethrower", "fire", "fuego", "flame", "torch", "antorcha", "lanzallamas", "flare"]):
+            found.add("FIRE")
+        if any(k in full for k in ["electric", "electricidad", "static", "massager", "masajeador", "stun", "shock", "lightning", "rayo", "plasma", "laser", "láser"]):
+            found.add("ELECTRIC")
+        if any(k in full for k in ["kamas", "rifle", "sniper", "francotirador", "nail", "clavos", "magnum", "pistol", "gun", "crossbow", "ballesta", "shotgun", "escopeta", "pitching", "béisbol", "bow", "arco", "rocket", "harpoon", "arpon", "spear"]):
+            found.add("PIERCE")
         if any(k in full for k in ["machete", "sword", "espada", "katana", "cleaver", "cuchilla", "saber", "sable", "saw", "sierra", "pickaxe", "picahielo", "knife", "cuchillo", "scythe", "guadaña", "sickle", "hoz", "axe", "hacha", "dagger", "daga", "blade"]):
-            return "SLASH"
-        if any(k in full for k in ["hammer", "martillo", "bat", "bate", "iron", "plancha", "club", "palo", "bowling", "bolos", "flail", "mayal", "boxing", "boxeo", "wrench", "llave", "pipe", "tubo", "fist", "puño"]):
-            return "BLUNT"
+            found.add("SLASH")
+        if any(k in full for k in ["hammer", "martillo", "bat", "bate", "iron", "plancha", "club", "palo", "bowling", "bolos", "flail", "mayal", "boxing", "boxeo", "wrench", "llave", "pipe", "tubo", "fist", "puño", "sand"]):
+            found.add("BLUNT")
             
-        return "OTHER"
+        return found if found else {"OTHER"}
+
+    def _get_weapon_damage_type(self, item):
+        """Returns primary damage type for backwards compatibility."""
+        dt = item.get("damage_types")
+        if dt and len(dt) > 0:
+            return dt[0]
+        types = self._get_weapon_damage_types(item)
+        for pref in ("POISON", "FIRE", "ELECTRIC", "SLASH", "PIERCE", "BLUNT"):
+            if pref in types:
+                return pref
+        return list(types)[0] if types else "OTHER"
 
     def _build_blueprints_tab(self):
         paned = ttk.PanedWindow(self.tab_blueprints, orient="horizontal")
@@ -284,10 +372,10 @@ class BlueprintsTabMixin:
         self.bp_faction_lbl = ttk.Label(self.bp_card, text="---", font=("Segoe UI", 9), foreground=FG_MUTED)
         self.bp_faction_lbl.pack(pady=1)
         
-        self.bp_status_lbl = ttk.Label(self.bp_card, text="Estado: ---", font=("Segoe UI", 10, "bold"), foreground=ACCENT_CYAN)
+        self.bp_status_lbl = ttk.Label(self.bp_card, text=t("bp_status_placeholder"), font=("Segoe UI", 10, "bold"), foreground=ACCENT_CYAN)
         self.bp_status_lbl.pack(pady=2)
         
-        self.bp_stats_lbl = ttk.Label(self.bp_card, text="Estadísticas Base: ---", font=("Segoe UI", 9), foreground=FG_MAIN, wraplength=260, justify="center")
+        self.bp_stats_lbl = ttk.Label(self.bp_card, text=t("bp_stats_placeholder"), font=("Segoe UI", 9), foreground=FG_MAIN, wraplength=260, justify="center")
         self.bp_stats_lbl.pack(pady=3)
         
         self.bp_set_btn = ttk.Button(self.bp_card, text=t("bp_view_set_btn"), command=self._open_selected_piece_set)
@@ -557,17 +645,9 @@ class BlueprintsTabMixin:
         if next_unlocked:
             nxt_meta = next((item for item in self.equipment_db if item["id"] == next_unlocked), None)
             nxt_name = i18n.get_item_name(nxt_meta) or next_unlocked
-            self._notify(
-                "Blueprint & Next Tier in R&D!", "¡Plano y Siguiente Tier en I+D!",
-                f"{cur_name} registered at Level {lvl_str_en} in Chokufunsha!\n\n✨ Reached Level +4: Unlocked next tier in R&D (Development):\n🔨 {nxt_name} [{next_unlocked}]",
-                f"¡{cur_name} registrado al Nivel {lvl_str} en Chokufunsha!\n\n✨ Alcanzó Nivel +4: ¡Se ha desbloqueado el siguiente tier en I+D (Desarrollo):\n🔨 {nxt_name} [{next_unlocked}]!"
-            )
+            self._notify("bp_notify_next_tier_title", "bp_notify_next_tier_msg", cur_name=cur_name, lvl_str=lvl_str_en, nxt_name=nxt_name, next_unlocked=next_unlocked)
         else:
-            self._notify(
-                "Blueprint Unlocked", "Plano Desbloqueado",
-                f"Blueprint {cur_name} unlocked at Level {lvl_str_en} in Chokufunsha Shop!\nSaved automatically.",
-                f"¡Plano {cur_name} registrado al Nivel {lvl_str} en Chokufunsha!\nGuardado automáticamente."
-            )
+            self._notify("bp_notify_unlocked_title", "bp_notify_unlocked_msg", cur_name=cur_name, lvl_str=lvl_str_en)
 
     def _send_single_bp_to_rnd(self):
         if not self.current_bp_selection or not self.save_json:
@@ -591,22 +671,12 @@ class BlueprintsTabMixin:
         cur_name = i18n.get_item_name(item_meta) or ptid
         
         if target_lvl == 0:
-            self._notify(
-                "Blueprint Sent to R&D!", "¡Plano Enviado a I+D!",
-                f"{cur_name} [{ptid}] is now available in Chokufunsha R&D to develop with materials!\nSaved automatically.",
-                f"¡{cur_name} [{ptid}] está ahora disponible en el I+D de Chokufunsha para desarrollarlo con materiales!\nGuardado automáticamente."
-            )
+            self._notify("bp_notify_rnd_sent_title", "bp_notify_rnd_sent_msg", cur_name=cur_name, ptid=ptid)
         else:
             prev_num = target_lvl - 1
             prev_str = f"+{prev_num} (Uncapped)" if prev_num >= 19 else f"+{prev_num}"
-            prev_str_es = f"+{prev_num} (Destope)" if prev_num >= 19 else f"+{prev_num}"
             next_str = f"+{target_lvl} (Uncapped)" if target_lvl >= 19 else f"+{target_lvl}"
-            next_str_es = f"+{target_lvl} (Destope)" if target_lvl >= 19 else f"+{target_lvl}"
-            self._notify(
-                "Item Set in R&D!", "¡Objeto Configurado en I+D!",
-                f"{cur_name} [{ptid}] registered at Level {prev_str}.\n\n🔨 Ready in Chokufunsha R&D to research Level {next_str}!\nSaved automatically.",
-                f"¡{cur_name} [{ptid}] registrado al Nivel {prev_str_es}.\n\n🔨 ¡Listo en el I+D de Chokufunsha para investigar el Nivel {next_str_es}!\nGuardado automáticamente."
-            )
+            self._notify("bp_notify_rnd_set_title", "bp_notify_rnd_set_msg", cur_name=cur_name, ptid=ptid, prev_str=prev_str, next_str=next_str)
 
     def _evolve_selected_bp_to_next_tier(self):
         if not self.current_bp_selection or not self.save_json:
@@ -630,11 +700,7 @@ class BlueprintsTabMixin:
         cur_name = i18n.get_item_name(item_meta) or ptid
         nxt_name = i18n.get_item_name(nxt_meta) or nextptid
         
-        self._notify(
-            "Tier in R&D Ready!", "¡Tier Listo en I+D!",
-            f"Equipped R&D evolved from {cur_name} (+4)!\n\nSuccessfully unlocked next tier in Chokufunsha R&D:\n🔨 {nxt_name} [{nextptid}]",
-            f"¡R&D evolucionado desde {cur_name} (+4)!\n\n¡Se ha desbloqueado con éxito el siguiente tier en I+D (Desarrollo) de Chokufunsha:\n🔨 {nxt_name} [{nextptid}]!"
-        )
+        self._notify("bp_notify_tier_rnd_title", "bp_notify_tier_rnd_msg", cur_name=cur_name, nxt_name=nxt_name, nextptid=nextptid)
 
     def _deliver_single_bp_to_storage(self):
         if not self.current_bp_selection or not self.save_json:
@@ -657,13 +723,8 @@ class BlueprintsTabMixin:
         modifiers.add_equipment_to_storage(self.save_json, ptid, count=1, lvl=lvl, dur=999999 if plus >= 19 else 50000)
         self._auto_save()
         self.filter_blueprints_list()
-        plus_str = f"+{plus} (Destope)" if plus >= 19 else f"+{plus}"
-        plus_str_en = f"+{plus} (Uncapped)" if plus >= 19 else f"+{plus}"
-        self._notify(
-            "Item Delivered", "Objeto Entregado",
-            f"Delivered 1 unit of {ptid} ({plus_str_en}, 100% Durability) to Coin Locker!\nSaved automatically.",
-            f"¡Se ha entregado 1 unidad de {ptid} ({plus_str}, 100% Durabilidad) en tu Almacén!\nGuardado automáticamente."
-        )
+        plus_str = f"+{plus} (Uncapped)" if plus >= 19 else f"+{plus}"
+        self._notify("bp_notify_delivered_title", "bp_notify_delivered_msg", ptid=ptid, plus_str=plus_str)
 
     def _set_collab_filter(self, mode):
         if hasattr(self, "bp_collab_filter"):
@@ -682,7 +743,7 @@ class BlueprintsTabMixin:
                 item_meta = item
                 break
                 
-        name_lbl = (item_meta.get("name_es") or item_meta.get("name_en") or ptid) if item_meta else ptid
+        name_lbl = (i18n.get_item_name(item_meta) or ptid) if item_meta else ptid
         raw_fac = (item_meta.get("faction") or "").upper() if item_meta else ""
         
         fac_code = "DIY"
@@ -742,11 +803,7 @@ class BlueprintsTabMixin:
         self._refresh_shop_tiers_status()
         if res.get("success"):
             cnt = res.get("modified_count", 0)
-            self._notify(
-                "Shop Mod Active!", "¡Mod Tienda Activado!",
-                f"All {cnt} equipment evolution tiers (Tiers 1 to 4) unlocked in Chokufunsha Shop!\nYou can now purchase any tier directly from the store.",
-                f"¡Los {cnt} tiers de evolución (Tiers 1 al 4) ahora están desbloqueados en la Tienda Chokufunsha!\nPuedes comprar cualquier tier directamente en la tienda."
-            )
+            self._notify("bp_notify_shop_mod_title", "bp_notify_shop_mod_msg", cnt=cnt)
         else:
             messagebox.showerror(t("notice"), f"Error: {res.get('reason')}")
 
@@ -754,11 +811,7 @@ class BlueprintsTabMixin:
         res = modifiers.restore_shop_tier_progression()
         self._refresh_shop_tiers_status()
         if res.get("success"):
-            self._notify(
-                "Progression Restored", "Progresión Restaurada",
-                "Standard Chokufunsha tier progression restored.\nOnly the latest researched tier will be displayed in the store.",
-                "Progresión estándar de Chokufunsha restaurada.\nSólo se mostrará el último tier investigado en la tienda."
-            )
+            self._notify("bp_notify_progression_restored_title", "bp_notify_progression_restored_msg")
         else:
             messagebox.showerror(t("notice"), f"Error: {res.get('reason')}")
 
@@ -777,11 +830,7 @@ class BlueprintsTabMixin:
         self._refresh_shop_tiers_status()
         self._auto_save()
         self.filter_blueprints_list()
-        self._notify(
-            "Blueprints Unlocked", "Planos Desbloqueados",
-            f"All weapon and armor blueprints unlocked at Level +{lvl} in Chokufunsha!\nAll lower tiers (Tier 1-4) are available in the store.",
-            f"¡Todos los planos de armas y armaduras han sido desbloqueados al Nivel +{lvl} en Chokufunsha!\nTodos los tiers inferiores (Tier 1 al 4) están disponibles en la tienda."
-        )
+        self._notify("bp_notify_all_unlocked_title", "bp_notify_all_unlocked_msg", lvl=lvl)
 
     def _repair_blueprints_action(self):
         if not self.save_json:
@@ -790,11 +839,7 @@ class BlueprintsTabMixin:
         clamped_bp, clamped_st = modifiers.clamp_all_equipment_authentic_levels(self.save_json)
         self._auto_save()
         self.filter_blueprints_list()
-        self._notify(
-            "Blueprints Verified", "Planos Reparados",
-            f"Verified and fixed {fixed} blueprints in Chokufunsha!\nAudited and clamped {clamped_bp} uncap blueprints to authentic +19 (level 15) and {clamped_st} storage items.",
-            f"¡Se han verificado {fixed} planos en Chokufunsha!\nSe auditaron y ajustaron {clamped_bp} planos de destope al auténtico +19 (nivel 15) y {clamped_st} objetos del alijo."
-        )
+        self._notify("bp_notify_repaired_title", "bp_notify_repaired_msg", fixed=fixed, clamped_bp=clamped_bp, clamped_st=clamped_st)
 
     def _inject_endgame_set_action(self):
         if not self.save_json:
@@ -813,11 +858,7 @@ class BlueprintsTabMixin:
         self._auto_save()
         self.filter_blueprints_list()
         self.refresh_all_views()
-        self._notify(
-            "Endgame Set Injected", "Set Endgame Inyectado",
-            f"Added {added} pieces of {name} (+19 Uncapped, 100% Durability) to Coin Locker & Shop!",
-            f"¡Se han añadido las {added} piezas del set {name} (Nivel +19 Uncapped, Durabilidad 100%) a tu Almacén y Tienda!"
-        )
+        self._notify("bp_notify_endgame_injected_title", "bp_notify_endgame_injected_msg", added=added, name=name)
 
     def _set_infinite_durability_action(self):
         if not self.save_json:
@@ -825,11 +866,7 @@ class BlueprintsTabMixin:
         cnt = modifiers.set_infinite_durability_all_equipment(self.save_json, target_dur=50000)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "100% Durability Restored", "Durabilidad al 100% Restaurada",
-            f"Restored 100% authentic durability on {cnt} weapons and armors across Storage and Bags!\n\nYour equipment is in factory-fresh condition.",
-            f"¡Se ha restaurado la durabilidad al 100% auténtico en {cnt} piezas de armas y armaduras en tu Almacén y Bolsas!\n\n¡Tu equipo está en estado impecable!"
-        )
+        self._notify("bp_notify_durability_title", "bp_notify_durability_msg", cnt=cnt)
 
     def _set_massive_ammo_action(self):
         if not self.save_json:
@@ -837,11 +874,7 @@ class BlueprintsTabMixin:
         cnt = modifiers.set_massive_ammo_all_weapons(self.save_json, ammo=None)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Max Ammo Refilled", "Munición al Máximo Recargada",
-            f"Refilled authentic full magazine and reserve ammo for {cnt} ranged firearms in Storage and Bags!\nCleaned any erroneous ammo on melee weapons.",
-            f"¡Se ha recargado el cargador y la reserva máxima auténtica para {cnt} armas de fuego en Almacén y Bolsas!\nSe limpió cualquier munición errónea en armas cuerpo a cuerpo."
-        )
+        self._notify("bp_notify_ammo_title", "bp_notify_ammo_msg", cnt=cnt)
 
     def _upgrade_all_gear_max_lvl_action(self, target_lvl=19):
         if not self.save_json:
@@ -851,17 +884,9 @@ class BlueprintsTabMixin:
         self.filter_blueprints_list()
         self.refresh_all_views()
         if target_lvl == 19:
-            self._notify(
-                "All Uncapped Gear in R&D (+19)!", "¡Todo el Equipo Destopado a I+D (+19)!",
-                f"Updated {cnt} equipment items in Storage & Bags!\n\n🔨 ALL 377+ uncapped blueprints sent to R&D (+18 in Shop, ready to upgrade to +19)!\nSaved automatically.",
-                f"¡Se han actualizado {cnt} piezas de equipo en Almacén y Bolsas!\n\n🔨 ¡Los 377+ planos destopados se enviaron a I+D (+18 en Tienda, listos para subir a +19)!\nGuardado automáticamente."
-            )
+            self._notify("bp_notify_uncapped_rnd_title", "bp_notify_uncapped_rnd_msg", cnt=cnt)
         else:
-            self._notify(
-                "All Uncapped Gear in Shop (+19)!", "¡Todo el Equipo Destopado en Tienda (+19)!",
-                f"Updated {cnt} items! All uncapped gear unlocked at Level +19 directly in Chokufunsha Shop & Storage!\nSaved automatically.",
-                f"¡Se han actualizado {cnt} piezas! ¡Todo el equipo destopado se desbloqueó al Nivel +19 directamente en la Tienda Chokufunsha y Almacén!\nGuardado automáticamente."
-            )
+            self._notify("bp_notify_uncapped_shop_title", "bp_notify_uncapped_shop_msg", cnt=cnt)
 
     def filter_blueprints_list(self):
         self.bp_tree.delete(*self.bp_tree.get_children())
@@ -938,39 +963,20 @@ class BlueprintsTabMixin:
                 continue
                 
             # 3. Forge status
-            cur_lang = i18n.get_language()
             if bp_id in pr_map:
                 forge_info = pr_map[bp_id]
                 forge_code = forge_info["status"]
                 lvl_val = forge_info.get("lvl", 20)
                 plus_lvl = lvl_val - 1 if lvl_val > 1 else lvl_val
-                if cur_lang == "es":
-                    if forge_code == "STORE_UNCAPPED": forge_status = f"⭐ Tienda (+{plus_lvl} Destope)"
-                    elif forge_code == "RND_UNCAPPED": forge_status = f"🔨 En I+D (+{plus_lvl} → +{plus_lvl+1})"
-                    elif forge_code == "STORE_PLUS4": forge_status = "⭐ Tienda (+4)"
-                    elif forge_code == "STORE": forge_status = f"🛒 Tienda (+{forge_info.get('level', 1)})"
-                    elif forge_code == "FINISHED_LVL": forge_status = f"🔨 En I+D (+{plus_lvl} → +{plus_lvl+1})"
-                    elif forge_code == "REMODEL": forge_status = "🔨 En I+D (Evolución +0)"
-                    elif forge_code == "MAP": forge_status = "📜 En I+D (Plano +0)"
-                    else: forge_status = forge_info.get("label", forge_code)
-                elif cur_lang == "zh":
-                    if forge_code == "STORE_UNCAPPED": forge_status = f"⭐ 商店 (+{plus_lvl} 无上限)"
-                    elif forge_code == "RND_UNCAPPED": forge_status = f"🔨 研发中 (+{plus_lvl} → +{plus_lvl+1})"
-                    elif forge_code == "STORE_PLUS4": forge_status = "⭐ 商店 (+4)"
-                    elif forge_code == "STORE": forge_status = f"🛒 商店 (+{forge_info.get('level', 1)})"
-                    elif forge_code == "FINISHED_LVL": forge_status = f"🔨 研发中 (+{plus_lvl} → +{plus_lvl+1})"
-                    elif forge_code == "REMODEL": forge_status = "🔨 研发中 (进化 +0)"
-                    elif forge_code == "MAP": forge_status = "📜 研发中 (设计图 +0)"
-                    else: forge_status = forge_info.get("label", forge_code)
-                else:
-                    if forge_code == "STORE_UNCAPPED": forge_status = f"⭐ In Shop (+{plus_lvl} Uncapped)"
-                    elif forge_code == "RND_UNCAPPED": forge_status = f"🔨 In R&D (+{plus_lvl} → +{plus_lvl+1})"
-                    elif forge_code == "STORE_PLUS4": forge_status = "⭐ In Shop (+4)"
-                    elif forge_code == "STORE": forge_status = f"🛒 In Shop (+{forge_info.get('level', 1)})"
-                    elif forge_code == "FINISHED_LVL": forge_status = f"🔨 In R&D (+{plus_lvl} → +{plus_lvl+1})"
-                    elif forge_code == "REMODEL": forge_status = "🔨 In R&D (Evolution +0)"
-                    elif forge_code == "MAP": forge_status = "📜 In R&D (Blueprint +0)"
-                    else: forge_status = forge_info.get("label", forge_code)
+                
+                forge_key = f"bp_forge_{forge_code.lower()}"
+                forge_status = t(
+                    forge_key,
+                    default=forge_info.get("label", forge_code),
+                    plus_lvl=plus_lvl,
+                    next_lvl=plus_lvl + 1,
+                    level=forge_info.get("level", 1)
+                )
             else:
                 forge_status = t("bp_forge_locked")
                 forge_code = "LOCKED"
@@ -992,8 +998,8 @@ class BlueprintsTabMixin:
             if dmg_target != "ALL":
                 if slot_key != "weapon":
                     continue
-                w_dmg = self._get_weapon_damage_type(item)
-                if w_dmg != dmg_target:
+                w_dmgs = self._get_weapon_damage_types(item)
+                if dmg_target not in w_dmgs:
                     continue
                 
             # 5. Search query (matches name_es, name_en, name_zh, bp_id, or set_code)
@@ -1023,12 +1029,7 @@ class BlueprintsTabMixin:
                 elif collab == "44CE" and not any(k in n_en or k in n_es for k in ["white steel", "red napalm", "black thunder", "pale wind", "m2g"]):
                     continue
                     
-            if cur_lang == "es":
-                display_title = f"{name_es} ({name_en})" if name_en and name_en != name_es else (name_es or name_en)
-            elif cur_lang == "en":
-                display_title = f"{name_en} ({name_es})" if name_es and name_en != name_es else (name_en or name_es)
-            else:
-                display_title = f"{name_zh} ({name_en})" if name_zh and name_en and name_zh != name_en else (name_zh or name_en or name_es)
+            display_title = i18n.get_entity_display_title(item)
 
             storage_str = t("inv_unit_str", qty=storage_count) if storage_count > 0 else "-"
             bag_str = t("inv_unit_str", qty=bag_count) if bag_count > 0 else "-"

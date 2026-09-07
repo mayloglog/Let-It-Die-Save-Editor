@@ -132,9 +132,9 @@ class CurrenciesTabMixin:
         acct_f.pack(fill="x")
         self.acct_uid_lbl = ttk.Label(acct_f, text="UID: --- | Steam ID: ---", font=("Segoe UI", 9, "bold"), foreground=ACCENT_CYAN)
         self.acct_uid_lbl.pack(side="left", padx=(4, 16))
-        self.acct_playtime_lbl = ttk.Label(acct_f, text="⏱️ Horas: ---", font=("Segoe UI", 9), foreground=FG_MUTED)
+        self.acct_playtime_lbl = ttk.Label(acct_f, text=t("acct_hours_placeholder"), font=("Segoe UI", 9), foreground=FG_MUTED)
         self.acct_playtime_lbl.pack(side="left", padx=(0, 16))
-        self.acct_streak_lbl = ttk.Label(acct_f, text="🔥 Racha Login: ---", font=("Segoe UI", 9), foreground=ACCENT_GOLD)
+        self.acct_streak_lbl = ttk.Label(acct_f, text=t("acct_streak_placeholder"), font=("Segoe UI", 9), foreground=ACCENT_GOLD)
         self.acct_streak_lbl.pack(side="left", padx=(0, 12))
         btn_max_streak = ttk.Button(acct_f, text=t("max_streak_btn"), command=self._max_login_streak_action)
         btn_max_streak.pack(side="right", padx=4)
@@ -158,11 +158,7 @@ class CurrenciesTabMixin:
         pts = modifiers.get_rank_points_for_rank(p_rnk)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Facilities Updated", "Instalaciones Actualizadas",
-            f"KC Bank set to Level {b_lvl}, SPL Tank to Level {t_lvl}.\nPlayer Rank set to {p_rnk} ({pts:,} points synced).",
-            f"Banco de KC establecido al Nivel {b_lvl}, Tanque de SPL al Nivel {t_lvl}.\nRango de Jugador establecido a {p_rnk} ({pts:,} puntos sincronizados)."
-        )
+        self._notify("curr_notify_facilities_updated_title", "curr_notify_facilities_updated_msg", b_lvl=b_lvl, t_lvl=t_lvl, p_rnk=p_rnk, pts=pts)
 
     def _max_waiting_room_facilities(self):
         self.safe_lvl_var.set("99")
@@ -174,11 +170,7 @@ class CurrenciesTabMixin:
             pts = modifiers.get_rank_points_for_rank(100)
             self._auto_save()
             self.refresh_all_views()
-            self._notify(
-                "Facilities Maximized", "Instalaciones Maximizadas",
-                f"KC Bank and SPL Tank upgraded to Max Level 99 (2,560,000 Cap)!\nPlayer Rank set to 100 ({pts:,} points synchronized)!",
-                f"¡Banco de KC y Tanque de SPL mejorados al Nivel Máximo 99 (2,560,000 Cap)!\n¡Rango de Jugador establecido a 100 ({pts:,} puntos sincronizados)!"
-            )
+            self._notify("curr_notify_facilities_max_title", "curr_notify_facilities_max_msg", pts=pts)
 
     def _max_login_streak_action(self):
         if not self.save_json:
@@ -186,11 +178,7 @@ class CurrenciesTabMixin:
         modifiers.max_login_streak(self.save_json, streak=365)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Login Streak", "Racha de Conexión",
-            "Login streak set to 365 consecutive days!",
-            "¡Racha de inicio de sesión establecida a 365 días consecutivos!"
-        )
+        self._notify("curr_notify_streak_title", "curr_notify_streak_msg")
 
     def _set_vip_entry_and_act(self, days, passes=99):
         self.vip_days_var.set(str(days))
@@ -207,11 +195,7 @@ class CurrenciesTabMixin:
         modifiers.set_vip_pass(self.save_json, days=days, passes=passes, oneday_passes=99)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "VIP Activated", "VIP Activado",
-            f"Royal Express Pass activated for {days} days (+{passes} 30-day passes in stock)!\n\n✨ Friendship fixed to 1 (prevents elevator cutscene/voice hang) and duration 100% safe.",
-            f"¡Pase Royal Express activado por {days} días (+{passes} pases de 30 días en reserva)!\n\n✨ Amistad fijada en 1 (soluciona el cuelgue de voz/animación en el ascensor) y duración 100% segura."
-        )
+        self._notify("curr_notify_vip_act_title", "curr_notify_vip_act_msg", days=days, passes=passes)
 
     def _deactivate_vip_action(self):
         if not self.save_json:
@@ -219,11 +203,7 @@ class CurrenciesTabMixin:
         modifiers.deactivate_vip_pass(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "VIP Deactivated", "VIP Desactivado",
-            "Royal Express Pass has been deactivated.",
-            "¡Pase Royal Express desactivado correctamente!"
-        )
+        self._notify("curr_notify_vip_deact_title", "curr_notify_vip_deact_msg")
 
     def max_all_currencies(self):
         if not self.save_json:
@@ -231,8 +211,4 @@ class CurrenciesTabMixin:
         modifiers.max_all_currencies(self.save_json)
         self._auto_save()
         self.refresh_all_views()
-        self._notify(
-            "Currencies Maximized", "Divisas Maximizadas",
-            "Death Metals (9,999), Kill Coins (2.56M), SPLithium (2.56M), Bloodnium, and RE Points maxed to Level 99 official cap!",
-            "¡Se han establecido Death Metals (9,999), Kill Coins (2.56M), SPLithium (2.56M), Sangrenio y Puntos RE al tope oficial de Nivel 99!"
-        )
+        self._notify("curr_notify_max_curr_title", "curr_notify_max_curr_msg")
