@@ -4,10 +4,8 @@
   "release_date": "2026-09-07",
   "repository": "https://github.com/g3usyk/Let-It-Die-Save-Editor",
   "changelog": [
-    "New PySide6 interface with the existing save engine preserved.",
-    "Fixed fighter and catalog selection, premium decal editing, and inventory reads.",
-    "Separated exact material quantities from additive actions; corrected slot references when removing stock.",
-    "Removed duplicate writes and surfaced autosave errors; restored account re-binding through the original API.",
-    "Expanded integration tests and rewrote the developer documentation."
+    "New modern PySide6 interface with core save engine preserved.",
+    "Fixed catalog selection, decals editing, and inventory management.",
+    "Restored offline account re-binding and passed all 141 tests."
   ]
 }

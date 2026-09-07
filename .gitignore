@@ -36,6 +36,7 @@ config.json
 dist/
 build/
 *.spec
+*.exe
 
 # Game database binaries
 *.db
